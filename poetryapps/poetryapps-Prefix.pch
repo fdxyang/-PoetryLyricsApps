@@ -13,4 +13,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+// 2013.11.26 [CASPER] Core Data
+    #import <CoreData/CoreData.h>   
 #endif
