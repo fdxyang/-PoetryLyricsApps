@@ -1,12 +1,3 @@
-/* 
-  data.strings
-  poetryapps
-
-  Created by Kevin on 2013/11/26.
-  Copyright (c) 2013年 cc. All rights reserved.
-*/
-
-
 請開我眼打開我心，明白你有多麼深愛我，
 請釋放我去我纏累，能讓我再有力榮耀你。
 請改變我謙卑我心，明白我有多麼需要你，
