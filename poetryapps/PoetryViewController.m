@@ -23,7 +23,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     
     NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *txtPath = [mainBundle pathForResource:@"data" ofType:@"txt"];
+    NSString *txtPath = [mainBundle pathForResource:@"2" ofType:@"txt"];
     
     NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
     NSLog(@"%@",string);

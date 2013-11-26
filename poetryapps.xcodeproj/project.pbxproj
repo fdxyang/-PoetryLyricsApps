@@ -25,7 +25,8 @@
 		CB25FD311843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
 		CB25FD391843972D00F3D980 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD371843972D00F3D980 /* InfoPlist.strings */; };
 		CB25FD3B1843972D00F3D980 /* poetryappsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB25FD3A1843972D00F3D980 /* poetryappsTests.m */; };
-		CBFC77A8184447CD00BE97D1 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* data.txt */; };
+		CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB53B26B1844F87F005B0CC6 /* 2.txt */; };
+		CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* 1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,8 @@
 		CB25FD361843972D00F3D980 /* poetryappsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "poetryappsTests-Info.plist"; sourceTree = "<group>"; };
 		CB25FD381843972D00F3D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB25FD3A1843972D00F3D980 /* poetryappsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = poetryappsTests.m; sourceTree = "<group>"; };
-		CBFC77A7184447CD00BE97D1 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
+		CB53B26B1844F87F005B0CC6 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
+		CBFC77A7184447CD00BE97D1 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,7 @@
 				CB25FD251843972D00F3D980 /* PoetryViewController.m */,
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
-				CBFC77A7184447CD00BE97D1 /* data.txt */,
+				CB53B26A1844F850005B0CC6 /* Resources */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -176,6 +178,15 @@
 				CB25FD371843972D00F3D980 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB53B26A1844F850005B0CC6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CBFC77A7184447CD00BE97D1 /* 1.txt */,
+				CB53B26B1844F87F005B0CC6 /* 2.txt */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +269,9 @@
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
+				CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
-				CBFC77A8184447CD00BE97D1 /* data.txt in Resources */,
+				CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
