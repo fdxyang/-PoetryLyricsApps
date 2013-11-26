@@ -7,6 +7,7 @@
 //
 
 #import "PoetryViewController.h"
+#import "PoetryCoreData.h"
 
 @interface PoetryViewController ()
 
@@ -38,6 +39,27 @@
     label.numberOfLines = 0;
     
     [self.view addSubview:label];
+    
+    
+    
+    
+    // [CASPER] 2013.11.26 Sample code for saving into core data
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                               @"data", POETRY_CORE_DATA_NAME_KEY,
+                            string, POETRY_CORE_DATA_CONTENT_KEY, nil];
+    
+    [PoetryDataBase PoetryCoreDataSave:PoetryDic];
+    // [CASPER] 2013.11.26 Sample code for saving into core data ==
+    
+    // [CASPER] 2013.11.26 Sample code for fetching core data
+    NSArray *PoetryList = [PoetryDataBase Poetry_CoreDataFetchData];
+    NSLog(@"Poetry List Count = %d", [PoetryList count]);
+    NSLog(@"Poetry Name = %@", [[PoetryList firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    NSLog(@"Poetry Content = %@", [[PoetryList firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+    // [CASPER] 2013.11.26 Sample code for fetching core data ==
+
+    
 }
 
 - (void)didReceiveMemoryWarning

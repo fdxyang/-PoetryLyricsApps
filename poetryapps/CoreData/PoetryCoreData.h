@@ -9,14 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "PoetryAppDelegate.h"
 
-#define POETRY_CORE_DATA_ENTITY         @"Poetry"
+#define POETRY_CORE_DATA_ENTITY         @"Poetrys"
 #define POETRY_CORE_DATA_NAME_KEY       @"name"
 #define POETRY_CORE_DATA_CONTENT_KEY    @"content"
 
 @interface PoetryCoreData : NSObject
 
--(PoetryCoreData*) init;
-
 @property (nonatomic, strong)   NSManagedObjectContext  *context;
+
+-(PoetryCoreData*) init;
+-(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic;
+-(NSMutableArray*) Poetry_CoreDataFetchData;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearcgName;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString;
+
 
 @end
