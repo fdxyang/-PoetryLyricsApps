@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "PoetryAppDelegate.h"
 
+#define POETRY_GUARD_CORE_DATA_ENTITY           @"GuardReading"
 #define POETRY_CORE_DATA_ENTITY                 @"Poetrys"
+#define POETRY_RES_CORE_DATA_ENTITY             @"ResponsivePrayer"
 #define POETRY_HISTORY_CORE_DATA_ENTITY         @"PoetrysHistory"
 
 #define POETRY_CORE_DATA_NAME_KEY               @"name"
@@ -18,21 +20,29 @@
 
 @interface PoetryCoreData : NSObject
 
+typedef enum {
+    GUARD_READING = 0x00,
+    POETRYS,
+    RESPONSIVE_PRAYER,
+} POETRY_CATEGORY;
+
 @property (nonatomic, strong)   NSManagedObjectContext  *context;
 
 -(PoetryCoreData*) init;
 
 // Poetry list Methods
--(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic;
--(NSMutableArray*) Poetry_CoreDataFetchData;
--(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearcgName;
--(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString;
+-(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic inCategory : (POETRY_CATEGORY) Category;
+-(NSMutableArray*) Poetry_CoreDataFetchDataInCategory : (POETRY_CATEGORY) Category;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearchName InCategory : (POETRY_CATEGORY) Category;;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category;;
 
 // Poetry history Methods
 -(BOOL) PoetryCoreDataSaveIntoHistory : (NSDictionary *) PoetryDic;
 -(NSMutableArray*) Poetry_CoreDataFetchDataInHistory;
 -(NSUInteger) Poetry_CoreDataGetNumberInHistory;
 -(BOOL) Poetry_CoreDataDeleteOldestInHistory;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContentInHistory : (NSString *) SearchString;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryNameInHistory : (NSString *) SearcgName;
 
 
 @end

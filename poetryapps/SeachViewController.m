@@ -29,7 +29,8 @@
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     
     _HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
-
+    //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchData];
+    
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = YES;
  
@@ -48,24 +49,150 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        return [_SearchResultDisplayArray count];
+        //return 1;
+
+    } else {
+        
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        return [[_SearchResultDisplayArray objectAtIndex:section] count];
+        //return [_SearchBookNameTableData count];
+        //return [_HistoryData count];
+
+        
+    } else {
+        
+        return [_HistoryData count];
+        
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        NSManagedObject *Poetry = [[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+
+        
+    } else {
+        
+        //NSManagedObject *Poetry = [[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        NSManagedObject *Poetry = [_HistoryData objectAtIndex:indexPath.row];
+
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    
+    }
+    
     
     return cell;
 }
+
+
+#pragma mark - Table view data source
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    NSString *sectionStr = [[NSString alloc] init];
+    
+    if ([self.searchDisplayController isActive]) {
+        
+        switch (section) {
+            case 0:
+                sectionStr = nil;
+                break;
+                
+            case 1:
+                sectionStr = @"GUARD READING";
+                break;
+                
+            case 2:
+                sectionStr = @"POETRY";
+                break;
+                
+            case 3:
+                sectionStr = @"RESPONSIVE PRAYER";
+                break;
+            default:
+                break;
+        }
+        
+    } else {
+        return nil;
+    }
+    return sectionStr;
+}
+
+
+#pragma mark - SearchBar Method
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    
+    // TODO: Modify the data display, deleted data should not be displayed
+    
+    _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
+    
+    _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
+    
+    _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
+    
+    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
+    
+
+    if ([searchText length] > 3 ) {
+        
+        [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
+        [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+
+    }
+    
+    
+    _SearchResultDisplayArray = [NSArray arrayWithObjects:
+                                 _SearchHistoryData,
+                                 _SearchGuidedReading,
+                                 _SearchPoetryData,
+                                 _SearchRespose,
+                                 nil];
+    
+    NSLog(@"Search result %i ！！！！～～～～", [_SearchGuidedReading count]);
+    NSLog(@"Search result %i ！！！！～～～～", [_SearchPoetryData count]);
+    NSLog(@"Search result %i ！！！！～～～～", [_SearchRespose count]);
+
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    
+    return YES;
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.

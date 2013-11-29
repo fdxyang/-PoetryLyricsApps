@@ -47,9 +47,28 @@
 
 #pragma mark - Poetry Core Data Methods
 // Save Poetry
--(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic
+-(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic inCategory : (POETRY_CATEGORY) Category;
 {
-    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+    NSString *PoetryCoreDataEntityName;
+    
+    switch (Category) {
+            
+        case GUARD_READING:
+            PoetryCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            PoetryCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
+    
     NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
     
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
@@ -69,11 +88,29 @@
 }
 
 // 取出 Core Data 中所有 Poetry 的資料，Array 中存的是 NSManagedObject
--(NSMutableArray*) Poetry_CoreDataFetchData
+-(NSMutableArray*) Poetry_CoreDataFetchDataInCategory : (POETRY_CATEGORY) Category
 {
     NSMutableArray *Poetrys = [[NSMutableArray alloc] init];
     
-    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+    NSString *PoetryCoreDataEntityName;
+    
+    switch (Category) {
+            
+        case GUARD_READING:
+            PoetryCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            PoetryCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
     Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -84,12 +121,30 @@
 
 
 // 在 Poetry 中搜尋 Poetry Name
--(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearcgName
+-(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearchName InCategory : (POETRY_CATEGORY) Category
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSString *BookCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
     
+    NSString *BookCoreDataEntityName;
+    
+    switch (Category) {
+            
+        case GUARD_READING:
+            BookCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            BookCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            BookCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
     
 	// NSSortDescriptor tells defines how to sort the fetched results
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_NAME_KEY ascending:YES];
@@ -102,8 +157,7 @@
     
     NSFetchedResultsController  *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_context sectionNameKeyPath:nil cacheName:@"Root"];
     
-    
-    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", SearcgName];
+    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", SearchName];
     
     [fetchedResultsController.fetchRequest setPredicate:predicate];
     
@@ -121,12 +175,28 @@
 
 
 // 在 Poetry 中搜尋 String
--(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSString *BookCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+    NSString *BookCoreDataEntityName;
     
+    switch (Category) {
+        case GUARD_READING:
+            BookCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            BookCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            BookCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
     
 	// NSSortDescriptor tells defines how to sort the fetched results
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_CONTENT_KEY ascending:YES];
@@ -277,5 +347,77 @@
 }
 
 
+// 在 History 中搜尋 Poetry Name
+-(NSArray*) Poetry_CoreDataSearchWithPoetryNameInHistory : (NSString *) SearcgName
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSString *BookCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
+    
+    
+	// NSSortDescriptor tells defines how to sort the fetched results
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_NAME_KEY ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+    // fetchRequest needs to know what entity to fetch
+	NSEntityDescription *entity = [NSEntityDescription entityForName:BookCoreDataEntityName inManagedObjectContext:_context];
+	[fetchRequest setEntity:entity];
+    
+    NSFetchedResultsController  *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_context sectionNameKeyPath:nil cacheName:@"Root"];
+    
+    
+    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", SearcgName];
+    
+    [fetchedResultsController.fetchRequest setPredicate:predicate];
+    
+	NSError *error = nil;
+	if (![fetchedResultsController performFetch:&error])
+	{
+		// Handle error
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    
+    return fetchedResultsController.fetchedObjects;
+    
+}
+
+
+// 在 History 中搜尋 String
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContentInHistory : (NSString *) SearchString
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSString *BookCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
+    
+    
+	// NSSortDescriptor tells defines how to sort the fetched results
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_CONTENT_KEY ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+    // fetchRequest needs to know what entity to fetch
+	NSEntityDescription *entity = [NSEntityDescription entityForName:BookCoreDataEntityName inManagedObjectContext:_context];
+	[fetchRequest setEntity:entity];
+    
+    NSFetchedResultsController  *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_context sectionNameKeyPath:nil cacheName:@"Root"];
+    
+    
+    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"content contains[cd] %@", SearchString];
+    
+    [fetchedResultsController.fetchRequest setPredicate:predicate];
+    
+	NSError *error = nil;
+	if (![fetchedResultsController performFetch:&error])
+	{
+		// Handle error
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    
+    return fetchedResultsController.fetchedObjects;
+    
+}
 
 @end
