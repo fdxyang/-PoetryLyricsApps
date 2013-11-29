@@ -10,6 +10,7 @@
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
+		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */; };
 		CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -44,6 +45,8 @@
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
 		10AE670E18449F8C00A683E7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
+		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD0C1843972D00F3D980 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -103,6 +106,15 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		10F88C111848833D009F045D /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				10F88C0E18488333009F045D /* SeachViewController.h */,
+				10F88C0F18488333009F045D /* SeachViewController.m */,
+			);
+			name = SearchView;
+			sourceTree = "<group>";
+		};
 		CB25FD001843972D00F3D980 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +149,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				10F88C111848833D009F045D /* SearchView */,
 				10AE671018449F9900A683E7 /* CoreData */,
 				CB25FD1B1843972D00F3D980 /* PoetryAppDelegate.h */,
 				CB25FD1C1843972D00F3D980 /* PoetryAppDelegate.m */,
@@ -293,6 +306,7 @@
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
 			);
