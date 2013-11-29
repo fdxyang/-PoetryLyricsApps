@@ -28,7 +28,7 @@
         <!--View Controller - Reading-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
-                <viewController id="edc-e0-G7q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rwx-QZ-ePj"/>
                         <viewControllerLayoutGuide type="bottom" id="Jyp-Z9-Xwd"/>
@@ -77,7 +77,7 @@
         <!--View Controller-->
         <scene sceneID="eRj-3C-vWg">
             <objects>
-                <viewController id="KYQ-5T-R8S" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GOTO_Picker_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KYQ-5T-R8S" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CPD-HU-xG1"/>
                         <viewControllerLayoutGuide type="bottom" id="p9z-yv-mFH"/>
@@ -96,16 +96,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2yN-GT-lod">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="rah-gc-0bw">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="syi-Av-6CK">
-                                <rect key="frame" x="16" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="4tL-Jm-ZpJ">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DDD-yE-SoI">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
@@ -122,10 +112,50 @@
             </objects>
             <point key="canvasLocation" x="1043" y="637"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="JRn-PO-6aU">
+            <objects>
+                <tableViewController storyboardIdentifier="GOTO_Table_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lzR-Wt-jI7" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="foJ-Vb-qkJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YI0-Y6-KYp">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YI0-Y6-KYp" id="TjH-Qd-Idg">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lzR-Wt-jI7" id="T6i-G6-B84"/>
+                            <outlet property="delegate" destination="lzR-Wt-jI7" id="KTI-CX-fXa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="sf7-T6-fUF">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="L2j-qm-iAm">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vIY-ZZ-Ne6">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2de-f4-Hp2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2061" y="637"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ts1-eo-hrZ">
             <objects>
-                <viewController id="RQz-bp-vrA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Setting_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RQz-bp-vrA" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a7o-g4-ejz"/>
                         <viewControllerLayoutGuide type="bottom" id="nbO-F7-0kp"/>
@@ -190,7 +220,7 @@
         <!--Table View Controller-->
         <scene sceneID="SZ8-Q0-GJX">
             <objects>
-                <tableViewController id="Ax9-QC-rRJ" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Search_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ax9-QC-rRJ" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JB9-iT-Bhg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -234,6 +264,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqR-pF-taB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="693" y="2025"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NZk-Xj-gOj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rpS-Ku-AZ3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5P9-yB-JyZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lzR-Wt-jI7" kind="relationship" relationship="rootViewController" id="teN-zy-aYO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJC-UP-yyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1535" y="637"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
