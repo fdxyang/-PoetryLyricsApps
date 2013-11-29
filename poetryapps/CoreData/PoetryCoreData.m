@@ -25,6 +25,27 @@
     return self;
 }
 
+
+
+// 刪除 Core Data 中特定的資料
+-(BOOL) Poetry_CoreDataDelete:(NSManagedObject*) Poetry
+{
+    
+    [_context deleteObject:Poetry];
+    
+    NSError *error = nil;
+    
+    if (![_context save:&error]) {
+        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
+#pragma mark - Poetry Core Data Methods
 // Save Poetry
 -(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic
 {
@@ -34,6 +55,8 @@
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
     
+    NSDate *CreationDate = [NSDate date];
+    [NewPoetry setValue: CreationDate forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
     
     NSError *error = nil;
     if (![_context save:&error]) {
@@ -44,7 +67,6 @@
     return YES;
 
 }
-
 
 // 取出 Core Data 中所有 Poetry 的資料，Array 中存的是 NSManagedObject
 -(NSMutableArray*) Poetry_CoreDataFetchData
@@ -98,7 +120,7 @@
 }
 
 
-// 在 Poetry 中搜尋 Poetry Name
+// 在 Poetry 中搜尋 String
 -(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString
 {
     
@@ -107,7 +129,7 @@
     
     
 	// NSSortDescriptor tells defines how to sort the fetched results
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_NAME_KEY ascending:YES];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_CONTENT_KEY ascending:YES];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
@@ -135,6 +157,124 @@
 }
 
 
+-(NSUInteger) Poetry_CoreDataGetNumber
+{
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    
+    NSError *err;
+    NSUInteger count = [_context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+    }
+    
+    return count;
+}
+
+
+#pragma mark - History Core Data Methods
+
+// Save Poetry into History
+-(BOOL) PoetryCoreDataSaveIntoHistory : (NSDictionary *) PoetryDic
+{
+    NSString *PoetryCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
+    NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+    
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+    
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    return YES;
+    
+}
+
+
+// 取出 History 中所有 Poetry 的資料，Array 中存的是 NSManagedObject
+-(NSMutableArray*) Poetry_CoreDataFetchDataInHistory
+{
+    NSMutableArray *Poetrys = [[NSMutableArray alloc] init];
+    
+    NSString *PoetryCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
+    Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    return Poetrys;
+}
+
+
+-(NSUInteger) Poetry_CoreDataGetNumberInHistory
+{
+    NSString *PoetryCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    
+    NSError *err;
+    NSUInteger count = [_context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+    }
+    
+    return count;
+}
+
+// Delete the Oldest object in history
+-(BOOL) Poetry_CoreDataDeleteOldestInHistory
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:POETRY_HISTORY_CORE_DATA_ENTITY inManagedObjectContext:_context];
+    [request setEntity:entity];
+    
+    // Specify that the request should return dictionaries.
+    [request setResultType:NSDictionaryResultType];
+    
+    // Create an expression for the key path.
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:POETRY_CORE_DATA_CREATION_TIME_KEY];
+    
+    // Create an expression to represent the minimum value at the key path 'creationDate'
+    NSExpression *minExpression = [NSExpression expressionForFunction:@"min:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    
+    // Create an expression description using the minExpression and returning a date.
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    
+    // The name is the key that will be used in the dictionary for the return value.
+    [expressionDescription setName:@"minDate"];
+    [expressionDescription setExpression:minExpression];
+    [expressionDescription setExpressionResultType:NSDateAttributeType];
+    
+    // Set the request's properties to fetch just the property represented by the expressions.
+    [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    
+    // Execute the fetch.
+    NSError *error = nil;
+    NSArray *objects = [_context executeFetchRequest:request error:&error];
+    if (objects == nil) {
+        // Handle the error.
+        return NO;
+    }
+    else {
+        if ([objects count] > 0) {
+            NSLog(@"Minimum date: %@", [[objects objectAtIndex:0] valueForKey:@"minDate"]);
+            [self Poetry_CoreDataDelete:[objects objectAtIndex:0]];
+
+        }
+    }
+    return YES;
+
+}
 
 
 
