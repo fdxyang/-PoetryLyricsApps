@@ -15,8 +15,21 @@ typedef enum {
     GOTOPAGECOUNT
 }GotoPageAreaSection;
 
+
+typedef enum {
+    GUIDE = 0,
+    POETRY,
+    RESPONSE
+}GotoSection;
+
+
 @interface GotoViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (nonatomic) GotoSection section;
+//@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) NSInteger currentGuideIndex;
+@property (nonatomic) NSInteger currentPoetryIndex;
+@property (nonatomic) NSInteger currentResponseIndex;
 @property (nonatomic,strong) NSMutableArray *historyArr;
 @property (nonatomic,strong) NSMutableArray *guideArray;
 @property (nonatomic) BOOL isTreeMode;

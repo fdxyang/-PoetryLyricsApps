@@ -58,6 +58,8 @@
     [self.view addSubview:picker];
     
     [gotoReading setTitle:[_guideArray objectAtIndex:0] forState:UIControlStateNormal];
+    
+    _section = GUIDE;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,16 +71,52 @@
 - (IBAction)guideBtnClicked:(id)sender
 {
     NSLog(@"guideBtnClicked");
+    _section = GUIDE;
+    [_guideArray removeAllObjects];
+    
+    [_guideArray addObject:@"導讀1"];
+    [_guideArray addObject:@"導讀2"];
+    [_guideArray addObject:@"導讀3"];
+    [_guideArray addObject:@"導讀4"];
+    [_guideArray addObject:@"導讀5"];
+    [_guideArray addObject:@"導讀6"];
+    
+    [self.picker reloadAllComponents];
+    [gotoReading setTitle:[_guideArray objectAtIndex:_currentGuideIndex] forState:UIControlStateNormal];
 }
 
 - (IBAction)poetryBtnClicked:(id)sender
 {
     NSLog(@"poetryBtnClicked");
+    _section = POETRY;
+    [_guideArray removeAllObjects];
+    
+    NSString *str = [[NSString alloc]init];
+    for (int i =1; i<=650 ; i++)
+    {
+        str = [NSString stringWithFormat:@"%d",i];
+        [_guideArray addObject:str];
+    }
+    
+    [self.picker reloadAllComponents];
+    [gotoReading setTitle:[_guideArray objectAtIndex:_currentPoetryIndex] forState:UIControlStateNormal];
 }
 
 - (IBAction)responseBtnClicked:(id)sender
 {
     NSLog(@"responseBtnClicked");
+    _section = RESPONSE;
+    [_guideArray removeAllObjects];
+    
+    NSString *str = [[NSString alloc]init];
+    for (int i =1; i<=66 ; i++)
+    {
+        str = [NSString stringWithFormat:@"%d",i];
+        [_guideArray addObject:str];
+    }
+    
+    [self.picker reloadAllComponents];
+    [gotoReading setTitle:[_guideArray objectAtIndex:_currentResponseIndex] forState:UIControlStateNormal];
 }
 
 - (IBAction)changeModeBtnClicked:(id)sender
@@ -127,7 +165,8 @@
 //內建的函式回傳UIPicker共有幾組選項
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    NSLog(@"numberOfComponentsInPickerView");
+    NSLog(@"numberOfComponentsInPickerView section");
+    
     return 1;
 }
 
@@ -155,6 +194,19 @@
     NSLog(@"titleForRow");
     switch (component) {
         case 0:
+            if (_section == GUIDE)
+            {
+                _currentGuideIndex = row;
+            }
+            else if(_section == POETRY)
+            {
+                _currentPoetryIndex = row;
+            }
+            else if(_section == RESPONSE)
+            {
+                _currentResponseIndex = row;
+            }
+            [gotoReading setTitle:[_guideArray objectAtIndex:row] forState:UIControlStateNormal];
             return [_guideArray objectAtIndex:row];
             break;
             
