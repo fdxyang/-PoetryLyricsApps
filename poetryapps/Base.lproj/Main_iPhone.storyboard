@@ -182,10 +182,10 @@
             </objects>
             <point key="canvasLocation" x="1439" y="635"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting View Controller-->
         <scene sceneID="ts1-eo-hrZ">
             <objects>
-                <viewController storyboardIdentifier="Setting_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RQz-bp-vrA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Setting_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RQz-bp-vrA" customClass="SettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a7o-g4-ejz"/>
                         <viewControllerLayoutGuide type="bottom" id="nbO-F7-0kp"/>
