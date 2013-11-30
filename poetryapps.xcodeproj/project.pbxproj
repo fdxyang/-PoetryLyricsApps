@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10771DB71849C33500A3B342 /* ReadingScroller.xib */; };
+		10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DBA1849C36500A3B342 /* ReadingScroller.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
@@ -46,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10771DB71849C33500A3B342 /* ReadingScroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingScroller.xib; sourceTree = "<group>"; };
+		10771DB91849C36500A3B342 /* ReadingScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingScroller.h; sourceTree = "<group>"; };
+		10771DBA1849C36500A3B342 /* ReadingScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingScroller.m; sourceTree = "<group>"; };
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
 		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
@@ -228,6 +233,9 @@
 			children = (
 				CB381FB81849BD5A000ECB84 /* ReadingViewController.h */,
 				CB381FB91849BD5A000ECB84 /* ReadingViewController.m */,
+				10771DB71849C33500A3B342 /* ReadingScroller.xib */,
+				10771DB91849C36500A3B342 /* ReadingScroller.h */,
+				10771DBA1849C36500A3B342 /* ReadingScroller.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
 				CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */,
+				10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */,
@@ -347,6 +356,7 @@
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
+				10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,

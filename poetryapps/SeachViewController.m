@@ -52,7 +52,6 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         return [_SearchResultDisplayArray count];
-        //return 1;
 
     } else {
         
@@ -66,8 +65,6 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         return [[_SearchResultDisplayArray objectAtIndex:section] count];
-        //return [_SearchBookNameTableData count];
-        //return [_HistoryData count];
 
         
     } else {
@@ -96,7 +93,6 @@
         
     } else {
         
-        //NSManagedObject *Poetry = [[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         NSManagedObject *Poetry = [_HistoryData objectAtIndex:indexPath.row];
 
         cell.textLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
