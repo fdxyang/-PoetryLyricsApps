@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103F67851848E2A200C9E563 /* GOTOTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103F67841848E2A200C9E563 /* GOTOTable.xib */; };
+		103F678B1848E4A600C9E563 /* GOTOTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 103F678A1848E4A600C9E563 /* GOTOTable.m */; };
+		103F678E1848E60A00C9E563 /* GOTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 103F678D1848E60A00C9E563 /* GOTOViewController.m */; };
+		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
@@ -41,6 +45,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		103F67841848E2A200C9E563 /* GOTOTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GOTOTable.xib; sourceTree = "<group>"; };
+		103F67891848E4A600C9E563 /* GOTOTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GOTOTable.h; sourceTree = "<group>"; };
+		103F678A1848E4A600C9E563 /* GOTOTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GOTOTable.m; sourceTree = "<group>"; };
+		103F678C1848E60A00C9E563 /* GOTOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GOTOViewController.h; sourceTree = "<group>"; };
+		103F678D1848E60A00C9E563 /* GOTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GOTOViewController.m; sourceTree = "<group>"; };
+		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
+		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
@@ -102,6 +113,8 @@
 				10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */,
 				10AE670B18449EA700A683E7 /* PoetryCoreData.h */,
 				10AE670C18449EA700A683E7 /* PoetryCoreData.m */,
+				108D2276184987ED005E6893 /* PoetrySettingCoreData.h */,
+				108D2277184987ED005E6893 /* PoetrySettingCoreData.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -160,6 +173,11 @@
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
 				CB53B26A1844F850005B0CC6 /* Resources */,
+				103F67841848E2A200C9E563 /* GOTOTable.xib */,
+				103F67891848E4A600C9E563 /* GOTOTable.h */,
+				103F678A1848E4A600C9E563 /* GOTOTable.m */,
+				103F678C1848E60A00C9E563 /* GOTOViewController.h */,
+				103F678D1848E60A00C9E563 /* GOTOViewController.m */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -285,6 +303,7 @@
 				CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
 				CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */,
+				103F67851848E2A200C9E563 /* GOTOTable.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,8 +326,11 @@
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
+				103F678B1848E4A600C9E563 /* GOTOTable.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
+				103F678E1848E60A00C9E563 /* GOTOViewController.m in Sources */,
+				108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

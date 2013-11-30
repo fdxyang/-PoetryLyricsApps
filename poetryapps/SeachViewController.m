@@ -147,8 +147,6 @@
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     
-    // TODO: Modify the data display, deleted data should not be displayed
-    
     _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
     
     _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
@@ -173,10 +171,6 @@
                                  _SearchPoetryData,
                                  _SearchRespose,
                                  nil];
-    
-    NSLog(@"Search result %i ！！！！～～～～", [_SearchGuidedReading count]);
-    NSLog(@"Search result %i ！！！！～～～～", [_SearchPoetryData count]);
-    NSLog(@"Search result %i ！！！！～～～～", [_SearchRespose count]);
 
 }
 
