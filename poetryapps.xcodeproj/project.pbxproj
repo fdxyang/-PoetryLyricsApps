@@ -27,6 +27,10 @@
 		CB25FD311843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
 		CB25FD391843972D00F3D980 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD371843972D00F3D980 /* InfoPlist.strings */; };
 		CB25FD3B1843972D00F3D980 /* poetryappsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB25FD3A1843972D00F3D980 /* poetryappsTests.m */; };
+		CB381FB41849B056000ECB84 /* GotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB01849B056000ECB84 /* GotoTable.m */; };
+		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
+		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
+		CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB91849BD5A000ECB84 /* ReadingViewController.m */; };
 		CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB53B26B1844F87F005B0CC6 /* 2.txt */; };
 		CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* 1.txt */; };
 /* End PBXBuildFile section */
@@ -70,6 +74,13 @@
 		CB25FD361843972D00F3D980 /* poetryappsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "poetryappsTests-Info.plist"; sourceTree = "<group>"; };
 		CB25FD381843972D00F3D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB25FD3A1843972D00F3D980 /* poetryappsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = poetryappsTests.m; sourceTree = "<group>"; };
+		CB381FAF1849B056000ECB84 /* GotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTable.h; sourceTree = "<group>"; };
+		CB381FB01849B056000ECB84 /* GotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTable.m; sourceTree = "<group>"; };
+		CB381FB11849B056000ECB84 /* GotoTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GotoTable.xib; sourceTree = "<group>"; };
+		CB381FB21849B056000ECB84 /* GotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoViewController.h; sourceTree = "<group>"; };
+		CB381FB31849B056000ECB84 /* GotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoViewController.m; sourceTree = "<group>"; };
+		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
+		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
 		CB53B26B1844F87F005B0CC6 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
 		CBFC77A7184447CD00BE97D1 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +165,8 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				CB381FBB1849BD67000ECB84 /* ReadingView */,
+				CB381FB71849B069000ECB84 /* GotoView */,
 				10F88C111848833D009F045D /* SearchView */,
 				10AE671018449F9900A683E7 /* CoreData */,
 				CB25FD1B1843972D00F3D980 /* PoetryAppDelegate.h */,
@@ -196,6 +209,27 @@
 				CB25FD371843972D00F3D980 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB381FB71849B069000ECB84 /* GotoView */ = {
+			isa = PBXGroup;
+			children = (
+				CB381FAF1849B056000ECB84 /* GotoTable.h */,
+				CB381FB01849B056000ECB84 /* GotoTable.m */,
+				CB381FB11849B056000ECB84 /* GotoTable.xib */,
+				CB381FB21849B056000ECB84 /* GotoViewController.h */,
+				CB381FB31849B056000ECB84 /* GotoViewController.m */,
+			);
+			name = GotoView;
+			sourceTree = "<group>";
+		};
+		CB381FBB1849BD67000ECB84 /* ReadingView */ = {
+			isa = PBXGroup;
+			children = (
+				CB381FB81849BD5A000ECB84 /* ReadingViewController.h */,
+				CB381FB91849BD5A000ECB84 /* ReadingViewController.m */,
+			);
+			name = ReadingView;
 			sourceTree = "<group>";
 		};
 		CB53B26A1844F850005B0CC6 /* Resources */ = {
@@ -289,6 +323,7 @@
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
 				CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
+				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,10 +346,13 @@
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
 				108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */,
+				CB381FB41849B056000ECB84 /* GotoTable.m in Sources */,
+				CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
