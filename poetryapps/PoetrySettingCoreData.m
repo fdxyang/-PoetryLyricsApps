@@ -48,8 +48,8 @@
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
         // TODO: [CASPER] Add another Attr for Setting
-        [Setting setValue: [NSNumber numberWithInt:POETRY_SETIING_DEFAULT_FONT_SIZE] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
-        
+        [Setting setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [Setting setValue:[NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
         
         
     } else if (count == 0) {
@@ -60,11 +60,14 @@
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
-        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_DEFAULT_FONT_SIZE] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
+    
         
     } else {
         
         NSLog(@"ERROR!!! Multiple Setting");
+
     }
     
     
@@ -94,6 +97,8 @@
     return ReturnDic;
 }
 
+
+#pragma mark - Font Size
 -(UInt16) PoetrySetting_GetFontSizeSetting
 {
     NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
@@ -104,5 +109,195 @@
 }
 
 
+-(BOOL) PoetrySetting_SetFontSize : (FONT_SIZE_SETTING) FontSizeSetting
+{
+    switch (FontSizeSetting) {
+            
+        case FONT_SIZE_SMALL:
+            _SettingFontSize = POETRY_SETIING_FONT_SIZE_SMALL;
+            break;
+            
+        case FONT_SIZE_MEDIUM:
+            _SettingFontSize = POETRY_SETIING_FONT_SIZE_MEDIUM;
+            break;
+            
+        case FONT_SIZE_LARGE:
+            _SettingFontSize = POETRY_SETIING_FONT_SIZE_LARGE;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"In Poetry Setting : Set to default");
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Setting setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"UPDATE- Normally it should not be here!!!");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+        
+    }
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+
+    
+    return YES;
+}
+
+#pragma mark - Theme
+-(UInt16) PoetrySetting_GetThemeSetting
+{
+    NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
+    
+    NSNumber *ThemeSetting = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_THEME];
+    
+    return [ThemeSetting unsignedIntegerValue];
+}
+
+
+-(BOOL) PoetrySetting_SetTheme : (THEME_SETTING) ThemeSetting
+{
+    switch (ThemeSetting) {
+            
+        case THEME_LIGHT_DARK:
+            _SettingTheme = THEME_LIGHT_DARK;
+            break;
+            
+        case THEME_DARK_LIGHT:
+            _SettingTheme = THEME_DARK_LIGHT;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"In Poetry Setting : Set to default");
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Setting setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"UPDATE- Normally it should not be here!!!");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+        
+    }
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    
+    return YES;
+}
+
+
+
+-(BOOL) PoetrySetting_UpdateSettingWithSettingDic : (NSDictionary *) SettingDic
+{
+    
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"In Poetry Setting : Set to default");
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Setting setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        
+        
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"First time in setting : Create Setting DB");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+    }
+    
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        
+        return NO;
+    }
+    
+    return YES;
+}
 
 @end
