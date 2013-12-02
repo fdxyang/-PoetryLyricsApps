@@ -435,8 +435,7 @@
     
     if (count == 1) {
         
-        // Setting is exist, update to default value
-        NSLog(@"In Poetry Setting : Set to default");
+        NSLog(@"In Poetry NowReading : Update NowReading ");
         
         NSManagedObject *Reading = [FetchResult objectAtIndex:0];
         
@@ -448,14 +447,13 @@
         
     } else if (count == 0) {
         
-        // Setting not exist, create one
-        NSLog(@"First time in setting : Create Setting DB");
+        NSLog(@"First Time use, create reading");
+
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *Reading = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
-        // TODO: [CASPER] Get the first poetry object and save it.
-        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
-        
-        [NewPoetry setValue: POETRY_CORE_DATA_NAME_KEY forKey:POETRY_CORE_DATA_NAME_KEY];
-        [NewPoetry setValue: POETRY_CORE_DATA_CONTENT_KEY forKey:POETRY_CORE_DATA_CONTENT_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
 
         
     } else {
