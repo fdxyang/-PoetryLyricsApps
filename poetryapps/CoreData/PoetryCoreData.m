@@ -436,8 +436,6 @@
     NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
     NSUInteger count = [FetchResult count];
     
-    NSLog(@"!!!!!!! %@", PoetryDic);
-    
     if (count == 1) {
         
         NSLog(@"In Poetry NowReading : Update NowReading ");
