@@ -30,11 +30,14 @@
 		CB25FD311843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
 		CB25FD391843972D00F3D980 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD371843972D00F3D980 /* InfoPlist.strings */; };
 		CB25FD3B1843972D00F3D980 /* poetryappsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB25FD3A1843972D00F3D980 /* poetryappsTests.m */; };
+		CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF2184C2D3200091BF1 /* Guidepicker.m */; };
+		CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF6184C3CC400091BF1 /* Responsepicker.m */; };
 		CB381FB41849B056000ECB84 /* GotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB01849B056000ECB84 /* GotoTable.m */; };
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
 		CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB91849BD5A000ECB84 /* ReadingViewController.m */; };
 		CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB53B26B1844F87F005B0CC6 /* 2.txt */; };
+		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* 1.txt */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +85,10 @@
 		CB25FD361843972D00F3D980 /* poetryappsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "poetryappsTests-Info.plist"; sourceTree = "<group>"; };
 		CB25FD381843972D00F3D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB25FD3A1843972D00F3D980 /* poetryappsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = poetryappsTests.m; sourceTree = "<group>"; };
+		CB26ADF1184C2D3200091BF1 /* Guidepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guidepicker.h; sourceTree = "<group>"; };
+		CB26ADF2184C2D3200091BF1 /* Guidepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guidepicker.m; sourceTree = "<group>"; };
+		CB26ADF5184C3CC400091BF1 /* Responsepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Responsepicker.h; sourceTree = "<group>"; };
+		CB26ADF6184C3CC400091BF1 /* Responsepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Responsepicker.m; sourceTree = "<group>"; };
 		CB381FAF1849B056000ECB84 /* GotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTable.h; sourceTree = "<group>"; };
 		CB381FB01849B056000ECB84 /* GotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTable.m; sourceTree = "<group>"; };
 		CB381FB11849B056000ECB84 /* GotoTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GotoTable.xib; sourceTree = "<group>"; };
@@ -90,6 +97,8 @@
 		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
 		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
 		CB53B26B1844F87F005B0CC6 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
+		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
+		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBFC77A7184447CD00BE97D1 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,6 +238,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CB26ADF4184C3C9C00091BF1 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				CBF1951E184AF1190062FC00 /* Poetrypicker.h */,
+				CBF1951F184AF1190062FC00 /* Poetrypicker.m */,
+				CB26ADF1184C2D3200091BF1 /* Guidepicker.h */,
+				CB26ADF2184C2D3200091BF1 /* Guidepicker.m */,
+				CB26ADF5184C3CC400091BF1 /* Responsepicker.h */,
+				CB26ADF6184C3CC400091BF1 /* Responsepicker.m */,
+			);
+			name = Pickers;
+			sourceTree = "<group>";
+		};
 		CB381FB71849B069000ECB84 /* GotoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +259,7 @@
 				CB381FB11849B056000ECB84 /* GotoTable.xib */,
 				CB381FB21849B056000ECB84 /* GotoViewController.h */,
 				CB381FB31849B056000ECB84 /* GotoViewController.m */,
+				CB26ADF4184C3C9C00091BF1 /* Pickers */,
 			);
 			name = GotoView;
 			sourceTree = "<group>";
@@ -365,9 +388,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */,
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
+				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,

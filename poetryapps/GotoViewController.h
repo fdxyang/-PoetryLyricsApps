@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GotoTable.h"
+#import "Poetrypicker.h"
+#import "Guidepicker.h"
+#import "Responsepicker.h"
 
 typedef enum {
     BASICGUIDE = 0,
@@ -15,21 +18,8 @@ typedef enum {
     GOTOPAGECOUNT
 }GotoPageAreaSection;
 
+@interface GotoViewController : UIViewController
 
-typedef enum {
-    GUIDE = 0,
-    POETRY,
-    RESPONSE
-}GotoSection;
-
-
-@interface GotoViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
-
-@property (nonatomic) GotoSection section;
-//@property (nonatomic) NSInteger currentIndex;
-@property (nonatomic) NSInteger currentGuideIndex;
-@property (nonatomic) NSInteger currentPoetryIndex;
-@property (nonatomic) NSInteger currentResponseIndex;
 @property (nonatomic,strong) NSMutableArray *historyArr;
 @property (nonatomic,strong) NSMutableArray *guideArray;
 @property (nonatomic) BOOL isTreeMode;
@@ -37,8 +27,11 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIButton *guideBtn;
 @property (strong, nonatomic) IBOutlet UIButton *poetryBtn;
 @property (strong, nonatomic) IBOutlet UIButton *responseBtn;
-@property (strong, nonatomic) IBOutlet UIPickerView *picker;
 @property (strong, nonatomic) IBOutlet UIButton *gotoReading;
+
+@property (strong,nonatomic) Guidepicker *guideView;
+@property (strong,nonatomic) Poetrypicker *poetryView;
+@property (strong,nonatomic) Responsepicker *responseView;
 
 - (IBAction)guideBtnClicked:(id)sender;
 - (IBAction)poetryBtnClicked:(id)sender;

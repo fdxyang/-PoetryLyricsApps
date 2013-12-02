@@ -16,7 +16,6 @@
 @synthesize guideBtn;
 @synthesize poetryBtn;
 @synthesize responseBtn;
-@synthesize picker;
 @synthesize gotoReading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,34 +31,21 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:FALSE];
+    _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:FALSE];
+    _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:TRUE];
     
-    _guideArray = [[NSMutableArray alloc] initWithObjects:@"導讀1", @"導讀2", @"導讀3", @"導讀4", @"導讀5", @"導讀6", nil ];
-    _historyArr = [[NSMutableArray alloc] init];
+    _poetryView.hidden = YES;
+    _responseView.hidden = YES;
+    _guideView.hidden = NO;
     
-    self.guideBtn = [[UIButton alloc]init];
-    [self.guideBtn addTarget:self action:@selector(guideBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.guideBtn];
+    [self.view addSubview:_guideView];
+    [self.view addSubview:_poetryView];
+    [self.view addSubview:_responseView];
     
-    self.poetryBtn = [[UIButton alloc]init];
-    [self.poetryBtn addTarget:self action:@selector(poetryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.poetryBtn];
-    
-    self.responseBtn = [[UIButton alloc]init];
-    [self.responseBtn addTarget:self action:@selector(responseBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.responseBtn];
-    
-    self.picker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,235, 320, 162)];
-    
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
-    
-    _isTreeMode = FALSE;
-    
-    [self.view addSubview:picker];
-    
-    [gotoReading setTitle:[_guideArray objectAtIndex:0] forState:UIControlStateNormal];
-    
-    _section = GUIDE;
+    [self.view bringSubviewToFront:_guideView];
+    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,55 +54,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (IBAction)guideBtnClicked:(id)sender
 {
     NSLog(@"guideBtnClicked");
-    _section = GUIDE;
-    [_guideArray removeAllObjects];
+    [_guideView setFlag:TRUE];
+    [_poetryView setFlag:FALSE];
+    [_responseView setFlag:FALSE];
     
-    [_guideArray addObject:@"導讀1"];
-    [_guideArray addObject:@"導讀2"];
-    [_guideArray addObject:@"導讀3"];
-    [_guideArray addObject:@"導讀4"];
-    [_guideArray addObject:@"導讀5"];
-    [_guideArray addObject:@"導讀6"];
-    
-    [self.picker reloadAllComponents];
-    [gotoReading setTitle:[_guideArray objectAtIndex:_currentGuideIndex] forState:UIControlStateNormal];
+    _poetryView.hidden = YES;
+    _responseView.hidden=YES;
+    _guideView.hidden = NO;
+    [self.view bringSubviewToFront:_guideView];
+    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (IBAction)poetryBtnClicked:(id)sender
 {
     NSLog(@"poetryBtnClicked");
-    _section = POETRY;
-    [_guideArray removeAllObjects];
-    
-    NSString *str = [[NSString alloc]init];
-    for (int i =1; i<=650 ; i++)
-    {
-        str = [NSString stringWithFormat:@"%d",i];
-        [_guideArray addObject:str];
-    }
-    
-    [self.picker reloadAllComponents];
-    [gotoReading setTitle:[_guideArray objectAtIndex:_currentPoetryIndex] forState:UIControlStateNormal];
+    [_guideView setFlag:FALSE];
+    [_poetryView setFlag:TRUE];
+    [_responseView setFlag:FALSE];
+    _responseView.hidden=YES;
+    _guideView.hidden = YES;
+    _poetryView.hidden = NO;
+    [self.view bringSubviewToFront:_poetryView];
+    [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (IBAction)responseBtnClicked:(id)sender
 {
-    NSLog(@"responseBtnClicked");
-    _section = RESPONSE;
-    [_guideArray removeAllObjects];
-    
-    NSString *str = [[NSString alloc]init];
-    for (int i =1; i<=66 ; i++)
-    {
-        str = [NSString stringWithFormat:@"%d",i];
-        [_guideArray addObject:str];
-    }
-    
-    [self.picker reloadAllComponents];
-    [gotoReading setTitle:[_guideArray objectAtIndex:_currentResponseIndex] forState:UIControlStateNormal];
+    NSLog(@"poetryBtnClicked");
+    [_guideView setFlag:FALSE];
+    [_poetryView setFlag:FALSE];
+    [_responseView setFlag:TRUE];
+    _guideView.hidden = YES;
+    _poetryView.hidden = YES;
+    _responseView.hidden=NO;
+    [self.view bringSubviewToFront:_responseView];
+    [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (IBAction)changeModeBtnClicked:(id)sender
@@ -160,71 +136,6 @@
 
 - (IBAction)changeReadingModeClicked:(id)sender
 {
-}
-
-//內建的函式回傳UIPicker共有幾組選項
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    NSLog(@"numberOfComponentsInPickerView section");
-    
-    return 1;
-}
-
-//內建的函式回傳UIPicker每組選項的項目數目
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    NSLog(@"numberOfRowsInComponent");
-    //第一組選項由0開始
-    switch (component)
-    {
-        case 0:
-            return [_guideArray count];
-            break;
-            
-            //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行
-        default:
-            return 0;
-            break;
-    }
-}
-
-//內建函式印出字串在Picker上以免出現"?"
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSLog(@"titleForRow");
-    switch (component) {
-        case 0:
-            if (_section == GUIDE)
-            {
-                _currentGuideIndex = row;
-            }
-            else if(_section == POETRY)
-            {
-                _currentPoetryIndex = row;
-            }
-            else if(_section == RESPONSE)
-            {
-                _currentResponseIndex = row;
-            }
-            [gotoReading setTitle:[_guideArray objectAtIndex:row] forState:UIControlStateNormal];
-            return [_guideArray objectAtIndex:row];
-            break;
-            
-            //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行）
-        default:
-            return @"Error";
-            break;
-    }
-}
-
-//選擇UIPickView中的項目時會出發的內建函式
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    NSLog(@"didSelectRow");
-    NSString *str = [NSString stringWithFormat:@"%@", [_guideArray objectAtIndex:row]];
-    NSLog(@"str = %@",str);
-    
-    [gotoReading setTitle:str forState:UIControlStateNormal];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
