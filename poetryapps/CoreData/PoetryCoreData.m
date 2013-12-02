@@ -73,6 +73,7 @@
     
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
     
     NSDate *CreationDate = [NSDate date];
     [NewPoetry setValue: CreationDate forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
@@ -256,6 +257,8 @@
     
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
     
     
     NSError *error = nil;
@@ -421,7 +424,7 @@
 }
 
 #pragma mark - Now Reading Core Data Methods
-// Save Poetry into History
+// Save Poetry into now reading
 -(BOOL) PoetryCoreDataSaveIntoNowReading : (NSDictionary *) PoetryDic
 {
     NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
@@ -433,6 +436,8 @@
     NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
     NSUInteger count = [FetchResult count];
     
+    NSLog(@"!!!!!!! %@", PoetryDic);
+    
     if (count == 1) {
         
         NSLog(@"In Poetry NowReading : Update NowReading ");
@@ -442,6 +447,8 @@
         // TODO: [CASPER] Add another Attr for Setting
         [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
         [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
 
         
         
@@ -454,6 +461,8 @@
         
         [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
         [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
 
         
     } else {
@@ -478,7 +487,6 @@
 -(BOOL) Poetry_CoreDataReadingExist
 {
     NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
-    NSLog(@"!!!");
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
     

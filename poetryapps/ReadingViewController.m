@@ -31,7 +31,6 @@
     
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
-//    [self readingViewSetupScroller];
     
 }
 
@@ -45,7 +44,7 @@
 {
     [super viewDidDisappear:animated];
     // TODO: save _PoetryNowReading in Reading database
-    NSLog(@"ViewDidDisappear - save reading \n %@", _PoetryNowReading);
+    NSLog(@"ViewDidDisappear - save reading");
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }
@@ -63,7 +62,7 @@
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        NSLog(@"READING EXIST , \n%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        NSLog(@"READING EXIST");
 
         
     } else {
@@ -76,7 +75,6 @@
     
     // Read Setting
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
-    NSLog(@"Font size = %@", font);
     
     // Setup Scroll View
     [_Scroller setContentSize:CGSizeMake(320, 1000)];

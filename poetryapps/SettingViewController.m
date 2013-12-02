@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    _Setting = [[PoetrySettingCoreData alloc] init];
+    
+    NSLog(@" font size = %d and theme = %d", _Setting.SettingFontSize, _Setting.SettingTheme);
+	
 }
 
 - (void)didReceiveMemoryWarning

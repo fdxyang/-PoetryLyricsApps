@@ -18,6 +18,8 @@
 #define POETRY_CORE_DATA_NAME_KEY               @"name"
 #define POETRY_CORE_DATA_CONTENT_KEY            @"content"
 #define POETRY_CORE_DATA_CREATION_TIME_KEY      @"creationDate"
+#define POETRY_CORE_DATA_INDEX_KEY              @"index"        // [CASPER] Add index
+#define POETRY_CORE_DATA_CATERORY_KEY           @"category"     // [CASPER] Add category
 
 @interface PoetryCoreData : NSObject
 

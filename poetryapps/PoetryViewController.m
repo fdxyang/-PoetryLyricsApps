@@ -22,7 +22,20 @@
     PoetrySettingCoreData *setting = [[PoetrySettingCoreData alloc] init];
     [setting PoetrySetting_Create];
     
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];
     
+    NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+    
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                               @"1", POETRY_CORE_DATA_NAME_KEY,
+                               string, POETRY_CORE_DATA_CONTENT_KEY,
+                               [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,
+                               [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
+    [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+
+
 /*
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];

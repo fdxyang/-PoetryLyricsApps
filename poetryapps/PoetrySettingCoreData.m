@@ -51,7 +51,7 @@
         
     } else {
     
-        NSLog(@"Already exist");
+        NSLog(@"Setting Already exist");
         return NO;
     }
     
@@ -213,13 +213,13 @@
 }
 
 #pragma mark - Theme
--(UInt16) PoetrySetting_GetThemeSetting
+-(THEME_SETTING) PoetrySetting_GetThemeSetting
 {
     NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
     
     NSNumber *ThemeSetting = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_THEME];
     
-    return [ThemeSetting unsignedIntegerValue];
+    return (THEME_SETTING)[ThemeSetting unsignedIntegerValue];
 }
 
 
