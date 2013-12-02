@@ -227,8 +227,8 @@
                     NSLog(@"gp2");
                     [_detailTableView setTableViewType:0];
                 }
-                
-                
+
+                [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 1: // poetry
                 NSLog(@"poetry press");
@@ -236,6 +236,7 @@
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
                 else
                     [_detailTableView setTableViewType:1];
+                [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 2: // response
                 NSLog(@"response press");
@@ -243,6 +244,7 @@
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
                 else
                     [_detailTableView setTableViewType:2];
+                [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
                 
             default:
@@ -256,6 +258,14 @@
             default:
                 break;
         }
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"detailTableView"])
+    {
+        _detailTableView = segue.destinationViewController;
     }
 }
 @end

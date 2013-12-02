@@ -19,6 +19,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        NSLog(@"init ");
         tableViewType = type;
         NSString *str;
         
@@ -33,6 +34,8 @@
                 str = [NSString stringWithFormat:@"g%d",i+1];
                 [guideAttr addObject:str];
             }
+            
+            NSLog(@"guide count = %d",[guideAttr count]);
         }
         else if(tableViewType == 1) //poetry
         {
@@ -70,13 +73,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSLog(@"numberOfSectionsInTableView");
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"numberOfRowsInSection");
     if (tableViewType == 0)
+    {
+        NSLog(@"count = %d",[guideAttr count]);
         return [guideAttr count];
+    }
     else if(tableViewType == 1)
         return [poetryAttr count];
     else if(tableViewType == 2)
@@ -90,6 +98,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cellforrow");
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d%d",indexPath.row,indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     

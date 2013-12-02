@@ -149,7 +149,7 @@
                         <outlet property="guideBtn" destination="VbU-Kr-hYO" id="UmN-VO-iYn"/>
                         <outlet property="poetryBtn" destination="LQ6-Iy-REN" id="Tbt-eu-4fX"/>
                         <outlet property="responseBtn" destination="1Go-Hg-dcK" id="P0G-so-wBt"/>
-                        <segue destination="U98-hz-mbe" kind="push" id="x6q-bi-pgJ"/>
+                        <segue destination="U98-hz-mbe" kind="push" identifier="detailTableView" id="x6q-bi-pgJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWl-Kn-nps" userLabel="First Responder" sceneMemberID="firstResponder"/>
