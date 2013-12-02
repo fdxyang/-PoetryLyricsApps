@@ -420,4 +420,107 @@
     
 }
 
+#pragma mark - Now Reading Core Data Methods
+// Save Poetry into History
+-(BOOL) PoetryCoreDataSaveIntoNowReading : (NSDictionary *) PoetryDic
+{
+    NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"In Poetry Setting : Set to default");
+        
+        NSManagedObject *Reading = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+        [Reading setValue: [PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+
+        
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"First time in setting : Create Setting DB");
+        
+        // TODO: [CASPER] Get the first poetry object and save it.
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: POETRY_CORE_DATA_NAME_KEY forKey:POETRY_CORE_DATA_NAME_KEY];
+        [NewPoetry setValue: POETRY_CORE_DATA_CONTENT_KEY forKey:POETRY_CORE_DATA_CONTENT_KEY];
+
+        
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+    }
+    
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        
+        return NO;
+    }
+    
+    return YES;
+    
+}
+
+
+
+-(BOOL) Poetry_CoreDataReadingExist
+{
+    NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
+    NSLog(@"!!!");
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    [request setIncludesSubentities:NO]; //Omit subentities. Default is YES (i.e. include subentities)
+    
+    NSError *err;
+    NSUInteger count = [_context countForFetchRequest:request error:&err];
+    if(count == NSNotFound) {
+        //Handle error
+    } else if (count == 0) {
+        
+        return NO;
+        
+    } else if (count == 1) {
+        
+        return YES;
+        
+    } else {
+        
+        NSLog(@"ERROR!, please check! it should not be here");
+        
+    }
+    
+    return YES;
+}
+
+
+-(NSDictionary*) Poetry_CoreDataFetchDataInReading
+{
+    NSMutableArray *Poetrys = [[NSMutableArray alloc] init];
+    
+    NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
+    Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    NSDictionary *ReturnDic = (NSDictionary*)[Poetrys objectAtIndex:0];
+
+    return ReturnDic;
+}
+
+
+
 @end

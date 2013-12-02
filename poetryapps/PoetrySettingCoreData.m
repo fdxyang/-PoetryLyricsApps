@@ -27,6 +27,43 @@
 }
 
 
+-(BOOL) PoetrySetting_Create
+{
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"First time in setting : Create Setting DB");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        
+        
+    } else {
+    
+        NSLog(@"Already exist");
+        return NO;
+    }
+    
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        
+        return NO;
+    }
+    return YES;
+}
 
 -(BOOL) PoetrySetting_SetDefault
 {

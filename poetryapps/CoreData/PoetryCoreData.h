@@ -13,6 +13,7 @@
 #define POETRY_CORE_DATA_ENTITY                 @"Poetrys"
 #define POETRY_RES_CORE_DATA_ENTITY             @"ResponsivePrayer"
 #define POETRY_HISTORY_CORE_DATA_ENTITY         @"PoetrysHistory"
+#define POETRY_NOW_READING_CORE_DATA_ENTITY     @"NowReading" //[CASPER] Add for reading view
 
 #define POETRY_CORE_DATA_NAME_KEY               @"name"
 #define POETRY_CORE_DATA_CONTENT_KEY            @"content"
@@ -43,6 +44,13 @@ typedef enum {
 -(BOOL) Poetry_CoreDataDeleteOldestInHistory;
 -(NSArray*) Poetry_CoreDataSearchWithPoetryContentInHistory : (NSString *) SearchString;
 -(NSArray*) Poetry_CoreDataSearchWithPoetryNameInHistory : (NSString *) SearcgName;
+
+// Now reading methods
+
+@property (nonatomic, getter = Poetry_CoreDataReadingExist) BOOL isReadingExist;
+-(BOOL) Poetry_CoreDataReadingExist;
+-(BOOL) PoetryCoreDataSaveIntoNowReading : (NSDictionary *) PoetryDic;
+-(NSDictionary*) Poetry_CoreDataFetchDataInReading;
 
 
 @end

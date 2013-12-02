@@ -8,7 +8,7 @@
 
 #import "PoetryViewController.h"
 #import "PoetryCoreData.h"
-
+#import "PoetrySettingCoreData.h"
 @interface PoetryViewController ()
 
 @end
@@ -18,9 +18,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    
+    PoetrySettingCoreData *setting = [[PoetrySettingCoreData alloc] init];
+    [setting PoetrySetting_Create];
+
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *txtPath = [mainBundle pathForResource:@"2" ofType:@"txt"];
+    
+    NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+    
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                               @"2", POETRY_CORE_DATA_NAME_KEY,
+                               string, POETRY_CORE_DATA_CONTENT_KEY, nil];
+    
+    [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
     
 
+
+    /*
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *txtPath = [mainBundle pathForResource:@"2" ofType:@"txt"];
+    
+    NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+    
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                               @"2", POETRY_CORE_DATA_NAME_KEY,
+                               string, POETRY_CORE_DATA_CONTENT_KEY, nil];
+    
+    [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+    
+*/
 	// Do any additional setup after loading the view, typically from a nib.
     
     /*

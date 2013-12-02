@@ -26,7 +26,68 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ 
 	// Do any additional setup after loading the view.
+    
+    _PoetryDatabase = [[PoetryCoreData alloc] init];
+    _PoetrySetting = [[PoetrySettingCoreData alloc] init];
+    
+    // Check Reading data available
+    
+    if (_PoetryDatabase.isReadingExist) {
+        
+        _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
+
+    } else {
+        
+        NSLog(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
+        _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING] objectAtIndex:0];
+        
+    }
+        
+    
+    // Read Setting
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    NSLog(@"Font size = %@", font);
+    
+    // Setup Scroll View
+    [_Scroller setContentSize:CGSizeMake(320, 1000)];
+    [_Scroller setScrollEnabled:YES];
+    CGSize size = CGSizeMake(300, 0);
+
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
+    if (subviewArray == nil) {
+        NSLog(@"CANNOT FIND ReadingScroller");
+    }
+    
+    // Add Content
+    UILabel *ContentLab = [[UILabel alloc] init];
+    [ContentLab setText:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    [ContentLab setFont:font];
+    ContentLab.numberOfLines = 0;
+    [ContentLab setBackgroundColor: [UIColor whiteColor]];
+    CGSize constraint = CGSizeMake(300, 20000.0f);
+    
+    size = [ContentLab sizeThatFits:constraint];
+    NSLog(@"scroller size height = %f", size.height);
+    [ContentLab setFrame:CGRectMake(10, 20, size.width, size.height)];
+    
+    ContentLab.numberOfLines = 0;
+    ContentLab.backgroundColor = [UIColor clearColor];
+    [_Scroller setContentSize:CGSizeMake(320, size.height + 40)];
+
+    [_Scroller addSubview: ContentLab];
+    
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    // TODO: save _PoetryNowReading in Reading database
+    NSLog(@"ViewDidDisappear - save reading");
+    [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +95,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

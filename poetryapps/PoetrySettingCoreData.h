@@ -40,6 +40,7 @@ typedef enum {
 @property (nonatomic)                                               THEME_SETTING   SettingTheme;
 
 -(PoetrySettingCoreData*) init;
+-(BOOL) PoetrySetting_Create;
 -(BOOL) PoetrySetting_SetDefault;
 
 -(NSDictionary*) PoetrySetting_ReadSetting;
