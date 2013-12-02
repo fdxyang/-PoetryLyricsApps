@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        NSLog(@"poetrypicker init");
+        //NSLog(@"poetrypicker init");
         // Initialization code
         
         isTurnOnView = isTurnOn;
@@ -42,15 +42,14 @@
 //內建的函式回傳UIPicker共有幾組選項
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    NSLog(@"poetry  numberOfComponentsInPickerView section");
-    
+    //NSLog(@"poetry  numberOfComponentsInPickerView section");
     return 1;
 }
 
 //內建的函式回傳UIPicker每組選項的項目數目
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSLog(@"poetry  numberOfRowsInComponent");
+    //NSLog(@"poetry  numberOfRowsInComponent");
     //第一組選項由0開始
     switch (component)
     {
@@ -68,7 +67,7 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"poetry titleForRow");
+    //NSLog(@"poetry titleForRow");
     switch (component) {
         case 0:
             _pickerContent = [NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]];

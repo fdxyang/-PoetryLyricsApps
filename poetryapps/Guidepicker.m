@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        NSLog(@"Guidepicker init");
+        //NSLog(@"Guidepicker init");
         
         isTurnOnView = isTurnOn;
         _btn = btn;
@@ -33,15 +33,14 @@
 //內建的函式回傳UIPicker共有幾組選項
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    NSLog(@"guide  numberOfComponentsInPickerView section");
-    
+    //NSLog(@"guide  numberOfComponentsInPickerView section");
     return 1;
 }
 
 //內建的函式回傳UIPicker每組選項的項目數目
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSLog(@"guide  numberOfRowsInComponent");
+    //NSLog(@"guide  numberOfRowsInComponent");
     //第一組選項由0開始
     switch (component)
     {
@@ -59,7 +58,7 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"guide titleForRow");
+    //NSLog(@"guide titleForRow");
     switch (component) {
         case 0:
             _pickerContent = [NSString stringWithFormat:@"%@", [guideArr objectAtIndex:row]];
@@ -79,7 +78,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [guideArr objectAtIndex:row]];
-    NSLog(@"_pickerContent = %@",_pickerContent);
+    //NSLog(@"_pickerContent = %@",_pickerContent);
 }
 
 - (NSString *) getPickerContent

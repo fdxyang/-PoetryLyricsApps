@@ -200,7 +200,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -210,4 +210,30 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == BASICGUIDE)
+    {
+        switch (indexPath.row) {
+            case 0: // guide
+                
+                break;
+            case 1: // poetry
+                break;
+            case 2: // response
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else //histroy
+    {
+        switch (indexPath.row)
+        {
+            default:
+                break;
+        }
+    }
+}
 @end
