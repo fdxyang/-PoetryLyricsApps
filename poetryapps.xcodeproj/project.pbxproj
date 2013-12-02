@@ -32,6 +32,7 @@
 		CB25FD3B1843972D00F3D980 /* poetryappsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB25FD3A1843972D00F3D980 /* poetryappsTests.m */; };
 		CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF2184C2D3200091BF1 /* Guidepicker.m */; };
 		CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF6184C3CC400091BF1 /* Responsepicker.m */; };
+		CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */; };
 		CB381FB41849B056000ECB84 /* GotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB01849B056000ECB84 /* GotoTable.m */; };
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
@@ -89,6 +90,8 @@
 		CB26ADF2184C2D3200091BF1 /* Guidepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guidepicker.m; sourceTree = "<group>"; };
 		CB26ADF5184C3CC400091BF1 /* Responsepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Responsepicker.h; sourceTree = "<group>"; };
 		CB26ADF6184C3CC400091BF1 /* Responsepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Responsepicker.m; sourceTree = "<group>"; };
+		CB26ADF8184C786A00091BF1 /* GotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableViewController.h; sourceTree = "<group>"; };
+		CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableViewController.m; sourceTree = "<group>"; };
 		CB381FAF1849B056000ECB84 /* GotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTable.h; sourceTree = "<group>"; };
 		CB381FB01849B056000ECB84 /* GotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTable.m; sourceTree = "<group>"; };
 		CB381FB11849B056000ECB84 /* GotoTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GotoTable.xib; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				CB381FB11849B056000ECB84 /* GotoTable.xib */,
 				CB381FB21849B056000ECB84 /* GotoViewController.h */,
 				CB381FB31849B056000ECB84 /* GotoViewController.m */,
+				CB26ADF8184C786A00091BF1 /* GotoTableViewController.h */,
+				CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */,
 				CB26ADF4184C3C9C00091BF1 /* Pickers */,
 			);
 			name = GotoView;
@@ -392,6 +397,7 @@
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
 				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,

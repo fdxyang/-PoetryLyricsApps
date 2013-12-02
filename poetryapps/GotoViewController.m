@@ -216,11 +216,33 @@
     {
         switch (indexPath.row) {
             case 0: // guide
+                NSLog(@"guide press");
+                if(!_detailTableView)
+                {
+                    NSLog(@"gp1");
+                    _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:0];
+                }
+                else
+                {
+                    NSLog(@"gp2");
+                    [_detailTableView setTableViewType:0];
+                }
+                
                 
                 break;
             case 1: // poetry
+                NSLog(@"poetry press");
+                if(!_detailTableView)
+                    _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
+                else
+                    [_detailTableView setTableViewType:1];
                 break;
             case 2: // response
+                NSLog(@"response press");
+                if(!_detailTableView)
+                    _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
+                else
+                    [_detailTableView setTableViewType:2];
                 break;
                 
             default:

@@ -11,6 +11,7 @@
 #import "Poetrypicker.h"
 #import "Guidepicker.h"
 #import "Responsepicker.h"
+#import "GotoTableViewController.h"
 
 typedef enum {
     BASICGUIDE = 0,
@@ -32,6 +33,8 @@ typedef enum {
 @property (strong,nonatomic) Guidepicker *guideView;
 @property (strong,nonatomic) Poetrypicker *poetryView;
 @property (strong,nonatomic) Responsepicker *responseView;
+
+@property (strong,nonatomic) GotoTableViewController *detailTableView;
 
 - (IBAction)guideBtnClicked:(id)sender;
 - (IBAction)poetryBtnClicked:(id)sender;

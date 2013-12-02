@@ -156,10 +156,10 @@
             </objects>
             <point key="canvasLocation" x="1043" y="637"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Goto Table View Controller-->
         <scene sceneID="VnN-Hd-qsC">
             <objects>
-                <tableViewController id="U98-hz-mbe" sceneMemberID="viewController">
+                <tableViewController id="U98-hz-mbe" customClass="GotoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="h8g-Bv-2fY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,10 +180,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vIU-kt-3hL"/>
+                    <connections>
+                        <outlet property="detailTableView" destination="h8g-Bv-2fY" id="tPJ-4Q-mSg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rek-EX-CuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439" y="635"/>
+            <point key="canvasLocation" x="1481" y="631"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="ts1-eo-hrZ">
