@@ -20,7 +20,7 @@
     if (self) {
         // Custom initialization
         NSLog(@"init ");
-        tableViewType = type;
+        _tableViewType = type;
     }
     return self;
 }
@@ -39,31 +39,42 @@
     responseAttr = [[NSMutableArray alloc] init];
     
     
-    if (tableViewType == 0) // guide
+    if (_tableViewType == 0) // guide
     {
-        for (int i = 0;i<6;i++)
+        if(![guideAttr count])
         {
-            str = [NSString stringWithFormat:@"g%d",i+1];
-            [guideAttr addObject:str];
+            for (int i = 0;i<6;i++)
+            {
+                str = [NSString stringWithFormat:@"g%d",i+1];
+                [guideAttr addObject:str];
+            }
         }
         
         NSLog(@"guide count = %lu",[guideAttr count]);
     }
-    else if(tableViewType == 1) //poetry
+    else if(_tableViewType == 1) //poetry
     {
-        for (int i = 0;i<650;i++)
+        if(![poetryAttr count])
         {
-            str = [NSString stringWithFormat:@"p%d",i+1];
-            [poetryAttr addObject:str];
+            for (int i = 0;i<650;i++)
+            {
+                str = [NSString stringWithFormat:@"p%d",i+1];
+                [poetryAttr addObject:str];
+            }
         }
+        NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
     }
-    else if(tableViewType == 2) //response
+    else if(_tableViewType == 2) //response
     {
-        for (int i = 0;i<650;i++)
+        if(![responseAttr count])
         {
-            str = [NSString stringWithFormat:@"r%d",i+1];
-            [responseAttr addObject:str];
+            for (int i = 0;i<66;i++)
+            {
+                str = [NSString stringWithFormat:@"r%d",i+1];
+                [responseAttr addObject:str];
+            }
         }
+        NSLog(@"responseAttr count = %lu",[responseAttr count]);
     }
 }
 
@@ -84,14 +95,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSLog(@"numberOfRowsInSection");
-    if (tableViewType == 0)
+    if (_tableViewType == 0)
     {
         NSLog(@"count = %lu",[guideAttr count]);
         return [guideAttr count];
     }
-    else if(tableViewType == 1)
+    else if(_tableViewType == 1)
         return [poetryAttr count];
-    else if(tableViewType == 2)
+    else if(_tableViewType == 2)
         return [responseAttr count];
     else
     {
@@ -103,19 +114,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"cellforrow");
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%lu%lu",indexPath.row,indexPath.section];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell"];
+    GotoTableCell *cell = (GotoTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    if (tableViewType == 0)
+    if (cell == nil)
+    {
+        cell = [[GotoTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    
+    if (_tableViewType == 0)
     {
         cell.textLabel.text = [guideAttr objectAtIndex:indexPath.row];
     }
-    else if (tableViewType == 1)
+    else if (_tableViewType == 1)
     {
         cell.textLabel.text = [poetryAttr objectAtIndex:indexPath.row];
     }
-    else if (tableViewType == 2)
+    else if (_tableViewType == 2)
     {
         cell.textLabel.text = [responseAttr objectAtIndex:indexPath.row];
     }
@@ -127,35 +146,52 @@
 
 - (void) setTableViewType:(NSInteger)type
 {
-    tableViewType = type;
+    NSLog(@"type = %lu",type);
+    _tableViewType = type;
     
     NSString *str;
     
-    if (tableViewType == 0) // guide
+    if (_tableViewType == 0) // guide
     {
-        for (int i = 0;i<6;i++)
+        NSLog(@"table view type - guide");
+        if(![guideAttr count])
         {
-            str = [NSString stringWithFormat:@"g%d",i+1];
-            [guideAttr addObject:str];
+            for (int i = 0;i<6;i++)
+            {
+                str = [NSString stringWithFormat:@"g%d",i+1];
+                [guideAttr addObject:str];
+            }
         }
         
-        NSLog(@"guide count = %d",[guideAttr count]);
+        NSLog(@"guide count = %lu",[guideAttr count]);
     }
-    else if(tableViewType == 1) //poetry
+    else if(_tableViewType == 1) //poetry
     {
-        for (int i = 0;i<650;i++)
+        NSLog(@"table view type - poetry");
+        
+        if(![poetryAttr count])
         {
-            str = [NSString stringWithFormat:@"p%d",i+1];
-            [poetryAttr addObject:str];
+            for (int i = 0;i<650;i++)
+            {
+                str = [NSString stringWithFormat:@"p%d",i+1];
+                [poetryAttr addObject:str];
+            }
         }
+        NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
     }
-    else if(tableViewType == 2) //response
+    else if(_tableViewType == 2) //response
     {
-        for (int i = 0;i<650;i++)
+        NSLog(@"table view type - response");
+        
+        if(![responseAttr count])
         {
-            str = [NSString stringWithFormat:@"r%d",i+1];
-            [responseAttr addObject:str];
+            for (int i = 0;i<66;i++)
+            {
+                str = [NSString stringWithFormat:@"r%d",i+1];
+                [responseAttr addObject:str];
+            }
         }
+        NSLog(@"responseAttr count = %lu",[responseAttr count]);
     }
 }
 @end

@@ -38,6 +38,7 @@
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
 		CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB91849BD5A000ECB84 /* ReadingViewController.m */; };
 		CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB53B26B1844F87F005B0CC6 /* 2.txt */; };
+		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* 1.txt */; };
 /* End PBXBuildFile section */
@@ -100,6 +101,8 @@
 		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
 		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
 		CB53B26B1844F87F005B0CC6 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
+		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
+		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBFC77A7184447CD00BE97D1 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				CB381FB31849B056000ECB84 /* GotoViewController.m */,
 				CB26ADF8184C786A00091BF1 /* GotoTableViewController.h */,
 				CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */,
+				CBA286CA184D753A00010125 /* GotoTableCell.h */,
+				CBA286CB184D753A00010125 /* GotoTableCell.m */,
 				CB26ADF4184C3C9C00091BF1 /* Pickers */,
 			);
 			name = GotoView;
@@ -404,6 +409,7 @@
 				10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
+				CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
 				108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */,
 				CB381FB41849B056000ECB84 /* GotoTable.m in Sources */,

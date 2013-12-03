@@ -20,6 +20,9 @@ typedef enum {
 }GotoPageAreaSection;
 
 @interface GotoViewController : UIViewController
+{
+    NSInteger gotoType;
+}
 
 @property (nonatomic,strong) NSMutableArray *historyArr;
 @property (nonatomic,strong) NSMutableArray *guideArray;

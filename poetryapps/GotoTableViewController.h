@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GotoTableCell.h"
 
 @interface GotoTableViewController : UITableViewController
 {
-    NSInteger tableViewType;
     NSMutableArray *guideAttr;
     NSMutableArray *poetryAttr;
     NSMutableArray *responseAttr;
 }
 @property (strong, nonatomic) IBOutlet UITableView *detailTableView;
+@property (nonatomic) NSInteger tableViewType;
 
 - (id) initWithStyle:(UITableViewStyle)style TYPE:(NSInteger)type;
 - (void) setTableViewType:(NSInteger)type;

@@ -40,6 +40,8 @@
     _responseView.hidden = YES;
     _guideView.hidden = NO;
     
+    gotoType = 0; // default type guide
+    
     [self.view addSubview:_guideView];
     [self.view addSubview:_poetryView];
     [self.view addSubview:_responseView];
@@ -58,6 +60,9 @@
 - (IBAction)guideBtnClicked:(id)sender
 {
     NSLog(@"guideBtnClicked");
+    
+    gotoType = 0; //guide type
+    
     [_guideView setFlag:TRUE];
     [_poetryView setFlag:FALSE];
     [_responseView setFlag:FALSE];
@@ -72,6 +77,9 @@
 - (IBAction)poetryBtnClicked:(id)sender
 {
     NSLog(@"poetryBtnClicked");
+    
+    gotoType = 1; // poetry type
+    
     [_guideView setFlag:FALSE];
     [_poetryView setFlag:TRUE];
     [_responseView setFlag:FALSE];
@@ -84,7 +92,10 @@
 
 - (IBAction)responseBtnClicked:(id)sender
 {
-    NSLog(@"poetryBtnClicked");
+    NSLog(@"responseBtnClicked");
+    
+    gotoType = 2; // response type
+    
     [_guideView setFlag:FALSE];
     [_poetryView setFlag:FALSE];
     [_responseView setFlag:TRUE];
@@ -200,7 +211,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%lu%lu",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -227,23 +238,43 @@
                     NSLog(@"gp2");
                     [_detailTableView setTableViewType:0];
                 }
+                
+                gotoType = 0;
 
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 1: // poetry
                 NSLog(@"poetry press");
                 if(!_detailTableView)
+                {
+                    NSLog(@"pp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
+                }
                 else
+                {
+                    NSLog(@"pp2");
                     [_detailTableView setTableViewType:1];
+                }
+                
+                gotoType = 1;
+                
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 2: // response
                 NSLog(@"response press");
                 if(!_detailTableView)
+                {
+                    NSLog(@"rp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
+                }
                 else
+                {
+                    NSLog(@"rp2");
                     [_detailTableView setTableViewType:2];
+                }
+                
+                gotoType = 2;
+                
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
                 
@@ -266,6 +297,8 @@
     if ([segue.identifier isEqualToString:@"detailTableView"])
     {
         _detailTableView = segue.destinationViewController;
+        
+        [_detailTableView setTableViewType:gotoType];
     }
 }
 @end
