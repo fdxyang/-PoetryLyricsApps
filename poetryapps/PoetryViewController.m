@@ -22,20 +22,31 @@
     PoetrySettingCoreData *setting = [[PoetrySettingCoreData alloc] init];
     [setting PoetrySetting_Create];
     
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];
-    
-    NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
-    
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
-    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"1", POETRY_CORE_DATA_NAME_KEY,
-                               string, POETRY_CORE_DATA_CONTENT_KEY,
-                               [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,
-                               [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
-    [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
 
+    NSArray *Search = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:@"1" InCategory:GUARD_READING];
+    if ([Search count] == 0) {
+        
+        NSLog(@"Add 1.txt");
+        
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];
+        
+        NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+        
+        NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                   @"1", POETRY_CORE_DATA_NAME_KEY,
+                                   string, POETRY_CORE_DATA_CONTENT_KEY,
+                                   [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,
+                                   [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
+        [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+        
 
+    } else {
+    
+        NSLog(@"1.txt exist");
+    }
+    
 /*
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];
