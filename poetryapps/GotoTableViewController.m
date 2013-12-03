@@ -103,7 +103,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"cellforrow");
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d%d",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%lu%lu",indexPath.row,indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
