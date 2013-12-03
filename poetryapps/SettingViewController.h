@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PoetrySettingCoreData.h"
 #import "FontSizeSetting.h"
+#import "ThemeSetting.h"
 
 @interface SettingViewController : UIViewController 
 
@@ -17,5 +18,7 @@
 @property (nonatomic)           THEME_SETTING           Theme;
 
 @property (nonatomic, strong)   FontSizeSetting         *FontSizeSettingView;
-
+@property (nonatomic, strong)   ThemeSetting            *ThemeSettingView;
+@property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
+@property (nonatomic, strong)   UILabel                 *FontSizeLab;
 @end

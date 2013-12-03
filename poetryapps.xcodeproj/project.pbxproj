@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449953184D87B700C58526 /* FontSizeSetting.xib */; };
 		10449957184D87E700C58526 /* FontSizeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 10449956184D87E700C58526 /* FontSizeSetting.m */; };
+		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
+		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10771DB71849C33500A3B342 /* ReadingScroller.xib */; };
 		10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DBA1849C36500A3B342 /* ReadingScroller.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
@@ -59,6 +61,9 @@
 		10449953184D87B700C58526 /* FontSizeSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontSizeSetting.xib; sourceTree = "<group>"; };
 		10449955184D87E700C58526 /* FontSizeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSizeSetting.h; sourceTree = "<group>"; };
 		10449956184D87E700C58526 /* FontSizeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSizeSetting.m; sourceTree = "<group>"; };
+		10449958184DA42500C58526 /* ThemeSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThemeSetting.xib; sourceTree = "<group>"; };
+		1044995A184DA5EF00C58526 /* ThemeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSetting.h; sourceTree = "<group>"; };
+		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
 		10771DB71849C33500A3B342 /* ReadingScroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingScroller.xib; sourceTree = "<group>"; };
 		10771DB91849C36500A3B342 /* ReadingScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingScroller.h; sourceTree = "<group>"; };
 		10771DBA1849C36500A3B342 /* ReadingScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingScroller.m; sourceTree = "<group>"; };
@@ -146,6 +151,9 @@
 				10449953184D87B700C58526 /* FontSizeSetting.xib */,
 				10449955184D87E700C58526 /* FontSizeSetting.h */,
 				10449956184D87E700C58526 /* FontSizeSetting.m */,
+				10449958184DA42500C58526 /* ThemeSetting.xib */,
+				1044995A184DA5EF00C58526 /* ThemeSetting.h */,
+				1044995B184DA5EF00C58526 /* ThemeSetting.m */,
 			);
 			name = SettingView;
 			sourceTree = "<group>";
@@ -380,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
@@ -413,6 +422,7 @@
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
+				1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */,
 				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */,

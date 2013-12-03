@@ -36,7 +36,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    // TODO: Scroll to the top
+    [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
     [self readingViewSetupScroller];
 }
 

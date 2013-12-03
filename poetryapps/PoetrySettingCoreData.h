@@ -47,5 +47,7 @@ typedef enum {
 -(FONT_SIZE_SETTING) PoetrySetting_GetFontSizeSetting;
 -(THEME_SETTING) PoetrySetting_GetThemeSetting;
 -(BOOL) PoetrySetting_SetFontSize : (FONT_SIZE_SETTING) FontSizeSetting;
+-(BOOL) PoetrySetting_SetTheme : (THEME_SETTING) ThemeSetting;
+
 ;
 @end

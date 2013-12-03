@@ -274,8 +274,6 @@
     if (count == 1) {
         
         // Setting is exist, update to default value
-        NSLog(@"In Poetry Setting : Set to default");
-        
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
         // TODO: [CASPER] Add another Attr for Setting
@@ -283,9 +281,7 @@
         
     } else if (count == 0) {
         
-        // Setting not exist, create one
-        NSLog(@"UPDATE- Normally it should not be here!!!");
-        
+        // Setting not exist, create one        
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
