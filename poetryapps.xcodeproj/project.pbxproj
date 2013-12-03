@@ -41,10 +41,10 @@
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
 		CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB91849BD5A000ECB84 /* ReadingViewController.m */; };
-		CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB53B26B1844F87F005B0CC6 /* 2.txt */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
+		CBA286D0184DCF4A00010125 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CE184DCF4A00010125 /* 1.txt */; };
+		CBA286D1184DCF4A00010125 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CF184DCF4A00010125 /* 2.txt */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
-		CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBFC77A7184447CD00BE97D1 /* 1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,12 +110,12 @@
 		CB381FB31849B056000ECB84 /* GotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoViewController.m; sourceTree = "<group>"; };
 		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
 		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
-		CB53B26B1844F87F005B0CC6 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
+		CBA286CE184DCF4A00010125 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
+		CBA286CF184DCF4A00010125 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
-		CBFC77A7184447CD00BE97D1 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +213,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				CBA286CD184DCF4A00010125 /* resource */,
 				10771DBF1849D04800A3B342 /* SettingView */,
 				CB381FBB1849BD67000ECB84 /* ReadingView */,
 				CB381FB71849B069000ECB84 /* GotoView */,
@@ -226,7 +227,6 @@
 				CB25FD251843972D00F3D980 /* PoetryViewController.m */,
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
-				CB53B26A1844F850005B0CC6 /* Resources */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -302,13 +302,13 @@
 			name = ReadingView;
 			sourceTree = "<group>";
 		};
-		CB53B26A1844F850005B0CC6 /* Resources */ = {
+		CBA286CD184DCF4A00010125 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				CBFC77A7184447CD00BE97D1 /* 1.txt */,
-				CB53B26B1844F87F005B0CC6 /* 2.txt */,
+				CBA286CE184DCF4A00010125 /* 1.txt */,
+				CBA286CF184DCF4A00010125 /* 2.txt */,
 			);
-			name = Resources;
+			path = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,12 +392,12 @@
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
-				CB53B26C1844F87F005B0CC6 /* 2.txt in Resources */,
 				10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
+				CBA286D0184DCF4A00010125 /* 1.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
-				CBFC77A8184447CD00BE97D1 /* 1.txt in Resources */,
 				10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */,
+				CBA286D1184DCF4A00010125 /* 2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
