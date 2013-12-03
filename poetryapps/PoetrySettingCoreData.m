@@ -281,7 +281,7 @@
         
     } else if (count == 0) {
         
-        // Setting not exist, create one        
+        // Setting not exist, create one
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         

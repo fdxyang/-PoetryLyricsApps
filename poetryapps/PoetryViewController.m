@@ -37,8 +37,7 @@
         NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    @"1", POETRY_CORE_DATA_NAME_KEY,
                                    string, POETRY_CORE_DATA_CONTENT_KEY,
-                                   [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,
-                                   [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
+                                   [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,nil];
         [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
         
 
@@ -60,8 +59,7 @@
         NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    @"2", POETRY_CORE_DATA_NAME_KEY,
                                    string, POETRY_CORE_DATA_CONTENT_KEY,
-                                   [NSNumber numberWithInt:2], POETRY_CORE_DATA_INDEX_KEY,
-                                   [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
+                                   [NSNumber numberWithInt:2], POETRY_CORE_DATA_INDEX_KEY,nil];
         [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
         
         

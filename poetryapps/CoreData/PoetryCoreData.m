@@ -50,19 +50,24 @@
 -(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic inCategory : (POETRY_CATEGORY) Category;
 {
     NSString *PoetryCoreDataEntityName;
-    
+    NSNumber *PoetryCategoryForSave;
     switch (Category) {
             
         case GUARD_READING:
             PoetryCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            PoetryCategoryForSave = [NSNumber numberWithInt:GUARD_READING];
             break;
             
         case POETRYS:
             PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            PoetryCategoryForSave = [NSNumber numberWithInt:POETRYS];
+
             break;
             
         case RESPONSIVE_PRAYER:
             PoetryCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            PoetryCategoryForSave = [NSNumber numberWithInt:RESPONSIVE_PRAYER];
+
             break;
             
         default:
@@ -74,7 +79,8 @@
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-    
+    [NewPoetry setValue:PoetryCategoryForSave forKey:POETRY_CORE_DATA_CATERORY_KEY];
+
     NSDate *CreationDate = [NSDate date];
     [NewPoetry setValue: CreationDate forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
     
