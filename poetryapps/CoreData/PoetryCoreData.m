@@ -80,7 +80,7 @@
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
     [NewPoetry setValue:PoetryCategoryForSave forKey:POETRY_CORE_DATA_CATERORY_KEY];
-
+ 
     NSDate *CreationDate = [NSDate date];
     [NewPoetry setValue: CreationDate forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
     

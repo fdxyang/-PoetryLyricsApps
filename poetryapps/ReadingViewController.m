@@ -28,7 +28,6 @@
     [super viewDidLoad];
  
 	// Do any additional setup after loading the view.
-    
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
     
@@ -44,7 +43,6 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    // TODO: save _PoetryNowReading in Reading database
     NSLog(@"ViewDidDisappear - save reading");
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
@@ -76,6 +74,9 @@
     
     // Read Setting
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    THEME_SETTING ThemeSetting = _PoetrySetting.SettingTheme;
+    
+    
     
     // Setup Scroll View
     [_Scroller setContentSize:CGSizeMake(320, 1000)];
@@ -88,7 +89,6 @@
     }
     
     // Add Content
-    
     if (_ContentLab == nil) {
         _ContentLab = [[UILabel alloc] init];
     }
@@ -96,14 +96,28 @@
     [_ContentLab setText:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     [_ContentLab setFont:font];
     _ContentLab.numberOfLines = 0;
-    [_ContentLab setBackgroundColor: [UIColor whiteColor]];
+    [_ContentLab setBackgroundColor: [UIColor clearColor]];
     CGSize constraint = CGSizeMake(300, 20000.0f);
     
     size = [_ContentLab sizeThatFits:constraint];
     [_ContentLab setFrame:CGRectMake(10, 20, size.width, size.height)];
     
-    [_Scroller setContentSize:CGSizeMake(320, size.height + 40)];
+    if (ThemeSetting == THEME_LIGHT_DARK) {
+        
+        // Font color = Black, Background = White
+        _ContentLab.textColor = [UIColor blackColor];
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+    } else {
+        
+        // Font color = Black, Background = White
+        _ContentLab.textColor = [UIColor whiteColor];
+        [self.view setBackgroundColor:[UIColor blackColor]];
+        
+    }
     
+    
+    [_Scroller setContentSize:CGSizeMake(320, size.height + 40)];
     [_Scroller addSubview: _ContentLab];
 }
 

@@ -37,7 +37,7 @@ typedef enum {
 
 
 @property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    FONT_SIZE_SETTING          SettingFontSize;
-@property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING   SettingTheme;
+@property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING              SettingTheme;
 
 -(PoetrySettingCoreData*) init;
 -(BOOL) PoetrySetting_Create;
