@@ -289,41 +289,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Oy5-7J-OFJ" kind="relationship" relationship="rootViewController" id="Agt-bM-8t5"/>
+                        <segue destination="dAa-cC-g9c" kind="relationship" relationship="rootViewController" id="4W3-bP-g8b"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqR-pF-taB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="693" y="2025"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="GIW-Ff-tHL">
+        <!--Setting View Controller-->
+        <scene sceneID="83e-uA-fzT">
             <objects>
-                <tableViewController id="Oy5-7J-OFJ" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Upm-l9-CVn">
+                <viewController storyboardIdentifier="SettingView" id="dAa-cC-g9c" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xfL-2Z-x0r"/>
+                        <viewControllerLayoutGuide type="bottom" id="wmT-L8-Qx2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dv1-K4-1gc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Epx-gL-GqI">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Epx-gL-GqI" id="GJv-d5-WhB">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Oy5-7J-OFJ" id="DYQ-Bx-mmj"/>
-                            <outlet property="delegate" destination="Oy5-7J-OFJ" id="pGG-56-OF9"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="TNR-Yv-nZv"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SJS-bg-PAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9bR-nI-AUo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nsd-KW-UTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1058" y="2025"/>
+            <point key="canvasLocation" x="1047" y="2025"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
