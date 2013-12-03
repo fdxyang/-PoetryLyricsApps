@@ -37,7 +37,7 @@ typedef enum {
 
 
 @property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    UInt16          SettingFontSize;
-@property (nonatomic)                                               THEME_SETTING   SettingTheme;
+@property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING   SettingTheme;
 
 -(PoetrySettingCoreData*) init;
 -(BOOL) PoetrySetting_Create;
@@ -45,6 +45,6 @@ typedef enum {
 
 -(NSDictionary*) PoetrySetting_ReadSetting;
 -(UInt16) PoetrySetting_GetFontSizeSetting;
-
+-(THEME_SETTING) PoetrySetting_GetThemeSetting;
 
 @end

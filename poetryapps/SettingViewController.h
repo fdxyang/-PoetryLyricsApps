@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PoetrySettingCoreData.h"
 
 @interface SettingViewController : UIViewController
+
+@property (nonatomic, strong)   PoetrySettingCoreData   *Setting;
+@property (nonatomic)           UInt16                  SettingFontSize;
+@property (nonatomic)           THEME_SETTING           Theme;
 
 @end
