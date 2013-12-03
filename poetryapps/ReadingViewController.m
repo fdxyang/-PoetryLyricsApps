@@ -87,19 +87,23 @@
     }
     
     // Add Content
-    UILabel *ContentLab = [[UILabel alloc] init];
-    [ContentLab setText:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
-    [ContentLab setFont:font];
-    ContentLab.numberOfLines = 0;
-    [ContentLab setBackgroundColor: [UIColor whiteColor]];
+    
+    if (_ContentLab == nil) {
+        _ContentLab = [[UILabel alloc] init];
+    }
+    
+    [_ContentLab setText:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    [_ContentLab setFont:font];
+    _ContentLab.numberOfLines = 0;
+    [_ContentLab setBackgroundColor: [UIColor whiteColor]];
     CGSize constraint = CGSizeMake(300, 20000.0f);
     
-    size = [ContentLab sizeThatFits:constraint];
-    [ContentLab setFrame:CGRectMake(10, 20, size.width, size.height)];
+    size = [_ContentLab sizeThatFits:constraint];
+    [_ContentLab setFrame:CGRectMake(10, 20, size.width, size.height)];
     
     [_Scroller setContentSize:CGSizeMake(320, size.height + 40)];
     
-    [_Scroller addSubview: ContentLab];
+    [_Scroller addSubview: _ContentLab];
 }
 
 @end

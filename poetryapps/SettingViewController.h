@@ -13,7 +13,7 @@
 @interface SettingViewController : UIViewController 
 
 @property (nonatomic, strong)   PoetrySettingCoreData   *Setting;
-@property (nonatomic)           UInt16                  SettingFontSize;
+@property (nonatomic)           FONT_SIZE_SETTING       SettingFontSize;
 @property (nonatomic)           THEME_SETTING           Theme;
 
 @property (nonatomic, strong)   FontSizeSetting         *FontSizeSettingView;

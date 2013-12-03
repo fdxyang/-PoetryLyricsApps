@@ -136,30 +136,53 @@
 
 
 #pragma mark - Font Size
--(UInt16) PoetrySetting_GetFontSizeSetting
+-(FONT_SIZE_SETTING) PoetrySetting_GetFontSizeSetting
 {
     NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
     
     NSNumber *FontSizeSetting = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
     
-    return [FontSizeSetting unsignedIntegerValue];
+    
+    switch ([FontSizeSetting intValue]) {
+            
+        case POETRY_SETIING_FONT_SIZE_SMALL:
+            return FONT_SIZE_SMALL;
+            break;
+            
+        case POETRY_SETIING_FONT_SIZE_MEDIUM:
+            return FONT_SIZE_MEDIUM;
+            break;
+            
+        case POETRY_SETIING_FONT_SIZE_LARGE:
+            return FONT_SIZE_LARGE;
+            break;
+            
+        default:
+            break;
+    }
+
+    
+    return FONT_SIZE_MEDIUM;
 }
 
 
 -(BOOL) PoetrySetting_SetFontSize : (FONT_SIZE_SETTING) FontSizeSetting
 {
+    
+    UInt16 LocalFontSize;
     switch (FontSizeSetting) {
             
         case FONT_SIZE_SMALL:
-            _SettingFontSize = POETRY_SETIING_FONT_SIZE_SMALL;
+            
+            LocalFontSize = POETRY_SETIING_FONT_SIZE_SMALL;
             break;
             
         case FONT_SIZE_MEDIUM:
-            _SettingFontSize = POETRY_SETIING_FONT_SIZE_MEDIUM;
+            LocalFontSize = POETRY_SETIING_FONT_SIZE_MEDIUM;
             break;
             
         case FONT_SIZE_LARGE:
-            _SettingFontSize = POETRY_SETIING_FONT_SIZE_LARGE;
+            LocalFontSize = POETRY_SETIING_FONT_SIZE_LARGE;
             break;
             
         default:
@@ -183,7 +206,7 @@
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
         // TODO: [CASPER] Add another Attr for Setting
-        [Setting setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [Setting setValue: [NSNumber numberWithInt:LocalFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         
     } else if (count == 0) {
         
@@ -193,7 +216,7 @@
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
-        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:LocalFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
 
     } else {

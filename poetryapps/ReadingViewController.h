@@ -17,5 +17,5 @@
 @property (nonatomic, strong) NSDictionary              *PoetryNowReading;
 
 @property THEME_SETTING DisplayTheme;
-
+@property (nonatomic) UILabel *ContentLab;
 @end

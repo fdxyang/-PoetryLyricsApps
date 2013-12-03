@@ -25,9 +25,9 @@
 @property (nonatomic, strong)   NSManagedObjectContext  *context;
 
 typedef enum {
-    FONT_SIZE_SMALL = 0x00,
-    FONT_SIZE_MEDIUM,
-    FONT_SIZE_LARGE,
+    FONT_SIZE_SMALL = POETRY_SETIING_FONT_SIZE_SMALL,
+    FONT_SIZE_MEDIUM = POETRY_SETIING_FONT_SIZE_MEDIUM,
+    FONT_SIZE_LARGE = POETRY_SETIING_FONT_SIZE_LARGE,
 } FONT_SIZE_SETTING;
 
 typedef enum {
@@ -36,7 +36,7 @@ typedef enum {
 } THEME_SETTING;
 
 
-@property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    UInt16          SettingFontSize;
+@property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    FONT_SIZE_SETTING          SettingFontSize;
 @property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING   SettingTheme;
 
 -(PoetrySettingCoreData*) init;
@@ -44,7 +44,8 @@ typedef enum {
 -(BOOL) PoetrySetting_SetDefault;
 
 -(NSDictionary*) PoetrySetting_ReadSetting;
--(UInt16) PoetrySetting_GetFontSizeSetting;
+-(FONT_SIZE_SETTING) PoetrySetting_GetFontSizeSetting;
 -(THEME_SETTING) PoetrySetting_GetThemeSetting;
-
+-(BOOL) PoetrySetting_SetFontSize : (FONT_SIZE_SETTING) FontSizeSetting;
+;
 @end
