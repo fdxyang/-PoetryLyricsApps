@@ -213,7 +213,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
-				CBA286CD184DCF4A00010125 /* resource */,
+				CBA286CD184DCF4A00010125 /* Resource */,
 				10771DBF1849D04800A3B342 /* SettingView */,
 				CB381FBB1849BD67000ECB84 /* ReadingView */,
 				CB381FB71849B069000ECB84 /* GotoView */,
@@ -302,12 +302,13 @@
 			name = ReadingView;
 			sourceTree = "<group>";
 		};
-		CBA286CD184DCF4A00010125 /* resource */ = {
+		CBA286CD184DCF4A00010125 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				CBA286CE184DCF4A00010125 /* 1.txt */,
 				CBA286CF184DCF4A00010125 /* 2.txt */,
 			);
+			name = Resource;
 			path = resource;
 			sourceTree = "<group>";
 		};
