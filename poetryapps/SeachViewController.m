@@ -104,8 +104,6 @@
     return cell;
 }
 
-
-#pragma mark - Table view data source
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     NSString *sectionStr = [[NSString alloc] init];
@@ -138,6 +136,38 @@
     return sectionStr;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *SelectedDic;
+    if (indexPath.section == 0) {
+        // History
+        SelectedDic = [_SearchHistoryData objectAtIndex:indexPath.row];
+
+    } else if (indexPath.section == 1) {
+    
+        // Guard Reading
+        SelectedDic = [_SearchGuidedReading objectAtIndex:indexPath.row];
+
+        
+    } else if (indexPath.section == 2) {
+    
+        // Poetry
+        SelectedDic = [_SearchPoetryData objectAtIndex:indexPath.row];
+
+        
+    } else if (indexPath.section == 3) {
+    
+        // Responsive prayer
+        SelectedDic = [_SearchRespose objectAtIndex:indexPath.row];
+
+    }
+
+    [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:SelectedDic];
+    
+    // Jump to Reading View
+    [self.tabBarController setSelectedIndex:0];
+    
+}
 
 #pragma mark - SearchBar Method
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
