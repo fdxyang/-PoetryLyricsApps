@@ -47,6 +47,31 @@
         NSLog(@"1.txt exist");
     }
     
+    Search = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:@"2" InCategory:GUARD_READING];
+    if ([Search count] == 0) {
+        
+        NSLog(@"Add 2.txt");
+        
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        NSString *txtPath = [mainBundle pathForResource:@"2" ofType:@"txt"];
+        
+        NSString *string = [[NSString  alloc] initWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+        
+        NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                   @"2", POETRY_CORE_DATA_NAME_KEY,
+                                   string, POETRY_CORE_DATA_CONTENT_KEY,
+                                   [NSNumber numberWithInt:1], POETRY_CORE_DATA_INDEX_KEY,
+                                   [NSNumber numberWithInt:0], POETRY_CORE_DATA_CATERORY_KEY,nil];
+        [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+        
+        
+    } else {
+        
+        NSLog(@"2.txt exist");
+    }
+
+    
+    
 /*
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *txtPath = [mainBundle pathForResource:@"1" ofType:@"txt"];
