@@ -20,7 +20,7 @@
     if (self) {
         // Custom initialization
     }
-    return self;
+    return self; 
 }
 
 - (void)viewDidLoad
@@ -31,7 +31,23 @@
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
     
+    if (_Scroller == nil) {
+        _Scroller = [[UIScrollView alloc] init];
+    }
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    _Scroller.frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height - UI_IOS7_TAB_BAR_HEIGHT);
+    [self.view addSubview:_Scroller];
+
+    _SwipeToNext = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HangleSwipeToNextPage:)];
+    [_SwipeToNext setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [_Scroller addGestureRecognizer:_SwipeToNext];
+    
+    _SwipeToPrevious = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HangleSwipeToPreviousPage:)];
+    [_SwipeToPrevious setDirection:UISwipeGestureRecognizerDirectionRight];
+    [_Scroller addGestureRecognizer:_SwipeToPrevious];
+    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -54,6 +70,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) HangleSwipeToNextPage:(UITapGestureRecognizer *)recognizer
+{
+    NSLog(@"HangleSwipeToNextPage %@", recognizer);
+    
+}
+
+-(void) HangleSwipeToPreviousPage:(UITapGestureRecognizer *)recognizer
+{
+    NSLog(@"HangleSwipeToPreviousPage");
+}
 
 -(void)readingViewSetupScroller
 {
