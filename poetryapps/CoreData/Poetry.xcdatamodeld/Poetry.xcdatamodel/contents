@@ -35,6 +35,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Setting" syncable="YES">
+        <attribute name="dataSaved" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fontSize" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="theme" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
