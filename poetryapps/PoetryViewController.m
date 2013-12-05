@@ -23,7 +23,7 @@
     [setting PoetrySetting_Create];
     
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
-
+/*
     NSArray *Search = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:@"1" InCategory:GUARD_READING];
     if ([Search count] == 0) {
         
@@ -67,7 +67,7 @@
         
         NSLog(@"2.txt exist");
     }
-
+*/
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
