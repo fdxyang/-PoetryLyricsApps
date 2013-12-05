@@ -32,9 +32,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:FALSE];
-    _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:FALSE];
-    _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,235,320,162) getbtn:gotoReading getState:TRUE];
+    _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
+    _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
+    _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:TRUE];
     
     _poetryView.hidden = YES;
     _responseView.hidden = YES;
