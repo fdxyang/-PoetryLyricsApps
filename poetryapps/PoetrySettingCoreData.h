@@ -40,7 +40,7 @@ typedef enum {
 
 @property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    FONT_SIZE_SETTING       SettingFontSize;
 @property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING           SettingTheme;
-@property (nonatomic, getter = PoetrySetting_GetDataSavedFlag)      BOOL                    SettingDataSaved;
+@property (nonatomic, getter = PoetrySetting_GetDataSavedFlag)      BOOL                    DataSaved;
 // [CASPER] 2013.12.05 Add Data Saved Flag
 
 
