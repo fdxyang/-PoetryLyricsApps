@@ -238,6 +238,68 @@
 }
 
 
+
+// 在 Poetry 中搜尋 String
+-(NSDictionary*) Poetry_CoreDataSearchWithPoetryIndex : (NSNumber *) SearchIndex InCategory : (POETRY_CATEGORY) Category
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSString *BookCoreDataEntityName;
+    
+    switch (Category) {
+        case GUARD_READING:
+            BookCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            BookCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            BookCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
+    
+	// NSSortDescriptor tells defines how to sort the fetched results
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_INDEX_KEY ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+    // fetchRequest needs to know what entity to fetch
+	NSEntityDescription *entity = [NSEntityDescription entityForName:BookCoreDataEntityName inManagedObjectContext:_context];
+	[fetchRequest setEntity:entity];
+    
+    NSFetchedResultsController  *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_context sectionNameKeyPath:nil cacheName:@"Root"];
+    
+    
+    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"index contains[cd] %@", SearchIndex];
+    
+    [fetchedResultsController.fetchRequest setPredicate:predicate];
+    
+	NSError *error = nil;
+	if (![fetchedResultsController performFetch:&error])
+	{
+		// Handle error
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    
+    NSDictionary *RetDic;
+    if ([fetchedResultsController.fetchedObjects count] > 0) {
+        RetDic = [fetchedResultsController.fetchedObjects objectAtIndex:0];
+    } else {
+        RetDic = nil;
+    }
+    
+    return RetDic;
+    
+}
+
+
+
 -(NSUInteger) Poetry_CoreDataGetNumberInCategory : (POETRY_CATEGORY) Category
 
 {
@@ -274,17 +336,54 @@
     
     return count;
 }
-/*
+
+// return nil means there's no next data
 -(NSDictionary *) GetNextWithCurrentData : (NSDictionary *) NowReading
 {
-    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CREATION_TIME_KEY] intValue];
+    NSDictionary *RetDic;
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] intValue];
+    int Index = [[NowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] intValue];
+
+    
+    if ((Index >= [self Poetry_CoreDataGetNumberInCategory:Category])) {
+        
+        NSLog(@"GetNextWithCurrentData Failed, Index out of range");
+        return nil;
+        
+    } else {
+        
+        Index++;
+        NSLog(@"Get Index[%d] in Category = %d", Index, Category);
+        RetDic = [self Poetry_CoreDataSearchWithPoetryIndex:[NSNumber numberWithInt:Index] InCategory:Category];
+    }
+    
+    
+    return RetDic;
+}
+
+// return nil means there's no next data
+-(NSDictionary *) GetPreviousWithCurrentData : (NSDictionary *) NowReading
+{
+    NSDictionary *RetDic;
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] intValue];
     int Index = [[NowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] intValue];
     
     
+    if (Index == 1) {
+        
+        NSLog(@"GetPreviousWithCurrentData Failed, Index == 1");
+        return nil;
+        
+    } else {
+        
+        Index--;
+        NSLog(@"Get Index[%d] in Category = %d", Index, Category);
+        RetDic = [self Poetry_CoreDataSearchWithPoetryIndex:[NSNumber numberWithInt:Index] InCategory:Category];
+    }
     
-    return <#expression#>
+    
+    return RetDic;
 }
-*/
 
 
 #pragma mark - History Core Data Methods

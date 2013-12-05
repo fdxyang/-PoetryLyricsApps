@@ -36,8 +36,11 @@ typedef enum {
 // Poetry list Methods
 -(BOOL) PoetryCoreDataSave : (NSDictionary *) PoetryDic inCategory : (POETRY_CATEGORY) Category;
 -(NSMutableArray*) Poetry_CoreDataFetchDataInCategory : (POETRY_CATEGORY) Category;
--(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearchName InCategory : (POETRY_CATEGORY) Category;;
--(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category;;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearchName InCategory : (POETRY_CATEGORY) Category;
+-(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category;
+-(NSDictionary *) GetPreviousWithCurrentData : (NSDictionary *) NowReading;
+-(NSDictionary *) GetNextWithCurrentData : (NSDictionary *) NowReading;
+
 
 // Poetry history Methods
 -(BOOL) PoetryCoreDataSaveIntoHistory : (NSDictionary *) PoetryDic;
