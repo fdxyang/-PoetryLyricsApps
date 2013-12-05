@@ -47,7 +47,8 @@
         
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
-        
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+
         
     } else {
     
@@ -99,7 +100,7 @@
         
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
-    
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
         
     } else {
         
@@ -134,6 +135,15 @@
     return ReturnDic;
 }
 
+#pragma mark - Font Size
+-(BOOL) PoetrySetting_GetDataSavedFlag
+{
+    NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
+    NSNumber *Saved = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+    BOOL DataSaved = [Saved boolValue];
+    return DataSaved;
+}
+
 
 #pragma mark - Font Size
 -(FONT_SIZE_SETTING) PoetrySetting_GetFontSizeSetting
@@ -163,6 +173,57 @@
 
     
     return FONT_SIZE_MEDIUM;
+}
+
+
+-(BOOL) PoetrySetting_SetDataSaved : (BOOL) DataSaved
+{
+    
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"Set to data saved as %d", DataSaved);
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Setting setValue: [NSNumber numberWithBool:DataSaved] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"UPDATE- Normally it should not be here!!!");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        [NewPoetry setValue: [NSNumber numberWithBool:DataSaved] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+        
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+        
+    }
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    
+    return YES;
 }
 
 
@@ -218,6 +279,7 @@
         
         [NewPoetry setValue: [NSNumber numberWithInt:LocalFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
 
     } else {
         
@@ -283,11 +345,13 @@
         
         // Setting not exist, create one
         // TODO: [CASPER] Add another Attr for Setting
+        NSLog(@"UPDATE- Normally it should not be here!!!");
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
         [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
-        
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+
     } else {
         
         NSLog(@"ERROR!!! Multiple Setting");
