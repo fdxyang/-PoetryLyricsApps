@@ -338,7 +338,7 @@
 }
 
 // return nil means there's no next data
--(NSDictionary *) GetNextWithCurrentData : (NSDictionary *) NowReading
+-(NSDictionary *) Poetry_GetNextWithCurrentData : (NSDictionary *) NowReading
 {
     NSDictionary *RetDic;
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] intValue];
@@ -362,7 +362,7 @@
 }
 
 // return nil means there's no next data
--(NSDictionary *) GetPreviousWithCurrentData : (NSDictionary *) NowReading
+-(NSDictionary *) Poetry_GetPreviousWithCurrentData : (NSDictionary *) NowReading
 {
     NSDictionary *RetDic;
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] intValue];
