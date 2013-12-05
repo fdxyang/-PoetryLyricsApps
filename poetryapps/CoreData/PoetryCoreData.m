@@ -74,6 +74,10 @@
             break;
     }
     
+    if ((![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]) || (![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]) || (![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY])) {
+        return NO;
+    }
+    
     NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
     
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
@@ -234,10 +238,29 @@
 }
 
 
--(NSUInteger) Poetry_CoreDataGetNumber
+-(NSUInteger) Poetry_CoreDataGetNumberInCategory : (POETRY_CATEGORY) Category
+
 {
-    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+    NSString *PoetryCoreDataEntityName;
     
+    switch (Category) {
+        case GUARD_READING:
+            PoetryCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
+            break;
+            
+        case POETRYS:
+            PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            PoetryCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            break;
+            
+        default:
+            break;
+    }
+    
+
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
     
@@ -251,6 +274,17 @@
     
     return count;
 }
+/*
+-(NSDictionary *) GetNextWithCurrentData : (NSDictionary *) NowReading
+{
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CREATION_TIME_KEY] intValue];
+    int Index = [[NowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] intValue];
+    
+    
+    
+    return <#expression#>
+}
+*/
 
 
 #pragma mark - History Core Data Methods
