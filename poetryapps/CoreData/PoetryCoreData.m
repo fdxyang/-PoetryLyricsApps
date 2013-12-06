@@ -36,7 +36,7 @@
     NSError *error = nil;
     
     if (![_context save:&error]) {
-        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+        CORE_DATA_ERROR_LOG(@"Can't Delete! %@ %@", error, [error localizedDescription]);
         return NO;
     }
     
@@ -75,6 +75,7 @@
     }
     
     if ((![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]) || (![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]) || (![PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY])) {
+        CORE_DATA_ERROR_LOG(@"Data value == nil, Please check");
         return NO;
     }
     
@@ -90,7 +91,7 @@
     
     NSError *error = nil;
     if (![_context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
 
@@ -176,7 +177,7 @@
 	if (![fetchedResultsController performFetch:&error])
 	{
 		// Handle error
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		CORE_DATA_ERROR_LOG(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
     
@@ -229,7 +230,7 @@
 	if (![fetchedResultsController performFetch:&error])
 	{
 		// Handle error
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		CORE_DATA_ERROR_LOG(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
     
@@ -283,7 +284,7 @@
 	if (![fetchedResultsController performFetch:&error])
 	{
 		// Handle error
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		CORE_DATA_ERROR_LOG(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
 	}
     
@@ -347,13 +348,13 @@
     
     if ((Index >= [self Poetry_CoreDataGetNumberInCategory:Category])) {
         
-        NSLog(@"GetNextWithCurrentData Failed, Index out of range");
+        CORE_DATA_ERROR_LOG(@"GetNextWithCurrentData Failed, Index out of range");
         return nil;
         
     } else {
         
         Index++;
-        NSLog(@"Get Index[%d] in Category = %d", Index, Category);
+        CORE_DATA_LOG(@"Get Index[%d] in Category = %d", Index, Category);
         RetDic = [self Poetry_CoreDataSearchWithPoetryIndex:[NSNumber numberWithInt:Index] InCategory:Category];
     }
     
@@ -371,13 +372,13 @@
     
     if (Index == 1) {
         
-        NSLog(@"GetPreviousWithCurrentData Failed, Index == 1");
+        CORE_DATA_ERROR_LOG(@"GetPreviousWithCurrentData Failed, Index == 1");
         return nil;
         
     } else {
         
         Index--;
-        NSLog(@"Get Index[%d] in Category = %d", Index, Category);
+        CORE_DATA_LOG(@"Get Index[%d] in Category = %d", Index, Category);
         RetDic = [self Poetry_CoreDataSearchWithPoetryIndex:[NSNumber numberWithInt:Index] InCategory:Category];
     }
     
@@ -402,7 +403,7 @@
     
     NSError *error = nil;
     if (![_context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
     
@@ -479,7 +480,7 @@
     }
     else {
         if ([objects count] > 0) {
-            NSLog(@"Minimum date: %@", [[objects objectAtIndex:0] valueForKey:@"minDate"]);
+            CORE_DATA_LOG(@"Minimum date: %@", [[objects objectAtIndex:0] valueForKey:@"minDate"]);
             [self Poetry_CoreDataDelete:[objects objectAtIndex:0]];
 
         }
@@ -591,7 +592,7 @@
         
     } else if (count == 0) {
         
-        NSLog(@"First Time use, create reading");
+        CORE_DATA_LOG(@"First Time use, create reading");
 
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *Reading = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
@@ -604,13 +605,13 @@
         
     } else {
         
-        NSLog(@"ERROR!!! Multiple Setting");
+        CORE_DATA_ERROR_LOG(@"ERROR!!! Multiple Setting");
     }
     
     
     NSError *error = nil;
     if (![_context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         
         return NO;
     }
@@ -643,7 +644,7 @@
         
     } else {
         
-        NSLog(@"ERROR!, please check! it should not be here");
+        CORE_DATA_ERROR_LOG(@"ERROR!, please check! it should not be here");
         
     }
     

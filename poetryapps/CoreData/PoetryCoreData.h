@@ -21,6 +21,16 @@
 #define POETRY_CORE_DATA_INDEX_KEY              @"index"        // [CASPER] Add index
 #define POETRY_CORE_DATA_CATERORY_KEY           @"category"     // [CASPER] Add category
 
+
+//#define DEBUG_COREDATA
+#ifdef DEBUG_COREDATA
+#   define CORE_DATA_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#   define CORE_DATA_LOG(...)
+#endif
+
+#define CORE_DATA_ERROR_LOG(fmt, ...) NSLog((@"ERROR !! %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
 @interface PoetryCoreData : NSObject
 
 typedef enum {

@@ -21,6 +21,20 @@
 
 #define POETRY_SETTING_THEME_DEFAULT            0
 
+
+
+//#define DEBUG_SETTING_COREDATA
+#ifdef DEBUG_SETTING_COREDATA
+#   define SETTING_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#   define SETTING_LOG(...)
+#endif
+
+#define SETTING_ERROR_LOG(fmt, ...) NSLog((@"ERROR !! %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
+
+
+
 @interface PoetrySettingCoreData : NSObject
 
 @property (nonatomic, strong)   NSManagedObjectContext  *context;
