@@ -126,8 +126,7 @@
     }
     
     CGPoint DefaultLabelLocation = CGPointMake(10, 10);
-    _Label1.frame = CGRectMake(DefaultLabelLocation.x, DefaultLabelLocation.y, _LabelSizeInit.width, 0);
-    
+    _Label1.frame = CGRectMake(DefaultLabelLocation.x, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, 0);
     _Label1 = [self DisplayLabelHandlingWithData:_PoetryNowReading onLabel:_Label1];
     [_Scroller addSubview: _Label1];
     
@@ -139,7 +138,7 @@
     
     [Label setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     [Label setFont:_font];
-    [Label setTextAlignment:NSTextAlignmentCenter];
+    //[Label setTextAlignment:NSTextAlignmentCenter];
     Label.numberOfLines = 0;
 //    [Label setBackgroundColor: [UIColor clearColor]];
     CGSize constraint = CGSizeMake(300, 20000.0f);
@@ -165,9 +164,8 @@
         _LabelSizeInit.height = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     }
     
-    [Label setFrame:CGRectMake(Label.frame.origin.x, Label.frame.origin.y, _LabelSizeInit.width, _LabelSizeInit.height)];
-    
-//    [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
+    [Label setFrame:CGRectMake(Label.frame.origin.x, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, _LabelSizeInit.height)];
+    [Label sizeToFit];
 
     return Label;
     
