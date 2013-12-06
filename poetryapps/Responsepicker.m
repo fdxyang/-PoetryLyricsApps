@@ -23,6 +23,12 @@
         responsePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         NSString *str;
         responseArr = [[NSMutableArray alloc] init];
+        
+        responseArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+        NSLog(@"responseArr List Count = %lu", [responseArr count]);
+        NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        
         for(int i = 0; i< 66;i++)
         {
             str  = [NSString stringWithFormat:@"r%d",i+1];

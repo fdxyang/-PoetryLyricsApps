@@ -26,6 +26,12 @@
         
         NSString *str;
         poetryArr = [[NSMutableArray alloc] init];
+        
+        poetryArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
+        NSLog(@"poetryArr List Count = %lu", [poetryArr count]);
+        NSLog(@"poetryArr Name = %@", [[poetryArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        NSLog(@"poetryArr Content = %@", [[poetryArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        
         for(int i = 0; i< 650;i++)
         {
             str  = [NSString stringWithFormat:@"p%d",i+1];

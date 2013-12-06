@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "GotoTableCell.h"
+#import "PoetryCoreData.h"
 
 @interface GotoTableViewController : UITableViewController
 {
     NSMutableArray *guideAttr;
     NSMutableArray *poetryAttr;
     NSMutableArray *responseAttr;
+    PoetryCoreData *PoetryDataBase;
 }
 @property (strong, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic) NSInteger tableViewType;

@@ -19,8 +19,16 @@
         
         isTurnOnView = isTurnOn;
         _btn = btn;
+        
+        
+        
         guidePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
-        guideArr = [[NSArray alloc]initWithObjects:@"g1",@"g2",@"g3",@"g4",@"g5",@"g6", nil];
+        //guideArr = [[NSArray alloc]initWithObjects:@"g1",@"g2",@"g3",@"g4",@"g5",@"g6", nil];
+        guideArr = [[NSMutableArray alloc] init];
+        guideArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
+        NSLog(@"guideArr List Count = %lu", [guideArr count]);
+        NSLog(@"guideArr Name = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        NSLog(@"guideArr Content = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         guidePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         guidePicker.delegate = self;
         guidePicker.dataSource = self;

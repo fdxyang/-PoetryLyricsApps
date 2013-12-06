@@ -30,22 +30,24 @@
     [super viewDidLoad];
     
     
-    //NSLog(@"viewDidLoad ");
+    NSLog(@"GOTO VIEW viewDidLoad ");
     
     NSString *str;
     
     guideAttr = [[NSMutableArray alloc] init];
     poetryAttr = [[NSMutableArray alloc] init];
     responseAttr = [[NSMutableArray alloc] init];
-    
-    
-    
+    PoetryDataBase = [[PoetryCoreData alloc] init];
     
     
     if (_tableViewType == 0) // guide
     {
         if(![guideAttr count])
         {
+            guideAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
+            NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
+            NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<6;i++)
             {
                 str = [NSString stringWithFormat:@"g%d",i+1];
@@ -59,6 +61,10 @@
     {
         if(![poetryAttr count])
         {
+            poetryAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
+            NSLog(@"Poetry List Count = %lu", [poetryAttr count]);
+            NSLog(@"Poetry Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"Poetry Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<650;i++)
             {
                 str = [NSString stringWithFormat:@"p%d",i+1];
@@ -71,6 +77,10 @@
     {
         if(![responseAttr count])
         {
+            responseAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+            NSLog(@"responseAttr List Count = %lu", [responseAttr count]);
+            NSLog(@"responseAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<66;i++)
             {
                 str = [NSString stringWithFormat:@"r%d",i+1];
@@ -159,6 +169,10 @@
         NSLog(@"table view type - guide");
         if(![guideAttr count])
         {
+            guideAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
+            NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
+            NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<6;i++)
             {
                 str = [NSString stringWithFormat:@"g%d",i+1];
@@ -174,6 +188,10 @@
         
         if(![poetryAttr count])
         {
+            poetryAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
+            NSLog(@"guideAttr List Count = %lu", [poetryAttr count]);
+            NSLog(@"guideAttr Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"guideAttr Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<650;i++)
             {
                 str = [NSString stringWithFormat:@"p%d",i+1];
@@ -188,6 +206,10 @@
         
         if(![responseAttr count])
         {
+            responseAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+            NSLog(@"guideAttr List Count = %lu", [responseAttr count]);
+            NSLog(@"guideAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"guideAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             for (int i = 0;i<66;i++)
             {
                 str = [NSString stringWithFormat:@"r%d",i+1];

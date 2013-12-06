@@ -106,7 +106,7 @@
     } else {
         
         READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
-        _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING] objectAtIndex:0];
+        _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
         
     }
 

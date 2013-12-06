@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PoetryCoreData.h"
 
 @interface Responsepicker : UIView<UIPickerViewDelegate,UIPickerViewDataSource>
 {
     UIPickerView *responsePicker;
     NSMutableArray *responseArr;
     BOOL isTurnOnView;
+    PoetryCoreData *PoetryDataBase;
 }
 
 @property (nonatomic,strong) NSString *pickerContent;

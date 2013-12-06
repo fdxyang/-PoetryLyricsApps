@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PoetryCoreData.h"
 
 @interface Guidepicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIPickerView *guidePicker;
-    NSArray *guideArr;
+    NSMutableArray *guideArr;
     BOOL isTurnOnView;
+    PoetryCoreData *PoetryDataBase;
 }
 
 @property (nonatomic,strong) NSString *pickerContent;

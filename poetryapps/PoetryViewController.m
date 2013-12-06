@@ -78,11 +78,19 @@
                                            [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
                                            nil];
                 
-                
-                isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+                if(count < 650) // 0-649
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:POETRYS];
+                else if(count >= 650 && count < 717) // 650-716
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:RESPONSIVE_PRAYER];
+                else //717-722
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
                 
                 if(!isSave)
                     NSLog(@"Core data is Error!!!!!!!!!");
+                else
+                {
+                    NSLog(@"index : %d",count);
+                }
                 
                 [poetryContent setString:@""];
                 lineCount = 0;
