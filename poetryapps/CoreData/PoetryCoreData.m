@@ -342,9 +342,10 @@
 -(NSDictionary *) Poetry_GetNextWithCurrentData : (NSDictionary *) NowReading
 {
     NSDictionary *RetDic;
+    
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[NowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] intValue];
     int Index = [[NowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] intValue];
-
+    
     
     if ((Index >= [self Poetry_CoreDataGetNumberInCategory:Category])) {
         

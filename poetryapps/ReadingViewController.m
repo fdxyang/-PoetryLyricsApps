@@ -347,7 +347,9 @@
                                              [_Label2 removeFromSuperview];
                                             _CurrentLab = LABEL1;
                                          }
-                                         
+
+                                         [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+
                                          [Label setBackgroundColor:[UIColor clearColor]];
                                          _PoetryNowReading = _NewDataDic;
                                          _DataFlag = NO;
@@ -374,6 +376,8 @@
                                      }
                                      completion:^(BOOL finished){
                                          
+                                         _GetSlideInLabel = NO;
+                                         _DataFlag = NO;
                                          
                                      }];
                     
