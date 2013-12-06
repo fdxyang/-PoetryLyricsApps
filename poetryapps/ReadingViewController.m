@@ -145,7 +145,6 @@
     CGSize constraint = CGSizeMake(300, 20000.0f);
     
     _LabelSizeInit = [Label sizeThatFits:constraint];
-    NSLog(@"!!! %f", _LabelSizeInit.height);
     
     if (_DisplayTheme == THEME_LIGHT_DARK) {
         
@@ -326,9 +325,9 @@
             
             if (_DataFlag) {
                 
-                if (abs(location.x - _TouchInit.x) > 100) {
+                if (abs(location.x - _TouchInit.x) > 50) {
                     
-                    [UIView animateWithDuration:0.3
+                    [UIView animateWithDuration:0.2
                                      animations:^{
                                          
                                          // Set Label in the normal location
@@ -360,7 +359,7 @@
                 } else {
                     
                     READING_VIEW_LOG(@"back to out of screen!!!");
-                    [UIView animateWithDuration:0.3
+                    [UIView animateWithDuration:0.2
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {
                                              
