@@ -49,6 +49,42 @@
 		5CD2555A18517AAA00930E3A /* 48.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555918517AAA00930E3A /* 48.txt */; };
 		5CD2555C18517AB600930E3A /* 49.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555B18517AB600930E3A /* 49.txt */; };
 		5CD2555E18517AC300930E3A /* 50.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555D18517AC300930E3A /* 50.txt */; };
+		5CD255601851806100930E3A /* 51.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555F1851806100930E3A /* 51.txt */; };
+		5CD255621851806D00930E3A /* 52.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255611851806D00930E3A /* 52.txt */; };
+		5CD255641851807C00930E3A /* 53.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255631851807C00930E3A /* 53.txt */; };
+		5CD2556618519CA600930E3A /* 54.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556518519CA600930E3A /* 54.txt */; };
+		5CD2556818519E9C00930E3A /* 55.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556718519E9C00930E3A /* 55.txt */; };
+		5CD2556A18519EAB00930E3A /* 56.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556918519EAB00930E3A /* 56.txt */; };
+		5CD2556C18519EB500930E3A /* 57.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556B18519EB500930E3A /* 57.txt */; };
+		5CD2556E18519EC100930E3A /* 58.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556D18519EC000930E3A /* 58.txt */; };
+		5CD2557018519EE400930E3A /* 59.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2556F18519EE400930E3A /* 59.txt */; };
+		5CD2557218519EF000930E3A /* 60.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557118519EF000930E3A /* 60.txt */; };
+		5CD2557418519F0000930E3A /* 61.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557318519F0000930E3A /* 61.txt */; };
+		5CD2557618519F0B00930E3A /* 62.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557518519F0B00930E3A /* 62.txt */; };
+		5CD2557818519F1600930E3A /* 63.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557718519F1600930E3A /* 63.txt */; };
+		5CD2557A18519F2100930E3A /* 64.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557918519F2100930E3A /* 64.txt */; };
+		5CD2557C18519F4300930E3A /* 65.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557B18519F4300930E3A /* 65.txt */; };
+		5CD2557E18519F4D00930E3A /* 66.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557D18519F4D00930E3A /* 66.txt */; };
+		5CD2558018519F5800930E3A /* 67.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2557F18519F5800930E3A /* 67.txt */; };
+		5CD2558218519F6200930E3A /* 68.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558118519F6200930E3A /* 68.txt */; };
+		5CD2558418519F6C00930E3A /* 69.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558318519F6C00930E3A /* 69.txt */; };
+		5CD2558618519F7800930E3A /* 70.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558518519F7800930E3A /* 70.txt */; };
+		5CD255881851A2D100930E3A /* 71.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255871851A2D100930E3A /* 71.txt */; };
+		5CD2558A1851A2DC00930E3A /* 72.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255891851A2DC00930E3A /* 72.txt */; };
+		5CD2558C1851A2E600930E3A /* 73.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558B1851A2E600930E3A /* 73.txt */; };
+		5CD2558E1851A2F000930E3A /* 74.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558D1851A2F000930E3A /* 74.txt */; };
+		5CD255901851A30C00930E3A /* 75.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2558F1851A30C00930E3A /* 75.txt */; };
+		5CD255921851A31600930E3A /* 76.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255911851A31600930E3A /* 76.txt */; };
+		5CD255941851A32100930E3A /* 77.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255931851A32100930E3A /* 77.txt */; };
+		5CD255961851A32C00930E3A /* 78.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255951851A32C00930E3A /* 78.txt */; };
+		5CD255981851A33900930E3A /* 79.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255971851A33900930E3A /* 79.txt */; };
+		5CD2559A1851A34200930E3A /* 80.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255991851A34200930E3A /* 80.txt */; };
+		5CD2559E1851A5C200930E3A /* 718.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2559D1851A5C200930E3A /* 718.txt */; };
+		5CD255A01851A5CE00930E3A /* 719.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2559F1851A5CE00930E3A /* 719.txt */; };
+		5CD255A21851A5D900930E3A /* 720.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255A11851A5D900930E3A /* 720.txt */; };
+		5CD255A41851A5EA00930E3A /* 721.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255A31851A5EA00930E3A /* 721.txt */; };
+		5CD255A61851A5F400930E3A /* 722.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255A51851A5F400930E3A /* 722.txt */; };
+		5CD255A81851A70200930E3A /* 717.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255A71851A70200930E3A /* 717.txt */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */; };
 		CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -155,6 +191,42 @@
 		5CD2555918517AAA00930E3A /* 48.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 48.txt; sourceTree = "<group>"; };
 		5CD2555B18517AB600930E3A /* 49.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 49.txt; sourceTree = "<group>"; };
 		5CD2555D18517AC300930E3A /* 50.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 50.txt; sourceTree = "<group>"; };
+		5CD2555F1851806100930E3A /* 51.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 51.txt; sourceTree = "<group>"; };
+		5CD255611851806D00930E3A /* 52.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 52.txt; sourceTree = "<group>"; };
+		5CD255631851807C00930E3A /* 53.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 53.txt; sourceTree = "<group>"; };
+		5CD2556518519CA600930E3A /* 54.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 54.txt; sourceTree = "<group>"; };
+		5CD2556718519E9C00930E3A /* 55.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 55.txt; sourceTree = "<group>"; };
+		5CD2556918519EAB00930E3A /* 56.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 56.txt; sourceTree = "<group>"; };
+		5CD2556B18519EB500930E3A /* 57.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 57.txt; sourceTree = "<group>"; };
+		5CD2556D18519EC000930E3A /* 58.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 58.txt; sourceTree = "<group>"; };
+		5CD2556F18519EE400930E3A /* 59.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 59.txt; sourceTree = "<group>"; };
+		5CD2557118519EF000930E3A /* 60.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 60.txt; sourceTree = "<group>"; };
+		5CD2557318519F0000930E3A /* 61.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 61.txt; sourceTree = "<group>"; };
+		5CD2557518519F0B00930E3A /* 62.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 62.txt; sourceTree = "<group>"; };
+		5CD2557718519F1600930E3A /* 63.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 63.txt; sourceTree = "<group>"; };
+		5CD2557918519F2100930E3A /* 64.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 64.txt; sourceTree = "<group>"; };
+		5CD2557B18519F4300930E3A /* 65.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 65.txt; sourceTree = "<group>"; };
+		5CD2557D18519F4D00930E3A /* 66.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 66.txt; sourceTree = "<group>"; };
+		5CD2557F18519F5800930E3A /* 67.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 67.txt; sourceTree = "<group>"; };
+		5CD2558118519F6200930E3A /* 68.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 68.txt; sourceTree = "<group>"; };
+		5CD2558318519F6C00930E3A /* 69.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 69.txt; sourceTree = "<group>"; };
+		5CD2558518519F7800930E3A /* 70.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 70.txt; sourceTree = "<group>"; };
+		5CD255871851A2D100930E3A /* 71.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 71.txt; sourceTree = "<group>"; };
+		5CD255891851A2DC00930E3A /* 72.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 72.txt; sourceTree = "<group>"; };
+		5CD2558B1851A2E600930E3A /* 73.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 73.txt; sourceTree = "<group>"; };
+		5CD2558D1851A2F000930E3A /* 74.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 74.txt; sourceTree = "<group>"; };
+		5CD2558F1851A30C00930E3A /* 75.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 75.txt; sourceTree = "<group>"; };
+		5CD255911851A31600930E3A /* 76.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 76.txt; sourceTree = "<group>"; };
+		5CD255931851A32100930E3A /* 77.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 77.txt; sourceTree = "<group>"; };
+		5CD255951851A32C00930E3A /* 78.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 78.txt; sourceTree = "<group>"; };
+		5CD255971851A33900930E3A /* 79.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 79.txt; sourceTree = "<group>"; };
+		5CD255991851A34200930E3A /* 80.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 80.txt; sourceTree = "<group>"; };
+		5CD2559D1851A5C200930E3A /* 718.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 718.txt; sourceTree = "<group>"; };
+		5CD2559F1851A5CE00930E3A /* 719.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 719.txt; sourceTree = "<group>"; };
+		5CD255A11851A5D900930E3A /* 720.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 720.txt; sourceTree = "<group>"; };
+		5CD255A31851A5EA00930E3A /* 721.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 721.txt; sourceTree = "<group>"; };
+		5CD255A51851A5F400930E3A /* 722.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 722.txt; sourceTree = "<group>"; };
+		5CD255A71851A70200930E3A /* 717.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 717.txt; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD0C1843972D00F3D980 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -451,6 +523,42 @@
 				5CD2555918517AAA00930E3A /* 48.txt */,
 				5CD2555B18517AB600930E3A /* 49.txt */,
 				5CD2555D18517AC300930E3A /* 50.txt */,
+				5CD2555F1851806100930E3A /* 51.txt */,
+				5CD255611851806D00930E3A /* 52.txt */,
+				5CD255631851807C00930E3A /* 53.txt */,
+				5CD2556518519CA600930E3A /* 54.txt */,
+				5CD2556718519E9C00930E3A /* 55.txt */,
+				5CD2556918519EAB00930E3A /* 56.txt */,
+				5CD2556B18519EB500930E3A /* 57.txt */,
+				5CD2556D18519EC000930E3A /* 58.txt */,
+				5CD2556F18519EE400930E3A /* 59.txt */,
+				5CD2557118519EF000930E3A /* 60.txt */,
+				5CD2557318519F0000930E3A /* 61.txt */,
+				5CD2557518519F0B00930E3A /* 62.txt */,
+				5CD2557718519F1600930E3A /* 63.txt */,
+				5CD2557918519F2100930E3A /* 64.txt */,
+				5CD2557B18519F4300930E3A /* 65.txt */,
+				5CD2557D18519F4D00930E3A /* 66.txt */,
+				5CD2557F18519F5800930E3A /* 67.txt */,
+				5CD2558118519F6200930E3A /* 68.txt */,
+				5CD2558318519F6C00930E3A /* 69.txt */,
+				5CD2558518519F7800930E3A /* 70.txt */,
+				5CD255871851A2D100930E3A /* 71.txt */,
+				5CD255891851A2DC00930E3A /* 72.txt */,
+				5CD2558B1851A2E600930E3A /* 73.txt */,
+				5CD2558D1851A2F000930E3A /* 74.txt */,
+				5CD2558F1851A30C00930E3A /* 75.txt */,
+				5CD255911851A31600930E3A /* 76.txt */,
+				5CD255931851A32100930E3A /* 77.txt */,
+				5CD255951851A32C00930E3A /* 78.txt */,
+				5CD255971851A33900930E3A /* 79.txt */,
+				5CD255991851A34200930E3A /* 80.txt */,
+				5CD255A71851A70200930E3A /* 717.txt */,
+				5CD2559D1851A5C200930E3A /* 718.txt */,
+				5CD2559F1851A5CE00930E3A /* 719.txt */,
+				5CD255A11851A5D900930E3A /* 720.txt */,
+				5CD255A31851A5EA00930E3A /* 721.txt */,
+				5CD255A51851A5F400930E3A /* 722.txt */,
 			);
 			name = Resource;
 			path = resource;
@@ -533,56 +641,91 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD2556C18519EB500930E3A /* 57.txt in Resources */,
+				5CD2556818519E9C00930E3A /* 55.txt in Resources */,
+				5CD255A21851A5D900930E3A /* 720.txt in Resources */,
 				5CD2555218517A7000930E3A /* 44.txt in Resources */,
+				5CD255601851806100930E3A /* 51.txt in Resources */,
 				5CD2552E185174C800930E3A /* 26.txt in Resources */,
 				5CD255291851709D00930E3A /* 22.txt in Resources */,
+				5CD2557218519EF000930E3A /* 60.txt in Resources */,
 				CBF7262E18501EAF003C70AB /* 3.txt in Resources */,
+				5CD2558418519F6C00930E3A /* 69.txt in Resources */,
 				5CD2555618517A8900930E3A /* 46.txt in Resources */,
 				5CD2555818517A9600930E3A /* 47.txt in Resources */,
 				CBF7263018501EAF003C70AB /* 5.txt in Resources */,
 				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
+				5CD2558618519F7800930E3A /* 70.txt in Resources */,
 				5CD2553E1851755B00930E3A /* 34.txt in Resources */,
 				CBD51BD11850DCEE005A15D0 /* 6.txt in Resources */,
+				5CD2557A18519F2100930E3A /* 64.txt in Resources */,
+				5CD255A01851A5CE00930E3A /* 719.txt in Resources */,
+				5CD2557C18519F4300930E3A /* 65.txt in Resources */,
+				5CD2557E18519F4D00930E3A /* 66.txt in Resources */,
+				5CD2558C1851A2E600930E3A /* 73.txt in Resources */,
 				5CD255281851709D00930E3A /* 21.txt in Resources */,
+				5CD255A41851A5EA00930E3A /* 721.txt in Resources */,
 				5CD2553C1851754B00930E3A /* 33.txt in Resources */,
+				5CD255A61851A5F400930E3A /* 722.txt in Resources */,
 				5CD2554218517A0C00930E3A /* 36.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
+				5CD2557818519F1600930E3A /* 63.txt in Resources */,
+				5CD255621851806D00930E3A /* 52.txt in Resources */,
 				CBF7262F18501EAF003C70AB /* 4.txt in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CBD51BD51850DCEE005A15D0 /* 10.txt in Resources */,
 				CBD51BD71850DFCC005A15D0 /* 11.txt in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
 				CBD51BDB1850E015005A15D0 /* 13.txt in Resources */,
+				5CD2559E1851A5C200930E3A /* 718.txt in Resources */,
 				10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */,
 				5CD2552A1851709D00930E3A /* 23.txt in Resources */,
 				CBD51BD21850DCEE005A15D0 /* 7.txt in Resources */,
 				CBD51BE51850E0C0005A15D0 /* 18.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
+				5CD255921851A31600930E3A /* 76.txt in Resources */,
 				CBD51BD41850DCEE005A15D0 /* 9.txt in Resources */,
 				CBD51BE71850E0E9005A15D0 /* 19.txt in Resources */,
 				CBD51BE31850E0A1005A15D0 /* 17.txt in Resources */,
 				CBD51BE91850E104005A15D0 /* 20.txt in Resources */,
 				5CD255341851751B00930E3A /* 29.txt in Resources */,
 				5CD2554618517A2300930E3A /* 38.txt in Resources */,
+				5CD2559A1851A34200930E3A /* 80.txt in Resources */,
 				CBD51BD31850DCEE005A15D0 /* 8.txt in Resources */,
 				5CD2553A1851753E00930E3A /* 32.txt in Resources */,
+				5CD255881851A2D100930E3A /* 71.txt in Resources */,
+				5CD2558A1851A2DC00930E3A /* 72.txt in Resources */,
 				5CD2554E18517A5300930E3A /* 42.txt in Resources */,
 				CBD51BD91850DFEC005A15D0 /* 12.txt in Resources */,
+				5CD255941851A32100930E3A /* 77.txt in Resources */,
+				5CD255641851807C00930E3A /* 53.txt in Resources */,
 				5CD255381851753200930E3A /* 31.txt in Resources */,
+				5CD255961851A32C00930E3A /* 78.txt in Resources */,
+				5CD255A81851A70200930E3A /* 717.txt in Resources */,
+				5CD2558218519F6200930E3A /* 68.txt in Resources */,
 				5CD25530185174FF00930E3A /* 27.txt in Resources */,
 				5CD255361851752500930E3A /* 30.txt in Resources */,
 				5CD25540185179FF00930E3A /* 35.txt in Resources */,
 				5CD2552C1851709D00930E3A /* 25.txt in Resources */,
+				5CD2556E18519EC100930E3A /* 58.txt in Resources */,
 				5CD2555018517A5E00930E3A /* 43.txt in Resources */,
 				5CD2554418517A1800930E3A /* 37.txt in Resources */,
+				5CD255901851A30C00930E3A /* 75.txt in Resources */,
 				CBD51BDD1850E03B005A15D0 /* 14.txt in Resources */,
+				5CD2557618519F0B00930E3A /* 62.txt in Resources */,
 				CBA286D0184DCF4A00010125 /* 1.txt in Resources */,
 				5CD2552B1851709D00930E3A /* 24.txt in Resources */,
+				5CD2558E1851A2F000930E3A /* 74.txt in Resources */,
 				5CD2554A18517A3C00930E3A /* 40.txt in Resources */,
 				5CD2555C18517AB600930E3A /* 49.txt in Resources */,
 				5CD2554C18517A4800930E3A /* 41.txt in Resources */,
+				5CD2557018519EE400930E3A /* 59.txt in Resources */,
+				5CD2556618519CA600930E3A /* 54.txt in Resources */,
 				5CD255321851750D00930E3A /* 28.txt in Resources */,
 				5CD2555A18517AAA00930E3A /* 48.txt in Resources */,
+				5CD2557418519F0000930E3A /* 61.txt in Resources */,
+				5CD255981851A33900930E3A /* 79.txt in Resources */,
+				5CD2558018519F5800930E3A /* 67.txt in Resources */,
 				CBD51BE11850E083005A15D0 /* 16.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */,
@@ -591,6 +734,7 @@
 				5CD2554818517A3100930E3A /* 39.txt in Resources */,
 				CBA286D1184DCF4A00010125 /* 2.txt in Resources */,
 				5CD2555418517A7E00930E3A /* 45.txt in Resources */,
+				5CD2556A18519EAB00930E3A /* 56.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
