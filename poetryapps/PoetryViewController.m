@@ -47,7 +47,7 @@
             if ([fileManager fileExistsAtPath:filePath2] == YES)
             {
                 // save core data
-                NSLog(@"file exists - %@",filePath2);
+                //NSLog(@"file exists - %@",filePath2);
                 
                 
                 content = [[NSString  alloc] initWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:nil];
@@ -55,7 +55,7 @@
                 fileContents = [NSString stringWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:NULL];
                 for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
                     // Do something
-                    NSLog(@"line = %@",line);
+                    //NSLog(@"line = %@",line);
                     if (lineCount == 0)
                     {
                         title = line;
@@ -68,7 +68,7 @@
                     lineCount++;
                 }
                 
-                NSLog(@"poetry content = %@",poetryContent);
+                //NSLog(@"poetry content = %@",poetryContent);
                 
                 
                 
@@ -78,12 +78,13 @@
                                            [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
                                            nil];
                 
-                [poetryContent setString:@""];
                 
                 isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
                 
                 if(!isSave)
                     NSLog(@"Core data is Error!!!!!!!!!");
+                
+                [poetryContent setString:@""];
             }
         }
         

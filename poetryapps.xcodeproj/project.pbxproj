@@ -24,6 +24,31 @@
 		5CD2552A1851709D00930E3A /* 23.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255251851709D00930E3A /* 23.txt */; };
 		5CD2552B1851709D00930E3A /* 24.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255261851709D00930E3A /* 24.txt */; };
 		5CD2552C1851709D00930E3A /* 25.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255271851709D00930E3A /* 25.txt */; };
+		5CD2552E185174C800930E3A /* 26.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2552D185174C800930E3A /* 26.txt */; };
+		5CD25530185174FF00930E3A /* 27.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2552F185174FF00930E3A /* 27.txt */; };
+		5CD255321851750D00930E3A /* 28.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255311851750D00930E3A /* 28.txt */; };
+		5CD255341851751B00930E3A /* 29.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255331851751B00930E3A /* 29.txt */; };
+		5CD255361851752500930E3A /* 30.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255351851752500930E3A /* 30.txt */; };
+		5CD255381851753200930E3A /* 31.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255371851753200930E3A /* 31.txt */; };
+		5CD2553A1851753E00930E3A /* 32.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255391851753E00930E3A /* 32.txt */; };
+		5CD2553C1851754B00930E3A /* 33.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2553B1851754B00930E3A /* 33.txt */; };
+		5CD2553E1851755B00930E3A /* 34.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2553D1851755B00930E3A /* 34.txt */; };
+		5CD25540185179FF00930E3A /* 35.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2553F185179FF00930E3A /* 35.txt */; };
+		5CD2554218517A0C00930E3A /* 36.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554118517A0C00930E3A /* 36.txt */; };
+		5CD2554418517A1800930E3A /* 37.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554318517A1800930E3A /* 37.txt */; };
+		5CD2554618517A2300930E3A /* 38.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554518517A2300930E3A /* 38.txt */; };
+		5CD2554818517A3100930E3A /* 39.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554718517A3100930E3A /* 39.txt */; };
+		5CD2554A18517A3C00930E3A /* 40.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554918517A3C00930E3A /* 40.txt */; };
+		5CD2554C18517A4800930E3A /* 41.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554B18517A4800930E3A /* 41.txt */; };
+		5CD2554E18517A5300930E3A /* 42.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554D18517A5300930E3A /* 42.txt */; };
+		5CD2555018517A5E00930E3A /* 43.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2554F18517A5E00930E3A /* 43.txt */; };
+		5CD2555218517A7000930E3A /* 44.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555118517A7000930E3A /* 44.txt */; };
+		5CD2555418517A7E00930E3A /* 45.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555318517A7E00930E3A /* 45.txt */; };
+		5CD2555618517A8900930E3A /* 46.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555518517A8900930E3A /* 46.txt */; };
+		5CD2555818517A9600930E3A /* 47.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555718517A9600930E3A /* 47.txt */; };
+		5CD2555A18517AAA00930E3A /* 48.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555918517AAA00930E3A /* 48.txt */; };
+		5CD2555C18517AB600930E3A /* 49.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555B18517AB600930E3A /* 49.txt */; };
+		5CD2555E18517AC300930E3A /* 50.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD2555D18517AC300930E3A /* 50.txt */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */; };
 		CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -105,6 +130,31 @@
 		5CD255251851709D00930E3A /* 23.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 23.txt; sourceTree = "<group>"; };
 		5CD255261851709D00930E3A /* 24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 24.txt; sourceTree = "<group>"; };
 		5CD255271851709D00930E3A /* 25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 25.txt; sourceTree = "<group>"; };
+		5CD2552D185174C800930E3A /* 26.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 26.txt; sourceTree = "<group>"; };
+		5CD2552F185174FF00930E3A /* 27.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 27.txt; sourceTree = "<group>"; };
+		5CD255311851750D00930E3A /* 28.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 28.txt; sourceTree = "<group>"; };
+		5CD255331851751B00930E3A /* 29.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 29.txt; sourceTree = "<group>"; };
+		5CD255351851752500930E3A /* 30.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 30.txt; sourceTree = "<group>"; };
+		5CD255371851753200930E3A /* 31.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 31.txt; sourceTree = "<group>"; };
+		5CD255391851753E00930E3A /* 32.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 32.txt; sourceTree = "<group>"; };
+		5CD2553B1851754B00930E3A /* 33.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 33.txt; sourceTree = "<group>"; };
+		5CD2553D1851755B00930E3A /* 34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 34.txt; sourceTree = "<group>"; };
+		5CD2553F185179FF00930E3A /* 35.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 35.txt; sourceTree = "<group>"; };
+		5CD2554118517A0C00930E3A /* 36.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 36.txt; sourceTree = "<group>"; };
+		5CD2554318517A1800930E3A /* 37.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 37.txt; sourceTree = "<group>"; };
+		5CD2554518517A2300930E3A /* 38.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 38.txt; sourceTree = "<group>"; };
+		5CD2554718517A3100930E3A /* 39.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 39.txt; sourceTree = "<group>"; };
+		5CD2554918517A3C00930E3A /* 40.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 40.txt; sourceTree = "<group>"; };
+		5CD2554B18517A4800930E3A /* 41.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 41.txt; sourceTree = "<group>"; };
+		5CD2554D18517A5300930E3A /* 42.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 42.txt; sourceTree = "<group>"; };
+		5CD2554F18517A5E00930E3A /* 43.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 43.txt; sourceTree = "<group>"; };
+		5CD2555118517A7000930E3A /* 44.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 44.txt; sourceTree = "<group>"; };
+		5CD2555318517A7E00930E3A /* 45.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 45.txt; sourceTree = "<group>"; };
+		5CD2555518517A8900930E3A /* 46.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 46.txt; sourceTree = "<group>"; };
+		5CD2555718517A9600930E3A /* 47.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 47.txt; sourceTree = "<group>"; };
+		5CD2555918517AAA00930E3A /* 48.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 48.txt; sourceTree = "<group>"; };
+		5CD2555B18517AB600930E3A /* 49.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 49.txt; sourceTree = "<group>"; };
+		5CD2555D18517AC300930E3A /* 50.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 50.txt; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD0C1843972D00F3D980 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -376,6 +426,31 @@
 				5CD255251851709D00930E3A /* 23.txt */,
 				5CD255261851709D00930E3A /* 24.txt */,
 				5CD255271851709D00930E3A /* 25.txt */,
+				5CD2552D185174C800930E3A /* 26.txt */,
+				5CD2552F185174FF00930E3A /* 27.txt */,
+				5CD255311851750D00930E3A /* 28.txt */,
+				5CD255331851751B00930E3A /* 29.txt */,
+				5CD255351851752500930E3A /* 30.txt */,
+				5CD255371851753200930E3A /* 31.txt */,
+				5CD255391851753E00930E3A /* 32.txt */,
+				5CD2553B1851754B00930E3A /* 33.txt */,
+				5CD2553D1851755B00930E3A /* 34.txt */,
+				5CD2553F185179FF00930E3A /* 35.txt */,
+				5CD2554118517A0C00930E3A /* 36.txt */,
+				5CD2554318517A1800930E3A /* 37.txt */,
+				5CD2554518517A2300930E3A /* 38.txt */,
+				5CD2554718517A3100930E3A /* 39.txt */,
+				5CD2554918517A3C00930E3A /* 40.txt */,
+				5CD2554B18517A4800930E3A /* 41.txt */,
+				5CD2554D18517A5300930E3A /* 42.txt */,
+				5CD2554F18517A5E00930E3A /* 43.txt */,
+				5CD2555118517A7000930E3A /* 44.txt */,
+				5CD2555318517A7E00930E3A /* 45.txt */,
+				5CD2555518517A8900930E3A /* 46.txt */,
+				5CD2555718517A9600930E3A /* 47.txt */,
+				5CD2555918517AAA00930E3A /* 48.txt */,
+				5CD2555B18517AB600930E3A /* 49.txt */,
+				5CD2555D18517AC300930E3A /* 50.txt */,
 			);
 			name = Resource;
 			path = resource;
@@ -458,12 +533,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD2555218517A7000930E3A /* 44.txt in Resources */,
+				5CD2552E185174C800930E3A /* 26.txt in Resources */,
 				5CD255291851709D00930E3A /* 22.txt in Resources */,
 				CBF7262E18501EAF003C70AB /* 3.txt in Resources */,
+				5CD2555618517A8900930E3A /* 46.txt in Resources */,
+				5CD2555818517A9600930E3A /* 47.txt in Resources */,
 				CBF7263018501EAF003C70AB /* 5.txt in Resources */,
 				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
+				5CD2553E1851755B00930E3A /* 34.txt in Resources */,
 				CBD51BD11850DCEE005A15D0 /* 6.txt in Resources */,
 				5CD255281851709D00930E3A /* 21.txt in Resources */,
+				5CD2553C1851754B00930E3A /* 33.txt in Resources */,
+				5CD2554218517A0C00930E3A /* 36.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CBF7262F18501EAF003C70AB /* 4.txt in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
@@ -480,17 +562,35 @@
 				CBD51BE71850E0E9005A15D0 /* 19.txt in Resources */,
 				CBD51BE31850E0A1005A15D0 /* 17.txt in Resources */,
 				CBD51BE91850E104005A15D0 /* 20.txt in Resources */,
+				5CD255341851751B00930E3A /* 29.txt in Resources */,
+				5CD2554618517A2300930E3A /* 38.txt in Resources */,
 				CBD51BD31850DCEE005A15D0 /* 8.txt in Resources */,
+				5CD2553A1851753E00930E3A /* 32.txt in Resources */,
+				5CD2554E18517A5300930E3A /* 42.txt in Resources */,
 				CBD51BD91850DFEC005A15D0 /* 12.txt in Resources */,
+				5CD255381851753200930E3A /* 31.txt in Resources */,
+				5CD25530185174FF00930E3A /* 27.txt in Resources */,
+				5CD255361851752500930E3A /* 30.txt in Resources */,
+				5CD25540185179FF00930E3A /* 35.txt in Resources */,
 				5CD2552C1851709D00930E3A /* 25.txt in Resources */,
+				5CD2555018517A5E00930E3A /* 43.txt in Resources */,
+				5CD2554418517A1800930E3A /* 37.txt in Resources */,
 				CBD51BDD1850E03B005A15D0 /* 14.txt in Resources */,
 				CBA286D0184DCF4A00010125 /* 1.txt in Resources */,
 				5CD2552B1851709D00930E3A /* 24.txt in Resources */,
+				5CD2554A18517A3C00930E3A /* 40.txt in Resources */,
+				5CD2555C18517AB600930E3A /* 49.txt in Resources */,
+				5CD2554C18517A4800930E3A /* 41.txt in Resources */,
+				5CD255321851750D00930E3A /* 28.txt in Resources */,
+				5CD2555A18517AAA00930E3A /* 48.txt in Resources */,
 				CBD51BE11850E083005A15D0 /* 16.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */,
+				5CD2555E18517AC300930E3A /* 50.txt in Resources */,
 				CBD51BDF1850E05D005A15D0 /* 15.txt in Resources */,
+				5CD2554818517A3100930E3A /* 39.txt in Resources */,
 				CBA286D1184DCF4A00010125 /* 2.txt in Resources */,
+				5CD2555418517A7E00930E3A /* 45.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
