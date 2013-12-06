@@ -44,6 +44,21 @@
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBA286D0184DCF4A00010125 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CE184DCF4A00010125 /* 1.txt */; };
 		CBA286D1184DCF4A00010125 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CF184DCF4A00010125 /* 2.txt */; };
+		CBD51BD11850DCEE005A15D0 /* 6.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BCC1850DCEE005A15D0 /* 6.txt */; };
+		CBD51BD21850DCEE005A15D0 /* 7.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BCD1850DCEE005A15D0 /* 7.txt */; };
+		CBD51BD31850DCEE005A15D0 /* 8.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BCE1850DCEE005A15D0 /* 8.txt */; };
+		CBD51BD41850DCEE005A15D0 /* 9.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BCF1850DCEE005A15D0 /* 9.txt */; };
+		CBD51BD51850DCEE005A15D0 /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BD01850DCEE005A15D0 /* 10.txt */; };
+		CBD51BD71850DFCC005A15D0 /* 11.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BD61850DFCC005A15D0 /* 11.txt */; };
+		CBD51BD91850DFEC005A15D0 /* 12.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BD81850DFEC005A15D0 /* 12.txt */; };
+		CBD51BDB1850E015005A15D0 /* 13.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BDA1850E015005A15D0 /* 13.txt */; };
+		CBD51BDD1850E03B005A15D0 /* 14.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BDC1850E03B005A15D0 /* 14.txt */; };
+		CBD51BDF1850E05D005A15D0 /* 15.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BDE1850E05D005A15D0 /* 15.txt */; };
+		CBD51BE11850E083005A15D0 /* 16.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE01850E083005A15D0 /* 16.txt */; };
+		CBD51BE31850E0A1005A15D0 /* 17.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE21850E0A1005A15D0 /* 17.txt */; };
+		CBD51BE51850E0C0005A15D0 /* 18.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE41850E0C0005A15D0 /* 18.txt */; };
+		CBD51BE71850E0E9005A15D0 /* 19.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE61850E0E9005A15D0 /* 19.txt */; };
+		CBD51BE91850E104005A15D0 /* 20.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE81850E104005A15D0 /* 20.txt */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBF7262E18501EAF003C70AB /* 3.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF7262B18501EAF003C70AB /* 3.txt */; };
 		CBF7262F18501EAF003C70AB /* 4.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF7262C18501EAF003C70AB /* 4.txt */; };
@@ -117,6 +132,21 @@
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
 		CBA286CE184DCF4A00010125 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		CBA286CF184DCF4A00010125 /* 2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.txt; sourceTree = "<group>"; };
+		CBD51BCC1850DCEE005A15D0 /* 6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 6.txt; path = poetryapps/Resource/6.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BCD1850DCEE005A15D0 /* 7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 7.txt; path = poetryapps/Resource/7.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BCE1850DCEE005A15D0 /* 8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 8.txt; path = poetryapps/Resource/8.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BCF1850DCEE005A15D0 /* 9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 9.txt; path = poetryapps/Resource/9.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BD01850DCEE005A15D0 /* 10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 10.txt; path = poetryapps/Resource/10.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BD61850DFCC005A15D0 /* 11.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 11.txt; path = poetryapps/Resource/11.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BD81850DFEC005A15D0 /* 12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 12.txt; path = poetryapps/Resource/12.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BDA1850E015005A15D0 /* 13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 13.txt; path = poetryapps/Resource/13.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BDC1850E03B005A15D0 /* 14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 14.txt; path = poetryapps/Resource/14.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BDE1850E05D005A15D0 /* 15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 15.txt; path = poetryapps/Resource/15.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BE01850E083005A15D0 /* 16.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 16.txt; path = poetryapps/Resource/16.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BE21850E0A1005A15D0 /* 17.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 17.txt; path = poetryapps/Resource/17.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BE41850E0C0005A15D0 /* 18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 18.txt; path = poetryapps/Resource/18.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BE61850E0E9005A15D0 /* 19.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 19.txt; path = poetryapps/Resource/19.txt; sourceTree = SOURCE_ROOT; };
+		CBD51BE81850E104005A15D0 /* 20.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 20.txt; path = poetryapps/Resource/20.txt; sourceTree = SOURCE_ROOT; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBF7262B18501EAF003C70AB /* 3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 3.txt; path = poetryapps/Resource/3.txt; sourceTree = SOURCE_ROOT; };
@@ -316,6 +346,21 @@
 				CBF7262B18501EAF003C70AB /* 3.txt */,
 				CBF7262C18501EAF003C70AB /* 4.txt */,
 				CBF7262D18501EAF003C70AB /* 5.txt */,
+				CBD51BCC1850DCEE005A15D0 /* 6.txt */,
+				CBD51BCD1850DCEE005A15D0 /* 7.txt */,
+				CBD51BCE1850DCEE005A15D0 /* 8.txt */,
+				CBD51BCF1850DCEE005A15D0 /* 9.txt */,
+				CBD51BD01850DCEE005A15D0 /* 10.txt */,
+				CBD51BD61850DFCC005A15D0 /* 11.txt */,
+				CBD51BD81850DFEC005A15D0 /* 12.txt */,
+				CBD51BDA1850E015005A15D0 /* 13.txt */,
+				CBD51BDC1850E03B005A15D0 /* 14.txt */,
+				CBD51BDE1850E05D005A15D0 /* 15.txt */,
+				CBD51BE01850E083005A15D0 /* 16.txt */,
+				CBD51BE21850E0A1005A15D0 /* 17.txt */,
+				CBD51BE41850E0C0005A15D0 /* 18.txt */,
+				CBD51BE61850E0E9005A15D0 /* 19.txt */,
+				CBD51BE81850E104005A15D0 /* 20.txt */,
 			);
 			name = Resource;
 			path = resource;
@@ -401,15 +446,30 @@
 				CBF7262E18501EAF003C70AB /* 3.txt in Resources */,
 				CBF7263018501EAF003C70AB /* 5.txt in Resources */,
 				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
+				CBD51BD11850DCEE005A15D0 /* 6.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CBF7262F18501EAF003C70AB /* 4.txt in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
+				CBD51BD51850DCEE005A15D0 /* 10.txt in Resources */,
+				CBD51BD71850DFCC005A15D0 /* 11.txt in Resources */,
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
+				CBD51BDB1850E015005A15D0 /* 13.txt in Resources */,
 				10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */,
+				CBD51BD21850DCEE005A15D0 /* 7.txt in Resources */,
+				CBD51BE51850E0C0005A15D0 /* 18.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
+				CBD51BD41850DCEE005A15D0 /* 9.txt in Resources */,
+				CBD51BE71850E0E9005A15D0 /* 19.txt in Resources */,
+				CBD51BE31850E0A1005A15D0 /* 17.txt in Resources */,
+				CBD51BE91850E104005A15D0 /* 20.txt in Resources */,
+				CBD51BD31850DCEE005A15D0 /* 8.txt in Resources */,
+				CBD51BD91850DFEC005A15D0 /* 12.txt in Resources */,
+				CBD51BDD1850E03B005A15D0 /* 14.txt in Resources */,
 				CBA286D0184DCF4A00010125 /* 1.txt in Resources */,
+				CBD51BE11850E083005A15D0 /* 16.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */,
+				CBD51BDF1850E05D005A15D0 /* 15.txt in Resources */,
 				CBA286D1184DCF4A00010125 /* 2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
