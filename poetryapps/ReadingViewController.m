@@ -10,19 +10,13 @@
 
 @interface ReadingViewController (){
     
-    CGSize _LabelSizeInit;
+    CGSize                  _LabelSizeInit;
+    CGPoint                 _TouchInit;
+    CURRENT_LABEL           _CurrentLab;
+    SLIDE_DIRECTION         _SlideDirection;
 
-    
-    CGPoint _TouchInit;
-    CGPoint _NextLabLocation;
-    CGPoint _PreviousLabLocation;
-    
-    CURRENT_LABEL   _CurrentLab;
-    SLIDE_DIRECTION _SlideDirection;
-    
-    NSDictionary    *_NewDataDic;
-    BOOL            _DataFlag;
-    BOOL            _GetSlideInLabel;
+    BOOL                    _DataFlag;
+    BOOL                    _GetSlideInLabel;
 
 }
 
@@ -84,7 +78,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    NSLog(@"ViewDidDisappear - save reading");
+    READING_VIEW_LOG(@"ViewDidDisappear - save reading");
     
     [_Label1 removeFromSuperview];
     [_Label2 removeFromSuperview];
@@ -106,12 +100,12 @@
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        NSLog(@"READING EXIST");
+        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
 
         
     } else {
         
-        NSLog(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
+        READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING] objectAtIndex:0];
         
     }
@@ -123,7 +117,7 @@
     
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
     if (subviewArray == nil) {
-        NSLog(@"CANNOT FIND ReadingScroller");
+        READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
     }
 
     // Add Content
@@ -145,12 +139,13 @@
     
     [Label setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     [Label setFont:_font];
+    [Label setTextAlignment:NSTextAlignmentCenter];
     Label.numberOfLines = 0;
-    [Label setBackgroundColor: [UIColor clearColor]];
+//    [Label setBackgroundColor: [UIColor clearColor]];
     CGSize constraint = CGSizeMake(300, 20000.0f);
     
     _LabelSizeInit = [Label sizeThatFits:constraint];
-    [Label setFrame:CGRectMake(Label.frame.origin.x, Label.frame.origin.y, _LabelSizeInit.width, _LabelSizeInit.height)];
+
     
     if (_DisplayTheme == THEME_LIGHT_DARK) {
         
@@ -165,6 +160,12 @@
         [self.view setBackgroundColor:[UIColor blackColor]];
         
     }
+    
+    if (_LabelSizeInit.height < (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
+        _LabelSizeInit.height = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+    }
+    
+    [Label setFrame:CGRectMake(Label.frame.origin.x, Label.frame.origin.y, _LabelSizeInit.width, _LabelSizeInit.height)];
     
 //    [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
 
@@ -202,7 +203,7 @@
             
                 if (!_GetSlideInLabel) {
                     
-                    NSLog(@"Drag to right, use the previous poetry");
+                    READING_VIEW_LOG(@"Drag to right, use the previous poetry");
                     // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
                     // Set Lable on the left of the screen and config it
                     
@@ -213,7 +214,7 @@
                         
                         if (_NewDataDic != nil) {
                             
-                            NSLog(@"Init PREVIOUS lab");
+                            READING_VIEW_LOG(@"Init PREVIOUS lab");
                             
                             _DataFlag = YES;
                             Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 10, _LabelSizeInit.width, 0);
@@ -243,7 +244,7 @@
                         } else {
                             
                             // TO config the label as no data label, and not to put on the scroller in the end
-                            NSLog(@"NO DATA");
+                            READING_VIEW_LOG(@"NO DATA");
                             
                         }
                         
@@ -263,8 +264,8 @@
             } else {
                 if (!_GetSlideInLabel) {
                     
-                    NSLog(@"Drag to left, use the next poetry");
-                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
+                    READING_VIEW_LOG(@"Drag to left, use the next poetry");
+                    // Get the next data and save into temp _NewDataDic for once (check DataFlag)
                     // Set Lable on the left of the screen and config it
                     
                     if (!_DataFlag) {
@@ -273,7 +274,7 @@
                         _NewDataDic = [_PoetryDatabase Poetry_GetNextWithCurrentData:_PoetryNowReading];
                         if (_NewDataDic != nil) {
                             
-                            NSLog(@"Init NEXT label");
+                            READING_VIEW_LOG(@"Init NEXT label");
                             
                             _DataFlag = YES;
                             Label.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 10, _LabelSizeInit.width, 0);
@@ -303,7 +304,7 @@
                         } else {
                             
                             // TO config the label as no data label, and not to put on the scroller in the end
-                            NSLog(@"NO DATA");
+                            READING_VIEW_LOG(@"NO DATA");
                             
                         }
                         
@@ -340,12 +341,12 @@
                                          
                                          if (_CurrentLab == LABEL1) {
                                              
-                                             NSLog(@"move done remove label 1");
+                                             READING_VIEW_LOG(@"move done remove label 1");
                                              [_Label1 removeFromSuperview];
                                              _CurrentLab = LABEL2;
                                          } else {
                                              
-                                             NSLog(@"move done remove label 2");
+                                             READING_VIEW_LOG(@"move done remove label 2");
                                              [_Label2 removeFromSuperview];
                                             _CurrentLab = LABEL1;
                                          }
@@ -360,7 +361,7 @@
                     
                 } else {
                     
-                    NSLog(@"back to out of screen!!!");
+                    READING_VIEW_LOG(@"back to out of screen!!!");
                     [UIView animateWithDuration:0.3
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {

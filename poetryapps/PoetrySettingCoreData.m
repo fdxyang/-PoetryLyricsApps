@@ -81,7 +81,7 @@
     if (count == 1) {
         
         // Setting is exist, update to default value
-        NSLog(@"In Poetry Setting : Set to default");
+        SETTING_LOG(@"In Poetry Setting : Set to default");
 
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
@@ -93,7 +93,7 @@
     } else if (count == 0) {
         
         // Setting not exist, create one
-        NSLog(@"First time in setting : Create Setting DB");
+        SETTING_LOG(@"First time in setting : Create Setting DB");
         
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
@@ -104,7 +104,7 @@
         
     } else {
         
-        NSLog(@"ERROR!!! Multiple Setting");
+        SETTING_ERROR_LOG(@"ERROR!!! Multiple Setting");
 
     }
     
@@ -191,7 +191,7 @@
     if (count == 1) {
         
         // Setting is exist, update to default value
-        NSLog(@"Set to data saved as %d", DataSaved);
+        SETTING_LOG(@"Set to data saved as %d", DataSaved);
         
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
@@ -201,7 +201,7 @@
     } else if (count == 0) {
         
         // Setting not exist, create one
-        NSLog(@"UPDATE- Normally it should not be here!!!");
+        SETTING_LOG(@"UPDATE- Normally it should not be here!!!");
         
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
@@ -212,13 +212,13 @@
         
     } else {
         
-        NSLog(@"ERROR!!! Multiple Setting");
+        SETTING_ERROR_LOG(@"ERROR!!! Multiple Setting");
         
     }
     
     NSError *error = nil;
     if (![_context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        SETTING_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
     
@@ -262,7 +262,7 @@
     if (count == 1) {
         
         // Setting is exist, update to default value
-        NSLog(@"In Poetry Setting : Set to default");
+        SETTING_LOG(@"In Poetry Setting : Set to default");
         
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
@@ -272,7 +272,7 @@
     } else if (count == 0) {
         
         // Setting not exist, create one
-        NSLog(@"UPDATE- Normally it should not be here!!!");
+        SETTING_LOG(@"UPDATE- Normally it should not be here!!!");
         
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
@@ -283,7 +283,7 @@
 
     } else {
         
-        NSLog(@"ERROR!!! Multiple Setting");
+        SETTING_LOG(@"ERROR!!! Multiple Setting");
         
     }
     
@@ -345,7 +345,7 @@
         
         // Setting not exist, create one
         // TODO: [CASPER] Add another Attr for Setting
-        NSLog(@"UPDATE- Normally it should not be here!!!");
+        SETTING_ERROR_LOG(@"UPDATE- Normally it should not be here!!!");
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
         
         [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
@@ -354,13 +354,13 @@
 
     } else {
         
-        NSLog(@"ERROR!!! Multiple Setting");
+        SETTING_LOG(@"ERROR!!! Multiple Setting");
         
     }
     
     NSError *error = nil;
     if (![_context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        SETTING_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
     
@@ -369,7 +369,7 @@
 }
 
 
-
+/*
 -(BOOL) PoetrySetting_UpdateSettingWithSettingDic : (NSDictionary *) SettingDic
 {
     
@@ -385,7 +385,7 @@
     if (count == 1) {
         
         // Setting is exist, update to default value
-        NSLog(@"In Poetry Setting : Set to default");
+        SETTING_LOG(@"In Poetry Setting : Set to default");
         
         NSManagedObject *Setting = [FetchResult objectAtIndex:0];
         
@@ -419,5 +419,5 @@
     
     return YES;
 }
-
+*/
 @end
