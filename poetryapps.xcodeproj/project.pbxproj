@@ -19,6 +19,11 @@
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
+		5CD255281851709D00930E3A /* 21.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255231851709D00930E3A /* 21.txt */; };
+		5CD255291851709D00930E3A /* 22.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255241851709D00930E3A /* 22.txt */; };
+		5CD2552A1851709D00930E3A /* 23.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255251851709D00930E3A /* 23.txt */; };
+		5CD2552B1851709D00930E3A /* 24.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255261851709D00930E3A /* 24.txt */; };
+		5CD2552C1851709D00930E3A /* 25.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5CD255271851709D00930E3A /* 25.txt */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */; };
 		CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -95,6 +100,11 @@
 		10AE670E18449F8C00A683E7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
+		5CD255231851709D00930E3A /* 21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 21.txt; sourceTree = "<group>"; };
+		5CD255241851709D00930E3A /* 22.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 22.txt; sourceTree = "<group>"; };
+		5CD255251851709D00930E3A /* 23.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 23.txt; sourceTree = "<group>"; };
+		5CD255261851709D00930E3A /* 24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 24.txt; sourceTree = "<group>"; };
+		5CD255271851709D00930E3A /* 25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 25.txt; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD0C1843972D00F3D980 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -361,6 +371,11 @@
 				CBD51BE41850E0C0005A15D0 /* 18.txt */,
 				CBD51BE61850E0E9005A15D0 /* 19.txt */,
 				CBD51BE81850E104005A15D0 /* 20.txt */,
+				5CD255231851709D00930E3A /* 21.txt */,
+				5CD255241851709D00930E3A /* 22.txt */,
+				5CD255251851709D00930E3A /* 23.txt */,
+				5CD255261851709D00930E3A /* 24.txt */,
+				5CD255271851709D00930E3A /* 25.txt */,
 			);
 			name = Resource;
 			path = resource;
@@ -443,10 +458,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD255291851709D00930E3A /* 22.txt in Resources */,
 				CBF7262E18501EAF003C70AB /* 3.txt in Resources */,
 				CBF7263018501EAF003C70AB /* 5.txt in Resources */,
 				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
 				CBD51BD11850DCEE005A15D0 /* 6.txt in Resources */,
+				5CD255281851709D00930E3A /* 21.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CBF7262F18501EAF003C70AB /* 4.txt in Resources */,
 				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
@@ -455,6 +472,7 @@
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
 				CBD51BDB1850E015005A15D0 /* 13.txt in Resources */,
 				10771DB81849C33500A3B342 /* ReadingScroller.xib in Resources */,
+				5CD2552A1851709D00930E3A /* 23.txt in Resources */,
 				CBD51BD21850DCEE005A15D0 /* 7.txt in Resources */,
 				CBD51BE51850E0C0005A15D0 /* 18.txt in Resources */,
 				CB25FD171843972D00F3D980 /* InfoPlist.strings in Resources */,
@@ -464,8 +482,10 @@
 				CBD51BE91850E104005A15D0 /* 20.txt in Resources */,
 				CBD51BD31850DCEE005A15D0 /* 8.txt in Resources */,
 				CBD51BD91850DFEC005A15D0 /* 12.txt in Resources */,
+				5CD2552C1851709D00930E3A /* 25.txt in Resources */,
 				CBD51BDD1850E03B005A15D0 /* 14.txt in Resources */,
 				CBA286D0184DCF4A00010125 /* 1.txt in Resources */,
+				5CD2552B1851709D00930E3A /* 24.txt in Resources */,
 				CBD51BE11850E083005A15D0 /* 16.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
 				10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */,

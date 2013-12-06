@@ -78,6 +78,8 @@
                                            [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
                                            nil];
                 
+                [poetryContent setString:@""];
+                
                 isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
                 
                 if(!isSave)
