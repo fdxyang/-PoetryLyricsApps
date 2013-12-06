@@ -19,7 +19,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        NSLog(@"init ");
+        //NSLog(@"init ");
         _tableViewType = type;
     }
     return self;
@@ -30,13 +30,16 @@
     [super viewDidLoad];
     
     
-    NSLog(@"viewDidLoad ");
+    //NSLog(@"viewDidLoad ");
     
     NSString *str;
     
     guideAttr = [[NSMutableArray alloc] init];
     poetryAttr = [[NSMutableArray alloc] init];
     responseAttr = [[NSMutableArray alloc] init];
+    
+    
+    
     
     
     if (_tableViewType == 0) // guide

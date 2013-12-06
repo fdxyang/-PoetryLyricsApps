@@ -85,6 +85,7 @@
                     NSLog(@"Core data is Error!!!!!!!!!");
                 
                 [poetryContent setString:@""];
+                lineCount = 0;
             }
         }
         
