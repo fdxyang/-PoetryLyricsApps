@@ -48,6 +48,7 @@
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
         [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+        [NewPoetry setValue: [NSNumber numberWithInt:0] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
 
         
     } else {
@@ -93,7 +94,7 @@
     } else if (count == 0) {
         
         // Setting not exist, create one
-        SETTING_LOG(@"First time in setting : Create Setting DB");
+        SETTING_ERROR_LOG(@"Setting not found Create Setting DB");
         
         // TODO: [CASPER] Add another Attr for Setting
         NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
@@ -101,7 +102,8 @@
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETIING_FONT_SIZE_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
         [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
-        
+        [NewPoetry setValue: [NSNumber numberWithInt:0] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
+
     } else {
         
         SETTING_ERROR_LOG(@"ERROR!!! Multiple Setting");
@@ -135,7 +137,18 @@
     return ReturnDic;
 }
 
-#pragma mark - Font Size
+
+-(UInt16) PoetrySetting_GetDataSavedIndex
+{
+    NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
+    NSNumber *SavedIndex = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+    UInt16 DataSavedIndex = [SavedIndex intValue];
+    return DataSavedIndex;
+}
+
+
+
+#pragma mark - SaveFlag
 -(BOOL) PoetrySetting_GetDataSavedFlag
 {
     NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
@@ -361,6 +374,60 @@
     NSError *error = nil;
     if (![_context save:&error]) {
         SETTING_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    
+    return YES;
+}
+
+
+
+
+-(BOOL) PoetrySetting_SetDataSavedIndex : (UInt16) IndexSaved
+{
+    
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        SETTING_LOG(@"Set to data saved as %d", DataSaved);
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        [Setting setValue: [NSNumber numberWithInt:IndexSaved] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        SETTING_ERROR_LOG(@"UPDATE- Normally it should not be here!!!");
+        
+        // TODO: [CASPER] Add another Attr for Setting
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+        [NewPoetry setValue: [NSNumber numberWithInt:0] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
+        
+    } else {
+        
+        SETTING_ERROR_LOG(@"ERROR!!! Multiple Setting");
+        
+    }
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        SETTING_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
     
