@@ -185,7 +185,7 @@
 
 
 #pragma mark - Now Working
--(UILabel *) HandlePreviousGestureWith:(UIPanGestureRecognizer *)recognizer andHandledLabel : (UILabel *) Label
+-(UILabel *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledLabel : (UILabel *) Label
 {
     CGPoint location = [recognizer locationInView:_Scroller];
 
@@ -210,14 +210,14 @@
                         
                         
                         _NewDataDic = [_PoetryDatabase Poetry_GetPreviousWithCurrentData:_PoetryNowReading];
+                        
                         if (_NewDataDic != nil) {
                             
-                            NSLog(@"Init lab");
+                            NSLog(@"Init PREVIOUS lab");
                             
                             _DataFlag = YES;
                             Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 10, _LabelSizeInit.width, 0);
                             Label = [self DisplayLabelHandlingWithData:_NewDataDic onLabel:Label];
-
                             
                             if (_DisplayTheme == THEME_LIGHT_DARK) {
                                 
@@ -235,6 +235,9 @@
                             //[Label setShadowOffset:CGSizeMake(30, _LabelSizeInit.height)];
                             
                             _GetSlideInLabel = YES;
+                            _SlideDirection = SlideLabelLeftToRigth;
+
+                            [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
                             [_Scroller addSubview:Label];
                             
                         } else {
@@ -249,19 +252,79 @@
                 } else {
                     
                     if (_DataFlag) {
+                        
                         // Move the label follow gesture
-                        NSLog(@"MOVE x = %d", (UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)));
+                        //NSLog(@"MOVE x = %d", (UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)));
                         Label.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
                         
                     }
                     
                 }
+            } else {
+                if (!_GetSlideInLabel) {
+                    
+                    NSLog(@"Drag to left, use the next poetry");
+                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
+                    // Set Lable on the left of the screen and config it
+                    
+                    if (!_DataFlag) {
+                        
+                        
+                        _NewDataDic = [_PoetryDatabase Poetry_GetNextWithCurrentData:_PoetryNowReading];
+                        if (_NewDataDic != nil) {
+                            
+                            NSLog(@"Init NEXT label");
+                            
+                            _DataFlag = YES;
+                            Label.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 10, _LabelSizeInit.width, 0);
+                            Label = [self DisplayLabelHandlingWithData:_NewDataDic onLabel:Label];
+                            
+                            if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                
+                                [Label setBackgroundColor:[UIColor whiteColor]];
+                                [Label setTextColor:[UIColor blackColor]];
+                                
+                            } else {
+                                
+                                [Label setBackgroundColor:[UIColor blackColor]];
+                                [Label setTextColor:[UIColor whiteColor]];
+                                
+                            }
+                            
+                            //[Label setShadowColor:[UIColor grayColor]];
+                            //[Label setShadowOffset:CGSizeMake(30, _LabelSizeInit.height)];
+                            
+                            _GetSlideInLabel = YES;
+                            _SlideDirection = SlideLabelRightToLegt;
+
+                            [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
+                            [_Scroller addSubview:Label];
+                            
+                        } else {
+                            
+                            // TO config the label as no data label, and not to put on the scroller in the end
+                            NSLog(@"NO DATA");
+                            
+                        }
+                        
+                    }
+                    
+                } else {
+                    
+                    if (_DataFlag) {
+                        
+                        // Move the label follow gesture
+                        Label.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
+                        
+                    }
+                    
+                }
+            
             }
             break;
             
         case UIGestureRecognizerStateEnded:
             
-            NSLog(@"ENDDDDDDD!!!!!!");
             if (_DataFlag) {
                 
                 if (abs(location.x - _TouchInit.x) > 100) {
@@ -269,29 +332,46 @@
                     [UIView animateWithDuration:0.3
                                      animations:^{
                                          
+                                         // Set Label in the normal location
                                          Label.frame = CGRectMake(10, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
                                          
                                      }
                                      completion:^(BOOL finished){
                                          
                                          if (_CurrentLab == LABEL1) {
+                                             
+                                             NSLog(@"move done remove label 1");
                                              [_Label1 removeFromSuperview];
+                                             _CurrentLab = LABEL2;
                                          } else {
+                                             
+                                             NSLog(@"move done remove label 2");
                                              [_Label2 removeFromSuperview];
+                                            _CurrentLab = LABEL1;
                                          }
                                          
                                          [Label setBackgroundColor:[UIColor clearColor]];
                                          _PoetryNowReading = _NewDataDic;
+                                         _DataFlag = NO;
+                                         _GetSlideInLabel = NO;
                                          
                                      }];
                     
                     
                 } else {
                     
+                    NSLog(@"back to out of screen!!!");
                     [UIView animateWithDuration:0.3
                                      animations:^{
+                                         if (_SlideDirection == SlideLabelLeftToRigth) {
+                                             
+                                             Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
+                                             
+                                         } else {
+                                             
+                                             Label.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
+                                         }
                                          
-                                         Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
                                          
                                      }
                                      completion:^(BOOL finished){
@@ -321,7 +401,7 @@
             _Label2 = [[UILabel alloc] init];
         }
         
-        _Label2 = [self HandlePreviousGestureWith:recognizer andHandledLabel:_Label2];
+        _Label2 = [self HandleGestureWith:recognizer andHandledLabel:_Label2];
 
         
     } else {
@@ -330,355 +410,10 @@
             _Label1 = [[UILabel alloc] init];
         }
 
-        _Label1 = [self HandlePreviousGestureWith:recognizer andHandledLabel:_Label1];
+        _Label1 = [self HandleGestureWith:recognizer andHandledLabel:_Label1];
         
     }
     
-    
-    /*
-     
-     NSDictionary *NewDataDic;
-     
-     CGPoint location = [recognizer locationInView:_Scroller];
-     //NSLog(@"location = %f", location.x);
-     
-     
-     if(recognizer.state == UIGestureRecognizerStateBegan) {
-     
-     // Start to drag
-     _TouchInit = location;
-     
-     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-     
-     // Gesture Did Move
-     if ((location.x - _TouchInit.x) > 0) {
-     
-     if (abs(location.x - _TouchInit.x) > 3) {
-     if (_GetSlideInLabel) {
-     
-     // Move Label
-     if (_CurrentLab == LABEL1) {
-     
-     // Handle Label2
-     _Label2.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + (abs(location.x - _TouchInit.x))), _Label2.frame.origin.y, _Label2.frame.size.width, _Label2.frame.size.height);
-     
-     } else {
-     
-     // Handle Label1
-     _Label1.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + (abs(location.x - _TouchInit.x))), _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     }
-     
-     } else {
-     
-     NSLog(@"Drag to right, use the previous poetry");
-     _SlideDirection = SlideLabelLeftToRigth;
-     // Previous Label View Location
-     CGPoint DefaultLabelLocation = CGPointMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 10);
-     
-     if (_CurrentLab == LABEL1) {
-     //get label2
-     if(_Label2 == nil) {
-     _Label2 = [[UILabel alloc] init];
-     }
-     
-     NewDataDic = [_PoetryDatabase Poetry_GetPreviousWithCurrentData:_PoetryNowReading];
-     if (NewDataDic != nil) {
-     
-     _DataFlag = YES;
-     _Label2.frame = CGRectMake(DefaultLabelLocation.x, DefaultLabelLocation.y, _LabelSizeInit.width, 0);
-     
-     [self DisplayLabelHandlingWithData:NewDataDic onLabel:_Label2];
-     
-     
-     } else {
-     
-     NSLog(@"NO DATA");
-     return;
-     }
-     
-     
-     if (_DisplayTheme == THEME_LIGHT_DARK) {
-     [_Label2 setBackgroundColor:[UIColor whiteColor]];
-     } else {
-     [_Label2 setBackgroundColor:[UIColor blackColor]];
-     }
-     
-     [_Scroller addSubview:_Label2];
-     _GetSlideInLabel = YES;
-     
-     } else {
-     
-     //get label1
-     if(_Label1 == nil) {
-     _Label1 = [[UILabel alloc] init];
-     }
-     
-     _Label1.frame = CGRectMake(DefaultLabelLocation.x, DefaultLabelLocation.y, _LabelSizeInit.width, 0);
-     
-     NewDataDic = [_PoetryDatabase Poetry_GetPreviousWithCurrentData:_PoetryNowReading];
-     if (NewDataDic != nil) {
-     
-     _DataFlag = YES;
-     [self DisplayLabelHandlingWithData:NewDataDic onLabel:_Label1];
-     
-     } else {
-     
-     NSLog(@"NO DATA");
-     return;
-     }
-     
-     if (_DisplayTheme == THEME_LIGHT_DARK) {
-     [_Label1 setBackgroundColor:[UIColor whiteColor]];
-     } else {
-     [_Label1 setBackgroundColor:[UIColor blackColor]];
-     }
-     
-     [self.view addSubview:_Label1];
-     _GetSlideInLabel = YES;
-     
-     }
-     }
-     
-     }
-     
-     
-     } else {
-     
-     if (abs(location.x - _TouchInit.x) > 3) {
-     if (_GetSlideInLabel) {
-     
-     // Move Label
-     if (_CurrentLab == LABEL1) {
-     
-     // Handle Label2
-     _Label2.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - (abs(location.x - _TouchInit.x))), _Label2.frame.origin.y, _Label2.frame.size.width, _Label2.frame.size.height);
-     
-     } else {
-     
-     // Handle Label1
-     _Label1.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - (abs(location.x - _TouchInit.x))), _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     }
-     
-     } else {
-     
-     NSLog(@"Drag to right, use the next poetry");
-     _SlideDirection = SlideLabelLeftToRigth;
-     // Previous Label View Location
-     CGPoint DefaultLabelLocation = CGPointMake(UI_DEFAULT_NEXT_ORIGIN_X, 10);
-     
-     if (_CurrentLab == LABEL1) {
-     //get label2
-     if(_Label2 == nil) {
-     _Label2 = [[UILabel alloc] init];
-     }
-     
-     NewDataDic = [_PoetryDatabase Poetry_GetNextWithCurrentData:_PoetryNowReading];
-     if (NewDataDic != nil) {
-     
-     _Label2.frame = CGRectMake(DefaultLabelLocation.x, DefaultLabelLocation.y, _LabelSizeInit.width, 0);
-     
-     [self DisplayLabelHandlingWithData:NewDataDic onLabel:_Label2];
-     
-     
-     } else {
-     NSLog(@"NO DATA");
-     return;
-     }
-     
-     
-     if (_DisplayTheme == THEME_LIGHT_DARK) {
-     [_Label2 setBackgroundColor:[UIColor whiteColor]];
-     } else {
-     [_Label2 setBackgroundColor:[UIColor blackColor]];
-     }
-     
-     [_Scroller addSubview:_Label2];
-     _GetSlideInLabel = YES;
-     
-     } else {
-     
-     //get label1
-     if(_Label1 == nil) {
-     _Label1 = [[UILabel alloc] init];
-     }
-     
-     _Label1.frame = CGRectMake(DefaultLabelLocation.x, DefaultLabelLocation.y, _LabelSizeInit.width, 0);
-     
-     NewDataDic = [_PoetryDatabase Poetry_GetNextWithCurrentData:_PoetryNowReading];
-     if (NewDataDic != nil) {
-     [self DisplayLabelHandlingWithData:NewDataDic onLabel:_Label1];
-     
-     } else {
-     NSLog(@"NO DATA");
-     return;
-     }
-     
-     if (_DisplayTheme == THEME_LIGHT_DARK) {
-     [_Label1 setBackgroundColor:[UIColor whiteColor]];
-     } else {
-     [_Label1 setBackgroundColor:[UIColor blackColor]];
-     }
-     
-     [self.view addSubview:_Label1];
-     _GetSlideInLabel = YES;
-     
-     }
-     }
-     
-     }
-     
-     }
-     
-     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-     
-     _GetSlideInLabel = NO;
-     if (_CurrentLab == LABEL1) {
-     if (abs(location.x - _TouchInit.x) > 130) {
-     // Confirmed to change label to Label2
-     
-     
-     [UIView animateWithDuration:0.5
-     animations:^{
-     
-     _Label2.frame = CGRectMake(10, _Label2.frame.origin.y, _Label2.frame.size.width, _Label2.frame.size.height);
-     
-     }
-     completion:^(BOOL finished){
-     
-     [_Label1 removeFromSuperview];
-     
-     }];
-     
-     _PoetryNowReading = NewDataDic;
-     _CurrentLab = LABEL2;
-     
-     } else {
-     
-     CGFloat x;
-     if (_SlideDirection == SlideLabelLeftToRigth) {
-     x = UI_DEFAULT_PREVIOUS_ORIGIN_X;
-     } else {
-     x = UI_DEFAULT_NEXT_ORIGIN_X;
-     }
-     
-     // Move back Label2
-     [UIView animateWithDuration:0.5
-     animations:^{
-     
-     _Label2.frame = CGRectMake(x, _Label2.frame.origin.y, _Label2.frame.size.width, _Label2.frame.size.height);
-     
-     }
-     completion:^(BOOL finished){
-     
-     [_Label2 removeFromSuperview];
-     [_Label2 setBackgroundColor:[UIColor clearColor]];
-     
-     
-     }];
-     
-     }
-     
-     } else {
-     
-     if (abs(location.x - _TouchInit.x) > 130) {
-     // Confirmed to change label to Label2
-     
-     
-     [UIView animateWithDuration:0.5
-     animations:^{
-     
-     _Label1.frame = CGRectMake(10, _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     
-     }
-     completion:^(BOOL finished){
-     
-     [_Label1 removeFromSuperview];
-     
-     }];
-     
-     _PoetryNowReading = NewDataDic;
-     _CurrentLab = LABEL1;
-     
-     } else {
-     
-     CGFloat x;
-     if (_SlideDirection == SlideLabelLeftToRigth) {
-     x = UI_DEFAULT_PREVIOUS_ORIGIN_X;
-     } else {
-     x = UI_DEFAULT_NEXT_ORIGIN_X;
-     }
-     
-     // Move back Label1
-     [UIView animateWithDuration:0.5
-     animations:^{
-     
-     _Label1.frame = CGRectMake(x, _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     
-     }
-     completion:^(BOOL finished){
-     
-     [_Label1 removeFromSuperview];
-     [_Label1 setBackgroundColor:[UIColor clearColor]];
-     
-     
-     }];
-     
-     }
-     
-     }
-     NSLog(@"END");
-     }
-
-    // 如果UIGestureRecognizerStateEnded的話...你是拿不到location的
-    // 不判斷的話,底下改frame會讓這個subview消失,因為origin的x和y就不見了!!!
-    if(recognizer.state == UIGestureRecognizerStateBegan) {
-     
-        // Start to drag
-        _init = location;
-     
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-     
-        // Change
-     
-        _Label1.frame = CGRectMake(((_ViewInit.x) - (_init.x - location.x)), _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-        //NSLog(@"%f", (_init.x - location.x));
-     
-    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        // End
-        if (((_init.x - location.x) > 30) && (_Label1.frame.origin.x < 200)) {
-     
-            NSLog(@"Move > 30");
-            //_Label1.frame = CGRectMake(0, _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     
-            [UIView animateWithDuration:0.5
-                             animations:^{
-     
-                                 _Label1.frame = CGRectMake(0, _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     
-                             }
-                             completion:^(BOOL finished){
-     
-                             }];
-     
-     
-        } else {
-            NSLog(@"Move back");
-            [UIView animateWithDuration:0.5
-                             animations:^{
-     
-                                 _Label1.frame = CGRectMake(_ViewInit.x, _Label1.frame.origin.y, _Label1.frame.size.width, _Label1.frame.size.height);
-     
-                             }
-                             completion:^(BOOL finished){
-     
-                             }];
-     
-     
-        }
-        NSLog(@"end");
-     
-    }
-     */
 }
 
 

@@ -36,8 +36,6 @@ typedef enum {
     THEME_DARK_LIGHT,           // Font color = White, Background = Black
 } THEME_SETTING;
 
-
-
 @property (nonatomic, getter = PoetrySetting_GetFontSizeSetting)    FONT_SIZE_SETTING       SettingFontSize;
 @property (nonatomic, getter = PoetrySetting_GetThemeSetting)       THEME_SETTING           SettingTheme;
 @property (nonatomic, getter = PoetrySetting_GetDataSavedFlag)      BOOL                    DataSaved;

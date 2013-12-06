@@ -13,7 +13,7 @@
 #define UI_IOS7_VERSION_FLOATING        7.0f
 #define UI_IOS7_TAB_BAR_HEIGHT          49
 #define UI_DEFAULT_PREVIOUS_ORIGIN_X    -300
-#define UI_DEFAULT_NEXT_ORIGIN_X        -320
+#define UI_DEFAULT_NEXT_ORIGIN_X        320
 
 
 @interface ReadingViewController : UIViewController <UIGestureRecognizerDelegate>
