@@ -41,9 +41,10 @@
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
     
-        if (_Scroller == nil) {
+    if (_Scroller == nil) {
         _Scroller = [[UIScrollView alloc] init];
     }
+    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     _Scroller.frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height - UI_IOS7_TAB_BAR_HEIGHT);
     [self.view addSubview:_Scroller];

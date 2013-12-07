@@ -38,9 +38,6 @@
 @property (nonatomic, strong)           NSDictionary                *NewDataDic;
 @property (nonatomic, strong)           UIFont                      *font;
 @property                               THEME_SETTING               DisplayTheme;
-@property (nonatomic, strong)           NSMutableArray              *DisplayLabArray; //Number = 2
-
-
 
 typedef enum {
     LABEL1 = 0x00,

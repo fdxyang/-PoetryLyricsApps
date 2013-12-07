@@ -11,9 +11,14 @@
 #import "FontSizeSetting.h"
 #import "ThemeSetting.h"
 
-@interface SettingViewController : UIViewController 
+@interface SettingViewController : UITableViewController
 
+@property (strong, nonatomic) IBOutlet UITableView *TableView;
+
+
+// ===
 @property (nonatomic, strong)   PoetrySettingCoreData   *Setting;
+@property (nonatomic, strong)   NSDictionary            *NowReading;
 @property (nonatomic)           FONT_SIZE_SETTING       SettingFontSize;
 @property (nonatomic)           THEME_SETTING           Theme;
 
@@ -21,4 +26,5 @@
 @property (nonatomic, strong)   ThemeSetting            *ThemeSettingView;
 @property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
 @property (nonatomic, strong)   UILabel                 *FontSizeLab;
+
 @end
