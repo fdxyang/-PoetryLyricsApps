@@ -27,60 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _Setting = [[PoetrySettingCoreData alloc] init];
-    PoetryCoreData *PoetryDatabase = [[PoetryCoreData alloc] init];
-    
-    if ([PoetryDatabase Poetry_CoreDataReadingExist]) {
-        _NowReading = [PoetryDatabase Poetry_CoreDataFetchDataInReading];
-    } else {
-        _NowReading = (NSDictionary*)[[PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject];
-    }
-
-
-    /*
-    
-    // TODO: Set UI
-    if (_FontSizeLab == nil) {
-        _FontSizeLab = [[UILabel alloc] init];
-    }
-    _FontSizeLab.frame = CGRectMake(10, 70, 100.f, 30.f);
-    _FontSizeLab.text = @"字型大小";
-    _FontSizeLab.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_FontSizeLab];
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FontSizeSetting" owner:self options:nil];
-    _FontSizeSettingView = (FontSizeSetting *)[subviewArray objectAtIndex:0];
-    _FontSizeSettingView.frame = CGRectMake(0, 100, _FontSizeSettingView.frame.size.width, _FontSizeSettingView.frame.size.height);
-    
-    [self Setting_InitFontSizeViewBtns];
-    
-    [_FontSizeSettingView.SmallSizeBtn addTarget:self action:@selector(SmallSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [_FontSizeSettingView.MidiumSizeBtn addTarget:self action:@selector(MediumSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [_FontSizeSettingView.LargeSizeBtn addTarget:self action:@selector(LargeSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:_FontSizeSettingView];
-    
-    
-    NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
-    _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
-    _ThemeSettingView.frame = CGRectMake(0, 300, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
-    
-    if (_ThemePreViewLab == nil) {
-        _ThemePreViewLab = [[UILabel alloc] init];
-    }
-    
-    _ThemePreViewLab.frame = CGRectMake(10, 250, 300.f, 50.f);
-    _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
-    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:POETRY_SETIING_FONT_SIZE_DEFAULT];
-    
-    [self Setting_InitThemeView];
-    
-    [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:_ThemePreViewLab];
-    [self.view addSubview:_ThemeSettingView];
-     */
+    _PoetryDatabase = [[PoetryCoreData alloc] init];
 
 }
 
@@ -90,6 +39,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSLog(@"View did appear");
+    
+    if ([_PoetryDatabase Poetry_CoreDataReadingExist]) {
+        _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+    } else {
+        _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+    }
+    
+    [_TableView reloadData];
+
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -132,6 +95,9 @@
         NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
         _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
         _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
+
+        [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
+        [_ThemeSettingView.DarkLightBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
         
         [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -146,7 +112,8 @@
             _ThemePreViewLab = [[UILabel alloc] init];
         }
         
-        _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 200.f);
+//        _ThemePreViewLab.numberOfLines = 0;
+        _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 100.f);
         _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
         _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
         
@@ -169,13 +136,42 @@
         
     } else if (indexPath.section == 2) {
         
-        return 200;
+        return 100;
         
     } else {
         
         return 45;
     }
     
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    NSString *sectionStr = [[NSString alloc] init];
+    
+
+    switch (section) {
+        case 0:
+            sectionStr = @"字體大小";
+            break;
+            
+        case 1:
+            sectionStr = @"顯示主題";
+            break;
+            
+        case 2:
+            sectionStr = @"預覽";
+            break;
+            
+        case 3:
+            sectionStr = @"關於我";
+            break;
+        default:
+            break;
+    }
+    
+
+    return sectionStr;
 }
 
 
@@ -263,9 +259,9 @@
     if (Save) {
         [_Setting PoetrySetting_SetTheme:ThemeSetting];
     }
-    
-    //_ThemePreViewLab.text = [_NowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
-    //NSLog(@"%@", [_NowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+    NSRange range;
+    range.length = 30;
+    range.location = 2;
     
     switch (ThemeSetting) {
             
@@ -274,8 +270,9 @@
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
             _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
             _ThemePreViewLab.textColor = [UIColor blackColor];
-            _ThemePreViewLab.text = @"白底黑字";
+            _ThemePreViewLab.text = [_NowReadingText substringWithRange:range];
 
+            NSLog(@"now reading = %@", [_NowReadingText substringWithRange:range]);
             break;
             
         case THEME_DARK_LIGHT:
@@ -284,7 +281,9 @@
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
             _ThemePreViewLab.backgroundColor = [UIColor blackColor];
             _ThemePreViewLab.textColor = [UIColor whiteColor];
-            _ThemePreViewLab.text = @"黑底白字";
+            _ThemePreViewLab.text = [_NowReadingText substringWithRange:range];
+            NSLog(@"now reading = %@", [_NowReadingText substringWithRange:range]);
+
 
             break;
         

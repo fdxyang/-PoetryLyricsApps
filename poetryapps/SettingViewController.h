@@ -10,6 +10,7 @@
 #import "PoetrySettingCoreData.h"
 #import "FontSizeSetting.h"
 #import "ThemeSetting.h"
+#import "PoetryCoreData.h"
 
 @interface SettingViewController : UITableViewController
 
@@ -18,7 +19,9 @@
 
 // ===
 @property (nonatomic, strong)   PoetrySettingCoreData   *Setting;
+@property (nonatomic, strong)   PoetryCoreData          *PoetryDatabase;
 @property (nonatomic, strong)   NSDictionary            *NowReading;
+@property (nonatomic, strong)   NSString                *NowReadingText;
 @property (nonatomic)           FONT_SIZE_SETTING       SettingFontSize;
 @property (nonatomic)           THEME_SETTING           Theme;
 
