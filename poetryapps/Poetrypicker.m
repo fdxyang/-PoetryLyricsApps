@@ -26,11 +26,13 @@
         
         NSString *str;
         poetryArr = [[NSMutableArray alloc] init];
+        PoetryDataBase = [[PoetryCoreData alloc] init];
+        
         
         poetryArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
         NSLog(@"poetryArr List Count = %lu", [poetryArr count]);
-        NSLog(@"poetryArr Name = %@", [[poetryArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        NSLog(@"poetryArr Content = %@", [[poetryArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        NSLog(@"poetryArr Name = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        NSLog(@"poetryArr Content = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         
         for(int i = 0; i< 650;i++)
         {
@@ -60,7 +62,7 @@
     switch (component)
     {
         case 0:
-            return  650;
+            return  [poetryArr count];
             break;
             
             //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行
@@ -73,13 +75,20 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    //NSLog(@"poetry titleForRow");
+    NSLog(@"!!! poetry titleForRow = %@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
     switch (component) {
         case 0:
-            _pickerContent = [NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]];
+            
+            //_pickerContent = [NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]];
+            
+            //[CASPER]
+            _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
             if(isTurnOnView)
-                [_btn setTitle:[NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]] forState:UIControlStateNormal];
-            return [poetryArr objectAtIndex:row];
+                [_btn setTitle:[NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]] forState:UIControlStateNormal];
+             
+            return [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+            //[CASPER] ==
+
             break;
             
             //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行）

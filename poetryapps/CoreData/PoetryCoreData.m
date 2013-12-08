@@ -103,7 +103,7 @@
 -(NSMutableArray*) Poetry_CoreDataFetchDataInCategory : (POETRY_CATEGORY) Category
 {
     NSMutableArray *Poetrys = [[NSMutableArray alloc] init];
-    
+    CORE_DATA_LOG(@"Poetry_CoreDataFetchDataInCategory = %d", Category);
     NSString *PoetryCoreDataEntityName;
     
     switch (Category) {
@@ -135,7 +135,7 @@
 // 在 Poetry 中搜尋 Poetry Name
 -(NSArray*) Poetry_CoreDataSearchWithPoetryName : (NSString *) SearchName InCategory : (POETRY_CATEGORY) Category
 {
-    
+    CORE_DATA_LOG(@"Poetry_CoreDataSearchWithPoetryName = %@ - %d", SearchName, Category);
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSString *BookCoreDataEntityName;
@@ -189,7 +189,8 @@
 // 在 Poetry 中搜尋 String
 -(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category
 {
-    
+    CORE_DATA_LOG(@"Poetry_CoreDataSearchWithPoetryContent = %@ - %d", SearchString, Category);
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSString *BookCoreDataEntityName;
     
@@ -243,7 +244,8 @@
 // 在 Poetry 中搜尋 String
 -(NSDictionary*) Poetry_CoreDataSearchWithPoetryIndex : (NSNumber *) SearchIndex InCategory : (POETRY_CATEGORY) Category
 {
-    
+    CORE_DATA_LOG(@"Poetry_CoreDataSearchWithPoetryIndex = %@ - %d", SearchIndex, Category);
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSString *BookCoreDataEntityName;
     
@@ -288,8 +290,10 @@
 		exit(-1);  // Fail
 	}
     
+    
+    
     NSDictionary *RetDic;
-    if ([fetchedResultsController.fetchedObjects count] > 0) {
+    if (fetchedResultsController.fetchedObjects != nil) {
         RetDic = [fetchedResultsController.fetchedObjects objectAtIndex:0];
     } else {
         RetDic = nil;
@@ -302,7 +306,6 @@
 
 
 -(NSUInteger) Poetry_CoreDataGetNumberInCategory : (POETRY_CATEGORY) Category
-
 {
     NSString *PoetryCoreDataEntityName;
     

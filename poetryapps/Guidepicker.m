@@ -21,14 +21,19 @@
         _btn = btn;
         
         
-        
+        PoetryDataBase = [[PoetryCoreData alloc] init];
+
         guidePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         //guideArr = [[NSArray alloc]initWithObjects:@"g1",@"g2",@"g3",@"g4",@"g5",@"g6", nil];
         guideArr = [[NSMutableArray alloc] init];
         guideArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-        NSLog(@"guideArr List Count = %lu", [guideArr count]);
-        NSLog(@"guideArr Name = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        NSLog(@"guideArr Content = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        
+        if (guideArr != nil) {
+            NSLog(@"guideArr List Count = %lu", [guideArr count]);
+            NSLog(@"guideArr Name = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"guideArr Content = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+            
+        }
         guidePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         guidePicker.delegate = self;
         guidePicker.dataSource = self;
@@ -66,13 +71,16 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    //NSLog(@"guide titleForRow");
+    NSLog(@"guide titleForRow = %d", row);
     switch (component) {
         case 0:
+            /*
             _pickerContent = [NSString stringWithFormat:@"%@", [guideArr objectAtIndex:row]];
             if(isTurnOnView)
                 [_btn setTitle:[NSString stringWithFormat:@"%@", [guideArr objectAtIndex:row]] forState:UIControlStateNormal];
             return [guideArr objectAtIndex:row];
+             */
+            return @"TEST";
             break;
             
             //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行）
