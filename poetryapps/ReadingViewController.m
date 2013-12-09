@@ -46,7 +46,7 @@
     }
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    _Scroller.frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height - UI_IOS7_TAB_BAR_HEIGHT);
+    _Scroller.frame = CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, screenRect.size.width, screenRect.size.height - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     [self.view addSubview:_Scroller];
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -56,6 +56,7 @@
     panRecognizer.delegate = self;
 
 }
+
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -70,8 +71,6 @@
     _CurrentLab = LABEL1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
-    
-
     
     [self InitReadingViewSetupScroller];
 }
@@ -92,6 +91,40 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Remove "\n" in the beginning of the article
+-(NSString*)ReadingViewCleanUpTextWithTheArticle : (NSString*) Articel
+{
+    NSRange range;
+    range.length = 1;
+    range.location = 0;
+    
+    for (int index = 0; index < [Articel length]; index++) {
+        
+        if ([Articel characterAtIndex:index] == 10) {
+            
+            if (index <= 1) {
+                
+                if (index == 1) {
+                    range.location = index;
+                    Articel = [Articel stringByReplacingCharactersInRange:range withString:@""];
+                    
+
+                }
+                
+            } else {
+                
+                break;
+            }
+            
+        } else {
+            
+            break;
+        }
+    }
+    
+    return Articel;
 }
 
 
@@ -126,20 +159,21 @@
         _Label1 = [[UILabel alloc] init];
     }
     
-    CGPoint DefaultLabelLocation = CGPointMake(10, 10);
-    _Label1.frame = CGRectMake(DefaultLabelLocation.x, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, 0);
+    CGPoint DefaultLabelLocation = CGPointMake(10, 0);
+    _Label1.frame = CGRectMake(DefaultLabelLocation.x, 0, _LabelSizeInit.width, 0);
     _Label1 = [self DisplayLabelHandlingWithData:_PoetryNowReading onLabel:_Label1];
     [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
 
+    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     [_Scroller addSubview: _Label1];
-    
 }
 
 #pragma mark - Display label handling
 -(UILabel *) DisplayLabelHandlingWithData :(NSDictionary*) PoetryData onLabel : (UILabel*) Label
 {
-    
-    [Label setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    [Label setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    ;
+    //[Label setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     [Label setFont:_font];
     //[Label setTextAlignment:NSTextAlignmentCenter];
     Label.numberOfLines = 0;
@@ -340,21 +374,32 @@
                                          if (_CurrentLab == LABEL1) {
                                              
                                              READING_VIEW_LOG(@"move done remove label 1");
+                                            
+
+                                             [Label setBackgroundColor:[UIColor clearColor]];
                                              [_Label1 removeFromSuperview];
                                              _CurrentLab = LABEL2;
+                                             _PoetryNowReading = _NewDataDic;
+                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             _DataFlag = NO;
+                                             _GetSlideInLabel = NO;
+
                                          } else {
                                              
                                              READING_VIEW_LOG(@"move done remove label 2");
+
+                                             [Label setBackgroundColor:[UIColor clearColor]];
                                              [_Label2 removeFromSuperview];
                                             _CurrentLab = LABEL1;
+                                             _PoetryNowReading = _NewDataDic;
+                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             _DataFlag = NO;
+                                             _GetSlideInLabel = NO;
+
                                          }
 
-                                         [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-
-                                         [Label setBackgroundColor:[UIColor clearColor]];
-                                         _PoetryNowReading = _NewDataDic;
-                                         _DataFlag = NO;
-                                         _GetSlideInLabel = NO;
                                          
                                      }];
                     

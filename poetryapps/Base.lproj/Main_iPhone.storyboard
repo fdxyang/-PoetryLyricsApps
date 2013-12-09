@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-524" y="257"/>
         </scene>
-        <!--Reading View Controller - Reading-->
+        <!--Reading View Controller-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
                 <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingViewController" sceneMemberID="viewController">
@@ -39,11 +39,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Reading" id="8O8-c5-S2D"/>
+                    <navigationItem key="navigationItem" id="bWY-Cq-QNw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0Q-NQ-9tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693" y="-34"/>
+            <point key="canvasLocation" x="1049" y="-34"/>
         </scene>
         <!--Tab Bar Controller - GOTO-->
         <scene sceneID="EF1-TU-lpR">
@@ -56,7 +56,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="edc-e0-G7q" kind="relationship" relationship="viewControllers" id="0ii-14-Gyp"/>
+                        <segue destination="SFn-Ti-d2S" kind="relationship" relationship="viewControllers" id="0ii-14-Gyp"/>
                         <segue destination="v8i-aI-qlE" kind="relationship" relationship="viewControllers" id="Yut-uD-psM"/>
                         <segue destination="LUF-2Q-sMp" kind="relationship" relationship="viewControllers" id="6cn-cd-urz"/>
                         <segue destination="4Q7-nF-F61" kind="relationship" relationship="viewControllers" id="VX7-Za-29H"/>
@@ -319,6 +319,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTl-iL-h7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1049" y="2025"/>
+        </scene>
+        <!--Navigation Controller - Reading-->
+        <scene sceneID="BAA-EL-heM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SFn-Ti-d2S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reading" id="8O8-c5-S2D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtE-LW-hAQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="edc-e0-G7q" kind="relationship" relationship="rootViewController" id="f2R-g1-ymx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CNt-x1-dHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="-34"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

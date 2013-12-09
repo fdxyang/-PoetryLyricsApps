@@ -13,6 +13,8 @@
 #define UI_4_INCH_HEIGHT                568
 #define UI_IOS7_VERSION_FLOATING        7.0f
 #define UI_IOS7_TAB_BAR_HEIGHT          49
+#define UI_IOS7_NAV_BAR_HEIGHT          44
+
 #define UI_DEFAULT_PREVIOUS_ORIGIN_X    -300
 #define UI_DEFAULT_NEXT_ORIGIN_X        320
 #define UI_DEFAULT_LABEL_ORIGIN_Y       10
