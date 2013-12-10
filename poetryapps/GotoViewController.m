@@ -230,12 +230,10 @@
                 NSLog(@"guide press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"gp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:0];
                 }
                 else
                 {
-                    NSLog(@"gp2");
                     [_detailTableView setTableViewType:0];
                 }
                 
@@ -247,12 +245,10 @@
                 NSLog(@"poetry press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"pp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
                 }
                 else
                 {
-                    NSLog(@"pp2");
                     [_detailTableView setTableViewType:1];
                 }
                 
@@ -264,12 +260,10 @@
                 NSLog(@"response press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"rp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
                 }
                 else
                 {
-                    NSLog(@"rp2");
                     [_detailTableView setTableViewType:2];
                 }
                 

@@ -25,20 +25,11 @@
         responseArr = [[NSMutableArray alloc] init];
         PoetryDataBase = [[PoetryCoreData alloc] init];
 
-        responseArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-        if (responseArr != nil) {
-            NSLog(@"responseArr List Count = %lu", [responseArr count]);
-            NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-            NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-
-        }
+        responseArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+        NSLog(@"responseArr List Count = %lu", [responseArr count]);
+        NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         
-        for(int i = 0; i< 66;i++)
-        {
-            str  = [NSString stringWithFormat:@"r%d",i+1];
-            //NSLog(@"str = %@",str);
-            [responseArr addObject:str];
-        }
         responsePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         responsePicker.delegate = self;
         responsePicker.dataSource = self;
@@ -78,16 +69,16 @@
     //NSLog(@"guide  titleForRow");
     switch (component) {
         case 0:
-            /*
-            _pickerContent = [NSString stringWithFormat:@"%@", [responseArr objectAtIndex:row]];
+            
+            _pickerContent = [NSString stringWithFormat:@"%@", [[responseArr objectAtIndex:row]valueForKey:POETRY_CORE_DATA_NAME_KEY]];
             
             if(isTurnOnView)
             {
-                [_btn setTitle:[NSString stringWithFormat:@"%@", [responseArr objectAtIndex:row]] forState:UIControlStateNormal];
+                [_btn setTitle:[NSString stringWithFormat:@"%@", _pickerContent] forState:UIControlStateNormal];
             }
-            return [responseArr objectAtIndex:row];
-             */
-            return @"TEST";
+            return _pickerContent;
+            
+            //return @"TEST";
             break;
             
             //如果有一組以上的選項就在這裡以component的值來區分（以本程式碼為例default:永遠不可能被執行）
@@ -101,7 +92,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //NSLog(@"guide  didSelectRow");
-    _pickerContent = [NSString stringWithFormat:@"%@", [responseArr objectAtIndex:row]];
+    _pickerContent = [NSString stringWithFormat:@"%@", [[responseArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     //NSLog(@"_pickerContent = %@",_pickerContent);
 }
 
