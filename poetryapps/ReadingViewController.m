@@ -225,7 +225,7 @@
         
     }
     
-    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(0, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
+    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
     READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
 
     CGFloat ViewHeight = _LabelSizeInit.height;
@@ -251,7 +251,7 @@
     [Label setFont:_font];
     //[Label setTextAlignment:NSTextAlignmentCenter];
     Label.numberOfLines = 0;
-    CGSize constraint = CGSizeMake(300, 20000.0f);
+    CGSize constraint = CGSizeMake(320, 20000.0f);
     
     _LabelSizeInit = [Label sizeThatFits:constraint];
     
@@ -273,7 +273,7 @@
         _LabelSizeInit.height = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     }
     
-    [Label setFrame:CGRectMake(Label.frame.origin.x, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, _LabelSizeInit.height)];
+    [Label setFrame:CGRectMake(30, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, _LabelSizeInit.height)];
     
     return Label;
     
@@ -317,7 +317,9 @@
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
                             READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
                             // Height of view will be set inside the method
-                            View.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            
+                            
+                            View.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
                             //READING_VIEW_LOG(@"View Generate = %@", View);
                             
@@ -344,7 +346,31 @@
                             _SlideDirection = SlideLabelLeftToRigth;
                             
                             [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
-                            [_Scroller addSubview:View];
+                            // TODO: Add this view between Current view and Scroller
+                            //[_Scroller addSubview:View];
+                            
+                            if (_CurrentView == VIEW1) {
+                                
+                                READING_VIEW_LOG(@"Add view below readingview1");
+                                if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                    [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
+                                } else {
+                                    [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
+                                }
+                                
+                                [_Scroller insertSubview:View belowSubview:_ReadingView1];
+                                
+                            } else {
+                                
+                                if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                    [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
+                                } else {
+                                    [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
+                                }
+                                
+                                [_Scroller insertSubview:View belowSubview:_ReadingView2];
+                            }
+                            
                             
                         }
                     }
@@ -352,9 +378,17 @@
                     
                     if (_DataFlag) {
                         
-                        // Move the label follow gesture
-                        View.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                        
+                        // Move the view above following gesture
+                        // View.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                        if (_CurrentView == VIEW1) {
+                            
+                            _ReadingView1.frame = CGRectMake((0 + abs(location.x - _TouchInit.x)), 0, View.frame.size.width, View.frame.size.height);
+                            
+                        } else {
+                            
+                            _ReadingView2.frame = CGRectMake((0 + abs(location.x - _TouchInit.x)), 0, View.frame.size.width, View.frame.size.height);
+                        }
+
                     }
                     
                 }
@@ -433,8 +467,25 @@
                     [UIView animateWithDuration:0.2
                                      animations:^{
                                          
-                                         // Set Label in the normal location
-                                         View.frame = CGRectMake(10, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                         if (_SlideDirection == SlideLabelLeftToRigth) {
+                                         
+                                             // Move view out of the screen
+                                             if (_CurrentView == VIEW1) {
+                                                 
+                                                 _ReadingView1.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                 
+                                             } else {
+                                                 
+                                                 _ReadingView2.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                             }
+
+                                             
+                                         } else {
+                                             
+                                             // Set Label in the normal location
+                                             View.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+
+                                         }
                                          
                                      }
                                      completion:^(BOOL finished){
@@ -456,7 +507,8 @@
                                              }
                                              
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+
                                              _DataFlag = NO;
                                              _GetSlideInLabel = NO;
                                              
@@ -476,7 +528,7 @@
                                              }
                                              
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                              _DataFlag = NO;
                                              _GetSlideInLabel = NO;
                                              
@@ -491,7 +543,16 @@
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {
                                              
-                                             View.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                             if (_CurrentView == VIEW1) {
+                                                 
+                                                 _ReadingView1.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                 
+                                             } else {
+                                                 
+                                                 _ReadingView2.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                             }
+
+                                             //View.frame = CGRectMake(0, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
                                              
                                          } else {
                                              
