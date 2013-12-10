@@ -21,10 +21,10 @@
 #define UI_DEFAULT_LABEL_ORIGIN_Y       10
 #define UI_DEFAULT_LABEL_ORIGIN_X       10
 #define UI_DEFAULT_SCREEN_WIDTH         320
-#define UI_DEFAULT_LABEL_WIDTH          300
+#define UI_DEFAULT_LABEL_WIDTH          280
 
 
-#define DEBUG_READINGVIEW
+//#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
