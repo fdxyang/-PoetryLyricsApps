@@ -1,7 +1,6 @@
-/* 
-  296.txt
-  poetryapps
+296. 哈利路亞
 
-  Created by Cevinyang on 2013/12/9.
-  Copyright (c) 2013年 cc. All rights reserved.
-*/
+哈利，哈利，哈利路亞，
+哈利，哈利，哈利路亞，
+哈利，哈利，哈利路亞，
+哈利路亞，哈利路亞！
