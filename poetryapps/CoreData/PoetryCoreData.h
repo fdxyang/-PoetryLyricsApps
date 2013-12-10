@@ -37,6 +37,7 @@ typedef enum {
     GUARD_READING = 0x00,
     POETRYS,
     RESPONSIVE_PRAYER,
+    CATEGORY_MAX,
 } POETRY_CATEGORY;
 
 @property (nonatomic, strong)   NSManagedObjectContext  *context;
@@ -50,6 +51,7 @@ typedef enum {
 -(NSArray*) Poetry_CoreDataSearchWithPoetryContent : (NSString *) SearchString InCategory : (POETRY_CATEGORY) Category;
 -(NSDictionary *) Poetry_GetPreviousWithCurrentData : (NSDictionary *) NowReading;
 -(NSDictionary *) Poetry_GetNextWithCurrentData : (NSDictionary *) NowReading;
+-(POETRY_CATEGORY) Poetry_ExtractCategoryInPoetry : (NSDictionary*) Poetry;
 
 
 // Poetry history Methods

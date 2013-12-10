@@ -19,8 +19,9 @@
 #define UI_DEFAULT_NEXT_ORIGIN_X        320
 #define UI_DEFAULT_LABEL_ORIGIN_Y       10
 #define UI_DEFAULT_LABEL_ORIGIN_X       10
+#define UI_DEFAULT_SCREEN_WIDTH         320
 
-//#define DEBUG_READINGVIEW
+#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -40,6 +41,17 @@
 @property (nonatomic, strong)           NSDictionary                *NewDataDic;
 @property (nonatomic, strong)           UIFont                      *font;
 @property                               THEME_SETTING               DisplayTheme;
+
+//[CASPER] Improve Reading View
+@property (nonatomic, strong)           NSMutableArray              *NowReadingCategoryArray;
+@property (nonatomic)                   UIView                      *View1;
+@property (nonatomic)                   UIView                      *View2;
+
+typedef enum {
+    VIEW1 = 0x00,
+    VIEW2,
+}CURRENT_VIEW;
+//[CASPER] Improve Reading View ==
 
 typedef enum {
     LABEL1 = 0x00,

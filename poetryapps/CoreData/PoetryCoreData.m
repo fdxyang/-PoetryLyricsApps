@@ -390,6 +390,25 @@
     return RetDic;
 }
 
+-(POETRY_CATEGORY) Poetry_ExtractCategoryInPoetry : (NSDictionary*) Poetry
+{
+    NSString *CategoryString = [Poetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+    if ([CategoryString isEqualToString:POETRY_GUARD_CORE_DATA_ENTITY]) {
+        
+        return GUARD_READING;
+        
+    } else if ([CategoryString isEqualToString:POETRY_CORE_DATA_ENTITY]) {
+        
+        return POETRYS;
+        
+    } else if ([CategoryString isEqualToString:POETRY_RES_CORE_DATA_ENTITY]) {
+        
+        return RESPONSIVE_PRAYER;
+        
+    } else {
+        return CATEGORY_MAX;
+    }
+}
 
 #pragma mark - History Core Data Methods
 

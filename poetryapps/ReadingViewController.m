@@ -67,7 +67,7 @@
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _DisplayTheme = _PoetrySetting.SettingTheme;
     
-    _LabelSizeInit = CGSizeMake(300, 0);
+    _LabelSizeInit = CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 0);
     _CurrentLab = LABEL1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
@@ -134,18 +134,21 @@
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:[_PoetryDatabase Poetry_ExtractCategoryInPoetry:_PoetryNowReading]]];
+        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
 
         
     } else {
         
         READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
+        //TODO: Modify the Category after all poetry ready.
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:[_PoetryDatabase Poetry_ExtractCategoryInPoetry:_PoetryNowReading]]];
         
     }
 
     // Setup Scroll View
-    [_Scroller setContentSize:CGSizeMake(320, 1000)];
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 1000)];
     [_Scroller setScrollEnabled:YES];
 
     
@@ -153,7 +156,13 @@
     if (subviewArray == nil) {
         READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
     }
-
+    
+    // Init View1 for first launch
+    if (_View1 == nil) {
+        _View1 = [[UIView alloc] init];
+    }
+    _View1.frame = CGRectMake(0, 0, _LabelSizeInit.width, 0);
+    
     // Add Content
     if (_Label1 == nil) {
         _Label1 = [[UILabel alloc] init];
@@ -162,7 +171,7 @@
     CGPoint DefaultLabelLocation = CGPointMake(10, 0);
     _Label1.frame = CGRectMake(DefaultLabelLocation.x, 0, _LabelSizeInit.width, 0);
     _Label1 = [self DisplayLabelHandlingWithData:_PoetryNowReading onLabel:_Label1];
-    [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 40)];
 
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     [_Scroller addSubview: _Label1];
