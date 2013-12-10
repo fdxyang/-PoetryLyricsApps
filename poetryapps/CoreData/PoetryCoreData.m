@@ -393,6 +393,8 @@
 -(POETRY_CATEGORY) Poetry_ExtractCategoryInPoetry : (NSDictionary*) Poetry
 {
     NSString *CategoryString = [Poetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+    NSLog(@"Cagegory string = %@",CategoryString);
+    
     if ([CategoryString isEqualToString:POETRY_GUARD_CORE_DATA_ENTITY]) {
         
         return GUARD_READING;

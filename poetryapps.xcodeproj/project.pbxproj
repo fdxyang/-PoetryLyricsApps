@@ -18,6 +18,7 @@
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
+		10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B361951856BF9B00A632AD /* PoetryReadingView.m */; };
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
 		5C3A2D491855A3DD0057C211 /* 202.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5C3A2D481855A3DD0057C211 /* 202.txt */; };
 		5C3A2D4B1855A3E30057C211 /* 203.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5C3A2D4A1855A3E30057C211 /* 203.txt */; };
@@ -375,11 +376,13 @@
 		10771DC11849D0B600A3B342 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
 		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
-		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
+		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
 		10AE670E18449F8C00A683E7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		10B361941856BF9B00A632AD /* PoetryReadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryReadingView.h; sourceTree = "<group>"; };
+		10B361951856BF9B00A632AD /* PoetryReadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryReadingView.m; sourceTree = "<group>"; };
 		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
 		5C3A2D481855A3DD0057C211 /* 202.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 202.txt; sourceTree = "<group>"; };
@@ -907,6 +910,8 @@
 				10771DB71849C33500A3B342 /* ReadingScroller.xib */,
 				10771DB91849C36500A3B342 /* ReadingScroller.h */,
 				10771DBA1849C36500A3B342 /* ReadingScroller.m */,
+				10B361941856BF9B00A632AD /* PoetryReadingView.h */,
+				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -1640,6 +1645,7 @@
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
+				10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */,
 				1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */,
 				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
