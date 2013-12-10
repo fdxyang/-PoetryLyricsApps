@@ -9,18 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
+#import "PoetryReadingView.h"
 
 #define UI_4_INCH_HEIGHT                568
 #define UI_IOS7_VERSION_FLOATING        7.0f
 #define UI_IOS7_TAB_BAR_HEIGHT          49
 #define UI_IOS7_NAV_BAR_HEIGHT          44
 
-#define UI_DEFAULT_PREVIOUS_ORIGIN_X    -300
+#define UI_DEFAULT_PREVIOUS_ORIGIN_X    -320
 #define UI_DEFAULT_NEXT_ORIGIN_X        320
 #define UI_DEFAULT_LABEL_ORIGIN_Y       10
 #define UI_DEFAULT_LABEL_ORIGIN_X       10
+#define UI_DEFAULT_SCREEN_WIDTH         320
+#define UI_DEFAULT_LABEL_WIDTH          300
 
-//#define DEBUG_READINGVIEW
+
+#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -41,19 +45,33 @@
 @property (nonatomic, strong)           UIFont                      *font;
 @property                               THEME_SETTING               DisplayTheme;
 
+//[CASPER] Improve Reading View
+@property (nonatomic, strong)           NSMutableArray              *NowReadingCategoryArray;
+@property (nonatomic, strong)           PoetryReadingView           *ReadingView1;
+@property (nonatomic, strong)           PoetryReadingView           *ReadingView2;
+
 typedef enum {
-    LABEL1 = 0x00,
-    LABEL2,
-}CURRENT_LABEL;
+    VIEW1 = 0x00,
+    VIEW2,
+}CURRENT_VIEW;
+//[CASPER] Improve Reading View ==
+
 
 typedef enum {
     SlideLabelLeftToRigth,
     SlideLabelRightToLegt,
 }SLIDE_DIRECTION;
 
+/*
+typedef enum {
+    LABEL1 = 0x00,
+    LABEL2,
+}CURRENT_LABEL;
+
+
 @property (nonatomic)                   UILabel                     *Label1;
 @property (nonatomic)                   UILabel                     *Label2;
-
+*/
 
 
 @end

@@ -12,12 +12,13 @@
     
     CGSize                  _LabelSizeInit;
     CGPoint                 _TouchInit;
-    CURRENT_LABEL           _CurrentLab;
+    //CURRENT_LABEL           _CurrentLab;
     SLIDE_DIRECTION         _SlideDirection;
 
     BOOL                    _DataFlag;
     BOOL                    _GetSlideInLabel;
-
+    CURRENT_VIEW            _CurrentView;
+    UInt16                  _CurrentIndex;
 }
 
 @end
@@ -37,7 +38,8 @@
 {
     [super viewDidLoad];
  
-	// Do any additional setup after loading the view.
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
     
@@ -45,10 +47,11 @@
         _Scroller = [[UIScrollView alloc] init];
     }
     
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
     _Scroller.frame = CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, screenRect.size.width, screenRect.size.height - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     [self.view addSubview:_Scroller];
     
+    
+    // GestureRecognize
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     
     [self.view addGestureRecognizer:panRecognizer];
@@ -61,18 +64,22 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    // TODO: Scroll to the top
     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+    
     // Read Setting
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _DisplayTheme = _PoetrySetting.SettingTheme;
-    
-    _LabelSizeInit = CGSizeMake(300, 0);
-    _CurrentLab = LABEL1;
+
+    _LabelSizeInit = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 0);
+    _CurrentView = VIEW1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
     
     [self InitReadingViewSetupScroller];
+
+    
+    //_CurrentLab = LABEL1;
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -80,9 +87,13 @@
     [super viewDidDisappear:animated];
     READING_VIEW_LOG(@"ViewDidDisappear - save reading");
     
+    [_ReadingView1 removeFromSuperview];
+    [_ReadingView2 removeFromSuperview];
+    
+    /*
     [_Label1 removeFromSuperview];
     [_Label2 removeFromSuperview];
-
+*/
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }
@@ -134,7 +145,12 @@
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+        _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] + 1; //Since the index in core data starts at 0
+
+        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        
 
         
     } else {
@@ -142,10 +158,15 @@
         READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
         
-    }
+        //TODO: Modify the Category after all poetry ready.
+        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+        _CurrentIndex = 0;
 
+    }
+    READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
     // Setup Scroll View
-    [_Scroller setContentSize:CGSizeMake(320, 1000)];
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 1000)];
     [_Scroller setScrollEnabled:YES];
 
     
@@ -153,22 +174,75 @@
     if (subviewArray == nil) {
         READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
     }
-
-    // Add Content
-    if (_Label1 == nil) {
-        _Label1 = [[UILabel alloc] init];
+    
+    // Init View1 for first launch
+    if (_ReadingView1 == nil) {
+        _ReadingView1 = [[PoetryReadingView alloc] init];
     }
     
-    CGPoint DefaultLabelLocation = CGPointMake(10, 0);
-    _Label1.frame = CGRectMake(DefaultLabelLocation.x, 0, _LabelSizeInit.width, 0);
-    _Label1 = [self DisplayLabelHandlingWithData:_PoetryNowReading onLabel:_Label1];
-    [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
-
+    _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
+    READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
+    
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 40)];
+    
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-    [_Scroller addSubview: _Label1];
+    [_ReadingView1 setBackgroundColor:[UIColor clearColor]];
+
+    [_Scroller addSubview: _ReadingView1];
+
+    
 }
 
-#pragma mark - Display label handling
+#pragma mark - Display view handling
+
+-(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
+{
+    
+    if (PoetryReadingView.ContentTextLabel == nil) {
+        PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
+    }
+    
+    [PoetryReadingView.ContentTextLabel setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    ;
+    [PoetryReadingView.ContentTextLabel setFont:_font];
+    [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
+    PoetryReadingView.ContentTextLabel.numberOfLines = 0;
+    CGSize constraint = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 20000.0f);
+    
+    _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
+    
+    if (_DisplayTheme == THEME_LIGHT_DARK) {
+        
+        // Font color = Black, Background = White
+        PoetryReadingView.ContentTextLabel.textColor = [UIColor blackColor];
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+    } else {
+        
+        // Font color = Black, Background = White
+        PoetryReadingView.ContentTextLabel.textColor = [UIColor whiteColor];
+        [self.view setBackgroundColor:[UIColor blackColor]];
+        
+    }
+    
+    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(0, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
+    READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
+
+    CGFloat ViewHeight = _LabelSizeInit.height;
+    if (ViewHeight< (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
+     ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+    }
+    
+    [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
+    [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
+    
+    
+    return PoetryReadingView;
+    
+}
+
+// Not Used
+
 -(UILabel *) DisplayLabelHandlingWithData :(NSDictionary*) PoetryData onLabel : (UILabel*) Label
 {
     [Label setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
@@ -207,17 +281,243 @@
 #pragma mark - Gesture Recognizer Method
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     
-    // TODO: Filter some view sould return NO!
-    [_Scroller setTag:100];
-    if (touch.view != _Scroller) {
-        return NO;
-    }
     return YES;
 }
 
 
 
 #pragma mark - Now Working
+-(PoetryReadingView *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledView : (PoetryReadingView *) View
+{
+    CGPoint location = [recognizer locationInView:_Scroller];
+    
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            _TouchInit = location;
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            if ((location.x - _TouchInit.x) > 0) {
+                
+                if (!_GetSlideInLabel) {
+                    
+                    READING_VIEW_LOG(@"Drag to right, use the previous poetry");
+                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
+                    // Set Lable on the left of the screen and config it
+                    
+                    if (!_DataFlag) {
+                        
+                        if (_CurrentIndex == 0) {
+                            
+                            // Generate empty view to notify user
+                            READING_VIEW_LOG(@"NO DATA");
+                            
+                        } else {
+                        
+                            _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
+                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
+                            // Height of view will be set inside the method
+                            View.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View = [self DisplayHandlingWithData:_NewDataDic onView:View];
+                            //READING_VIEW_LOG(@"View Generate = %@", View);
+                            
+                            
+                            if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                
+                                // Font color = Black, Background = White
+                                View.ContentTextLabel.textColor = [UIColor blackColor];
+                                [View setBackgroundColor:[UIColor whiteColor]];
+                                [self.view setBackgroundColor:[UIColor whiteColor]];
+                                
+                            } else {
+                                
+                                // Font color = Black, Background = White
+                                View.ContentTextLabel.textColor = [UIColor whiteColor];
+                                [View setBackgroundColor:[UIColor blackColor]];
+                                [self.view setBackgroundColor:[UIColor blackColor]];
+                                
+                            }
+
+                            
+                            _DataFlag = YES;
+                            _GetSlideInLabel = YES;
+                            _SlideDirection = SlideLabelLeftToRigth;
+                            
+                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
+                            [_Scroller addSubview:View];
+                            
+                        }
+                    }
+                } else {
+                    
+                    if (_DataFlag) {
+                        
+                        // Move the label follow gesture
+                        View.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                        
+                    }
+                    
+                }
+
+            } else {
+            
+                if (!_GetSlideInLabel) {
+                    
+                    READING_VIEW_LOG(@"Drag to left, use the next poetry");
+                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
+                    // Set Lable on the left of the screen and config it
+                    
+                    if (!_DataFlag) {
+                        
+                        if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
+                            
+                            // Generate empty view to notify user
+                            READING_VIEW_LOG(@"NO DATA");
+                            
+                        } else {
+                            
+                            _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
+                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex + 1);
+                            // Height of view will be set inside the method
+                            View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View = [self DisplayHandlingWithData:_NewDataDic onView:View];
+                            //READING_VIEW_LOG(@"View Generate = %@", View);
+                            
+                            
+                            if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                
+                                // Font color = Black, Background = White
+                                View.ContentTextLabel.textColor = [UIColor blackColor];
+                                [View setBackgroundColor:[UIColor whiteColor]];
+                                [self.view setBackgroundColor:[UIColor whiteColor]];
+                                
+                            } else {
+                                
+                                // Font color = Black, Background = White
+                                View.ContentTextLabel.textColor = [UIColor whiteColor];
+                                [View setBackgroundColor:[UIColor blackColor]];
+                                [self.view setBackgroundColor:[UIColor blackColor]];
+                                
+                            }
+                            
+                            
+                            _DataFlag = YES;
+                            _GetSlideInLabel = YES;
+                            _SlideDirection = SlideLabelRightToLegt;
+                            
+                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
+                            [_Scroller addSubview:View];
+                            
+                        }
+                    }
+                } else {
+                    
+                    if (_DataFlag) {
+                        
+                        // Move the label follow gesture
+                        View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                        
+                    }
+                    
+                }
+
+            
+            }
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+            if (_DataFlag) {
+                
+                if (abs(location.x - _TouchInit.x) > 50) {
+                    
+                    [UIView animateWithDuration:0.2
+                                     animations:^{
+                                         
+                                         // Set Label in the normal location
+                                         View.frame = CGRectMake(10, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                         
+                                     }
+                                     completion:^(BOOL finished){
+                                         
+                                         if (_CurrentView == VIEW1) {
+                                             
+                                             READING_VIEW_LOG(@"move done remove label 1");
+                                             
+                                             [_ReadingView1 removeFromSuperview];
+                                             [View setBackgroundColor:[UIColor clearColor]];
+                                             
+                                             _CurrentView = VIEW2;
+                                             _PoetryNowReading = _NewDataDic;
+                                             
+                                             if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                 _CurrentIndex--;
+                                             } else {
+                                                 _CurrentIndex++;
+                                             }
+                                             
+                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             _DataFlag = NO;
+                                             _GetSlideInLabel = NO;
+                                             
+                                         } else {
+                                             
+                                             READING_VIEW_LOG(@"move done remove label 2");
+                                             [_ReadingView2 removeFromSuperview];
+                                             [View setBackgroundColor:[UIColor clearColor]];
+                                             
+                                             _CurrentView = VIEW1;
+                                             _PoetryNowReading = _NewDataDic;
+                                             
+                                             if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                 _CurrentIndex--;
+                                             } else {
+                                                 _CurrentIndex++;
+                                             }
+                                             
+                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             _DataFlag = NO;
+                                             _GetSlideInLabel = NO;
+                                             
+                                         }
+                                    }];
+                    
+                    
+                } else {
+                    
+                    READING_VIEW_LOG(@"back to out of screen!!!");
+                    [UIView animateWithDuration:0.2
+                                     animations:^{
+                                         if (_SlideDirection == SlideLabelLeftToRigth) {
+                                             
+                                             View.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                             
+                                         } else {
+                                             
+                                             View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                         }
+                                         
+                                         
+                                     }
+                                     completion:^(BOOL finished){
+                                         
+                                         _GetSlideInLabel = NO;
+                                         _DataFlag = NO;
+                                         
+                                     }];
+                    
+                }
+            }
+            break;
+            
+        default:
+            break;
+    }
+    return View;
+}
+
+/*
 -(UILabel *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledLabel : (UILabel *) Label
 {
     CGPoint location = [recognizer locationInView:_Scroller];
@@ -240,7 +540,6 @@
                     // Set Lable on the left of the screen and config it
                     
                     if (!_DataFlag) {
-                        
                         
                         _NewDataDic = [_PoetryDatabase Poetry_GetPreviousWithCurrentData:_PoetryNowReading];
                         
@@ -440,9 +739,31 @@
     
     return Label;
 }
-
+*/
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     //拿到手指目前的位置
+    
+    
+    
+    if (_CurrentView == VIEW1) {
+        
+        if (_ReadingView2 == nil) {
+            _ReadingView2 = [[PoetryReadingView alloc] init];
+        }
+        
+        _ReadingView2 = [self HandleGestureWith:recognizer andHandledView:_ReadingView2];
+        
+        
+    } else {
+        
+        if (_ReadingView1 == nil) {
+            _ReadingView1 = [[PoetryReadingView alloc] init];
+        }
+        
+        _ReadingView1 = [self HandleGestureWith:recognizer andHandledView:_ReadingView1];
+        
+    }
+/*
     if (_CurrentLab == LABEL1) {
         
         if (_Label2 == nil) {
@@ -461,6 +782,7 @@
         _Label1 = [self HandleGestureWith:recognizer andHandledLabel:_Label1];
         
     }
+ */
     
 }
 
