@@ -124,20 +124,25 @@
     
     if (_tableViewType == 0)
     {
-        cell.textLabel.text = [guideAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[guideAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else if (_tableViewType == 1)
     {
-        cell.textLabel.text = [poetryAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[poetryAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else if (_tableViewType == 2)
     {
-        cell.textLabel.text = [responseAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[responseAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else
         NSLog(@"cellForRowAtIndexPath error!!");
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (void) setTableViewType:(NSInteger)type
