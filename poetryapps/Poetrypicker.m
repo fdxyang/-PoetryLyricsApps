@@ -24,7 +24,6 @@
         
         poetryPicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         
-        NSString *str;
         poetryArr = [[NSMutableArray alloc] init];
         PoetryDataBase = [[PoetryCoreData alloc] init];
         
@@ -33,13 +32,7 @@
         NSLog(@"poetryArr List Count = %lu", [poetryArr count]);
         NSLog(@"poetryArr Name = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
         NSLog(@"poetryArr Content = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-        
-        for(int i = 0; i< 650;i++)
-        {
-            str  = [NSString stringWithFormat:@"p%d",i+1];
-            [poetryArr addObject:str];
-        }
-        
+
         poetryPicker.delegate = self;
         poetryPicker.dataSource = self;
         [self addSubview:poetryPicker];
@@ -75,7 +68,7 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"!!! poetry titleForRow = %@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    NSLog(@"!!! ROW: %lu, poetry titleForRow = %@", row,[[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
     switch (component) {
         case 0:
             
@@ -101,7 +94,7 @@
 //選擇UIPickView中的項目時會出發的內建函式
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    _pickerContent = [NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]];
+    _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     NSLog(@"_pickerContent = %@",_pickerContent);
 }
 
