@@ -21,7 +21,6 @@
         
         _btn = btn;
         responsePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
-        NSString *str;
         responseArr = [[NSMutableArray alloc] init];
         PoetryDataBase = [[PoetryCoreData alloc] init];
 
@@ -34,6 +33,8 @@
         responsePicker.delegate = self;
         responsePicker.dataSource = self;
         [self addSubview:responsePicker];
+        
+        responseIndex = 0;
     }
     return self;
 }
@@ -91,9 +92,9 @@
 //選擇UIPickView中的項目時會出發的內建函式
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //NSLog(@"guide  didSelectRow");
     _pickerContent = [NSString stringWithFormat:@"%@", [[responseArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     //NSLog(@"_pickerContent = %@",_pickerContent);
+    responseIndex = row;
 }
 
 - (NSString *) getPickerContent
@@ -104,6 +105,13 @@
 - (void) setFlag:(BOOL)flag
 {
     isTurnOnView = flag;
+}
+
+- (NSDictionary*) getResponseContent
+{
+    NSDictionary *result = [responseArr objectAtIndex:responseIndex];
+    
+    return result;
 }
 
 @end

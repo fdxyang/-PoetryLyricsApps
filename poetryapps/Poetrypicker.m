@@ -36,6 +36,8 @@
         poetryPicker.delegate = self;
         poetryPicker.dataSource = self;
         [self addSubview:poetryPicker];
+        
+        poetryIndex = 0;
     }
     return self;
 }
@@ -91,6 +93,8 @@
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     //NSLog(@"_pickerContent = %@",_pickerContent);
+    
+    poetryIndex = row;
 }
 
 - (NSString *) getPickerContent
@@ -102,4 +106,12 @@
 {
     isTurnOnView = flag;
 }
+
+- (NSDictionary*) getPoetryContent
+{
+    NSDictionary *result = [poetryArr objectAtIndex:poetryIndex];
+    
+    return result;
+}
+
 @end

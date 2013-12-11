@@ -22,6 +22,7 @@ typedef enum {
 @interface GotoViewController : UIViewController
 {
     NSInteger gotoType;
+    PoetryCoreData *PoetryDataBase;
 }
 
 @property (nonatomic,strong) NSMutableArray *historyArr;

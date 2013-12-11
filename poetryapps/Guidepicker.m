@@ -38,6 +38,8 @@
         guidePicker.delegate = self;
         guidePicker.dataSource = self;
         [self addSubview:guidePicker];
+        
+        guideIndex = 0;
     }
     return self;
 }
@@ -93,6 +95,7 @@
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[guideArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     //NSLog(@"_pickerContent = %@",_pickerContent);
+    guideIndex = row;
 }
 
 //get title
@@ -104,5 +107,11 @@
 - (void) setFlag:(BOOL)flag
 {
     isTurnOnView = flag;
+}
+
+- (NSDictionary*) getGuideContent
+{
+    NSDictionary *result = [guideArr objectAtIndex:guideIndex];
+    return result;
 }
 @end

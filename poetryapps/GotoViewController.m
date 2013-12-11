@@ -48,6 +48,8 @@
     
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
+    
+    PoetryDataBase = [[PoetryCoreData alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,6 +149,18 @@
 
 - (IBAction)changeReadingModeClicked:(id)sender
 {
+    if(gotoType == 0) // guide
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_guideView getGuideContent]];
+    }
+    else if(gotoType == 1) // poetry
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_poetryView getPoetryContent]];
+    }
+    else if(gotoType == 2) // response
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_responseView getResponseContent]];
+    }
     [self.tabBarController setSelectedIndex:0];
 }
 

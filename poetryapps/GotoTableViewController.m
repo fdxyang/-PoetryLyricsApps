@@ -142,6 +142,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *SelectedDic;
+    if(_tableViewType == 0)
+    {
+        SelectedDic = [guideAttr objectAtIndex:indexPath.row];
+    }
+    else if(_tableViewType == 1)
+    {
+        SelectedDic = [poetryAttr objectAtIndex:indexPath.row];
+    }
+    else if(_tableViewType == 2)
+    {
+        SelectedDic = [responseAttr objectAtIndex:indexPath.row];
+    }
+    [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
     [self.tabBarController setSelectedIndex:0];
 }
 
