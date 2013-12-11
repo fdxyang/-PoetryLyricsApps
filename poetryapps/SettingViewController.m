@@ -96,7 +96,7 @@
         _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
         _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
 
-        [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
+        [_ThemeSettingView.LightDarkBtn setTitle:@"黑底白字" forState:UIControlStateNormal];
         [_ThemeSettingView.DarkLightBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
         
         [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
