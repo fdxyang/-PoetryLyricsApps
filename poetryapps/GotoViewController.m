@@ -152,15 +152,19 @@
     if(gotoType == 0) // guide
     {
         [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_guideView getGuideContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_guideView getGuideContent]];
     }
     else if(gotoType == 1) // poetry
     {
         [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_poetryView getPoetryContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_poetryView getPoetryContent]];
     }
     else if(gotoType == 2) // response
     {
         [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_responseView getResponseContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_responseView getResponseContent]];
     }
+    
     [self.tabBarController setSelectedIndex:0];
 }
 
