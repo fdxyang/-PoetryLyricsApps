@@ -156,6 +156,7 @@
         SelectedDic = [responseAttr objectAtIndex:indexPath.row];
     }
     [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
+    [PoetryDataBase PoetryCoreDataSaveIntoHistory:SelectedDic];
     [self.tabBarController setSelectedIndex:0];
 }
 
