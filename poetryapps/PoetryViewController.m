@@ -34,6 +34,7 @@
         NSString *fileContents;
         NSMutableString *poetryContent = [[NSMutableString alloc]init];
         int lineCount = 0;
+        int index = 0;
 
         BOOL isSave = FALSE;
         for (int count = 0; count < (int)[directoryContent count]; count++)
@@ -72,18 +73,41 @@
                 
                 
                 
-                NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                           title, POETRY_CORE_DATA_NAME_KEY,
-                                           poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
-                                           [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
-                                           nil];
+                NSDictionary *PoetryDic;
                 
-                if(count < 650) // 0-649
+                if(count < 650)// 0-649
+                {
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
                     isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:POETRYS];
+                }
                 else if(count >= 650 && count < 716) // 650-716
+                {
+                    index = index+1;
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
                     isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:RESPONSIVE_PRAYER];
-                else //717-722
+                    if(index == 66)
+                        index = 0;
+                }
+                else //717-721
+                {
+                    index = index+1;
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
                     isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+                    if(index == 5)
+                        index = 0;
+                }
                 
                 if(!isSave)
                     NSLog(@"Core data is Error!!!!!!!!!");
