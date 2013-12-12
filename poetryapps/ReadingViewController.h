@@ -12,6 +12,7 @@
 #import "PoetryReadingView.h"
 
 #define UI_4_INCH_HEIGHT                568
+#define UI_3_5_INCH_HEIGHT              480
 #define UI_IOS7_VERSION_FLOATING        7.0f
 #define UI_IOS7_TAB_BAR_HEIGHT          49
 #define UI_IOS7_NAV_BAR_HEIGHT          44
@@ -49,6 +50,7 @@
 @property (nonatomic, strong)           NSMutableArray              *NowReadingCategoryArray;
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView1;
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView2;
+@property (nonatomic, strong)           UIView                      *EmptyReadingView;
 
 typedef enum {
     VIEW1 = 0x00,
