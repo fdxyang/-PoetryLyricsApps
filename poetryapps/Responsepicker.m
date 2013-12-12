@@ -94,6 +94,8 @@
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[responseArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     //NSLog(@"_pickerContent = %@",_pickerContent);
+    if(isTurnOnView)
+        [_btn setTitle:[NSString stringWithFormat:@"%@", _pickerContent] forState:UIControlStateNormal];
     responseIndex = row;
 }
 
