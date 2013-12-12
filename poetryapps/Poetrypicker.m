@@ -92,7 +92,10 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+    
     //NSLog(@"_pickerContent = %@",_pickerContent);
+    if(isTurnOnView)
+        [_btn setTitle:[NSString stringWithFormat:@"%@", _pickerContent] forState:UIControlStateNormal];
     
     poetryIndex = row;
 }

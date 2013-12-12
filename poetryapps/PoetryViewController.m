@@ -19,6 +19,12 @@
 {
     [super viewDidLoad];
     
+    // Kevin add timer for test
+    NSTimeInterval time1 = [[NSDate date] timeIntervalSince1970];
+    long int date1 = (long int)time1;
+    //NSLog(@"date1\n%lu", date1);
+    // Kevin add timer for test
+    
     PoetrySettingCoreData *setting = [[PoetrySettingCoreData alloc] init];
     [setting PoetrySetting_Create];
     
@@ -120,24 +126,14 @@
         [setting PoetrySetting_SetDataSaved:YES];
     }
     
-    /*
+    // Kevin add timer for test
+    NSTimeInterval time2 = [[NSDate date] timeIntervalSince1970];
+    long int date2 = (long int)time2;
+    //NSLog(@"date2\n%lu", date2);
     
-    // [CASPER] 2013.11.26 Sample code for saving into core data
-    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
-    NSDictionary *PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"data", POETRY_CORE_DATA_NAME_KEY,
-                            string, POETRY_CORE_DATA_CONTENT_KEY, nil];
-    
-    [PoetryDataBase PoetryCoreDataSave:PoetryDic];
-    // [CASPER] 2013.11.26 Sample code for saving into core data ==
-    
-    // [CASPER] 2013.11.26 Sample code for fetching core data
-    NSArray *PoetryList = [PoetryDataBase Poetry_CoreDataFetchData];
-    NSLog(@"Poetry List Count = %d", [PoetryList count]);
-    NSLog(@"Poetry Name = %@", [[PoetryList firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-    NSLog(@"Poetry Content = %@", [[PoetryList firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-    // [CASPER] 2013.11.26 Sample code for fetching core data ==
-*/
+    long int d3 = date2 - date1;
+    NSLog(@"d3:\n%lu", d3);
+    // Kevin add timer for test
     
 }
 
