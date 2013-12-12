@@ -17,8 +17,11 @@
 
     BOOL                    _DataFlag;
     BOOL                    _GetSlideInLabel;
+    BOOL                    _CrossCategoryFlag;
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
+    NSMutableArray          *TempPoetryList;
+
 }
 
 @end
@@ -74,7 +77,7 @@
     _CurrentView = VIEW1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
-    
+    _CrossCategoryFlag = NO;
     [self InitReadingViewSetupScroller];
 
     
@@ -284,12 +287,11 @@
     return YES;
 }
 
-
-
 #pragma mark - Now Working
 -(PoetryReadingView *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledView : (PoetryReadingView *) View
 {
     CGPoint location = [recognizer locationInView:_Scroller];
+    
     
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
@@ -309,16 +311,51 @@
                         
                         if (_CurrentIndex == 0) {
                             
-                            // Generate empty view to notify user
-                            READING_VIEW_LOG(@"NO DATA");
+                            // Check the Category
+                            NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+                            if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
+                                // To get the previous category list as temp.
+                                
+                                if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
+
+                                    READING_VIEW_LOG(@"Get Guard Reading list");
+                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
+                                    
+                                } else if (RESPONSIVE_PRAYER == (POETRY_CATEGORY)[CategoryNum integerValue]) {
+                                    
+                                    READING_VIEW_LOG(@"Get Poetry list");
+                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
+                                    
+                                } else {
+                                    
+                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
+
+                                }
+                                
+                                if (TempPoetryList != nil) {
+                                    _CrossCategoryFlag = YES;
+                                    _NewDataDic = [TempPoetryList lastObject];
+                                    READING_VIEW_LOG(@"Get Poetry at cross category");
+                                }
+                                
+                            } else {
+                                
+                                // Generate empty view to notify user
+                                READING_VIEW_LOG(@"NO DATA");
+                                _NewDataDic = nil;
+
+                            }
+                            
+                            
                             
                         } else {
                         
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
                             READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
                             // Height of view will be set inside the method
-                            
-                            
+                        }
+                    
+                        if (_NewDataDic) {
                             View.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
                             //READING_VIEW_LOG(@"View Generate = %@", View);
@@ -339,7 +376,7 @@
                                 [self.view setBackgroundColor:[UIColor blackColor]];
                                 
                             }
-
+                            
                             
                             _DataFlag = YES;
                             _GetSlideInLabel = YES;
@@ -370,8 +407,6 @@
                                 
                                 [_Scroller insertSubview:View belowSubview:_ReadingView2];
                             }
-                            
-                            
                         }
                     }
                 } else {
@@ -400,18 +435,55 @@
                     READING_VIEW_LOG(@"Drag to left, use the next poetry");
                     // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
                     // Set Lable on the left of the screen and config it
-                    
+
                     if (!_DataFlag) {
                         
                         if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
                             
-                            // Generate empty view to notify user
-                            READING_VIEW_LOG(@"NO DATA");
+                            // Check the Category
+                            NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+                            if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
+                                // To get the previous category list as temp.
+                                
+                                if (GUARD_READING == (POETRY_CATEGORY)[CategoryNum integerValue]) {
+                                    
+                                    READING_VIEW_LOG(@"Get Petry Reading list");
+                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
+                                    
+                                } else if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
+                                    
+                                    READING_VIEW_LOG(@"Get Responsive list");
+                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+                                    
+                                } else {
+                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
+                                }
+                                
+                                if (TempPoetryList != nil) {
+                                    
+                                    _CrossCategoryFlag = YES;
+                                    _NewDataDic = [TempPoetryList firstObject];
+                                    READING_VIEW_LOG(@"Get Poetry at cross category");
+                                    
+                                }
+                                
+                                
+                            } else {
+                                
+                                // Generate empty view to notify user
+                                READING_VIEW_LOG(@"NO DATA");
+                                _NewDataDic = nil;
+                            }
                             
                         } else {
                             
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
                             READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex + 1);
+                        }
+                    
+                        
+                        if (_NewDataDic) {
+                            
                             // Height of view will be set inside the method
                             View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
@@ -441,8 +513,10 @@
                             
                             [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
                             [_Scroller addSubview:View];
-                            
+
                         }
+                        
+                        
                     }
                 } else {
                     
@@ -452,10 +526,7 @@
                         View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
                         
                     }
-                    
                 }
-
-            
             }
             break;
             
@@ -488,7 +559,32 @@
                                          }
                                          
                                      }
-                                     completion:^(BOOL finished){
+                                     completion:^(BOOL finished) {
+                                         
+                                         if (_CrossCategoryFlag) {
+                                             
+                                             //[_NowReadingCategoryArray removeAllObjects];
+                                             
+                                             READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
+                                             _NowReadingCategoryArray = [NSMutableArray arrayWithArray:TempPoetryList];
+                                             _CrossCategoryFlag = NO;
+                                             
+                                             if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                 _CurrentIndex = [_NowReadingCategoryArray count] - 1;
+                                             } else {
+                                                 _CurrentIndex = 0;
+                                             }
+                                             
+                                             
+                                         } else {
+                                         
+                                             if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                 _CurrentIndex--;
+                                             } else {
+                                                 _CurrentIndex++;
+                                             }
+                                         
+                                         }
                                          
                                          if (_CurrentView == VIEW1) {
                                              
@@ -499,12 +595,6 @@
                                              
                                              _CurrentView = VIEW2;
                                              _PoetryNowReading = _NewDataDic;
-                                             
-                                             if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                 _CurrentIndex--;
-                                             } else {
-                                                 _CurrentIndex++;
-                                             }
                                              
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                              [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
@@ -520,12 +610,6 @@
                                              
                                              _CurrentView = VIEW1;
                                              _PoetryNowReading = _NewDataDic;
-                                             
-                                             if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                 _CurrentIndex--;
-                                             } else {
-                                                 _CurrentIndex++;
-                                             }
                                              
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                              [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
@@ -565,6 +649,8 @@
                                          
                                          _GetSlideInLabel = NO;
                                          _DataFlag = NO;
+                                         _CrossCategoryFlag = NO;
+
                                          
                                      }];
                     
