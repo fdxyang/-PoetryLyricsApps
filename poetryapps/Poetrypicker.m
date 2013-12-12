@@ -36,6 +36,8 @@
         poetryPicker.delegate = self;
         poetryPicker.dataSource = self;
         [self addSubview:poetryPicker];
+        
+        poetryIndex = 0;
     }
     return self;
 }
@@ -71,16 +73,11 @@
     NSLog(@"!!! ROW: %lu, poetry titleForRow = %@", row,[[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
     switch (component) {
         case 0:
-            
-            //_pickerContent = [NSString stringWithFormat:@"%@", [poetryArr objectAtIndex:row]];
-            
-            //[CASPER]
             _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
             if(isTurnOnView)
-                [_btn setTitle:[NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]] forState:UIControlStateNormal];
+                [_btn setTitle:[NSString stringWithFormat:@"%@", _pickerContent] forState:UIControlStateNormal];
              
-            return [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
-            //[CASPER] ==
+            return _pickerContent;
 
             break;
             
@@ -95,7 +92,9 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
-    NSLog(@"_pickerContent = %@",_pickerContent);
+    //NSLog(@"_pickerContent = %@",_pickerContent);
+    
+    poetryIndex = row;
 }
 
 - (NSString *) getPickerContent
@@ -107,4 +106,12 @@
 {
     isTurnOnView = flag;
 }
+
+- (NSDictionary*) getPoetryContent
+{
+    NSDictionary *result = [poetryArr objectAtIndex:poetryIndex];
+    
+    return result;
+}
+
 @end

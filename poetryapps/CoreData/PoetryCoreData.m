@@ -417,6 +417,24 @@
 // Save Poetry into History
 -(BOOL) PoetryCoreDataSaveIntoHistory : (NSDictionary *) PoetryDic
 {
+
+    //TODO: Find the input in history
+    NSArray *SearchNameArray = [self Poetry_CoreDataSearchWithPoetryNameInHistory: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+    if ([SearchNameArray count] > 0) {
+        // This Poetry is already in the database, delete all the data in history database
+        for (int index = 0; index < [SearchNameArray count]; index++) {
+            
+            CORE_DATA_LOG("duplicate data in history, delete %d", index);
+            NSManagedObject *TempPoetry = [SearchNameArray objectAtIndex:index];
+            [self Poetry_CoreDataDelete:TempPoetry];
+
+        }
+        
+    }
+    
+    
+    CORE_DATA_LOG("Save %@ poetry in history", [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    
     NSString *PoetryCoreDataEntityName = POETRY_HISTORY_CORE_DATA_ENTITY;
     NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
     
@@ -424,13 +442,20 @@
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-    
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CREATION_TIME_KEY] forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
     
     NSError *error = nil;
     if (![_context save:&error]) {
         CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;
     }
+    
+    
+    if ([self Poetry_CoreDataGetNumberInHistory] > POETRY_MAX_NUMBER_IN_HISTORY) {
+        CORE_DATA_LOG("Numbers in history is over maximum, delete the oldest object");
+        [self Poetry_CoreDataDeleteOldestInHistory];
+    }
+    
     
     return YES;
     
@@ -472,6 +497,12 @@
 // Delete the Oldest object in history
 -(BOOL) Poetry_CoreDataDeleteOldestInHistory
 {
+    NSArray *HistoryList = [self Poetry_CoreDataFetchDataInHistory];
+    NSManagedObject *HistoryObj = [HistoryList firstObject];
+    
+    return [self Poetry_CoreDataDelete:HistoryObj];
+    
+    /*
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:POETRY_HISTORY_CORE_DATA_ENTITY inManagedObjectContext:_context];
     [request setEntity:entity];
@@ -504,14 +535,17 @@
         return NO;
     }
     else {
+        
         if ([objects count] > 0) {
             CORE_DATA_LOG(@"Minimum date: %@", [[objects objectAtIndex:0] valueForKey:@"minDate"]);
+            CORE_DATA_LOG(@"%@", [objects objectAtIndex:0]);
             [self Poetry_CoreDataDelete:[objects objectAtIndex:0]];
 
         }
+        
     }
-    return YES;
 
+     */
 }
 
 

@@ -15,6 +15,7 @@
     NSMutableArray *responseArr;
     BOOL isTurnOnView;
     PoetryCoreData *PoetryDataBase;
+    NSInteger responseIndex;
 }
 
 @property (nonatomic,strong) NSString *pickerContent;
@@ -22,5 +23,6 @@
 - (id)initWithFrame:(CGRect)frame getbtn:(UIButton*)btn getState:(BOOL)isTurnOn;
 - (NSString *) getPickerContent;
 - (void) setFlag:(BOOL)flag;
+- (NSDictionary*) getResponseContent;
 
 @end

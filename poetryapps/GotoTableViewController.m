@@ -32,8 +32,6 @@
     
     NSLog(@"GOTO VIEW viewDidLoad ");
     
-    NSString *str;
-    
     guideAttr = [[NSMutableArray alloc] init];
     poetryAttr = [[NSMutableArray alloc] init];
     responseAttr = [[NSMutableArray alloc] init];
@@ -48,11 +46,6 @@
             NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
             NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<6;i++)
-            {
-                str = [NSString stringWithFormat:@"g%d",i+1];
-                [guideAttr addObject:str];
-            }
         }
         
         NSLog(@"guide count = %lu",[guideAttr count]);
@@ -65,11 +58,6 @@
             NSLog(@"Poetry List Count = %lu", [poetryAttr count]);
             NSLog(@"Poetry Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"Poetry Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<650;i++)
-            {
-                str = [NSString stringWithFormat:@"p%d",i+1];
-                [poetryAttr addObject:str];
-            }
         }
         NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
     }
@@ -81,11 +69,6 @@
             NSLog(@"responseAttr List Count = %lu", [responseAttr count]);
             NSLog(@"responseAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<66;i++)
-            {
-                str = [NSString stringWithFormat:@"r%d",i+1];
-                [responseAttr addObject:str];
-            }
         }
         NSLog(@"responseAttr count = %lu",[responseAttr count]);
     }
@@ -141,15 +124,15 @@
     
     if (_tableViewType == 0)
     {
-        cell.textLabel.text = [guideAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[guideAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else if (_tableViewType == 1)
     {
-        cell.textLabel.text = [poetryAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[poetryAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else if (_tableViewType == 2)
     {
-        cell.textLabel.text = [responseAttr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[responseAttr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     else
         NSLog(@"cellForRowAtIndexPath error!!");
@@ -157,12 +140,30 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *SelectedDic;
+    if(_tableViewType == 0)
+    {
+        SelectedDic = [guideAttr objectAtIndex:indexPath.row];
+    }
+    else if(_tableViewType == 1)
+    {
+        SelectedDic = [poetryAttr objectAtIndex:indexPath.row];
+    }
+    else if(_tableViewType == 2)
+    {
+        SelectedDic = [responseAttr objectAtIndex:indexPath.row];
+    }
+    [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
+    [PoetryDataBase PoetryCoreDataSaveIntoHistory:SelectedDic];
+    [self.tabBarController setSelectedIndex:0];
+}
+
 - (void) setTableViewType:(NSInteger)type
 {
     NSLog(@"type = %lu",type);
     _tableViewType = type;
-    
-    NSString *str;
     
     if (_tableViewType == 0) // guide
     {
@@ -173,11 +174,6 @@
             NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
             NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<6;i++)
-            {
-                str = [NSString stringWithFormat:@"g%d",i+1];
-                [guideAttr addObject:str];
-            }
         }
         
         NSLog(@"guide count = %lu",[guideAttr count]);
@@ -189,14 +185,9 @@
         if(![poetryAttr count])
         {
             poetryAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-            NSLog(@"guideAttr List Count = %lu", [poetryAttr count]);
-            NSLog(@"guideAttr Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-            NSLog(@"guideAttr Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<650;i++)
-            {
-                str = [NSString stringWithFormat:@"p%d",i+1];
-                [poetryAttr addObject:str];
-            }
+            NSLog(@"poetryAttr List Count = %lu", [poetryAttr count]);
+            NSLog(@"poetryAttr Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"poetryAttr Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
     }
@@ -207,14 +198,9 @@
         if(![responseAttr count])
         {
             responseAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-            NSLog(@"guideAttr List Count = %lu", [responseAttr count]);
-            NSLog(@"guideAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-            NSLog(@"guideAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-            for (int i = 0;i<66;i++)
-            {
-                str = [NSString stringWithFormat:@"r%d",i+1];
-                [responseAttr addObject:str];
-            }
+            NSLog(@"responseAttr List Count = %lu", [responseAttr count]);
+            NSLog(@"responseAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            NSLog(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         NSLog(@"responseAttr count = %lu",[responseAttr count]);
     }

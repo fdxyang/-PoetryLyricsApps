@@ -48,6 +48,8 @@
     
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
+    
+    PoetryDataBase = [[PoetryCoreData alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,6 +149,23 @@
 
 - (IBAction)changeReadingModeClicked:(id)sender
 {
+    if(gotoType == 0) // guide
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_guideView getGuideContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_guideView getGuideContent]];
+    }
+    else if(gotoType == 1) // poetry
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_poetryView getPoetryContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_poetryView getPoetryContent]];
+    }
+    else if(gotoType == 2) // response
+    {
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_responseView getResponseContent]];
+        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_responseView getResponseContent]];
+    }
+    
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -230,12 +249,10 @@
                 NSLog(@"guide press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"gp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:0];
                 }
                 else
                 {
-                    NSLog(@"gp2");
                     [_detailTableView setTableViewType:0];
                 }
                 
@@ -247,12 +264,10 @@
                 NSLog(@"poetry press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"pp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
                 }
                 else
                 {
-                    NSLog(@"pp2");
                     [_detailTableView setTableViewType:1];
                 }
                 
@@ -264,12 +279,10 @@
                 NSLog(@"response press");
                 if(!_detailTableView)
                 {
-                    NSLog(@"rp1");
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
                 }
                 else
                 {
-                    NSLog(@"rp2");
                     [_detailTableView setTableViewType:2];
                 }
                 
