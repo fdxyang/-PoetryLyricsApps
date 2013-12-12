@@ -442,6 +442,7 @@
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
     [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CREATION_TIME_KEY] forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
     
     NSError *error = nil;
     if (![_context save:&error]) {
@@ -496,6 +497,12 @@
 // Delete the Oldest object in history
 -(BOOL) Poetry_CoreDataDeleteOldestInHistory
 {
+    NSArray *HistoryList = [self Poetry_CoreDataFetchDataInHistory];
+    NSManagedObject *HistoryObj = [HistoryList firstObject];
+    
+    return [self Poetry_CoreDataDelete:HistoryObj];
+    
+    /*
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:POETRY_HISTORY_CORE_DATA_ENTITY inManagedObjectContext:_context];
     [request setEntity:entity];
@@ -528,14 +535,17 @@
         return NO;
     }
     else {
+        
         if ([objects count] > 0) {
             CORE_DATA_LOG(@"Minimum date: %@", [[objects objectAtIndex:0] valueForKey:@"minDate"]);
+            CORE_DATA_LOG(@"%@", [objects objectAtIndex:0]);
             [self Poetry_CoreDataDelete:[objects objectAtIndex:0]];
 
         }
+        
     }
-    return YES;
 
+     */
 }
 
 

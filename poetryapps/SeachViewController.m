@@ -28,7 +28,7 @@
     [super viewDidLoad];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     
-    _HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
+    //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
     //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchData];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -36,6 +36,15 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
+    _HistoryData = [NSMutableArray arrayWithArray:[[_HistoryData reverseObjectEnumerator] allObjects]];
+    [_TableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,8 +105,7 @@
         NSManagedObject *Poetry = [_HistoryData objectAtIndex:indexPath.row];
 
         cell.textLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
-    
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
     }
     
     
@@ -219,5 +227,44 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     return YES;
 }
+
+
+// Remove "\n" in the beginning of the article
+-(NSString*)ReadingViewCleanUpTextWithTheArticle : (NSString*) Articel
+{
+    NSRange range;
+    range.length = 1;
+    range.location = 0;
+    [Articel stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    
+    for (int index = 0; index < [Articel length]; index++) {
+        
+        if ([Articel characterAtIndex:index] == 10) {
+            
+            if (index <= 1) {
+                
+                if (index == 1) {
+                    range.location = index;
+                    Articel = [Articel stringByReplacingCharactersInRange:range withString:@""];
+                    
+                    
+                }
+                
+            } else {
+                
+                break;
+            }
+            
+        } else {
+            
+            break;
+        }
+    }
+    
+    return Articel;
+}
+
+
 
 @end
