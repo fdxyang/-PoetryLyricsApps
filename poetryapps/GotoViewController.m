@@ -52,6 +52,14 @@
     PoetryDataBase = [[PoetryCoreData alloc] init];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //NSLog(@"viewWillAppear");
+    _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+    [_TableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -113,17 +121,23 @@
     CATransition *animation = [CATransition animation];
     if (!_isTreeMode) // tree mode
     {
-    
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
-        _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-        _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
-        _TableView.TableData = [[NSArray alloc] initWithObjects:@"GUARD READING", @"POPETRY", @"RESPONSIVE PRAYER", nil];
-        _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-        //NSLog(@"history = %@",_historyArr);
-        //_HistoryData = [NSMutableArray arrayWithArray:[[_HistoryData reverseObjectEnumerator] allObjects]];
-        
-        [_TableView reloadData];
-        [self.view addSubview:_TableView];
+        if(!_TableView)
+        {
+            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
+            
+            _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
+            _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
+            _TableView.TableData = [[NSArray alloc] initWithObjects:@"GUARD READING", @"POPETRY", @"RESPONSIVE PRAYER", nil];
+            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+            [_TableView reloadData];
+            [self.view addSubview:_TableView];
+        }
+        else
+        {
+            [self.view addSubview:_TableView];
+            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+            [_TableView reloadData];
+        }
     
     
         // set up an animation for the transition between the views
@@ -242,9 +256,14 @@
     }
     
     if(indexPath.section == BASICGUIDE)
+    {
         cell.textLabel.text = [_TableView.TableData objectAtIndex:indexPath.row];
+    }
     else
+    {
+        _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
         cell.textLabel.text = [[_historyArr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    }
     return cell;
 }
 
@@ -255,7 +274,7 @@
     {
         switch (indexPath.row) {
             case 0: // guide
-                NSLog(@"guide press");
+                //NSLog(@"guide press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:0];
@@ -270,7 +289,7 @@
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 1: // poetry
-                NSLog(@"poetry press");
+                //NSLog(@"poetry press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
@@ -285,7 +304,7 @@
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 2: // response
-                NSLog(@"response press");
+                //NSLog(@"response press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
@@ -308,7 +327,7 @@
     {
         //NSLog(@" history section = %d , row = %d",indexPath.section,indexPath.row);
         NSDictionary *SelectedDic = [_historyArr objectAtIndex:indexPath.row];
-        //NSLog(@"%@", SelectedDic);
+        //NSLog(@"history = %@", SelectedDic);
     
         [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
         [_TableView reloadData];
