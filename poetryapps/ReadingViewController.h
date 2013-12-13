@@ -50,7 +50,7 @@
 @property (nonatomic, strong)           NSMutableArray              *NowReadingCategoryArray;
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView1;
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView2;
-@property (nonatomic, strong)           UIView                      *EmptyReadingView;
+@property (nonatomic, strong)           PoetryReadingView           *EmptyReadingView;
 
 typedef enum {
     VIEW1 = 0x00,
