@@ -46,6 +46,11 @@
     
     if ([_PoetryDatabase Poetry_CoreDataReadingExist]) {
         _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+        if ([_NowReadingText length] == 0) {
+            
+            _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+            
+        }
     } else {
         _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
     }

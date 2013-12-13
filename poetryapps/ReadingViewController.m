@@ -21,6 +21,8 @@
 
     // To indicate that the poetry is the first and the last one, and it can not be executed PREV / NEXT
     BOOL                    _HeadAndTailFlag;
+    BOOL                    _ConfirmToSwitch;
+
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
     NSMutableArray          *TempPoetryList;
@@ -75,13 +77,14 @@
     // Read Setting
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _DisplayTheme = _PoetrySetting.SettingTheme;
-
+    _SlideDirection = SlideLabelNone;
     _LabelSizeInit = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 0);
     _CurrentView = VIEW1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
     _CrossCategoryFlag = NO;
     _HeadAndTailFlag = NO;
+    _ConfirmToSwitch = NO;
     [self InitReadingViewSetupScroller];
 
     
@@ -156,7 +159,7 @@
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
 
-        READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        //READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
         
 
         
@@ -185,6 +188,10 @@
     // Init View1 for first launch
     if (_ReadingView1 == nil) {
         _ReadingView1 = [[PoetryReadingView alloc] init];
+    }
+    
+    if (_ReadingView2 == nil) {
+        _ReadingView2 = [[PoetryReadingView alloc] init];
     }
     
     _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
@@ -248,44 +255,6 @@
     
 }
 
-// Not Used
-
--(UILabel *) DisplayLabelHandlingWithData :(NSDictionary*) PoetryData onLabel : (UILabel*) Label
-{
-    [Label setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
-    ;
-    //[Label setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
-    [Label setFont:_font];
-    //[Label setTextAlignment:NSTextAlignmentCenter];
-    Label.numberOfLines = 0;
-    CGSize constraint = CGSizeMake(320, 20000.0f);
-    
-    _LabelSizeInit = [Label sizeThatFits:constraint];
-    
-    if (_DisplayTheme == THEME_LIGHT_DARK) {
-        
-        // Font color = Black, Background = White
-        Label.textColor = [UIColor blackColor];
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        
-    } else {
-        
-        // Font color = Black, Background = White
-        Label.textColor = [UIColor whiteColor];
-        [self.view setBackgroundColor:[UIColor blackColor]];
-        
-    }
-    
-    if (_LabelSizeInit.height < (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
-        _LabelSizeInit.height = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
-    }
-    
-    [Label setFrame:CGRectMake(30, UI_DEFAULT_LABEL_ORIGIN_Y, _LabelSizeInit.width, _LabelSizeInit.height)];
-    
-    return Label;
-    
-}
-
 -(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
     if (_EmptyReadingView == nil) {
@@ -309,6 +278,14 @@
         _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
         
+    } else {
+        //NEXT
+        READING_VIEW_LOG(@"The latest poetry, try to init view ");
+        
+        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
+    
     }
     
     
@@ -334,10 +311,20 @@
             break;
             
         case UIGestureRecognizerStateChanged:
+            
+            //READING_VIEW_LOG(@"MOVE --- %d" , abs(location.x - _TouchInit.x));
+            
             if ((location.x - _TouchInit.x) > 0) {
                 
+                if ( _SlideDirection != SlideLabelLeftToRigth ) {
+                    // Need to reinit new view and data
+                    _GetSlideInLabel = NO;
+                    _DataFlag = NO;
+                    
+                }
+                
                 _SlideDirection = SlideLabelLeftToRigth;
-
+                
                 if (!_GetSlideInLabel) {
                     
                     READING_VIEW_LOG(@"Drag to right, use the previous poetry");
@@ -348,11 +335,12 @@
                         
                         if (_CurrentIndex == 0) {
                             
+                            // This is the first poetry in this category
                             // Check the Category
                             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
                             if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                // To get the previous category list as temp.
                                 
+                                // To get the previous category list as temp.
                                 if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
 
                                     READING_VIEW_LOG(@"Get Guard Reading list");
@@ -388,9 +376,9 @@
                                         [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    NSLog(@"View = %@", View);
-                                    [_Scroller insertSubview:View belowSubview:_ReadingView1];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView1];
+                                    
 
                                 } else {
                                     
@@ -400,18 +388,12 @@
                                         [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller insertSubview:View belowSubview:_ReadingView2];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView2];
 
                                 }
+                               
                                 
-                                
-                                
-                                if (_CurrentView == VIEW1) {
-                                } else {
-                                }
-                                
-
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
@@ -421,7 +403,8 @@
                             
                             
                         } else {
-                        
+                            
+                            // To get the previous poetry of this category
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
                             READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
                             // Height of view will be set inside the method
@@ -501,8 +484,15 @@
                     
                 }
 
-            } else {
+            } else if ((location.x - _TouchInit.x) < 0) {
             
+                if ( _SlideDirection != SlideLabelRightToLegt ) {
+                    // Need to reinit new view and data
+                    _GetSlideInLabel = NO;
+                    _DataFlag = NO;
+                    
+                }
+
                 _SlideDirection = SlideLabelRightToLegt;
                 
                 if (!_GetSlideInLabel) {
@@ -546,8 +536,33 @@
                             } else {
                                 
                                 // Generate empty view to notify user
+                                if (_CurrentView == VIEW1) {
+                                    
+                                    READING_VIEW_LOG(@"Add view below readingview1");
+                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                        [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
+                                    } else {
+                                        [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
+                                    }
+                                    
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:_EmptyReadingView];
+                                    
+                                } else {
+                                    
+                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                        [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
+                                    } else {
+                                        [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
+                                    }
+                                    
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:_EmptyReadingView];
+                                    
+                                }
+
                                 READING_VIEW_LOG(@"NO DATA");
-                                [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
                             }
                             
@@ -583,25 +598,47 @@
                             }
                             
                             
-                            _DataFlag = YES;
-                            _GetSlideInLabel = YES;
-                            
                             [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
                             [_Scroller addSubview:View];
 
                         }
                         
+
+                        _DataFlag = YES;
+                        _GetSlideInLabel = YES;
                         
                     }
                 } else {
                     
                     if (_DataFlag) {
                         
-                        // Move the label follow gesture
-                        View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                        if (_HeadAndTailFlag) {
+                            
+                            _EmptyReadingView.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), _EmptyReadingView.frame.origin.y, _EmptyReadingView.frame.size.width, _EmptyReadingView.frame.size.height);
+
+                        } else {
+                            
+                            // Move the label follow gesture
+                            View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                            
+                        }
+                        
                         
                     }
                 }
+            } else if (abs(location.x - _TouchInit.x) == 0) {
+            
+                READING_VIEW_LOG(@" CHANGE DIRECTION !!! reset all flags");
+                _GetSlideInLabel = NO;
+                _DataFlag = NO;
+                _CrossCategoryFlag = NO;
+                _HeadAndTailFlag = NO;
+                _SlideDirection = SlideLabelNone;
+
+                
+            
+            } else {
+                READING_VIEW_ERROR_LOG(@"(location.x - _TouchInit.x) !!!!!?");
             }
             break;
             
@@ -611,18 +648,18 @@
                 if (_HeadAndTailFlag) {
                     
                     // View transtion not complete
-                    READING_VIEW_LOG(@"back to out of screen!!!");
+                    READING_VIEW_LOG(@"Head and tail flag!!!");
                     [UIView animateWithDuration:0.2
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {
                                              
                                              if (_CurrentView == VIEW1) {
                                                  
-                                                 _ReadingView1.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                 _ReadingView1.frame = CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height);
                                                  
                                              } else {
                                                  
-                                                 _ReadingView2.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                 _ReadingView2.frame = CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height);
                                              }
                                              
                                              //View.frame = CGRectMake(0, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
@@ -640,100 +677,139 @@
                                          _DataFlag = NO;
                                          _CrossCategoryFlag = NO;
                                          _HeadAndTailFlag = NO;
+                                         
                                          [_EmptyReadingView removeFromSuperview];
                                          
                                      }];
+                    
                 } else {
                     
-                    if (abs(location.x - _TouchInit.x) > 50) {
-                        // View transtion complete
-                        [UIView animateWithDuration:0.2
-                                         animations:^{
-                                             
-                                             if (_SlideDirection == SlideLabelLeftToRigth) {
+                    if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
+                        
+                        if (_SlideDirection == SlideLabelLeftToRigth) {
+                            if ((location.x - _TouchInit.x) > 0) {
+                                // Confirm to change view
+                                _ConfirmToSwitch = YES;
+                                
+                            } else {
+                                // Failed to change view
+                                _ConfirmToSwitch = NO;
+                                
+                            }
+                            
+                        } else if (_SlideDirection == SlideLabelRightToLegt) {
+                            if ((location.x - _TouchInit.x) < 0) {
+                                // Confirm to change view
+                                _ConfirmToSwitch = YES;
+                            } else {
+                                // Failed to change view
+                                _ConfirmToSwitch = NO;
+
+                            }
+
+                        }
+                        
+                        if (_ConfirmToSwitch) {
+                            
+                            READING_VIEW_LOG(@"_ConfirmToSwitch !!!! ");
+                            // View transtion complete
+                            [UIView animateWithDuration:0.2
+                                             animations:^{
                                                  
-                                                 // Move view out of the screen
+                                                 if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                     
+                                                     // Move view out of the screen
+                                                     if (_CurrentView == VIEW1) {
+                                                         
+                                                         _ReadingView1.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                         
+                                                     } else {
+                                                         
+                                                         _ReadingView2.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                     }
+                                                     
+                                                 } else {
+                                                     
+                                                     
+                                                     // Set Label in the normal location
+                                                     View.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                     
+                                                     
+                                                 }
+                                                 
+                                             }
+                                             completion:^(BOOL finished) {
+                                                 
+                                                 if (_CrossCategoryFlag) {
+                                                     
+                                                     //[_NowReadingCategoryArray removeAllObjects];
+                                                     
+                                                     READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
+                                                     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:TempPoetryList];
+                                                     _CrossCategoryFlag = NO;
+                                                     
+                                                     if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                         _CurrentIndex = [_NowReadingCategoryArray count] - 1;
+                                                     } else {
+                                                         _CurrentIndex = 0;
+                                                     }
+                                                     
+                                                     
+                                                 } else {
+                                                     
+                                                     if (_SlideDirection == SlideLabelLeftToRigth) {
+                                                         _CurrentIndex--;
+                                                     } else {
+                                                         _CurrentIndex++;
+                                                     }
+                                                     
+                                                 }
+                                                 
                                                  if (_CurrentView == VIEW1) {
                                                      
-                                                     _ReadingView1.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                     READING_VIEW_LOG(@"move done remove label 1");
+                                                     
+                                                     [_ReadingView1 removeFromSuperview];
+                                                     [View setBackgroundColor:[UIColor clearColor]];
+                                                     
+                                                     _CurrentView = VIEW2;
+                                                     _PoetryNowReading = _NewDataDic;
+                                                     
+                                                     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                                     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                                     
+                                                     _DataFlag = NO;
+                                                     _GetSlideInLabel = NO;
                                                      
                                                  } else {
                                                      
-                                                     _ReadingView2.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                     READING_VIEW_LOG(@"move done remove label 2");
+                                                     [_ReadingView2 removeFromSuperview];
+                                                     [View setBackgroundColor:[UIColor clearColor]];
+                                                     
+                                                     _CurrentView = VIEW1;
+                                                     _PoetryNowReading = _NewDataDic;
+                                                     
+                                                     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                                     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                                     _DataFlag = NO;
+                                                     _GetSlideInLabel = NO;
+                                                     _ConfirmToSwitch = NO;
                                                  }
-                                                 
-                                                 
-                                             } else {
-                                                 
-                                                 // Set Label in the normal location
-                                                 View.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
-                                                 
-                                             }
-                                             
-                                         }
-                                         completion:^(BOOL finished) {
-                                             
-                                             if (_CrossCategoryFlag) {
-                                                 
-                                                 //[_NowReadingCategoryArray removeAllObjects];
-                                                 
-                                                 READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
-                                                 _NowReadingCategoryArray = [NSMutableArray arrayWithArray:TempPoetryList];
-                                                 _CrossCategoryFlag = NO;
-                                                 
-                                                 if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                     _CurrentIndex = [_NowReadingCategoryArray count] - 1;
-                                                 } else {
-                                                     _CurrentIndex = 0;
-                                                 }
-                                                 
-                                                 
-                                             } else {
-                                                 
-                                                 if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                     _CurrentIndex--;
-                                                 } else {
-                                                     _CurrentIndex++;
-                                                 }
-                                                 
-                                             }
-                                             
-                                             if (_CurrentView == VIEW1) {
-                                                 
-                                                 READING_VIEW_LOG(@"move done remove label 1");
-                                                 
-                                                 [_ReadingView1 removeFromSuperview];
-                                                 [View setBackgroundColor:[UIColor clearColor]];
-                                                 
-                                                 _CurrentView = VIEW2;
-                                                 _PoetryNowReading = _NewDataDic;
-                                                 
-                                                 self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                 [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                                 
-                                                 _DataFlag = NO;
-                                                 _GetSlideInLabel = NO;
-                                                 
-                                             } else {
-                                                 
-                                                 READING_VIEW_LOG(@"move done remove label 2");
-                                                 [_ReadingView2 removeFromSuperview];
-                                                 [View setBackgroundColor:[UIColor clearColor]];
-                                                 
-                                                 _CurrentView = VIEW1;
-                                                 _PoetryNowReading = _NewDataDic;
-                                                 
-                                                 self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                 [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                                 _DataFlag = NO;
-                                                 _GetSlideInLabel = NO;
-                                                 
-                                             }
-                                         }];
+                                             }];
+                        } else {
+                        
+                            _GetSlideInLabel = NO;
+                            _DataFlag = NO;
+                            _CrossCategoryFlag = NO;
+                            _HeadAndTailFlag = NO;
+                            _ConfirmToSwitch = NO;
+                            
+                        }
                         
                         
                     } else {
-                        
+                       
                         // View transtion not complete
                         READING_VIEW_LOG(@"back to out of screen!!!");
                         [UIView animateWithDuration:0.2
@@ -763,7 +839,9 @@
                                              _GetSlideInLabel = NO;
                                              _DataFlag = NO;
                                              _CrossCategoryFlag = NO;
-                                             
+                                             _HeadAndTailFlag = NO;
+                                             _ConfirmToSwitch = NO;
+
                                              
                                          }];
                         
@@ -771,6 +849,11 @@
                 }
             }
             break;
+        case UIGestureRecognizerStateCancelled:
+        {
+            READING_VIEW_LOG(@"!!!!UIGestureRecognizerStateCancelled");
+        }
+
             
         default:
             break;
@@ -778,229 +861,6 @@
     return View;
 }
 
-/*
--(UILabel *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledLabel : (UILabel *) Label
-{
-    CGPoint location = [recognizer locationInView:_Scroller];
-
-    switch (recognizer.state) {
-            
-        case UIGestureRecognizerStateBegan:
-            _TouchInit = location;
-            break;
-            
-            
-        case UIGestureRecognizerStateChanged:
-            
-            if ((location.x - _TouchInit.x) > 0) {
-            
-                if (!_GetSlideInLabel) {
-                    
-                    READING_VIEW_LOG(@"Drag to right, use the previous poetry");
-                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
-                    // Set Lable on the left of the screen and config it
-                    
-                    if (!_DataFlag) {
-                        
-                        _NewDataDic = [_PoetryDatabase Poetry_GetPreviousWithCurrentData:_PoetryNowReading];
-                        
-                        if (_NewDataDic != nil) {
-                            
-                            READING_VIEW_LOG(@"Init PREVIOUS lab");
-                            
-                            _DataFlag = YES;
-                            Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, 10, _LabelSizeInit.width, 0);
-                            Label = [self DisplayLabelHandlingWithData:_NewDataDic onLabel:Label];
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                
-                                [Label setBackgroundColor:[UIColor whiteColor]];
-                                [Label setTextColor:[UIColor blackColor]];
-                                
-                            } else {
-                                
-                                [Label setBackgroundColor:[UIColor blackColor]];
-                                [Label setTextColor:[UIColor whiteColor]];
-                                
-                            }
-                            
-                            //[Label setShadowColor:[UIColor grayColor]];
-                            //[Label setShadowOffset:CGSizeMake(30, _LabelSizeInit.height)];
-                            
-                            _GetSlideInLabel = YES;
-                            _SlideDirection = SlideLabelLeftToRigth;
-
-                            [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
-                            [_Scroller addSubview:Label];
-                            
-                        } else {
-                            
-                            // TO config the label as no data label, and not to put on the scroller in the end
-                            READING_VIEW_LOG(@"NO DATA");
-                            
-                        }
-                        
-                    }
-
-                } else {
-                    
-                    if (_DataFlag) {
-                        
-                        // Move the label follow gesture
-                        //NSLog(@"MOVE x = %d", (UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)));
-                        Label.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
-                        
-                    }
-                    
-                }
-            } else {
-                if (!_GetSlideInLabel) {
-                    
-                    READING_VIEW_LOG(@"Drag to left, use the next poetry");
-                    // Get the next data and save into temp _NewDataDic for once (check DataFlag)
-                    // Set Lable on the left of the screen and config it
-                    
-                    if (!_DataFlag) {
-                        
-                        
-                        _NewDataDic = [_PoetryDatabase Poetry_GetNextWithCurrentData:_PoetryNowReading];
-                        if (_NewDataDic != nil) {
-                            
-                            READING_VIEW_LOG(@"Init NEXT label");
-                            
-                            _DataFlag = YES;
-                            Label.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 10, _LabelSizeInit.width, 0);
-                            Label = [self DisplayLabelHandlingWithData:_NewDataDic onLabel:Label];
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                
-                                [Label setBackgroundColor:[UIColor whiteColor]];
-                                [Label setTextColor:[UIColor blackColor]];
-                                
-                            } else {
-                                
-                                [Label setBackgroundColor:[UIColor blackColor]];
-                                [Label setTextColor:[UIColor whiteColor]];
-                                
-                            }
-                            
-                            //[Label setShadowColor:[UIColor grayColor]];
-                            //[Label setShadowOffset:CGSizeMake(30, _LabelSizeInit.height)];
-                            
-                            _GetSlideInLabel = YES;
-                            _SlideDirection = SlideLabelRightToLegt;
-
-                            [_Scroller setContentSize:CGSizeMake(320, _LabelSizeInit.height + 40)];
-                            [_Scroller addSubview:Label];
-                            
-                        } else {
-                            
-                            // TO config the label as no data label, and not to put on the scroller in the end
-                            READING_VIEW_LOG(@"NO DATA");
-                            
-                        }
-                        
-                    }
-                    
-                } else {
-                    
-                    if (_DataFlag) {
-                        
-                        // Move the label follow gesture
-                        Label.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
-                        
-                    }
-                    
-                }
-            
-            }
-            break;
-            
-        case UIGestureRecognizerStateEnded:
-            
-            if (_DataFlag) {
-                
-                if (abs(location.x - _TouchInit.x) > 50) {
-                    
-                    [UIView animateWithDuration:0.2
-                                     animations:^{
-                                         
-                                         // Set Label in the normal location
-                                         Label.frame = CGRectMake(10, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
-                                         
-                                     }
-                                     completion:^(BOOL finished){
-                                         
-                                         if (_CurrentLab == LABEL1) {
-                                             
-                                             READING_VIEW_LOG(@"move done remove label 1");
-                                            
-
-                                             [Label setBackgroundColor:[UIColor clearColor]];
-                                             [_Label1 removeFromSuperview];
-                                             _CurrentLab = LABEL2;
-                                             _PoetryNowReading = _NewDataDic;
-                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                             _DataFlag = NO;
-                                             _GetSlideInLabel = NO;
-
-                                         } else {
-                                             
-                                             READING_VIEW_LOG(@"move done remove label 2");
-
-                                             [Label setBackgroundColor:[UIColor clearColor]];
-                                             [_Label2 removeFromSuperview];
-                                            _CurrentLab = LABEL1;
-                                             _PoetryNowReading = _NewDataDic;
-                                             self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                             _DataFlag = NO;
-                                             _GetSlideInLabel = NO;
-
-                                         }
-
-                                         
-                                     }];
-                    
-                    
-                } else {
-                    
-                    READING_VIEW_LOG(@"back to out of screen!!!");
-                    [UIView animateWithDuration:0.2
-                                     animations:^{
-                                         if (_SlideDirection == SlideLabelLeftToRigth) {
-                                             
-                                             Label.frame = CGRectMake(UI_DEFAULT_PREVIOUS_ORIGIN_X, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
-                                             
-                                         } else {
-                                             
-                                             Label.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, Label.frame.origin.y, Label.frame.size.width, Label.frame.size.height);
-                                         }
-                                         
-                                         
-                                     }
-                                     completion:^(BOOL finished){
-                                         
-                                         _GetSlideInLabel = NO;
-                                         _DataFlag = NO;
-                                         
-                                     }];
-                    
-                }
-
-            
-            
-            }
-            break;
-            
-        default:
-            break;
-    }
-    
-    return Label;
-}
-*/
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     //拿到手指目前的位置
     
@@ -1024,26 +884,6 @@
         _ReadingView1 = [self HandleGestureWith:recognizer andHandledView:_ReadingView1];
         
     }
-/*
-    if (_CurrentLab == LABEL1) {
-        
-        if (_Label2 == nil) {
-            _Label2 = [[UILabel alloc] init];
-        }
-        
-        _Label2 = [self HandleGestureWith:recognizer andHandledLabel:_Label2];
-
-        
-    } else {
-    
-        if (_Label1 == nil) {
-            _Label1 = [[UILabel alloc] init];
-        }
-
-        _Label1 = [self HandleGestureWith:recognizer andHandledLabel:_Label1];
-        
-    }
- */
     
 }
 
