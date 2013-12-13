@@ -25,7 +25,7 @@
         PoetryDataBase = [[PoetryCoreData alloc] init];
 
         responseArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-        NSLog(@"responseArr List Count = %lu", [responseArr count]);
+        NSLog(@"responseArr List Count = %d", [responseArr count]);
         NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
         NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         

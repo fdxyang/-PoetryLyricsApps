@@ -29,7 +29,7 @@
         guideArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
         
         if (guideArr != nil) {
-            NSLog(@"guideArr List Count = %lu", [guideArr count]);
+            NSLog(@"guideArr List Count = %d", [guideArr count]);
             NSLog(@"guideArr Name = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"guideArr Content = %@", [[guideArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             
@@ -73,7 +73,7 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"guide titleForRow = %lu", row);
+    NSLog(@"guide titleForRow = %d", row);
     switch (component) {
         case 0:
             _pickerContent = [NSString stringWithFormat:@"%@", [[guideArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
