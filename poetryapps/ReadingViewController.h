@@ -24,6 +24,7 @@
 #define UI_DEFAULT_SCREEN_WIDTH         320
 #define UI_DEFAULT_LABEL_WIDTH          280
 
+#define SWITCH_VIEW_THRESHOLD           40
 
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
@@ -60,6 +61,7 @@ typedef enum {
 
 
 typedef enum {
+    SlideLabelNone,
     SlideLabelLeftToRigth,
     SlideLabelRightToLegt,
 }SLIDE_DIRECTION;
