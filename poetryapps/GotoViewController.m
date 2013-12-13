@@ -118,7 +118,11 @@
         _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
         _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
         _TableView.TableData = [[NSArray alloc] initWithObjects:@"GUARD READING", @"POPETRY", @"RESPONSIVE PRAYER", nil];
-    
+        _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+        //NSLog(@"history = %@",_historyArr);
+        //_HistoryData = [NSMutableArray arrayWithArray:[[_HistoryData reverseObjectEnumerator] allObjects]];
+        
+        [_TableView reloadData];
         [self.view addSubview:_TableView];
     
     
@@ -189,7 +193,7 @@
 {
     if (indexPath.section == BASICGUIDE)
     {
-        return 100;
+        return 80;
     }
     else
         return 45;
@@ -230,18 +234,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%lu%lu",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [_TableView.TableData objectAtIndex:indexPath.row];
+    
+    if(indexPath.section == BASICGUIDE)
+        cell.textLabel.text = [_TableView.TableData objectAtIndex:indexPath.row];
+    else
+        cell.textLabel.text = [[_historyArr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"section = %d",indexPath.section);
     if (indexPath.section == BASICGUIDE)
     {
         switch (indexPath.row) {
@@ -297,11 +306,13 @@
     }
     else //histroy
     {
-        switch (indexPath.row)
-        {
-            default:
-                break;
-        }
+        //NSLog(@" history section = %d , row = %d",indexPath.section,indexPath.row);
+        NSDictionary *SelectedDic = [_historyArr objectAtIndex:indexPath.row];
+        //NSLog(@"%@", SelectedDic);
+    
+        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
+        [_TableView reloadData];
+        [self.tabBarController setSelectedIndex:0];
     }
 }
 

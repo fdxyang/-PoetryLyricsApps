@@ -43,34 +43,34 @@
         if(![guideAttr count])
         {
             guideAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
-            NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
+            NSLog(@"guideAttr List Count = %d", [guideAttr count]);
             NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         
-        NSLog(@"guide count = %lu",[guideAttr count]);
+        NSLog(@"guide count = %d",[guideAttr count]);
     }
     else if(_tableViewType == 1) //poetry
     {
         if(![poetryAttr count])
         {
             poetryAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-            NSLog(@"Poetry List Count = %lu", [poetryAttr count]);
+            NSLog(@"Poetry List Count = %d", [poetryAttr count]);
             NSLog(@"Poetry Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"Poetry Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
-        NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
+        NSLog(@"poetryAttr count = %d",[poetryAttr count]);
     }
     else if(_tableViewType == 2) //response
     {
         if(![responseAttr count])
         {
             responseAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-            NSLog(@"responseAttr List Count = %lu", [responseAttr count]);
+            NSLog(@"responseAttr List Count = %d", [responseAttr count]);
             NSLog(@"responseAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
-        NSLog(@"responseAttr count = %lu",[responseAttr count]);
+        NSLog(@"responseAttr count = %d",[responseAttr count]);
     }
 }
 
@@ -84,16 +84,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"numberOfSectionsInTableView");
+    //NSLog(@"numberOfSectionsInTableView");
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection");
+    //NSLog(@"numberOfRowsInSection");
     if (_tableViewType == 0)
     {
-        NSLog(@"count = %lu",[guideAttr count]);
+        NSLog(@"count = %d",[guideAttr count]);
         return [guideAttr count];
     }
     else if(_tableViewType == 1)
@@ -109,7 +109,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellforrow");
+    //NSLog(@"cellforrow");
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell"];
     GotoTableCell *cell = (GotoTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -162,7 +162,7 @@
 
 - (void) setTableViewType:(NSInteger)type
 {
-    NSLog(@"type = %lu",type);
+    NSLog(@"type = %d",type);
     _tableViewType = type;
     
     if (_tableViewType == 0) // guide
@@ -171,12 +171,12 @@
         if(![guideAttr count])
         {
             guideAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
-            NSLog(@"guideAttr List Count = %lu", [guideAttr count]);
+            NSLog(@"guideAttr List Count = %d", [guideAttr count]);
             NSLog(@"guideAttr Name = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         
-        NSLog(@"guide count = %lu",[guideAttr count]);
+        NSLog(@"guide count = %d",[guideAttr count]);
     }
     else if(_tableViewType == 1) //poetry
     {
@@ -185,11 +185,11 @@
         if(![poetryAttr count])
         {
             poetryAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-            NSLog(@"poetryAttr List Count = %lu", [poetryAttr count]);
+            NSLog(@"poetryAttr List Count = %d", [poetryAttr count]);
             NSLog(@"poetryAttr Name = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"poetryAttr Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
-        NSLog(@"poetryAttr count = %lu",[poetryAttr count]);
+        NSLog(@"poetryAttr count = %d",[poetryAttr count]);
     }
     else if(_tableViewType == 2) //response
     {
@@ -198,11 +198,11 @@
         if(![responseAttr count])
         {
             responseAttr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-            NSLog(@"responseAttr List Count = %lu", [responseAttr count]);
+            NSLog(@"responseAttr List Count = %d", [responseAttr count]);
             NSLog(@"responseAttr Name = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
             NSLog(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
-        NSLog(@"responseAttr count = %lu",[responseAttr count]);
+        NSLog(@"responseAttr count = %d",[responseAttr count]);
     }
 }
 @end
