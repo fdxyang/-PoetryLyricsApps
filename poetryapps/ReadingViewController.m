@@ -286,33 +286,33 @@
     
 }
 
--(BOOL) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
+-(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
     if (_EmptyReadingView == nil) {
-        _EmptyReadingView = [[UIView alloc] init];
+        _EmptyReadingView = [[PoetryReadingView alloc] init];
     }
+    if (_EmptyReadingView.ContentTextLabel == nil) {
+        _EmptyReadingView.ContentTextLabel = [[UILabel alloc] init];
+    }
+    [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
     
-    
-    UILabel *NotifyLabel = [[UILabel alloc] init];
-    [_EmptyReadingView addSubview:NotifyLabel];
-    NotifyLabel.backgroundColor = [UIColor clearColor];
-    NotifyLabel.textColor = [UIColor grayColor];
-    NotifyLabel.font = _font;
+    _EmptyReadingView.ContentTextLabel.backgroundColor = [UIColor clearColor];
+    _EmptyReadingView.ContentTextLabel.textColor = [UIColor grayColor];
+    _EmptyReadingView.ContentTextLabel.font = _font;
     
     if (SlideDirection == SlideLabelLeftToRigth) {
         
         // PREV
         READING_VIEW_LOG(@"The most first poetry, try to init view below");
-        _EmptyReadingView.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
-        NotifyLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
-        NotifyLabel.text = @"最前的一首";
         
-        [self.view insertSubview:_EmptyReadingView atIndex:0];
+        _EmptyReadingView.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
         
     }
     
     
-    return YES;
+    return _EmptyReadingView;
 }
 
 #pragma mark - Gesture Recognizer Method
@@ -388,6 +388,10 @@
                                         [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
+                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    NSLog(@"View = %@", View);
+                                    [_Scroller insertSubview:View belowSubview:_ReadingView1];
+
                                 } else {
                                     
                                     if (_DisplayTheme == THEME_LIGHT_DARK) {
@@ -395,10 +399,19 @@
                                     } else {
                                         [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                     }
+                                    
+                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller insertSubview:View belowSubview:_ReadingView2];
+
                                 }
                                 
                                 
-                                [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                
+                                if (_CurrentView == VIEW1) {
+                                } else {
+                                }
+                                
+
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
