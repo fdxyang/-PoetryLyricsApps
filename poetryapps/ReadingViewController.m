@@ -82,6 +82,8 @@
     _DataFlag = NO;
     _CrossCategoryFlag = NO;
     _HeadAndTailFlag = NO;
+    
+    NSLog(@"INIT");
     [self InitReadingViewSetupScroller];
 
     
@@ -187,6 +189,10 @@
         _ReadingView1 = [[PoetryReadingView alloc] init];
     }
     
+    if (_ReadingView2 == nil) {
+        _ReadingView2 = [[PoetryReadingView alloc] init];
+    }
+    
     _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
     READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
     
@@ -278,9 +284,7 @@
         _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
         _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
-
-        
-        
+    
     }
     
     
@@ -320,11 +324,12 @@
                         
                         if (_CurrentIndex == 0) {
                             
+                            // This is the first poetry in this category
                             // Check the Category
                             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
                             if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                // To get the previous category list as temp.
                                 
+                                // To get the previous category list as temp.
                                 if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
 
                                     READING_VIEW_LOG(@"Get Guard Reading list");
@@ -360,8 +365,9 @@
                                         [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller insertSubview:View belowSubview:_ReadingView1];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView1];
+                                    
 
                                 } else {
                                     
@@ -371,8 +377,8 @@
                                         [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller insertSubview:View belowSubview:_ReadingView2];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView2];
 
                                 }
                                
@@ -386,7 +392,8 @@
                             
                             
                         } else {
-                        
+                            
+                            // To get the previous poetry of this category
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
                             READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
                             // Height of view will be set inside the method
@@ -520,8 +527,8 @@
                                         [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller addSubview:View];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:_EmptyReadingView];
                                     
                                 } else {
                                     
@@ -531,8 +538,8 @@
                                         [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                     }
                                     
-                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller addSubview:View];
+                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:_EmptyReadingView];
                                     
                                 }
 
@@ -574,10 +581,10 @@
                             
                             
                             [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
+                            [_Scroller addSubview:View];
 
                         }
                         
-                        [_Scroller addSubview:View];
 
                         _DataFlag = YES;
                         _GetSlideInLabel = YES;
@@ -587,8 +594,17 @@
                     
                     if (_DataFlag) {
                         
-                        // Move the label follow gesture
-                        View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                        if (_HeadAndTailFlag) {
+                            
+                            _EmptyReadingView.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), _EmptyReadingView.frame.origin.y, _EmptyReadingView.frame.size.width, _EmptyReadingView.frame.size.height);
+
+                        } else {
+                            
+                            // Move the label follow gesture
+                            View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                            
+                        }
+                        
                         
                     }
                 }
@@ -601,18 +617,18 @@
                 if (_HeadAndTailFlag) {
                     
                     // View transtion not complete
-                    READING_VIEW_LOG(@"back to out of screen!!!");
+                    READING_VIEW_LOG(@"Head and tail flag!!!");
                     [UIView animateWithDuration:0.2
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {
                                              
                                              if (_CurrentView == VIEW1) {
                                                  
-                                                 _ReadingView1.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                 _ReadingView1.frame = CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height);
                                                  
                                              } else {
                                                  
-                                                 _ReadingView2.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
+                                                 _ReadingView2.frame = CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height);
                                              }
                                              
                                              //View.frame = CGRectMake(0, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
@@ -630,9 +646,11 @@
                                          _DataFlag = NO;
                                          _CrossCategoryFlag = NO;
                                          _HeadAndTailFlag = NO;
+                                         
                                          [_EmptyReadingView removeFromSuperview];
                                          
                                      }];
+                    
                 } else {
                     
                     if (abs(location.x - _TouchInit.x) > 50) {
@@ -753,7 +771,7 @@
                                              _GetSlideInLabel = NO;
                                              _DataFlag = NO;
                                              _CrossCategoryFlag = NO;
-                                             
+                                             _HeadAndTailFlag = NO;
                                              
                                          }];
                         
