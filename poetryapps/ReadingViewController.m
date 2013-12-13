@@ -309,6 +309,16 @@
         _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
         
+    } else {
+        //NEXT
+        READING_VIEW_LOG(@"The latest poetry, try to init view ");
+        
+        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
+
+        
+        
     }
     
     
@@ -389,7 +399,6 @@
                                     }
                                     
                                     View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    NSLog(@"View = %@", View);
                                     [_Scroller insertSubview:View belowSubview:_ReadingView1];
 
                                 } else {
@@ -404,14 +413,8 @@
                                     [_Scroller insertSubview:View belowSubview:_ReadingView2];
 
                                 }
+                               
                                 
-                                
-                                
-                                if (_CurrentView == VIEW1) {
-                                } else {
-                                }
-                                
-
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
@@ -546,8 +549,33 @@
                             } else {
                                 
                                 // Generate empty view to notify user
+                                if (_CurrentView == VIEW1) {
+                                    
+                                    READING_VIEW_LOG(@"Add view below readingview1");
+                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                        [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
+                                    } else {
+                                        [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
+                                    }
+                                    
+                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:View];
+                                    
+                                } else {
+                                    
+                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
+                                        [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
+                                    } else {
+                                        [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
+                                    }
+                                    
+                                    View = [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                    [_Scroller addSubview:View];
+                                    
+                                }
+
                                 READING_VIEW_LOG(@"NO DATA");
-                                [self PlaceEmptyViewForSlideDirection:_SlideDirection];
+                                _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
                             }
                             
@@ -583,14 +611,14 @@
                             }
                             
                             
-                            _DataFlag = YES;
-                            _GetSlideInLabel = YES;
-                            
                             [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
-                            [_Scroller addSubview:View];
 
                         }
                         
+                        [_Scroller addSubview:View];
+
+                        _DataFlag = YES;
+                        _GetSlideInLabel = YES;
                         
                     }
                 } else {
