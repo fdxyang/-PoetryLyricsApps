@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */; };
 		10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449953184D87B700C58526 /* FontSizeSetting.xib */; };
 		10449957184D87E700C58526 /* FontSizeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 10449956184D87E700C58526 /* FontSizeSetting.m */; };
 		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
@@ -778,6 +779,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadPoetryViewController.h; sourceTree = "<group>"; };
+		102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadPoetryViewController.m; sourceTree = "<group>"; };
 		10449953184D87B700C58526 /* FontSizeSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontSizeSetting.xib; sourceTree = "<group>"; };
 		10449955184D87E700C58526 /* FontSizeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSizeSetting.h; sourceTree = "<group>"; };
 		10449956184D87E700C58526 /* FontSizeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSizeSetting.m; sourceTree = "<group>"; };
@@ -1667,6 +1670,8 @@
 				CB25FD211843972D00F3D980 /* Main_iPad.storyboard */,
 				CB25FD241843972D00F3D980 /* PoetryViewController.h */,
 				CB25FD251843972D00F3D980 /* PoetryViewController.m */,
+				102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */,
+				102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */,
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
 			);
@@ -3307,6 +3312,7 @@
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
 				10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */,
 				1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */,
+				102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */,
 				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10771DBB1849C36500A3B342 /* ReadingScroller.m in Sources */,

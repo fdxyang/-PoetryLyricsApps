@@ -1,37 +1,35 @@
 //
-//  ReadingViewController.m
+//  iPadPoetryViewController.m
 //  poetryapps
 //
-//  Created by Goda on 2013/11/30.
+//  Created by GIGIGUN on 2013/12/13.
 //  Copyright (c) 2013年 cc. All rights reserved.
 //
 
-#import "ReadingViewController.h"
+#import "iPadPoetryViewController.h"
 
-@interface ReadingViewController (){
-    
+@interface iPadPoetryViewController () {
+
     CGSize                  _LabelSizeInit;
     CGPoint                 _TouchInit;
-    //CURRENT_LABEL           _CurrentLab;
     SLIDE_DIRECTION         _SlideDirection;
-
+    
     BOOL                    _DataFlag;
     BOOL                    _GetSlideInLabel;
     BOOL                    _CrossCategoryFlag;
-
+    
     // To indicate that the poetry is the first and the last one, and it can not be executed PREV / NEXT
     BOOL                    _HeadAndTailFlag;
     BOOL                    _ConfirmToSwitch;
-
+    
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
     NSMutableArray          *TempPoetryList;
-
 }
 
 @end
 
-@implementation ReadingViewController
+@implementation iPadPoetryViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,25 +37,61 @@
     if (self) {
         // Custom initialization
     }
-    return self; 
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
     
-    _PoetryDatabase = [[PoetryCoreData alloc] init];
-    _PoetrySetting = [[PoetrySettingCoreData alloc] init];
+    NSLog(@"iPad View Did Load");
+    
+    if (_PoetrySetting == nil) {
+        _PoetrySetting = [[PoetrySettingCoreData alloc] init];
+    }
+    [_PoetrySetting PoetrySetting_Create];
+    
+    
+    if (_PoetryDatabase == nil) {
+        _PoetryDatabase = [[PoetryCoreData alloc] init];
+    }
+    
+    [self AddPoetryIntoDatabase];
+    
+    if (_TableView == nil) {
+        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, 330, UI_IPAD_SCREEN_HEIGHT)];
+    }
+    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
+
+    [_TableView reloadData];
+    _TableView.delegate = self;
+    _TableView.dataSource = self;
+
+    [self.view addSubview:_TableView];
+    
     
     if (_Scroller == nil) {
         _Scroller = [[UIScrollView alloc] init];
     }
     
-    _Scroller.frame = CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, screenRect.size.width, screenRect.size.height - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+    _Scroller.frame = CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
+    [_Scroller setScrollEnabled:YES];
     [self.view addSubview:_Scroller];
     
+    
+    if (_ReadingView1 == nil) {
+        _ReadingView1 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    }
+    if (_ReadingView2 == nil) {
+        _ReadingView2 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    }
+    if (_EmptyReadingView == nil) {
+        _EmptyReadingView = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    }
+    
+    if (_NowReadingCategoryArray == nil) {
+        _NowReadingCategoryArray = [[NSMutableArray alloc] init];
+    }
     
     // GestureRecognize
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -66,8 +100,14 @@
     panRecognizer.maximumNumberOfTouches = 1;
     panRecognizer.delegate = self;
 
+
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -78,7 +118,7 @@
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _DisplayTheme = _PoetrySetting.SettingTheme;
     _SlideDirection = SlideLabelNone;
-    _LabelSizeInit = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 0);
+    _LabelSizeInit = CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, 0);
     _CurrentView = VIEW1;
     _GetSlideInLabel = NO;
     _DataFlag = NO;
@@ -86,32 +126,198 @@
     _HeadAndTailFlag = NO;
     _ConfirmToSwitch = NO;
     [self InitReadingViewSetupScroller];
-
-    
-    //_CurrentLab = LABEL1;
     
 }
+
+
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    READING_VIEW_LOG(@"ViewDidDisappear - save reading");
+    IPAD_READING_VIEW_LOG(@"ViewDidDisappear - save reading");
     
     [_ReadingView1 removeFromSuperview];
     [_ReadingView2 removeFromSuperview];
     
-    /*
-    [_Label1 removeFromSuperview];
-    [_Label2 removeFromSuperview];
-*/
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+    
+}
+
+-(void)AddPoetryIntoDatabase
+{
+    
+    // Kevin add timer for test
+    NSTimeInterval time1 = [[NSDate date] timeIntervalSince1970];
+    long int date1 = (long int)time1;
+    //NSLog(@"date1\n%lu", date1);
+    // Kevin add timer for test
+    
+    PoetrySettingCoreData *setting = [[PoetrySettingCoreData alloc] init];
+    [setting PoetrySetting_Create];
+    
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    
+    if(!setting.DataSaved)
+    {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+        NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
+        NSLog(@"file path = %@",FilePath);
+        NSString *title, *filePath2,*content;
+        NSString *fileContents;
+        NSMutableString *poetryContent = [[NSMutableString alloc]init];
+        int lineCount = 0;
+        int index = 0;
+        
+        BOOL isSave = FALSE;
+        for (int count = 0; count < (int)[directoryContent count]; count++)
+        {
+            //NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
+            title = [NSString stringWithFormat:@"/%d.txt",count+1];
+            filePath2 = [FilePath stringByAppendingString:title];
+            
+            //NSLog(@"filePath2 = %@",filePath2);
+            
+            if ([fileManager fileExistsAtPath:filePath2] == YES)
+            {
+                // save core data
+                //NSLog(@"file exists - %@",filePath2);
+                
+                
+                content = [[NSString  alloc] initWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:nil];
+                
+                fileContents = [NSString stringWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:NULL];
+                for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
+                    // Do something
+                    //NSLog(@"line = %@",line);
+                    if (lineCount == 0)
+                    {
+                        title = line;
+                    }
+                    else
+                    {
+                        [poetryContent appendString:@"\n"];
+                        [poetryContent appendString:line];
+                    }
+                    lineCount++;
+                }
+                
+                //NSLog(@"poetry content = %@",poetryContent);
+                
+                
+                
+                NSDictionary *PoetryDic;
+                
+                if(count < 650)// 0-649
+                {
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:count+1],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:POETRYS];
+                }
+                else if(count >= 650 && count < 716) // 650-716
+                {
+                    index = index+1;
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:RESPONSIVE_PRAYER];
+                    if(index == 66)
+                        index = 0;
+                }
+                else //717-721
+                {
+                    index = index+1;
+                    PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 title, POETRY_CORE_DATA_NAME_KEY,
+                                 poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                                 [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
+                                 nil];
+                    isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
+                    if(index == 5)
+                        index = 0;
+                }
+                
+                if(!isSave)
+                    NSLog(@"Core data is Error!!!!!!!!!");
+                
+                [poetryContent setString:@""];
+                lineCount = 0;
+            }
+        }
+        
+        [setting PoetrySetting_SetDataSaved:YES];
+    }
+    
+    // Kevin add timer for test
+    NSTimeInterval time2 = [[NSDate date] timeIntervalSince1970];
+    long int date2 = (long int)time2;
+    //NSLog(@"date2\n%lu", date2);
+    
+    long int d3 = date2 - date1;
+    NSLog(@"d3:\n%lu", d3);
+    // Kevin add timer for test
 
 }
 
-- (void)didReceiveMemoryWarning
+-(void)InitReadingViewSetupScroller
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    if (_PoetryDatabase.isReadingExist) {
+        
+        _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
+        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+        _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
+        
+        
+    } else {
+        
+        IPAD_READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
+        _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
+        
+        //TODO: Modify the Category after all poetry ready.
+        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+        _CurrentIndex = 0;
+        
+    }
+    
+    IPAD_READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
+    // Setup Scroll View
+    [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, 1000)];
+    [_Scroller setScrollEnabled:YES];
+    
+    
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
+    if (subviewArray == nil) {
+        IPAD_READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
+    }
+    
+    // Init View1 for first launch
+    if (_ReadingView1 == nil) {
+        _ReadingView1 = [[PoetryReadingView alloc] init];
+    }
+    
+    if (_ReadingView2 == nil) {
+        _ReadingView2 = [[PoetryReadingView alloc] init];
+    }
+    
+    _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
+    IPAD_READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
+    
+    [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, _LabelSizeInit.height + 40)];
+    
+    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    [_ReadingView1 setBackgroundColor:[UIColor clearColor]];
+    
+    [_Scroller addSubview: _ReadingView1];
+    
+    
 }
 
 // Remove "\n" in the beginning of the article
@@ -131,7 +337,7 @@
                     range.location = index;
                     Articel = [Articel stringByReplacingCharactersInRange:range withString:@""];
                     
-
+                    
                 }
                 
             } else {
@@ -148,67 +354,6 @@
     return Articel;
 }
 
-
--(void)InitReadingViewSetupScroller
-{
-    
-    if (_PoetryDatabase.isReadingExist) {
-        
-        _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
-        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
-        _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
-
-        //READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        
-
-        
-    } else {
-        
-        READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
-        _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
-        
-        //TODO: Modify the Category after all poetry ready.
-        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
-        _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
-        _CurrentIndex = 0;
-
-    }
-    READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
-    // Setup Scroll View
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 1000)];
-    [_Scroller setScrollEnabled:YES];
-
-    
-    /*NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
-    if (subviewArray == nil) {
-        READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
-    }
-    */
-    // Init View1 for first launch
-    if (_ReadingView1 == nil) {
-        _ReadingView1 = [[PoetryReadingView alloc] init];
-    }
-    
-    if (_ReadingView2 == nil) {
-        _ReadingView2 = [[PoetryReadingView alloc] init];
-    }
-    
-    _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
-    READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
-    
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 40)];
-    
-    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-    [_ReadingView1 setBackgroundColor:[UIColor clearColor]];
-
-    [_Scroller addSubview: _ReadingView1];
-
-    
-}
-
-#pragma mark - Display view handling
-
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
 {
     
@@ -221,7 +366,8 @@
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
-    CGSize constraint = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 20000.0f);
+    PoetryReadingView.ContentTextLabel.textAlignment = NSTextAlignmentCenter;
+    CGSize constraint = CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, 20000.0f);
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
     
@@ -239,21 +385,55 @@
         
     }
     
-    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
-    READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
-
+    //[PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
+    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20.0f, UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y, UI_IPAD_READINGVIEW_WIDTH - 50.0f, _LabelSizeInit.height)];
+    IPAD_READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
+    
     CGFloat ViewHeight = _LabelSizeInit.height;
-    if (ViewHeight< (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
-     ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+    if (ViewHeight < UI_IPAD_SCREEN_HEIGHT) {
+        ViewHeight = UI_IPAD_SCREEN_HEIGHT;
     }
     
+    CGFloat Header = UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y;
+
+    //[PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor redColor]];
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
-    [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
+    [PoetryReadingView setFrame:CGRectMake(20, 0, UI_IPAD_READINGVIEW_WIDTH, (ViewHeight + Header + 40))];
     
-    
+    IPAD_READING_VIEW_LOG(@"PoetryReadingView = %@ -  %f", PoetryReadingView, (ViewHeight + Header + 40));
+
     return PoetryReadingView;
     
 }
+
+
+#pragma mark - Control Panel methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_TableData count];
+}
+
+
+#pragma mark - Gensture recognizer methods
 
 -(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
@@ -272,27 +452,27 @@
     if (SlideDirection == SlideLabelLeftToRigth) {
         
         // PREV
-        READING_VIEW_LOG(@"The most first poetry, try to init view below");
+        IPAD_READING_VIEW_LOG(@"The most first poetry, try to init view below");
         
-        _EmptyReadingView.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, UI_IPAD_SCREEN_HEIGHT / 2, UI_IPAD_READINGVIEW_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
         
     } else {
         //NEXT
-        READING_VIEW_LOG(@"The latest poetry, try to init view ");
+        IPAD_READING_VIEW_LOG(@"The latest poetry, try to init view ");
         
-        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, UI_IPAD_SCREEN_HEIGHT / 2, UI_IPAD_READINGVIEW_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
-    
+        _EmptyReadingView.ContentTextLabel.textAlignment = NSTextAlignmentRight;
+        
     }
     
     
     return _EmptyReadingView;
 }
 
-#pragma mark - Gesture Recognizer Method
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     
@@ -312,9 +492,9 @@
             
         case UIGestureRecognizerStateChanged:
             
-            //READING_VIEW_LOG(@"MOVE --- %d" , abs(location.x - _TouchInit.x));
+            //IPAD_READING_VIEW_LOG(@"MOVE --- %d" , abs(location.x - _TouchInit.x));
             
-            if ((location.x - _TouchInit.x) > 0) {
+            if (((location.x - _TouchInit.x) > 0) && (abs(location.x - _TouchInit.x) > 10)) {
                 
                 if ( _SlideDirection != SlideLabelLeftToRigth ) {
                     // Need to reinit new view and data
@@ -327,7 +507,7 @@
                 
                 if (!_GetSlideInLabel) {
                     
-                    READING_VIEW_LOG(@"Drag to right, use the previous poetry");
+                    IPAD_READING_VIEW_LOG(@"Drag to right, use the previous poetry");
                     // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
                     // Set Lable on the left of the screen and config it
                     
@@ -342,26 +522,26 @@
                                 
                                 // To get the previous category list as temp.
                                 if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
-
-                                    READING_VIEW_LOG(@"Get Guard Reading list");
+                                    
+                                    IPAD_READING_VIEW_LOG(@"Get Guard Reading list");
                                     TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                                     
                                 } else if (RESPONSIVE_PRAYER == (POETRY_CATEGORY)[CategoryNum integerValue]) {
                                     
-                                    READING_VIEW_LOG(@"Get Poetry list");
+                                    IPAD_READING_VIEW_LOG(@"Get Poetry list");
                                     TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
                                     
                                 } else {
                                     
-                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
-
+                                    IPAD_READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
+                                    
                                 }
                                 
                                 if (TempPoetryList != nil) {
                                     
                                     _CrossCategoryFlag = YES;
                                     _NewDataDic = [TempPoetryList lastObject];
-                                    READING_VIEW_LOG(@"Get Poetry at cross category");
+                                    IPAD_READING_VIEW_LOG(@"Get Poetry at cross category");
                                 }
                                 
                             } else {
@@ -369,7 +549,7 @@
                                 // Generate empty view to notify user
                                 if (_CurrentView == VIEW1) {
                                     
-                                    READING_VIEW_LOG(@"Add view below readingview1");
+                                    IPAD_READING_VIEW_LOG(@"Add view below readingview1");
                                     if (_DisplayTheme == THEME_LIGHT_DARK) {
                                         [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
                                     } else {
@@ -379,7 +559,7 @@
                                     [self PlaceEmptyViewForSlideDirection:_SlideDirection];
                                     [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView1];
                                     
-
+                                    
                                 } else {
                                     
                                     if (_DisplayTheme == THEME_LIGHT_DARK) {
@@ -390,11 +570,11 @@
                                     
                                     [self PlaceEmptyViewForSlideDirection:_SlideDirection];
                                     [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView2];
-
+                                    
                                 }
-                               
                                 
-                                READING_VIEW_LOG(@"NO DATA");
+                                
+                                IPAD_READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
                                 
@@ -406,15 +586,15 @@
                             
                             // To get the previous poetry of this category
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
-                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
+                            IPAD_READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
                             // Height of view will be set inside the method
                         }
-                    
+                        
                         if (_NewDataDic) {
                             
-                            View.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
-                            //READING_VIEW_LOG(@"View Generate = %@", View);
+                            //IPAD_READING_VIEW_LOG(@"View Generate = %@", View);
                             
                             if (_DisplayTheme == THEME_LIGHT_DARK) {
                                 
@@ -431,14 +611,14 @@
                                 [self.view setBackgroundColor:[UIColor blackColor]];
                                 
                             }
-
-                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
+                            
+                            [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, _LabelSizeInit.height + 20)];
                             // TODO: Add this view between Current view and Scroller
                             //[_Scroller addSubview:View];
                             
                             if (_CurrentView == VIEW1) {
                                 
-                                READING_VIEW_LOG(@"Add view below readingview1");
+                                IPAD_READING_VIEW_LOG(@"Add view below readingview1");
                                 if (_DisplayTheme == THEME_LIGHT_DARK) {
                                     [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
                                 } else {
@@ -457,7 +637,7 @@
                                 
                                 [_Scroller insertSubview:View belowSubview:_ReadingView2];
                             }
-
+                            
                             
                         }
                         
@@ -479,28 +659,28 @@
                             
                             _ReadingView2.frame = CGRectMake((0 + abs(location.x - _TouchInit.x)), 0, View.frame.size.width, View.frame.size.height);
                         }
-
+                        
                     }
                     
                 }
-
-            } else if ((location.x - _TouchInit.x) < 0) {
-            
+                
+            } else if (((location.x - _TouchInit.x) < 0) && (abs(location.x - _TouchInit.x) > 10)) {
+                
                 if ( _SlideDirection != SlideLabelRightToLegt ) {
                     // Need to reinit new view and data
                     _GetSlideInLabel = NO;
                     _DataFlag = NO;
                     
                 }
-
+                
                 _SlideDirection = SlideLabelRightToLegt;
                 
                 if (!_GetSlideInLabel) {
                     
-                    READING_VIEW_LOG(@"Drag to left, use the next poetry");
+                    IPAD_READING_VIEW_LOG(@"Drag to left, use the next poetry");
                     // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
                     // Set Lable on the left of the screen and config it
-
+                    
                     if (!_DataFlag) {
                         
                         if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
@@ -508,27 +688,27 @@
                             // Check the Category
                             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
                             if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                // To get the previous category list as temp.
+                                // To get the next category list as temp.
                                 
                                 if (GUARD_READING == (POETRY_CATEGORY)[CategoryNum integerValue]) {
                                     
-                                    READING_VIEW_LOG(@"Get Petry Reading list");
+                                    IPAD_READING_VIEW_LOG(@"Get Petry Reading list");
                                     TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
                                     
                                 } else if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
                                     
-                                    READING_VIEW_LOG(@"Get Responsive list");
+                                    IPAD_READING_VIEW_LOG(@"Get Responsive list");
                                     TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
                                     
                                 } else {
-                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
+                                    IPAD_READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
                                 }
                                 
                                 if (TempPoetryList != nil) {
                                     
                                     _CrossCategoryFlag = YES;
                                     _NewDataDic = [TempPoetryList firstObject];
-                                    READING_VIEW_LOG(@"Get Poetry at cross category");
+                                    IPAD_READING_VIEW_LOG(@"Get Poetry at cross category");
                                     
                                 }
                                 
@@ -538,7 +718,7 @@
                                 // Generate empty view to notify user
                                 if (_CurrentView == VIEW1) {
                                     
-                                    READING_VIEW_LOG(@"Add view below readingview1");
+                                    IPAD_READING_VIEW_LOG(@"Add view below readingview1");
                                     if (_DisplayTheme == THEME_LIGHT_DARK) {
                                         [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
                                     } else {
@@ -560,8 +740,8 @@
                                     [_Scroller addSubview:_EmptyReadingView];
                                     
                                 }
-
-                                READING_VIEW_LOG(@"NO DATA");
+                                
+                                IPAD_READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
                             }
@@ -569,16 +749,16 @@
                         } else {
                             
                             _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
-                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex + 1);
+                            IPAD_READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex + 1);
                         }
-                    
+                        
                         
                         if (_NewDataDic) {
                             
                             // Height of view will be set inside the method
-                            View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
-                            //READING_VIEW_LOG(@"View Generate = %@", View);
+                            IPAD_READING_VIEW_LOG(@"New View Generate = [%@]", View);
                             
                             
                             if (_DisplayTheme == THEME_LIGHT_DARK) {
@@ -598,12 +778,12 @@
                             }
                             
                             
-                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
+                            [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, _LabelSizeInit.height + 20)];
                             [_Scroller addSubview:View];
-
+                            
                         }
                         
-
+                        
                         _DataFlag = YES;
                         _GetSlideInLabel = YES;
                         
@@ -614,21 +794,23 @@
                         
                         if (_HeadAndTailFlag) {
                             
-                            _EmptyReadingView.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), _EmptyReadingView.frame.origin.y, _EmptyReadingView.frame.size.width, _EmptyReadingView.frame.size.height);
-
+                            _EmptyReadingView.frame = CGRectMake((UI_IPAD_SCREEN_WIDTH - abs(location.x - _TouchInit.x)), _EmptyReadingView.frame.origin.y, _EmptyReadingView.frame.size.width, _EmptyReadingView.frame.size.height);
+                            
                         } else {
                             
                             // Move the label follow gesture
-                            View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                            
+                            View.frame = CGRectMake((UI_IPAD_READINGVIEW_WIDTH - abs(location.x - _TouchInit.x)), View.frame.origin.y, UI_IPAD_READINGVIEW_WIDTH, View.frame.size.height);
+                            //IPAD_READING_VIEW_LOG(@"New View Generate = [%@]", View);
+
                         }
                         
                         
                     }
                 }
-            } else {
-                READING_VIEW_ERROR_LOG(@"(location.x - _TouchInit.x) !!!!!?");
             }
+            /*else {
+                IPAD_READING_VIEW_ERROR_LOG(@"(location.x - _TouchInit.x) !!!!!?");
+            }*/
             break;
             
         case UIGestureRecognizerStateEnded:
@@ -637,7 +819,7 @@
                 if (_HeadAndTailFlag) {
                     
                     // View transtion not complete
-                    READING_VIEW_LOG(@"Head and tail flag!!!");
+                    IPAD_READING_VIEW_LOG(@"Head and tail flag!!!");
                     [UIView animateWithDuration:0.2
                                      animations:^{
                                          if (_SlideDirection == SlideLabelLeftToRigth) {
@@ -655,7 +837,7 @@
                                              
                                          } else {
                                              
-                                             View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                             View.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
                                          }
                                          
                                          
@@ -673,7 +855,7 @@
                     
                 } else {
                     
-                    if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
+                    if (abs(location.x - _TouchInit.x) > IPAD_SWITCH_VIEW_THRESHOLD) {
                         
                         if (_SlideDirection == SlideLabelLeftToRigth) {
                             if ((location.x - _TouchInit.x) > 0) {
@@ -693,14 +875,14 @@
                             } else {
                                 // Failed to change view
                                 _ConfirmToSwitch = NO;
-
+                                
                             }
-
+                            
                         }
                         
                         if (_ConfirmToSwitch) {
                             
-                            READING_VIEW_LOG(@"_ConfirmToSwitch !!!! ");
+                            IPAD_READING_VIEW_LOG(@"_ConfirmToSwitch !!!! ");
                             // View transtion complete
                             [UIView animateWithDuration:0.2
                                              animations:^{
@@ -710,11 +892,11 @@
                                                      // Move view out of the screen
                                                      if (_CurrentView == VIEW1) {
                                                          
-                                                         _ReadingView1.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                         _ReadingView1.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, View.frame.size.width, View.frame.size.height);
                                                          
                                                      } else {
                                                          
-                                                         _ReadingView2.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
+                                                         _ReadingView2.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, View.frame.size.width, View.frame.size.height);
                                                      }
                                                      
                                                  } else {
@@ -733,7 +915,7 @@
                                                      
                                                      //[_NowReadingCategoryArray removeAllObjects];
                                                      
-                                                     READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
+                                                     IPAD_READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
                                                      _NowReadingCategoryArray = [NSMutableArray arrayWithArray:TempPoetryList];
                                                      _CrossCategoryFlag = NO;
                                                      
@@ -756,7 +938,7 @@
                                                  
                                                  if (_CurrentView == VIEW1) {
                                                      
-                                                     READING_VIEW_LOG(@"move done remove label 1");
+                                                     IPAD_READING_VIEW_LOG(@"move done remove label 1");
                                                      
                                                      [_ReadingView1 removeFromSuperview];
                                                      [View setBackgroundColor:[UIColor clearColor]];
@@ -772,7 +954,7 @@
                                                      
                                                  } else {
                                                      
-                                                     READING_VIEW_LOG(@"move done remove label 2");
+                                                     IPAD_READING_VIEW_LOG(@"move done remove label 2");
                                                      [_ReadingView2 removeFromSuperview];
                                                      [View setBackgroundColor:[UIColor clearColor]];
                                                      
@@ -787,7 +969,7 @@
                                                  }
                                              }];
                         } else {
-                        
+                            
                             _GetSlideInLabel = NO;
                             _DataFlag = NO;
                             _CrossCategoryFlag = NO;
@@ -798,9 +980,9 @@
                         
                         
                     } else {
-                       
+                        
                         // View transtion not complete
-                        READING_VIEW_LOG(@"back to out of screen!!!");
+                        IPAD_READING_VIEW_LOG(@"back to out of screen!!!");
                         [UIView animateWithDuration:0.2
                                          animations:^{
                                              if (_SlideDirection == SlideLabelLeftToRigth) {
@@ -818,7 +1000,7 @@
                                                  
                                              } else {
                                                  
-                                                 View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
+                                                 View.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
                                              }
                                              
                                              
@@ -830,7 +1012,7 @@
                                              _CrossCategoryFlag = NO;
                                              _HeadAndTailFlag = NO;
                                              _ConfirmToSwitch = NO;
-
+                                             
                                              
                                          }];
                         
@@ -840,9 +1022,9 @@
             break;
         case UIGestureRecognizerStateCancelled:
         {
-            READING_VIEW_LOG(@"!!!!UIGestureRecognizerStateCancelled");
+            IPAD_READING_VIEW_LOG(@"!!!!UIGestureRecognizerStateCancelled");
         }
-
+            
             
         default:
             break;
@@ -852,8 +1034,6 @@
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     //拿到手指目前的位置
-    
-    
     
     if (_CurrentView == VIEW1) {
         
@@ -875,7 +1055,5 @@
     }
     
 }
-
-
 
 @end
