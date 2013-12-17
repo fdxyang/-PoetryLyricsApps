@@ -127,7 +127,7 @@
             
             _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
-            _TableView.TableData = [[NSArray alloc] initWithObjects:@"GUARD READING", @"POPETRY", @"RESPONSIVE PRAYER", nil];
+            _TableView.TableData = [[NSArray alloc] initWithObjects:@"導讀", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
             [_TableView reloadData];
             [self.view addSubview:_TableView];
@@ -232,7 +232,7 @@
             break;
             
         case 1:
-            sectionStr = @"History";
+            sectionStr = @"歷史記錄";
             break;
             
         default:
