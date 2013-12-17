@@ -175,8 +175,8 @@
 
     }
     READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
-    // Setup Scroll View
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 1000)];
+    // Setup Scroll View, the height would be handled in (DisplayHandlingWithData)
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 0)];
     [_Scroller setScrollEnabled:YES];
 
     
@@ -196,8 +196,6 @@
     
     _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
     READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
-    
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 40)];
     
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     [_ReadingView1 setBackgroundColor:[UIColor clearColor]];
@@ -249,7 +247,7 @@
     
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight + 20)];
     
     return PoetryReadingView;
     
@@ -432,7 +430,6 @@
                                 
                             }
 
-                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
                             // TODO: Add this view between Current view and Scroller
                             //[_Scroller addSubview:View];
                             
@@ -598,7 +595,6 @@
                             }
                             
                             
-                            [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, _LabelSizeInit.height + 20)];
                             [_Scroller addSubview:View];
 
                         }
