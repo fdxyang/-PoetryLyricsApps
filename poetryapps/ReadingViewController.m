@@ -245,9 +245,10 @@
      ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     }
     
+    ViewHeight = ViewHeight + 20; // To add buff in the bottom of the view
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight + 20)];
+    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
     
     return PoetryReadingView;
     
