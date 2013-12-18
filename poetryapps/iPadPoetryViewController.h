@@ -14,9 +14,9 @@
 #define UI_IPAD_SCREEN_WIDTH            1024
 #define UI_IPAD_SCREEN_HEIGHT           768
 #define UI_TABLE_WIDTH                  330
-#define UI_READING_VIEW_ORIGIN_X        UI_TABLE_WIDTH
-#define UI_IPAD_READINGVIEW_WIDTH       UI_IPAD_SCREEN_WIDTH - UI_READING_VIEW_ORIGIN_X
-#define UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y 100.0f // Reserved for header
+#define UI_READING_VIEW_ORIGIN_X        0
+#define UI_IPAD_READINGVIEW_WIDTH       UI_IPAD_SCREEN_WIDTH
+#define UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y 200.0f // Reserved for header
 #define IPAD_SWITCH_VIEW_THRESHOLD      60
 
 #define DEBUG_IPAD_READINGVIEW
@@ -35,6 +35,7 @@
 
 @property (nonatomic, strong) NSMutableArray            *TableData;
 @property (nonatomic, strong) UITableView               *TableView;
+@property (nonatomic, strong) UITableView               *SettingTable;
 @property (nonatomic, strong) UIScrollView              *Scroller;
 
 @property (nonatomic, strong) NSMutableArray            *NowReadingCategoryArray;
@@ -50,6 +51,10 @@
 @property (nonatomic, strong) NSDictionary              *NewDataDic;
 @property (nonatomic, strong) UIFont                    *font;
 @property                     THEME_SETTING             DisplayTheme;
+
+@property (nonatomic, strong) UIButton                  *NaviBtn;
+@property (nonatomic, strong) UIButton                  *SettingBtn;
+
 
 typedef enum {
     VIEW1 = 0x00,
