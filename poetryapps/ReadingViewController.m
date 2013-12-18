@@ -240,6 +240,12 @@
     // Remove @@ and add attribute
     ContentText = [ContentText stringByReplacingOccurrencesOfString:KeyWord1 withString:@""];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ContentText];
+    
+    // Add General Attribute
+    AttrRange = NSMakeRange(0, [ContentText length]);
+    [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:1]range:AttrRange];
+    [string addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:2]range:AttrRange];
+    
     AttrRange = NSMakeRange(0, 0);
 
     if ([RangeArray count] != 0) {
