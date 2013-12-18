@@ -206,6 +206,58 @@
 }
 
 #pragma mark - Display view handling
+-(NSMutableAttributedString *) SetupStringAttrForDisplayWithContentText : (NSString*) ContentText
+{
+    READING_VIEW_LOG(@"SetupStringAttrForDisplayWithContentText");
+    
+    //TODO : Find @@ line
+    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize];
+
+    NSArray *Lines = [ContentText componentsSeparatedByString:@"\n"];
+    NSRange AttrRange = NSMakeRange(0, 0);
+    NSRange StringRange = NSMakeRange(0, 0);
+
+    NSMutableArray *RangeArray = [[NSMutableArray alloc] init];
+    NSString *KeyWord1 = @"@@";
+
+    // Find "@@" and save range
+    for (int i = 0; i < [Lines count]; i++) {
+        
+        StringRange = NSMakeRange(0, 0);
+        StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord1];
+        
+        if (StringRange.length != 0) {
+            
+            AttrRange.length = ([[Lines objectAtIndex:i] length]);
+            [RangeArray addObject:[NSValue valueWithRange:AttrRange]];
+            
+        }
+        
+        AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
+
+    }
+
+    // Remove @@ and add attribute
+    ContentText = [ContentText stringByReplacingOccurrencesOfString:KeyWord1 withString:@""];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ContentText];
+    AttrRange = NSMakeRange(0, 0);
+
+    if ([RangeArray count] != 0) {
+        
+        for (int i = 0; i < [RangeArray count]; i++) {
+            
+            AttrRange = [[RangeArray objectAtIndex:i] rangeValue];
+            if ((AttrRange.location + AttrRange.length) > [ContentText length]) {
+                AttrRange.length = [ContentText length] - AttrRange.location;
+            }
+            
+            [string addAttribute:NSFontAttributeName value:BoldFont range:AttrRange];
+        }
+    }
+
+    return string;
+}
+
 
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
 {
@@ -214,12 +266,17 @@
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
     
-    [PoetryReadingView.ContentTextLabel setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
-    ;
+    //[PoetryReadingView.ContentTextLabel setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
+    [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
+
+    
     CGSize constraint = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 20000.0f);
+    
+    
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
     
@@ -238,6 +295,7 @@
     }
     
     [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
+    
     READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
 
     CGFloat ViewHeight = _LabelSizeInit.height;
