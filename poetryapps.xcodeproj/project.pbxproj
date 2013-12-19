@@ -744,6 +744,7 @@
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
 		CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB91849BD5A000ECB84 /* ReadingViewController.m */; };
+		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBA286D0184DCF4A00010125 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CE184DCF4A00010125 /* 1.txt */; };
 		CBA286D1184DCF4A00010125 /* 2.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBA286CF184DCF4A00010125 /* 2.txt */; };
@@ -1537,6 +1538,8 @@
 		CB381FB31849B056000ECB84 /* GotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoViewController.m; sourceTree = "<group>"; };
 		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
 		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
+		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
+		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
 		CBA286CE184DCF4A00010125 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
@@ -1658,6 +1661,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				CB86F0311862E0CC006F8500 /* Model */,
 				CBA286CD184DCF4A00010125 /* Resource */,
 				10771DBF1849D04800A3B342 /* SettingView */,
 				CB381FBB1849BD67000ECB84 /* ReadingView */,
@@ -1749,6 +1753,15 @@
 				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
 			);
 			name = ReadingView;
+			sourceTree = "<group>";
+		};
+		CB86F0311862E0CC006F8500 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */,
+				CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		CBA286CD184DCF4A00010125 /* Resource */ = {
@@ -3308,6 +3321,7 @@
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */,
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
 				10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */,
