@@ -10,6 +10,8 @@
 #import "PoetryReadingView.h"
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
+#import "Animations.h"
+
 
 #define UI_IPAD_SCREEN_WIDTH            1024
 #define UI_IPAD_SCREEN_HEIGHT           768
@@ -18,6 +20,11 @@
 #define UI_IPAD_READINGVIEW_WIDTH       UI_IPAD_SCREEN_WIDTH
 #define UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y 200.0f // Reserved for header
 #define IPAD_SWITCH_VIEW_THRESHOLD      60
+
+#define TAG_READING_VIEW_1              1
+#define TAG_READING_VIEW_2              2
+#define TAG_COVER_VIEW                  3
+#define TAG_TABLE_VIEW                  4
 
 #define DEBUG_IPAD_READINGVIEW
 #ifdef DEBUG_IPAD_READINGVIEW
@@ -37,6 +44,7 @@
 @property (nonatomic, strong) UITableView               *TableView;
 @property (nonatomic, strong) UITableView               *SettingTable;
 @property (nonatomic, strong) UIScrollView              *Scroller;
+@property (nonatomic, strong) UIView                    *CoverView;
 
 @property (nonatomic, strong) NSMutableArray            *NowReadingCategoryArray;
 

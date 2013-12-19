@@ -211,7 +211,7 @@
     READING_VIEW_LOG(@"SetupStringAttrForDisplayWithContentText");
     
     //TODO : Find @@ line
-    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize];
+    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 4];
 
     NSArray *Lines = [ContentText componentsSeparatedByString:@"\n"];
     NSRange AttrRange = NSMakeRange(0, 0);
@@ -219,7 +219,7 @@
 
     NSMutableArray *RangeArray = [[NSMutableArray alloc] init];
     NSString *KeyWord1 = @"@@";
-
+    NSString *KeyWord2 = @"亻因";
     // Find "@@" and save range
     for (int i = 0; i < [Lines count]; i++) {
         
@@ -239,6 +239,8 @@
 
     // Remove @@ and add attribute
     ContentText = [ContentText stringByReplacingOccurrencesOfString:KeyWord1 withString:@""];
+        //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"[" withString:@""];
+        //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"]" withString:@""];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ContentText];
     
     // Add General Attribute
@@ -261,6 +263,40 @@
         }
     }
 
+    // Find [亻因]
+    [RangeArray removeAllObjects];
+    StringRange = NSMakeRange(0, 0);
+    AttrRange = NSMakeRange(0, 0);
+    
+    StringRange = [ContentText rangeOfString:KeyWord2];
+    
+    if (StringRange.length != 0) {
+        for (int i = 0; i < [Lines count]; i++) {
+            
+            StringRange = NSMakeRange(0, 0);
+            StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+            if (StringRange.length != 0 ) {
+                
+                StringRange.location = AttrRange.location + StringRange.location;
+                [RangeArray addObject:[NSValue valueWithRange:StringRange]];
+                NSLog(@"亻因 location = %d langth = %d", StringRange.location, StringRange.length);
+            }
+            AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
+        }
+    }
+    /*
+    if ([RangeArray count] != 0) {
+        for (int i = 0; i < [RangeArray count]; i++) {
+            
+            NSRange TempRange = [[RangeArray objectAtIndex:i] rangeValue];
+            [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:0] range:TempRange];
+
+        }
+
+    }
+    */
+    
+    
     return string;
 }
 
@@ -271,8 +307,6 @@
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
-    
-    //[PoetryReadingView.ContentTextLabel setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
     
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
