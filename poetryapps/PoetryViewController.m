@@ -132,7 +132,7 @@
     //NSLog(@"date2\n%lu", date2);
     
     long int d3 = date2 - date1;
-    NSLog(@"d3:%lu", d3);
+    NSLog(@"handle core data time difference :%lu", d3);
     // Kevin add timer for test
     
 }
