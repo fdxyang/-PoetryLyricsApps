@@ -191,7 +191,7 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
-        NSLog(@"file path = %@",FilePath);
+        //NSLog(@"file path = %@",FilePath);
         NSString *title, *filePath2,*content;
         NSString *fileContents;
         NSMutableString *poetryContent = [[NSMutableString alloc]init];
