@@ -42,7 +42,7 @@
 
 @property (nonatomic, strong) NSMutableArray            *TableData;
 @property (nonatomic, strong) UITableView               *TableView;
-@property (nonatomic, strong) UITableView               *SettingTable;
+@property (nonatomic, strong) UITableView               *SettingTableView;
 @property (nonatomic, strong) UIScrollView              *Scroller;
 @property (nonatomic, strong) UIView                    *CoverView;
 
