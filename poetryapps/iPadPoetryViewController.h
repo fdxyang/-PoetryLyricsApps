@@ -11,7 +11,7 @@
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
 #import "Animations.h"
-
+#import "PoetrySaveIntoCoreData.h"
 
 #define UI_IPAD_SCREEN_WIDTH            1024
 #define UI_IPAD_SCREEN_HEIGHT           768
@@ -26,7 +26,7 @@
 #define TAG_COVER_VIEW                  3
 #define TAG_TABLE_VIEW                  4
 
-#define DEBUG_IPAD_READINGVIEW
+//#define DEBUG_IPAD_READINGVIEW
 #ifdef DEBUG_IPAD_READINGVIEW
 #   define IPAD_READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -52,6 +52,7 @@
 @property (nonatomic, strong) PoetryReadingView         *ReadingView2;
 @property (nonatomic, strong) PoetryReadingView         *EmptyReadingView;
 @property (nonatomic, strong) PoetryCoreData            *PoetryDatabase;
+@property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
 @property (nonatomic, strong) PoetrySettingCoreData     *PoetrySetting;
 
 
