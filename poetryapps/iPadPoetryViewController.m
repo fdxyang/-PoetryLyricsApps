@@ -77,8 +77,13 @@
     _TableView.delegate = self;
     _TableView.dataSource = self;
     [_TableView setTag:TAG_TABLE_VIEW];
+    
+    if (_SettingTableView == nil) {
+        _SettingTableView = [[UITableView alloc] init];
+    }
+    _SettingTableView.delegate = self;
+    _SettingTableView.dataSource = self;
 
-    //[self.view addSubview:_TableView];
     
     
     // 5. Init Scroller
@@ -374,7 +379,6 @@
         IPAD_READING_VIEW_LOG(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
         
-        //TODO: Modify the Category after all poetry ready.
         POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = 0;
@@ -504,6 +508,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if ([tableView isKindOfClass:[_TableView class]]) {
+        
+        NSLog(@"navigation tableview");
+        return 1;
+    } else if ([tableView isKindOfClass:[_SettingTableView class]]) {
+        NSLog(@"Setting TableView");
+    }
+    
     return 1;
 }
 
