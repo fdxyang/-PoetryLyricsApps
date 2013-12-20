@@ -262,6 +262,7 @@
     else
     {
         _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+        _historyArr = [NSMutableArray arrayWithArray:[[_historyArr reverseObjectEnumerator] allObjects]];
         cell.textLabel.text = [[_historyArr objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     return cell;
@@ -325,7 +326,6 @@
     }
     else //histroy
     {
-        //NSLog(@" history section = %d , row = %d",indexPath.section,indexPath.row);
         NSDictionary *SelectedDic = [_historyArr objectAtIndex:indexPath.row];
         //NSLog(@"history = %@", SelectedDic);
     
