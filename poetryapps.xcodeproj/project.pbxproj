@@ -764,6 +764,7 @@
 		CBD51BE51850E0C0005A15D0 /* 18.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE41850E0C0005A15D0 /* 18.txt */; };
 		CBD51BE71850E0E9005A15D0 /* 19.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE61850E0E9005A15D0 /* 19.txt */; };
 		CBD51BE91850E104005A15D0 /* 20.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBD51BE81850E104005A15D0 /* 20.txt */; };
+		CBE024BF18642A8900B96D8D /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE024BE18642A8900B96D8D /* libGoogleAnalytics_debug.a */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBF7262E18501EAF003C70AB /* 3.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF7262B18501EAF003C70AB /* 3.txt */; };
 		CBF7262F18501EAF003C70AB /* 4.txt in Resources */ = {isa = PBXBuildFile; fileRef = CBF7262C18501EAF003C70AB /* 4.txt */; };
@@ -1562,6 +1563,13 @@
 		CBD51BE41850E0C0005A15D0 /* 18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 18.txt; path = poetryapps/Resource/18.txt; sourceTree = SOURCE_ROOT; };
 		CBD51BE61850E0E9005A15D0 /* 19.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 19.txt; path = poetryapps/Resource/19.txt; sourceTree = SOURCE_ROOT; };
 		CBD51BE81850E104005A15D0 /* 20.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 20.txt; path = poetryapps/Resource/20.txt; sourceTree = SOURCE_ROOT; };
+		CBE024B818642A8900B96D8D /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		CBE024B918642A8900B96D8D /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		CBE024BA18642A8900B96D8D /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		CBE024BB18642A8900B96D8D /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		CBE024BC18642A8900B96D8D /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		CBE024BD18642A8900B96D8D /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		CBE024BE18642A8900B96D8D /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBF7262B18501EAF003C70AB /* 3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 3.txt; path = poetryapps/Resource/3.txt; sourceTree = SOURCE_ROOT; };
@@ -1576,6 +1584,7 @@
 			files = (
 				10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */,
 				CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */,
+				CBE024BF18642A8900B96D8D /* libGoogleAnalytics_debug.a in Frameworks */,
 				CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */,
 				CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */,
 			);
@@ -1673,6 +1682,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				CBE024B718642A8900B96D8D /* google analytics */,
 				109EF70E1863E8EA00A4B9E1 /* iPadView */,
 				CB86F0311862E0CC006F8500 /* Model */,
 				CBA286CD184DCF4A00010125 /* Resource */,
@@ -2504,6 +2514,21 @@
 			);
 			name = Resource;
 			path = resource;
+			sourceTree = "<group>";
+		};
+		CBE024B718642A8900B96D8D /* google analytics */ = {
+			isa = PBXGroup;
+			children = (
+				CBE024B818642A8900B96D8D /* GAI.h */,
+				CBE024B918642A8900B96D8D /* GAIDictionaryBuilder.h */,
+				CBE024BA18642A8900B96D8D /* GAIFields.h */,
+				CBE024BB18642A8900B96D8D /* GAILogger.h */,
+				CBE024BC18642A8900B96D8D /* GAITrackedViewController.h */,
+				CBE024BD18642A8900B96D8D /* GAITracker.h */,
+				CBE024BE18642A8900B96D8D /* libGoogleAnalytics_debug.a */,
+			);
+			name = "google analytics";
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3493,6 +3518,10 @@
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Goda/Documents/xcode_project/casper_project/poetryapps_development/poetryapps/Library,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3507,6 +3536,10 @@
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Goda/Documents/xcode_project/casper_project/poetryapps_development/poetryapps/Library,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
