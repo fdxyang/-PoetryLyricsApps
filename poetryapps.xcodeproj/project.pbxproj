@@ -1609,6 +1609,15 @@
 			name = SettingView;
 			sourceTree = "<group>";
 		};
+		109EF70E1863E8EA00A4B9E1 /* iPadView */ = {
+			isa = PBXGroup;
+			children = (
+				102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */,
+				102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */,
+			);
+			name = iPadView;
+			sourceTree = "<group>";
+		};
 		10AE671018449F9900A683E7 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1664,6 +1673,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				109EF70E1863E8EA00A4B9E1 /* iPadView */,
 				CB86F0311862E0CC006F8500 /* Model */,
 				CBA286CD184DCF4A00010125 /* Resource */,
 				10771DBF1849D04800A3B342 /* SettingView */,
@@ -1677,10 +1687,6 @@
 				CB25FD211843972D00F3D980 /* Main_iPad.storyboard */,
 				CB25FD241843972D00F3D980 /* PoetryViewController.h */,
 				CB25FD251843972D00F3D980 /* PoetryViewController.m */,
-				102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */,
-				102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */,
-				10AF12701862EC7F002F6DB9 /* Animations.m */,
-				10AF12711862EC7F002F6DB9 /* Animations.h */,
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
 			);
@@ -1763,6 +1769,8 @@
 		CB86F0311862E0CC006F8500 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				10AF12701862EC7F002F6DB9 /* Animations.m */,
+				10AF12711862EC7F002F6DB9 /* Animations.h */,
 				CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */,
 				CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */,
 			);

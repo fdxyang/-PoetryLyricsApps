@@ -60,6 +60,7 @@
 }
 
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 4;
@@ -68,7 +69,6 @@
 {
     return 1;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -82,46 +82,18 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if (indexPath.section == 0) {
-        //cell.textLabel.text = @"FONT SIZE";
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FontSizeSetting" owner:self options:nil];
-        _FontSizeSettingView = (FontSizeSetting *)[subviewArray objectAtIndex:0];
-        _FontSizeSettingView.frame = CGRectMake(0, 0, _FontSizeSettingView.frame.size.width, _FontSizeSettingView.frame.size.height);
         
         [self Setting_InitFontSizeViewBtns];
-        
-        [_FontSizeSettingView.SmallSizeBtn addTarget:self action:@selector(SmallSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [_FontSizeSettingView.MidiumSizeBtn addTarget:self action:@selector(MediumSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [_FontSizeSettingView.LargeSizeBtn addTarget:self action:@selector(LargeSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        
         [cell addSubview:_FontSizeSettingView];
         
     } else if (indexPath.section == 1) {
-
-        NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
-        _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
-        _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
-
-        [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
-        [_ThemeSettingView.DarkLightBtn setTitle:@"黑底白字" forState:UIControlStateNormal];
         
-        [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-
+        [self Setting_InitThemeSettingView];
         [cell addSubview:_ThemeSettingView];
 
         
     } else if (indexPath.section == 2) {
-        
-        if (_ThemePreViewLab == nil) {
-            _ThemePreViewLab = [[UILabel alloc] init];
-        }
-        
-//        _ThemePreViewLab.numberOfLines = 0;
-        _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 100.f);
-        _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
-        _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
-        
+        [self InitPreviewLab];
         [self Setting_InitThemeView];
         [cell addSubview:_ThemePreViewLab];
         
@@ -184,7 +156,21 @@
 
 -(void) Setting_InitFontSizeViewBtns
 {
+    
+    //cell.textLabel.text = @"FONT SIZE";
+    if (_FontSizeSettingView == nil) {
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FontSizeSetting" owner:self options:nil];
+        _FontSizeSettingView = (FontSizeSetting *)[subviewArray objectAtIndex:0];
+        _FontSizeSettingView.frame = CGRectMake(0, 0, _FontSizeSettingView.frame.size.width, _FontSizeSettingView.frame.size.height);
+        
+        [_FontSizeSettingView.SmallSizeBtn addTarget:self action:@selector(SmallSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.MidiumSizeBtn addTarget:self action:@selector(MediumSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.LargeSizeBtn addTarget:self action:@selector(LargeSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
     [self Setting_SetupBtnsInFontSizeViewWithSetting:_Setting.SettingFontSize andSave:NO];
+    
 }
 
 -(void) Setting_SetupBtnsInFontSizeViewWithSetting : (FONT_SIZE_SETTING) FontSizeSetting andSave:(BOOL) Save
@@ -253,6 +239,34 @@
 
 #pragma mark - Theme Setting
 
+-(void) InitPreviewLab
+{
+    
+    if (_ThemePreViewLab == nil) {
+        _ThemePreViewLab = [[UILabel alloc] init];
+    }
+    
+    _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 100.f);
+    _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
+    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
+    
+
+}
+
+-(void) Setting_InitThemeSettingView
+{
+    NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
+    _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
+    _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
+    
+    [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
+    [_ThemeSettingView.DarkLightBtn setTitle:@"黑底白字" forState:UIControlStateNormal];
+    
+    [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
 -(void) Setting_InitThemeView
 {
     [self Setting_SetupThemeSettingView : _Setting.SettingTheme andSave:NO];
@@ -276,7 +290,6 @@
             _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
             _ThemePreViewLab.textColor = [UIColor blackColor];
             _ThemePreViewLab.text = [_NowReadingText substringWithRange:range];
-
             NSLog(@"now reading = %@", [_NowReadingText substringWithRange:range]);
             break;
             
