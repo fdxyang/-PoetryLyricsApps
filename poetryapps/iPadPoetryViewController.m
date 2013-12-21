@@ -22,6 +22,7 @@
     BOOL                    _HeadAndTailFlag;
     BOOL                    _ConfirmToSwitch;
     BOOL                    _isNavTableOn;
+    BOOL                    _isSettingTableOn;
     
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
@@ -48,11 +49,13 @@
     NSLog(@"iPad View Did Load");
     
     // 1. Init Setting
-    if (_PoetrySetting == nil) {
-        _PoetrySetting = [[PoetrySettingCoreData alloc] init];
+    if (_Setting == nil) {
+        _Setting = [[PoetrySettingCoreData alloc] init];
     }
-    [_PoetrySetting PoetrySetting_Create];
-    
+    [_Setting PoetrySetting_Create];
+    if  (_Setting.DataSaved == NO) {
+        [_PoetrySaved isCoreDataSave];
+    }
     
     // 2. Init Core Data
     if (_PoetryDatabase == nil) {
@@ -63,7 +66,6 @@
     if (_PoetrySaved == nil) {
         _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
     }
-    [_PoetrySaved isCoreDataSave];
     
     
     // 4. Init table view
@@ -78,13 +80,13 @@
     _TableView.dataSource = self;
     [_TableView setTag:TAG_TABLE_VIEW];
     
+    
     if (_SettingTableView == nil) {
-        _SettingTableView = [[UITableView alloc] init];
+        _SettingTableView = [[UITableView alloc] initWithFrame:CGRectMake(1024, 150, 320, 568) style:UITableViewStyleGrouped];
     }
     _SettingTableView.delegate = self;
     _SettingTableView.dataSource = self;
-
-    
+    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
     
     // 5. Init Scroller
     if (_Scroller == nil) {
@@ -110,8 +112,9 @@
     
     // 7. Init Cover View
     if (_CoverView == nil) {
+        
         _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.4];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
         
     }
     [_CoverView setTag:TAG_COVER_VIEW];
@@ -142,8 +145,8 @@
     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
     
     // Read Setting
-    _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
-    _DisplayTheme = _PoetrySetting.SettingTheme;
+    _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
+    _DisplayTheme = _Setting.SettingTheme;
     _SlideDirection = SlideLabelNone;
     _LabelSizeInit = CGSizeMake(UI_IPAD_SCREEN_WIDTH, 0);
     _CurrentView = VIEW1;
@@ -153,6 +156,7 @@
     _HeadAndTailFlag = NO;
     _ConfirmToSwitch = NO;
     _isNavTableOn = NO;
+    _isSettingTableOn = NO;
     [self InitReadingViewSetupScroller];
     [self InitNavigationBtn];
     
@@ -294,74 +298,6 @@
 }
 
 
-#pragma mark - Navigation Btn
--(void) PlaceCoverView
-{
-   
-    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
-    
-}
-
--(void) ExecuteTableViewAnnimation
-{
-    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    _isNavTableOn = YES;
-
-}
-
--(void)InitNavigationBtn
-{
-    if (_NaviBtn == nil) {
-        _NaviBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 50, 70, 60)];
-    }
-    
-    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
-    
-    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
-//    _NaviBtn.backgroundColor = [UIColor blackColor];
-    _NaviBtn.opaque = YES;
-    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_NaviBtn];
-}
-
--(void)NavigationBtnHandler
-{
-    if (_isNavTableOn == NO) {
-        
-        [self PlaceCoverView];
-        _TableView.frame = CGRectMake(-300, 100, 300, 500); // Table View init location
-        [self.view addSubview:_TableView];
-        [_TableView reloadData];
-        [self ExecuteTableViewAnnimation];
-        
-    } else {
-        
-        [self RemoveTableViewAnnimation];
-
-    }
-    
-}
-
--(void)RemoveTableViewAnnimation
-{
-    _isNavTableOn = NO;
-
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         [_TableView setFrame:CGRectMake(-300, 100, 300, 500)];
-                     }
-                     completion:^(BOOL finished) {
-                         [_CoverView removeFromSuperview];
-                         [_TableView removeFromSuperview];
-                     }];
-    
-}
-
-
 #pragma mark - Reading and Gesture Methods
 -(void)InitReadingViewSetupScroller
 {
@@ -414,6 +350,47 @@
     [_Scroller addSubview: _ReadingView1];
     
     
+}
+
+//TODO: ReloadReading View
+-(void)ReloadReadingView
+{
+    
+    _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
+    _DisplayTheme = _Setting.SettingTheme;
+    if (_CurrentView == VIEW1) {
+        
+        [_ReadingView1.ContentTextLabel setFont:_font];
+        if (_DisplayTheme == THEME_LIGHT_DARK) {
+            
+            // Font color = Black, Background = White
+            _ReadingView1.ContentTextLabel.textColor = [UIColor blackColor];
+            [self.view setBackgroundColor:[UIColor whiteColor]];
+            
+        } else {
+            
+            // Font color = Black, Background = White
+            _ReadingView1.ContentTextLabel.textColor = [UIColor whiteColor];
+            [self.view setBackgroundColor:[UIColor blackColor]];
+            
+        }
+    } else {
+        
+        [_ReadingView2.ContentTextLabel setFont:_font];
+        if (_DisplayTheme == THEME_LIGHT_DARK) {
+            
+            // Font color = Black, Background = White
+            _ReadingView2.ContentTextLabel.textColor = [UIColor blackColor];
+            [self.view setBackgroundColor:[UIColor whiteColor]];
+            
+        } else {
+            
+            // Font color = Black, Background = White
+            _ReadingView2.ContentTextLabel.textColor = [UIColor whiteColor];
+            [self.view setBackgroundColor:[UIColor blackColor]];
+            
+        }
+    }
 }
 
 // Remove "\n" in the beginning of the article
@@ -505,37 +482,294 @@
 
 
 #pragma mark - Control Panel methods
+-(void) PlaceCoverView
+{
+    
+    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
+    
+}
+
+-(void) ExecuteTableViewAnnimation
+{
+    // TODO: I have to do it by myself.
+    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
+    [self InitSettingBtn];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
+    [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
+    _isNavTableOn = YES;
+}
+
+-(void) ExecuteSettingTableViewAnnimation
+{
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
+    _isSettingTableOn = YES;
+    
+}
+
+
+-(void)InitNavigationBtn
+{
+    if (_NaviBtn == nil) {
+        _NaviBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 50, 70, 60)];
+    }
+    
+    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    
+    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    //    _NaviBtn.backgroundColor = [UIColor blackColor];
+    _NaviBtn.opaque = YES;
+    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_NaviBtn];
+}
+
+
+-(void)InitSettingBtn
+{
+    if (_SettingBtn == nil) {
+        //        _SettingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 568, 150, 60)];
+        _SettingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 768, 150, 60)];
+        
+    }
+    
+    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    
+    //_SettingBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    _SettingBtn.backgroundColor = [UIColor grayColor];
+    _SettingBtn.opaque = YES;
+    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_SettingBtn];
+}
+
+
+
+-(void)NavigationBtnHandler
+{
+    if (_isNavTableOn == NO) {
+        
+        [self PlaceCoverView];
+        _TableView.frame = CGRectMake(-300, 100, 300, 500); // Table View init location
+        
+        [_CoverView addSubview:_TableView];
+        [_TableView reloadData];
+        [self ExecuteTableViewAnnimation];
+        
+    } else {
+        
+        [self RemoveTableViewAnnimation];
+        
+    }
+    
+}
+
+-(void)SettingBtnHandler
+{
+    
+    if (_isSettingTableOn == NO) {
+        
+        [self PlaceCoverView];
+        _SettingTableView.frame = CGRectMake(1024, 150, 320, 568); // Out of the screen
+        [_CoverView addSubview:_SettingTableView];
+        [self ExecuteSettingTableViewAnnimation];
+        
+    } else {
+        
+        [self RemoveSettingTableViewAnnimation];
+    }
+    
+}
+
+
+-(void)RemoveTableViewAnnimation
+{
+    _isNavTableOn = NO;
+    _isSettingTableOn = NO;
+    
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         [_TableView setFrame:CGRectMake(-300, 100, 300, 500)];
+                         [_SettingBtn setFrame:CGRectMake(40, 768, 150, 60)];
+                         [_SettingTableView setFrame:CGRectMake(1024, 150, 320, 568)];
+                     }
+                     completion:^(BOOL finished) {
+                         [_CoverView removeFromSuperview];
+                         [_TableView removeFromSuperview];
+                         [_SettingTableView removeFromSuperview];
+                         
+                         //TODO: Force Update Reading View followed Setting
+                         [self ReloadReadingView];
+                     }];
+    
+}
+
+
+-(void)RemoveSettingTableViewAnnimation
+{
+    _isSettingTableOn = NO;
+    
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         [_SettingTableView setFrame:CGRectMake(1024, 150, 320, 568)];
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         [_SettingTableView removeFromSuperview];
+                     }];
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([tableView isKindOfClass:[_TableView class]]) {
-        
-        NSLog(@"navigation tableview");
+    if (tableView.tag == TAG_TABLE_VIEW) {
+
         return 1;
-    } else if ([tableView isKindOfClass:[_SettingTableView class]]) {
-        NSLog(@"Setting TableView");
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        return 4;
     }
     
     return 1;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+
+    if (tableView.tag == TAG_TABLE_VIEW) {
+        
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+    
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+    
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.section == 0) {
+            
+            [self Setting_InitFontSizeViewBtns];
+            [cell addSubview:_FontSizeSettingView];
+            
+        } else if (indexPath.section == 1) {
+            
+            [self Setting_InitThemeSettingView];
+            [cell addSubview:_ThemeSettingView];
+            
+            
+        } else if (indexPath.section == 2) {
+            [self InitPreviewLab];
+            [self Setting_InitThemeView];
+            [cell addSubview:_ThemePreViewLab];
+            
+        } else if (indexPath.section ==3) {
+            cell.textLabel.text = @"About me";
+        }
+        
+
     }
     
-    cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_TableData count];
+    if (tableView.tag == TAG_TABLE_VIEW) {
+        
+        return [_TableData count];
+        
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        return 1;
+        
+    }
+    return 1;
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        if (indexPath.section <= 1) {
+            
+            return 50;
+            
+        } else if (indexPath.section == 2) {
+            
+            return 100;
+            
+        } else {
+            
+            return 45;
+        }
+        
+    }
+    
+    return 44;
+
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    
+    NSString *sectionStr = [[NSString alloc] init];
+    
+    if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        
+        switch (section) {
+            case 0:
+                sectionStr = @"字體大小";
+                break;
+                
+            case 1:
+                sectionStr = @"顯示主題";
+                break;
+                
+            case 2:
+                sectionStr = @"預覽";
+                break;
+                
+            case 3:
+                sectionStr = @"關於我";
+                break;
+            default:
+                break;
+        }
+        
+    } else {
+        
+        sectionStr = nil;
+    }
+    
+    return sectionStr;
+}
+
 
 
 #pragma mark - Gensture recognizer for CoverView
@@ -591,13 +825,8 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     
     if ((touch.view.tag == TAG_READING_VIEW_1) || (touch.view.tag == TAG_READING_VIEW_2)) {
-        return YES;
-    }
-    
-    if (touch.view.tag == TAG_COVER_VIEW) {
         
-        // Gensture recognizer for CoverView would handle this
-        return NO;
+        return YES;
     }
     
     return YES;
@@ -607,6 +836,9 @@
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     
+    if (_isNavTableOn || _isNavTableOn) {
+        return;
+    }
     if (_CurrentView == VIEW1) {
         
         if (_ReadingView2 == nil) {
@@ -651,6 +883,7 @@
         }
 
     } else {
+        
         CGPoint location = [recognizer locationInView:_Scroller];
         switch (recognizer.state) {
             case UIGestureRecognizerStateBegan:
@@ -1211,5 +1444,179 @@
         }
     }
 }
+
+
+#pragma mark - Font Setting
+
+-(void) Setting_InitFontSizeViewBtns
+{
+    
+    //cell.textLabel.text = @"FONT SIZE";
+    if (_FontSizeSettingView == nil) {
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FontSizeSetting" owner:self options:nil];
+        _FontSizeSettingView = (FontSizeSetting *)[subviewArray objectAtIndex:0];
+        _FontSizeSettingView.frame = CGRectMake(0, 0, _FontSizeSettingView.frame.size.width, _FontSizeSettingView.frame.size.height);
+        
+        [_FontSizeSettingView.SmallSizeBtn addTarget:self action:@selector(SmallSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.MidiumSizeBtn addTarget:self action:@selector(MediumSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.LargeSizeBtn addTarget:self action:@selector(LargeSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:_Setting.SettingFontSize andSave:NO];
+    
+}
+
+-(void) Setting_SetupBtnsInFontSizeViewWithSetting : (FONT_SIZE_SETTING) FontSizeSetting andSave:(BOOL) Save
+{
+    UIColor *DefaultTintColor_iOS7 = [UIColor colorWithRed:0.0f green:(108.f/255.f) blue:(255.f/255.f) alpha:1.0f];
+    
+    if (Save) {
+        [_Setting PoetrySetting_SetFontSize:FontSizeSetting];
+    }
+    
+    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:FontSizeSetting];
+    
+    switch (FontSizeSetting) {
+            
+        case FONT_SIZE_SMALL:
+            
+            NSLog(@"FONT  = SMALL SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:DefaultTintColor_iOS7];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
+            
+            
+            break;
+            
+        case FONT_SIZE_MEDIUM:
+            
+            NSLog(@"FONT  = MEDIUM SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:DefaultTintColor_iOS7];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
+            
+            break;
+            
+        case FONT_SIZE_LARGE:
+            
+            NSLog(@"FONT  = LARGE SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:DefaultTintColor_iOS7];
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void) SmallSizeBtnClicked
+{
+    NSLog(@"small");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_SMALL andSave:YES];
+}
+
+-(void) MediumSizeBtnClicked
+{
+    NSLog(@"medium");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_MEDIUM andSave:YES];
+}
+
+-(void) LargeSizeBtnClicked
+{
+    NSLog(@"large");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_LARGE andSave:YES];
+}
+
+
+#pragma mark - Theme Setting
+
+-(void) InitPreviewLab
+{
+    
+    if (_ThemePreViewLab == nil) {
+        _ThemePreViewLab = [[UILabel alloc] init];
+    }
+    
+    _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 100.f);
+    _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
+    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_Setting.SettingFontSize];
+    
+    
+}
+
+-(void) Setting_InitThemeSettingView
+{
+    NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
+    _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
+    _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
+    
+    [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
+    [_ThemeSettingView.DarkLightBtn setTitle:@"黑底白字" forState:UIControlStateNormal];
+    
+    [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void) Setting_InitThemeView
+{
+    [self Setting_SetupThemeSettingView : _Setting.SettingTheme andSave:NO];
+}
+
+-(void) Setting_SetupThemeSettingView : (THEME_SETTING) ThemeSetting andSave : (BOOL) Save
+{
+    
+    if (Save) {
+        [_Setting PoetrySetting_SetTheme:ThemeSetting];
+    }
+    NSRange range;
+    range.length = 30;
+    range.location = 2;
+    
+    // [CASPER] Add for iPad Ver
+    _NowReadingText = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    
+    switch (ThemeSetting) {
+            
+        case THEME_LIGHT_DARK:
+            NSLog(@"THEME_LIGHT_DARK");
+            //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
+            _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
+            _ThemePreViewLab.textColor = [UIColor blackColor];
+            _ThemePreViewLab.text = _NowReadingText;
+            NSLog(@"now reading = %@", _NowReadingText);
+            break;
+            
+        case THEME_DARK_LIGHT:
+            NSLog(@"THEME_DARK_LIGHT");
+            
+            //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
+            _ThemePreViewLab.backgroundColor = [UIColor blackColor];
+            _ThemePreViewLab.textColor = [UIColor whiteColor];
+            _ThemePreViewLab.text = _NowReadingText;
+            NSLog(@"now reading = %@", _NowReadingText);
+            
+            
+            break;
+            
+    }
+}
+
+
+
+-(void) LightDarkBtnClicked
+{
+    [self Setting_SetupThemeSettingView:THEME_LIGHT_DARK andSave:YES];
+}
+
+-(void) DarkLightBtnClicked
+{
+    [self Setting_SetupThemeSettingView:THEME_DARK_LIGHT andSave:YES];
+}
+
+
 
 @end

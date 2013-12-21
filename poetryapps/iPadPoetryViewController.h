@@ -12,6 +12,8 @@
 #import "PoetrySettingCoreData.h"
 #import "Animations.h"
 #import "PoetrySaveIntoCoreData.h"
+#import "SettingViewController.h"
+
 
 #define UI_IPAD_SCREEN_WIDTH            1024
 #define UI_IPAD_SCREEN_HEIGHT           768
@@ -25,8 +27,10 @@
 #define TAG_READING_VIEW_2              2
 #define TAG_COVER_VIEW                  3
 #define TAG_TABLE_VIEW                  4
+#define TAG_SETTING_TABLE_VIEW          5
 
-//#define DEBUG_IPAD_READINGVIEW
+
+#define DEBUG_IPAD_READINGVIEW
 #ifdef DEBUG_IPAD_READINGVIEW
 #   define IPAD_READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -42,7 +46,6 @@
 
 @property (nonatomic, strong) NSMutableArray            *TableData;
 @property (nonatomic, strong) UITableView               *TableView;
-@property (nonatomic, strong) UITableView               *SettingTableView;
 @property (nonatomic, strong) UIScrollView              *Scroller;
 @property (nonatomic, strong) UIView                    *CoverView;
 
@@ -53,8 +56,7 @@
 @property (nonatomic, strong) PoetryReadingView         *EmptyReadingView;
 @property (nonatomic, strong) PoetryCoreData            *PoetryDatabase;
 @property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
-@property (nonatomic, strong) PoetrySettingCoreData     *PoetrySetting;
-
+@property (nonatomic, strong) PoetrySettingCoreData     *Setting;
 
 @property (nonatomic, strong) NSDictionary              *PoetryNowReading;
 @property (nonatomic, strong) NSDictionary              *NewDataDic;
@@ -63,6 +65,17 @@
 
 @property (nonatomic, strong) UIButton                  *NaviBtn;
 @property (nonatomic, strong) UIButton                  *SettingBtn;
+
+// Setting members
+@property (nonatomic, strong) UITableView               *SettingTableView;
+@property (nonatomic, strong)   NSDictionary            *NowReading;
+@property (nonatomic, strong)   NSString                *NowReadingText;
+@property (nonatomic)           FONT_SIZE_SETTING       SettingFontSize;
+
+@property (nonatomic, strong)   FontSizeSetting         *FontSizeSettingView;
+@property (nonatomic, strong)   ThemeSetting            *ThemeSettingView;
+@property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
+@property (nonatomic, strong)   UILabel                 *FontSizeLab;
 
 
 typedef enum {
