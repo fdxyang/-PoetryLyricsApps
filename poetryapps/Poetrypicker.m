@@ -29,9 +29,9 @@
         
         
         poetryArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-        NSLog(@"poetryArr List Count = %d", [poetryArr count]);
-        NSLog(@"poetryArr Name = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        NSLog(@"poetryArr Content = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        //NSLog(@"poetryArr List Count = %d", [poetryArr count]);
+        //NSLog(@"poetryArr Name = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        //NSLog(@"poetryArr Content = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
 
         poetryPicker.delegate = self;
         poetryPicker.dataSource = self;

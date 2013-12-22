@@ -31,7 +31,8 @@
     
     PoetrySaveIntoCoreData *saveIntoCoreData = [[PoetrySaveIntoCoreData alloc]init];
     BOOL isSuccessful = [saveIntoCoreData isCoreDataSave];
-    NSLog(@"isSuccessful = %d",isSuccessful);
+    if(!isSuccessful)
+        NSLog(@"Save into core data Error!!!!!!!!!!");
     
     
     

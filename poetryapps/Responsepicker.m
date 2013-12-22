@@ -25,9 +25,9 @@
         PoetryDataBase = [[PoetryCoreData alloc] init];
 
         responseArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-        NSLog(@"responseArr List Count = %d", [responseArr count]);
-        NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        //NSLog(@"responseArr List Count = %d", [responseArr count]);
+        //NSLog(@"responseArr Name = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+        //NSLog(@"responseArr Content = %@", [[responseArr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         
         responsePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(0,0, 320, 162)];
         responsePicker.delegate = self;
