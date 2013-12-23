@@ -45,7 +45,9 @@
     NSLog(@"View did appear");
     
     if ([_PoetryDatabase Poetry_CoreDataReadingExist]) {
-        _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+        // [CASPER] 2013.12.23 Set text in preview as poetry name
+        _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+        // [CASPER] 2013.12.23 == 
         if ([_NowReadingText length] == 0) {
             
             _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
@@ -278,10 +280,11 @@
     if (Save) {
         [_Setting PoetrySetting_SetTheme:ThemeSetting];
     }
+    /*
     NSRange range;
     range.length = 30;
     range.location = 2;
-    
+    */
     switch (ThemeSetting) {
             
         case THEME_LIGHT_DARK:
@@ -289,8 +292,8 @@
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
             _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
             _ThemePreViewLab.textColor = [UIColor blackColor];
-            _ThemePreViewLab.text = [_NowReadingText substringWithRange:range];
-            NSLog(@"now reading = %@", [_NowReadingText substringWithRange:range]);
+            _ThemePreViewLab.text = _NowReadingText;
+            NSLog(@"now reading = %@", _NowReadingText);
             break;
             
         case THEME_DARK_LIGHT:
@@ -299,8 +302,8 @@
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
             _ThemePreViewLab.backgroundColor = [UIColor blackColor];
             _ThemePreViewLab.textColor = [UIColor whiteColor];
-            _ThemePreViewLab.text = [_NowReadingText substringWithRange:range];
-            NSLog(@"now reading = %@", [_NowReadingText substringWithRange:range]);
+            _ThemePreViewLab.text = _NowReadingText;
+            NSLog(@"now reading = %@", _NowReadingText);
 
 
             break;

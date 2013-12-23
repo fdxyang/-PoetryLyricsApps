@@ -311,8 +311,12 @@
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
-    [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
-
+    
+    
+    // [CASPER] 2013.12.23 do not clean up text, since file already did.
+    //[PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
+    [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    // [CASPER] 2013.12.23 ==
     
     CGSize constraint = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 20000.0f);
     

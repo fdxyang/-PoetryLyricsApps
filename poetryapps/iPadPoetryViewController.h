@@ -67,8 +67,7 @@
 @property (nonatomic, strong) UIButton                  *SettingBtn;
 
 // Setting members
-@property (nonatomic, strong) UITableView               *SettingTableView;
-@property (nonatomic, strong)   NSDictionary            *NowReading;
+@property (nonatomic, strong)   UITableView             *SettingTableView;
 @property (nonatomic, strong)   NSString                *NowReadingText;
 @property (nonatomic)           FONT_SIZE_SETTING       SettingFontSize;
 
