@@ -77,6 +77,9 @@
 @property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
 @property (nonatomic, strong)   UILabel                 *FontSizeLab;
 
+// Search members
+@property (nonatomic, strong) UISearchBar               *SearchBar;
+
 
 typedef enum {
     VIEW1 = 0x00,

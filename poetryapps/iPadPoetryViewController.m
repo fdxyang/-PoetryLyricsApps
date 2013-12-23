@@ -23,6 +23,8 @@
     BOOL                    _ConfirmToSwitch;
     BOOL                    _isNavTableOn;
     BOOL                    _isSettingTableOn;
+    BOOL                    _isSearchBarOn;
+
     
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
@@ -53,7 +55,14 @@
         _Setting = [[PoetrySettingCoreData alloc] init];
     }
     [_Setting PoetrySetting_Create];
+    
     if  (_Setting.DataSaved == NO) {
+        // 3. Save poetrys into core data
+        NSLog(@"Empty database, try to save all file in database");
+        if (_PoetrySaved == nil) {
+            _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
+        }
+        
         [_PoetrySaved isCoreDataSave];
     }
     
@@ -61,12 +70,6 @@
     if (_PoetryDatabase == nil) {
         _PoetryDatabase = [[PoetryCoreData alloc] init];
     }
-    
-    // 3. Save poetrys into core data
-    if (_PoetrySaved == nil) {
-        _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
-    }
-    
     
     // 4. Init table view
     if (_TableView == nil) {
@@ -120,6 +123,7 @@
     [_CoverView setTag:TAG_COVER_VIEW];
     
     
+    
     // 8. Init poetry array for poetry switch
     if (_NowReadingCategoryArray == nil) {
         _NowReadingCategoryArray = [[NSMutableArray alloc] init];
@@ -157,6 +161,7 @@
     _ConfirmToSwitch = NO;
     _isNavTableOn = NO;
     _isSettingTableOn = NO;
+    _isSearchBarOn = NO;
     [self InitReadingViewSetupScroller];
     [self InitNavigationBtn];
     
@@ -460,7 +465,6 @@
     
     //[PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
     [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20.0f, UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y, UI_IPAD_READINGVIEW_WIDTH - 50.0f, _LabelSizeInit.height)];
-    IPAD_READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
     
     CGFloat ViewHeight = _LabelSizeInit.height;
     CGFloat Header = UI_IPAD_TEXT_LABEL_TITLE_HEAD_Y;
@@ -470,8 +474,10 @@
         ViewHeight = UI_IPAD_SCREEN_HEIGHT;
     }
     
-
+    
     //[PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor redColor]];
+    IPAD_READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
+
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(20, 0, UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
     [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
@@ -498,6 +504,8 @@
     [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
     [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
     
+   
+    
     [self InitSettingBtn];
     [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
     [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
@@ -505,16 +513,23 @@
     [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
     [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
     
-    _isNavTableOn = YES;
+    [self ExecuteSearchBarAnnimation];
 }
 
 -(void) ExecuteSettingTableViewAnnimation
 {
+    
+    //Remove Search Bar
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:500.0];
+    _isSearchBarOn = NO;
+    
+    
     [Animations moveLeft:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
     [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
     [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
     [Animations moveRight:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
     [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
     
     _isSettingTableOn = YES;
     
@@ -551,10 +566,29 @@
     _SettingBtn.backgroundColor = [UIColor grayColor];
     _SettingBtn.opaque = YES;
     [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_SettingBtn];
+    [_CoverView addSubview:_SettingBtn];
 }
 
+-(void) InitSearchBar
+{
+    if (_SearchBar == nil) {
+        _SearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(1024, 300, 400, 50)];
+    }
+    
+    [_CoverView addSubview:_SearchBar];
+}
 
+-(void) ExecuteSearchBarAnnimation
+{
+    [self InitSearchBar];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    _isSearchBarOn = YES;
+
+}
 
 -(void)NavigationBtnHandler
 {
@@ -588,6 +622,8 @@
     } else {
         
         [self RemoveSettingTableViewAnnimation];
+        [self ExecuteSearchBarAnnimation];
+
     }
     
 }
@@ -597,17 +633,22 @@
 {
     _isNavTableOn = NO;
     _isSettingTableOn = NO;
+    _isSearchBarOn = NO;
     
     [UIView animateWithDuration:0.2
                      animations:^{
+                         
                          [_TableView setFrame:CGRectMake(-300, 100, 300, 500)];
                          [_SettingBtn setFrame:CGRectMake(40, 768, 150, 60)];
                          [_SettingTableView setFrame:CGRectMake(1024, 150, 320, 568)];
+                         [_SearchBar setFrame:CGRectMake(1024, 300, 400, 50)];
                      }
                      completion:^(BOOL finished) {
+                         
                          [_CoverView removeFromSuperview];
                          [_TableView removeFromSuperview];
                          [_SettingTableView removeFromSuperview];
+                         [_SearchBar removeFromSuperview];
                          
                          //TODO: Force Update Reading View followed Setting
                          [self ReloadReadingView];
