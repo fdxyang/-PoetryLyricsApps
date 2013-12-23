@@ -94,4 +94,11 @@ typedef enum {
     SlideLabelRightToLegt,
 }SLIDE_DIRECTION;
 
+typedef enum {
+    COVER_IDLE,
+    COVER_INIT,
+    COVER_SEARCH,
+    COVER_SETTING,
+} COVER_VIEW_STATE;
+
 @end

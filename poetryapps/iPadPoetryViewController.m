@@ -8,6 +8,16 @@
 
 #import "iPadPoetryViewController.h"
 
+#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 50, 70, 60)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 320, 500)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(30, 100, 320, 568)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(40, 768, 100, 50)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 638, 100, 50)
+#define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 300, 50)
+#define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(674, 300, 300, 50)
+#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 150, 320, 568)
+
+
 @interface iPadPoetryViewController () {
 
     CGSize                  _LabelSizeInit;
@@ -21,6 +31,8 @@
     // To indicate that the poetry is the first and the last one, and it can not be executed PREV / NEXT
     BOOL                    _HeadAndTailFlag;
     BOOL                    _ConfirmToSwitch;
+    
+    COVER_VIEW_STATE        _CoverViewState;
     BOOL                    _isNavTableOn;
     BOOL                    _isSettingTableOn;
     BOOL                    _isSearchBarOn;
@@ -29,6 +41,8 @@
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
     NSMutableArray          *TempPoetryList;
+    
+    
 }
 
 @end
@@ -71,25 +85,6 @@
         _PoetryDatabase = [[PoetryCoreData alloc] init];
     }
     
-    // 4. Init table view
-    if (_TableView == nil) {
-        //_TableView = [[UITableView alloc] initWithFrame:CGRectMake(20, 40, 320, UI_IPAD_SCREEN_HEIGHT)];
-        _TableView = [[UITableView alloc] init];
-    }
-    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
-
-    [_TableView reloadData];
-    _TableView.delegate = self;
-    _TableView.dataSource = self;
-    [_TableView setTag:TAG_TABLE_VIEW];
-    
-    
-    if (_SettingTableView == nil) {
-        _SettingTableView = [[UITableView alloc] initWithFrame:CGRectMake(1024, 150, 320, 568) style:UITableViewStyleGrouped];
-    }
-    _SettingTableView.delegate = self;
-    _SettingTableView.dataSource = self;
-    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
     
     // 5. Init Scroller
     if (_Scroller == nil) {
@@ -112,17 +107,6 @@
     if (_EmptyReadingView == nil) {
         _EmptyReadingView = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
     }
-    
-    // 7. Init Cover View
-    if (_CoverView == nil) {
-        
-        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
-        
-    }
-    [_CoverView setTag:TAG_COVER_VIEW];
-    
-    
     
     // 8. Init poetry array for poetry switch
     if (_NowReadingCategoryArray == nil) {
@@ -163,8 +147,7 @@
     _isSettingTableOn = NO;
     _isSearchBarOn = NO;
     [self InitReadingViewSetupScroller];
-    [self InitNavigationBtn];
-    
+    [self InitCoverViewItems];
 }
 
 
@@ -395,7 +378,10 @@
             [self.view setBackgroundColor:[UIColor blackColor]];
             
         }
+        
     }
+    
+    
 }
 
 // Remove "\n" in the beginning of the article
@@ -488,122 +474,97 @@
 
 
 #pragma mark - Control Panel methods
+-(void) InitCoverViewItems
+{
+    
+    if (_NaviBtn == nil) {
+        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+    }
+    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    
+    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    _NaviBtn.opaque = YES;
+    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_NaviBtn];
+    
+    
+    if (_SettingBtn == nil) {
+        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+    }
+    
+    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    
+    _SettingBtn.backgroundColor = [UIColor grayColor];
+    _SettingBtn.opaque = YES;
+    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (_CoverView == nil) {
+        
+        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        
+    }
+    [_CoverView setTag:TAG_COVER_VIEW];
+    
+    if (_SearchBar == nil) {
+        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+    }
+    
+    if (_TableView == nil) {
+        _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    }
+    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
+    
+    [_TableView reloadData];
+    _TableView.delegate = self;
+    _TableView.dataSource = self;
+    [_TableView setTag:TAG_TABLE_VIEW];
+
+    
+    if (_SettingTableView == nil) {
+        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
+    }
+    _SettingTableView.delegate = self;
+    _SettingTableView.dataSource = self;
+    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
+    
+    _CoverViewState = COVER_IDLE;
+
+}
+
+
 -(void) PlaceCoverView
 {
     
     [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
     
-}
-
--(void) ExecuteTableViewAnnimation
-{
-    // TODO: I have to do it by myself.
-    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    
-   
-    
-    [self InitSettingBtn];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    
-    [self ExecuteSearchBarAnnimation];
-}
-
--(void) ExecuteSettingTableViewAnnimation
-{
-    
-    //Remove Search Bar
-    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:500.0];
-    _isSearchBarOn = NO;
-    
-    
-    [Animations moveLeft:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
-    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveRight:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    
-    
-    _isSettingTableOn = YES;
-    
-}
-
-
--(void)InitNavigationBtn
-{
-    if (_NaviBtn == nil) {
-        _NaviBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 50, 70, 60)];
-    }
-    
-    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
-    
-    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
-    //    _NaviBtn.backgroundColor = [UIColor blackColor];
-    _NaviBtn.opaque = YES;
-    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_NaviBtn];
-}
-
-
--(void)InitSettingBtn
-{
-    if (_SettingBtn == nil) {
-        //        _SettingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 568, 150, 60)];
-        _SettingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 768, 150, 60)];
-        
-    }
-    
-    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-    
-    //_SettingBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
-    _SettingBtn.backgroundColor = [UIColor grayColor];
-    _SettingBtn.opaque = YES;
-    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    // And init all item on the init location
+    [_CoverView addSubview:_TableView];
     [_CoverView addSubview:_SettingBtn];
-}
-
--(void) InitSearchBar
-{
-    if (_SearchBar == nil) {
-        _SearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(1024, 300, 400, 50)];
-    }
-    
+    [_CoverView addSubview:_SettingTableView];
     [_CoverView addSubview:_SearchBar];
+    
 }
 
--(void) ExecuteSearchBarAnnimation
+
+-(void) ReinitSearchBar
 {
-    [self InitSearchBar];
-    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
-    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveLeft:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveRight:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveLeft:_SearchBar andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    _isSearchBarOn = YES;
-
+    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
 }
+
 
 -(void)NavigationBtnHandler
 {
     if (_isNavTableOn == NO) {
         
-        [self PlaceCoverView];
-        _TableView.frame = CGRectMake(-300, 100, 300, 500); // Table View init location
-        
-        [_CoverView addSubview:_TableView];
-        [_TableView reloadData];
-        [self ExecuteTableViewAnnimation];
+        _CoverViewState = COVER_INIT;
+        [self CoverViewStateMachine];
         
     } else {
         
-        [self RemoveTableViewAnnimation];
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
         
     }
     
@@ -614,34 +575,114 @@
     
     if (_isSettingTableOn == NO) {
         
-        [self PlaceCoverView];
-        _SettingTableView.frame = CGRectMake(1024, 150, 320, 568); // Out of the screen
-        [_CoverView addSubview:_SettingTableView];
-        [self ExecuteSettingTableViewAnnimation];
+        _CoverViewState = COVER_SETTING;
+        [self CoverViewStateMachine];
         
     } else {
         
-        [self RemoveSettingTableViewAnnimation];
-        [self ExecuteSearchBarAnnimation];
-
+        _CoverViewState = COVER_SEARCH;
+        [self CoverViewStateMachine];
+        
     }
     
 }
 
 
--(void)RemoveTableViewAnnimation
+
+#pragma mark - Cover view state control
+-(void) CoverViewStateMachine
 {
-    _isNavTableOn = NO;
-    _isSettingTableOn = NO;
-    _isSearchBarOn = NO;
+    switch (_CoverViewState) {
+        case COVER_IDLE:
+            _isNavTableOn = NO;
+            _isSearchBarOn = NO;
+            _isSettingTableOn = NO;
+            
+            [self RemoveCoverViewAnimation];
+            break;
+        
+        case COVER_INIT:
+            _isNavTableOn = YES;
+            _isSearchBarOn = YES;
+            _isSettingTableOn = NO;
+            
+            [self PlaceCoverView];
+            
+            // display table, setting btn and search bar
+            [self ExecuteTableViewAnnimation];
+            break;
+            
+        case COVER_SEARCH:
+            _isNavTableOn = YES;
+            _isSearchBarOn = YES;
+            _isSettingTableOn = NO;
+            
+            [self RemoveSettingTableViewAnnimation];
+            [self ExecuteSearchBarAnnimation];
+            break;
+            
+        case COVER_SETTING:
+            
+            _isNavTableOn = YES;
+            _isSearchBarOn = NO;
+            _isSettingTableOn = YES;
+            
+            [self RemoveSearchbarAnimation];
+            [self ExecuteSettingTableViewAnnimation];
+
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) ExecuteTableViewAnnimation
+{
+    
+    [_TableView reloadData];
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER];
+                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER];
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         
+                     }];
+    
+
+/*
+    
+    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
+    [self InitSettingBtn];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
+    [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    */
+}
+
+
+-(void)RemoveCoverViewAnimation
+{
     
     [UIView animateWithDuration:0.2
                      animations:^{
                          
-                         [_TableView setFrame:CGRectMake(-300, 100, 300, 500)];
-                         [_SettingBtn setFrame:CGRectMake(40, 768, 150, 60)];
-                         [_SettingTableView setFrame:CGRectMake(1024, 150, 320, 568)];
-                         [_SearchBar setFrame:CGRectMake(1024, 300, 400, 50)];
+                         [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+                         [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+                         
                      }
                      completion:^(BOOL finished) {
                          
@@ -657,19 +698,43 @@
 }
 
 
+
+-(void) ExecuteSearchBarAnnimation
+{
+    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+    [_CoverView addSubview:_SearchBar];
+    
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:20.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:12.0];
+    
+}
+-(void) RemoveSearchbarAnimation
+{
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [_SearchBar removeFromSuperview];
+}
+
+-(void) ExecuteSettingTableViewAnnimation
+{
+    [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+    [_CoverView addSubview:_SettingTableView];
+    
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+
+}
+
+
 -(void)RemoveSettingTableViewAnnimation
 {
-    _isSettingTableOn = NO;
-    
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         [_SettingTableView setFrame:CGRectMake(1024, 150, 320, 568)];
-                     }
-                     completion:^(BOOL finished) {
-                         
-                         [_SettingTableView removeFromSuperview];
-                     }];
-    
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [_SettingTableView removeFromSuperview];
 }
 
 
@@ -818,7 +883,7 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    [self RemoveTableViewAnnimation];
+    [self RemoveCoverViewAnimation];
 }
 
 
