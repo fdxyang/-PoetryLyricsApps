@@ -169,6 +169,15 @@
     [view setClipsToBounds:NO];
 }
 
++ (void) ViewShadow : (UIView *) view
+{
+    CALayer *layer = view.layer;
+    [layer setShadowColor: [[UIColor blackColor] CGColor]]; //Shadow Color
+    [layer setShadowOpacity:0.80f];
+    [layer setShadowOffset: CGSizeMake(8, 10)];
+    [layer setShadowRadius:10.0];
+
+}
 
 + (void) background: (UIView *) view andImageFileName: (NSString *) filename{
     //Sets the background for a UIView full filename with extension as parameter
@@ -187,7 +196,7 @@
 
 + (void) shadowOnView: (UIView *) view andShadowType: (NSString *) shadowType{
     CGSize size = view.bounds.size;
-    if (shadowType == @"NoShadow"){
+    if ([shadowType isEqualToString:@"NoShadow"]){
         view.layer.shadowColor = [UIColor clearColor].CGColor;
     }
     else{
@@ -199,7 +208,7 @@
     view.layer.shadowRadius = 5.0f;
     view.layer.masksToBounds = NO;
  
-    if (shadowType == @"Trapezoidal"){
+    if ([shadowType isEqualToString:@"Trapezoidal"]){
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path moveToPoint:CGPointMake(size.width * 0.33f, size.height * 0.66f)];
         [path addLineToPoint:CGPointMake(size.width * 0.66f, size.height * 0.66f)];
@@ -208,13 +217,13 @@
         view.layer.shadowPath = path.CGPath;
         
     }
-    else if (shadowType == @"Elliptical"){
+    else if ([shadowType isEqualToString:@"Elliptical"]){
         CGRect ovalRect = CGRectMake(0.0f, size.height + 5, size.width - 10, 15);
         UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:ovalRect];
         view.layer.shadowPath = path.CGPath;
     }
     //Curl is not working !!
-    else if (shadowType == @"Curl"){
+    else if ([shadowType isEqualToString:@"Curl"]){
         CGFloat offset = 10.0;
         CGFloat curve = 5.0;
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -240,6 +249,8 @@
         view.layer.shouldRasterize = YES;
         view.layer.shadowPath = path.CGPath;
             
+    } else if ([shadowType isEqualToString:@"Customized"]){
+        
     }
         
 }

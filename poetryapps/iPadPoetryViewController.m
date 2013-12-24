@@ -9,11 +9,14 @@
 
 #import "iPadPoetryViewController.h"
 
+#define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
+#define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
+
 #define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 50, 70, 60)
-#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 320, 500)
-#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(30, 100, 320, 568)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(40, 768, 100, 50)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 638, 100, 50)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(30, 768, 100, 50)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 668, 100, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 300, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(674, 300, 300, 50)
 #define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 150, 320, 568)
@@ -144,6 +147,68 @@
 }
 
 
+-(void) InitCoverViewItems
+{
+    
+    if (_NaviBtn == nil) {
+        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+    }
+    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    
+    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    _NaviBtn.opaque = YES;
+    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_NaviBtn];
+    
+    
+    if (_SettingBtn == nil) {
+        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+    }
+    
+    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    
+    _SettingBtn.backgroundColor = [UIColor grayColor];
+    _SettingBtn.opaque = YES;
+    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (_CoverView == nil) {
+        
+        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        
+    }
+    [_CoverView setTag:TAG_COVER_VIEW];
+    
+    if (_SearchBar == nil) {
+        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+        _SearchBar.delegate = self;
+    }
+    
+    if (_TableView == nil) {
+        _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    }
+    _TableData = [NSMutableArray arrayWithObjects:@"導讀", @"聖詩", @"啟應文", @"閱讀歷史", nil];
+    _TableView.delegate = self;
+    _TableView.dataSource = self;
+    _TableView.scrollEnabled = NO;
+    [_TableView setTag:TAG_TABLE_VIEW];
+    
+    [_TableView reloadData];
+   
+    
+    if (_SettingTableView == nil) {
+        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
+    }
+    _SettingTableView.delegate = self;
+    _SettingTableView.dataSource = self;
+    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
+    
+
+    _CoverViewState = COVER_IDLE;
+    
+}
+
 #pragma mark - Reading and Gesture Methods
 -(void)InitReadingViewSetupScroller
 {
@@ -198,7 +263,6 @@
     
 }
 
-//TODO: ReloadReading View
 -(void)ReloadReadingView
 {
     
@@ -366,7 +430,7 @@
 {
     
     [_TableView reloadData];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.5
                      animations:^{
                          
                          [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
@@ -462,67 +526,6 @@
     [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
     [_SettingTableView removeFromSuperview];
 }
--(void) InitCoverViewItems
-{
-    
-    if (_NaviBtn == nil) {
-        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
-    }
-    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
-    
-    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
-    _NaviBtn.opaque = YES;
-    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_NaviBtn];
-    
-    
-    if (_SettingBtn == nil) {
-        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
-    }
-    
-    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-    
-    _SettingBtn.backgroundColor = [UIColor grayColor];
-    _SettingBtn.opaque = YES;
-    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    if (_CoverView == nil) {
-        
-        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
-        
-    }
-    [_CoverView setTag:TAG_COVER_VIEW];
-    
-    if (_SearchBar == nil) {
-        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
-        _SearchBar.delegate = self;
-    }
-    
-    if (_TableView == nil) {
-        _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
-    }
-    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
-    
-    [_TableView reloadData];
-    _TableView.delegate = self;
-    _TableView.dataSource = self;
-    [_TableView setTag:TAG_TABLE_VIEW];
-    
-    
-    if (_SettingTableView == nil) {
-        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
-    }
-    _SettingTableView.delegate = self;
-    _SettingTableView.dataSource = self;
-    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
-    
-    
-    _CoverViewState = COVER_IDLE;
-    
-}
-
 
 -(void) PlaceCoverView
 {
@@ -534,6 +537,15 @@
     [_CoverView addSubview:_SettingBtn];
     [_CoverView addSubview:_SettingTableView];
     [_CoverView addSubview:_SearchBar];
+   
+    NSString *ShadowType = @"Customized";
+    [Animations frameAndShadow:_TableView];
+//    [Animations shadowOnView:_TableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingBtn andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingTableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SearchBar andShadowType:ShadowType];
+
+    
     _SearchBar.text = @"";
     
 }

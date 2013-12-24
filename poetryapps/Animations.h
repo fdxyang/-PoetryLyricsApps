@@ -32,4 +32,7 @@
 + (void) background: (UIView *) view andImageFileName: (NSString *) filename;
 + (void) roundedCorners: (UIView *) view;
 
++ (void) ViewShadow : (UIView *) view;
+
+
 @end
