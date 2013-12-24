@@ -42,7 +42,10 @@
 
 
 
-@interface iPadPoetryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface iPadPoetryViewController : UIViewController <UITableViewDelegate,
+                                                        UITableViewDataSource,
+                                                        UIGestureRecognizerDelegate,
+                                                        UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray            *TableData;
 @property (nonatomic, strong) UITableView               *TableView;
@@ -77,7 +80,13 @@
 @property (nonatomic, strong)   UILabel                 *FontSizeLab;
 
 // Search members
-@property (nonatomic, strong) UISearchBar               *SearchBar;
+@property (nonatomic, strong)   UISearchBar             *SearchBar;
+
+@property (nonatomic, strong)   NSMutableArray          *SearchHistoryData;
+@property (nonatomic, strong)   NSMutableArray          *SearchGuidedReading;
+@property (nonatomic, strong)   NSMutableArray          *SearchPoetryData;
+@property (nonatomic, strong)   NSMutableArray          *SearchRespose;
+@property (nonatomic, strong)   NSArray                 *SearchResultDisplayArray;
 
 
 typedef enum {

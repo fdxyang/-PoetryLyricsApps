@@ -5,6 +5,7 @@
 //  Created by GIGIGUN on 2013/12/13.
 //  Copyright (c) 2013年 cc. All rights reserved.
 //
+//  [CASPER] 2013.12.24 Add search funciton
 
 #import "iPadPoetryViewController.h"
 
@@ -36,6 +37,7 @@
     BOOL                    _isNavTableOn;
     BOOL                    _isSettingTableOn;
     BOOL                    _isSearchBarOn;
+    BOOL                    _isSearching;       //[CASPER] 2013.12.24
 
     
     CURRENT_VIEW            _CurrentView;
@@ -62,63 +64,36 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"iPad View Did Load");
-    
-    // 1. Init Setting
-    if (_Setting == nil) {
-        _Setting = [[PoetrySettingCoreData alloc] init];
-    }
+    _Setting = [[PoetrySettingCoreData alloc] init];
     [_Setting PoetrySetting_Create];
     
     if  (_Setting.DataSaved == NO) {
-        // 3. Save poetrys into core data
         NSLog(@"Empty database, try to save all file in database");
-        if (_PoetrySaved == nil) {
-            _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
-        }
-        
+        _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
         [_PoetrySaved isCoreDataSave];
     }
-    
-    // 2. Init Core Data
-    if (_PoetryDatabase == nil) {
-        _PoetryDatabase = [[PoetryCoreData alloc] init];
-    }
-    
-    
-    // 5. Init Scroller
-    if (_Scroller == nil) {
-        _Scroller = [[UIScrollView alloc] init];
-    }
-    
+    _PoetryDatabase = [[PoetryCoreData alloc] init];
+    _Scroller = [[UIScrollView alloc] init];
     _Scroller.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
     [_Scroller setScrollEnabled:YES];
     [self.view addSubview:_Scroller];
     
-    // 6. Init reading views
-    if (_ReadingView1 == nil) {
-        _ReadingView1 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        [_ReadingView1 setTag:TAG_READING_VIEW_1];
-    }
-    if (_ReadingView2 == nil) {
-        _ReadingView2 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        [_ReadingView2 setTag:TAG_READING_VIEW_2];
-    }
-    if (_EmptyReadingView == nil) {
-        _EmptyReadingView = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-    }
     
-    // 8. Init poetry array for poetry switch
-    if (_NowReadingCategoryArray == nil) {
-        _NowReadingCategoryArray = [[NSMutableArray alloc] init];
-    }
+    _ReadingView1 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    _ReadingView2 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    _EmptyReadingView = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+    [_ReadingView1 setTag:TAG_READING_VIEW_1];
+    [_ReadingView2 setTag:TAG_READING_VIEW_2];
+
+    _NowReadingCategoryArray = [[NSMutableArray alloc] init];
+
     
     // 9. add GestureRecognize on reading view
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
-
     [self.view addGestureRecognizer:panRecognizer];
     panRecognizer.maximumNumberOfTouches = 1;
     panRecognizer.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,14 +113,19 @@
     _SlideDirection = SlideLabelNone;
     _LabelSizeInit = CGSizeMake(UI_IPAD_SCREEN_WIDTH, 0);
     _CurrentView = VIEW1;
+    
+    // Reading view flags
     _GetSlideInLabel = NO;
     _DataFlag = NO;
     _CrossCategoryFlag = NO;
     _HeadAndTailFlag = NO;
     _ConfirmToSwitch = NO;
+    
+    // Cover view flags
     _isNavTableOn = NO;
     _isSettingTableOn = NO;
     _isSearchBarOn = NO;
+    _isSearching = NO;      //[CASPER] 2013.12.24
     [self InitReadingViewSetupScroller];
     [self InitCoverViewItems];
 }
@@ -207,7 +187,7 @@
         _ReadingView2 = [[PoetryReadingView alloc] init];
     }
     
-    _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
+    _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1 ViewExist:NO];
     IPAD_READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
     
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
@@ -226,12 +206,15 @@
     _DisplayTheme = _Setting.SettingTheme;
     if (_CurrentView == VIEW1) {
         
+        [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1 ViewExist:YES];
+        /*
         [_ReadingView1.ContentTextLabel setFont:_font];
         if (_DisplayTheme == THEME_LIGHT_DARK) {
             
             // Font color = Black, Background = White
             _ReadingView1.ContentTextLabel.textColor = [UIColor blackColor];
             [self.view setBackgroundColor:[UIColor whiteColor]];
+
             
         } else {
             
@@ -240,28 +223,11 @@
             [self.view setBackgroundColor:[UIColor blackColor]];
             
         }
+         */
     } else {
         
-        
-        
-        [_ReadingView2.ContentTextLabel setFont:_font];
-        if (_DisplayTheme == THEME_LIGHT_DARK) {
-            
-            // Font color = Black, Background = White
-            _ReadingView2.ContentTextLabel.textColor = [UIColor blackColor];
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            
-        } else {
-            
-            // Font color = Black, Background = White
-            _ReadingView2.ContentTextLabel.textColor = [UIColor whiteColor];
-            [self.view setBackgroundColor:[UIColor blackColor]];
-            
-        }
-        
+        [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView2 ViewExist:YES];
     }
-    
-    
 }
 
 // Remove "\n" in the beginning of the article
@@ -278,9 +244,9 @@
             if (index <= 1) {
                 
                 if (index == 1) {
+                    
                     range.location = index;
                     Articel = [Articel stringByReplacingCharactersInRange:range withString:@""];
-                    
                     
                 }
                 
@@ -298,7 +264,7 @@
     return Articel;
 }
 
--(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
+-(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView ViewExist : (BOOL) Exist
 {
     
     if (PoetryReadingView.ContentTextLabel == nil) {
@@ -344,7 +310,9 @@
     //[PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor redColor]];
     //IPAD_READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
 
-    [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
+    if (Exist == NO) {
+        [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
+    }
     [PoetryReadingView setFrame:CGRectMake(20, 0, UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
     [_Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
 
@@ -352,124 +320,9 @@
     
 }
 
-
-#pragma mark - Control Panel methods
--(void) InitCoverViewItems
-{
-    
-    if (_NaviBtn == nil) {
-        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
-    }
-    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
-    
-    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
-    _NaviBtn.opaque = YES;
-    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_NaviBtn];
-    
-    
-    if (_SettingBtn == nil) {
-        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
-    }
-    
-    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-    
-    _SettingBtn.backgroundColor = [UIColor grayColor];
-    _SettingBtn.opaque = YES;
-    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    if (_CoverView == nil) {
-        
-        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
-        
-    }
-    [_CoverView setTag:TAG_COVER_VIEW];
-    
-    if (_SearchBar == nil) {
-        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
-    }
-    
-    if (_TableView == nil) {
-        _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
-    }
-    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
-    
-    [_TableView reloadData];
-    _TableView.delegate = self;
-    _TableView.dataSource = self;
-    [_TableView setTag:TAG_TABLE_VIEW];
-
-    
-    if (_SettingTableView == nil) {
-        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
-    }
-    _SettingTableView.delegate = self;
-    _SettingTableView.dataSource = self;
-    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
-    
-    _CoverViewState = COVER_IDLE;
-
-}
-
-
--(void) PlaceCoverView
-{
-    
-    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
-    
-    // And init all item on the init location
-    [_CoverView addSubview:_TableView];
-    [_CoverView addSubview:_SettingBtn];
-    [_CoverView addSubview:_SettingTableView];
-    [_CoverView addSubview:_SearchBar];
-    
-}
-
-
--(void) ReinitSearchBar
-{
-    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
-}
-
-
--(void)NavigationBtnHandler
-{
-    if (_isNavTableOn == NO) {
-        
-        _CoverViewState = COVER_INIT;
-        [self CoverViewStateMachine];
-        
-    } else {
-        
-        _CoverViewState = COVER_IDLE;
-        [self CoverViewStateMachine];
-        
-    }
-    
-}
-
--(void)SettingBtnHandler
-{
-    
-    if (_isSettingTableOn == NO) {
-        
-        _CoverViewState = COVER_SETTING;
-        [self CoverViewStateMachine];
-        
-    } else {
-        
-        _CoverViewState = COVER_SEARCH;
-        [self CoverViewStateMachine];
-        
-    }
-    
-}
-
-
-
 #pragma mark - Cover view state control
+
+// All element on cover view should use this SM to control
 -(void) CoverViewStateMachine
 {
     switch (_CoverViewState) {
@@ -477,6 +330,7 @@
             _isNavTableOn = NO;
             _isSearchBarOn = NO;
             _isSettingTableOn = NO;
+            _isSearching = NO; //[CASPER] 2013.12.24
             
             [self RemoveCoverViewAnimation];
             break;
@@ -487,8 +341,6 @@
             _isSettingTableOn = NO;
             
             [self PlaceCoverView];
-            
-            // display table, setting btn and search bar
             [self ExecuteTableViewAnnimation];
             break;
             
@@ -506,6 +358,7 @@
             _isNavTableOn = YES;
             _isSearchBarOn = NO;
             _isSettingTableOn = YES;
+            _isSearching = NO;
             
             [self RemoveSearchbarAnimation];
             [self ExecuteSettingTableViewAnnimation];
@@ -515,6 +368,15 @@
             break;
     }
 }
+
+// Only cover view use this gesture detection
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    _CoverViewState = COVER_IDLE;
+    [self CoverViewStateMachine];
+}
+
 
 -(void) ExecuteTableViewAnnimation
 {
@@ -616,6 +478,166 @@
     [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
     [_SettingTableView removeFromSuperview];
 }
+-(void) InitCoverViewItems
+{
+    
+    if (_NaviBtn == nil) {
+        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+    }
+    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    
+    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    _NaviBtn.opaque = YES;
+    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_NaviBtn];
+    
+    
+    if (_SettingBtn == nil) {
+        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+    }
+    
+    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    
+    _SettingBtn.backgroundColor = [UIColor grayColor];
+    _SettingBtn.opaque = YES;
+    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (_CoverView == nil) {
+        
+        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        
+    }
+    [_CoverView setTag:TAG_COVER_VIEW];
+    
+    if (_SearchBar == nil) {
+        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+        _SearchBar.delegate = self;
+    }
+    
+    if (_TableView == nil) {
+        _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    }
+    _TableData = [NSMutableArray arrayWithObjects:@"GUARD READING", @"POETRYS", @"RESPONSIVE POETRYS", nil];
+    
+    [_TableView reloadData];
+    _TableView.delegate = self;
+    _TableView.dataSource = self;
+    [_TableView setTag:TAG_TABLE_VIEW];
+    
+    
+    if (_SettingTableView == nil) {
+        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
+    }
+    _SettingTableView.delegate = self;
+    _SettingTableView.dataSource = self;
+    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
+    
+    
+    _CoverViewState = COVER_IDLE;
+    
+}
+
+
+-(void) PlaceCoverView
+{
+    
+    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
+    
+    // And init all item on the init location
+    [_CoverView addSubview:_TableView];
+    [_CoverView addSubview:_SettingBtn];
+    [_CoverView addSubview:_SettingTableView];
+    [_CoverView addSubview:_SearchBar];
+    _SearchBar.text = @"";
+    
+}
+
+
+-(void) ReinitSearchBar
+{
+    _SearchBar.text = @"";
+    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+}
+
+
+-(void)NavigationBtnHandler
+{
+    if (_isNavTableOn == NO) {
+        
+        _CoverViewState = COVER_INIT;
+        [self CoverViewStateMachine];
+        
+    } else {
+        
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
+        
+    }
+    
+}
+
+-(void)SettingBtnHandler
+{
+    
+    if (_isSettingTableOn == NO) {
+        
+        _CoverViewState = COVER_SETTING;
+        [self CoverViewStateMachine];
+        
+    } else {
+        
+        _CoverViewState = COVER_SEARCH;
+        [self CoverViewStateMachine];
+        
+    }
+    
+}
+
+// return NO to not become first responder
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"TEST searchBarShouldBeginEditing  set _isSearching YES");
+    _isSearching = YES;     //[CASPER] 2013.12.24
+    return YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self filterContentForSearchText:searchText];
+    [_TableView reloadData];
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText {
+    
+    _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
+    
+    _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
+    
+    _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
+    
+    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
+    
+    
+    if ([searchText length] > 3 ) {
+    
+    [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
+    [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+    [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+    
+    }
+    
+    
+    _SearchResultDisplayArray = [NSArray arrayWithObjects:
+                                 _SearchHistoryData,
+                                 _SearchGuidedReading,
+                                 _SearchPoetryData,
+                                 _SearchRespose,
+                                 nil];
+    
+}
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -637,7 +659,9 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
+    
     if (tableView.tag == TAG_TABLE_VIEW) {
+        NSLog(@"TEST3 _isSearching = %d", _isSearching);
         
         
         if (cell == nil) {
@@ -684,6 +708,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == TAG_TABLE_VIEW) {
+        NSLog(@"TEST _isSearching = %d", _isSearching);
         
         return [_TableData count];
         
@@ -750,21 +775,11 @@
         
     } else {
         
+        NSLog(@"TEST2 _isSearching = %d", _isSearching);
         sectionStr = nil;
     }
     
     return sectionStr;
-}
-
-
-
-#pragma mark - Gensture recognizer for CoverView
-
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    _CoverViewState = COVER_IDLE;
-    [self CoverViewStateMachine];
 }
 
 
@@ -803,7 +818,6 @@
         _EmptyReadingView.ContentTextLabel.textAlignment = NSTextAlignmentRight;
         
     }
-    
     
     return _EmptyReadingView;
 }
@@ -1009,7 +1023,7 @@
                 if (_NewDataDic) {
                     
                     View.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
-                    View = [self DisplayHandlingWithData:_NewDataDic onView:View];
+                    View = [self DisplayHandlingWithData:_NewDataDic onView:View ViewExist:NO];
                     //IPAD_READING_VIEW_LOG(@"View Generate = %@", View);
                     
                     if (_DisplayTheme == THEME_LIGHT_DARK) {
@@ -1172,7 +1186,7 @@
                     
                     // Height of view will be set inside the method
                     View.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
-                    View = [self DisplayHandlingWithData:_NewDataDic onView:View];
+                    View = [self DisplayHandlingWithData:_NewDataDic onView:View ViewExist:NO];
                     IPAD_READING_VIEW_LOG(@"New View Generate = [%@]", View);
                     
                     
@@ -1435,7 +1449,6 @@
 
 
 #pragma mark - Font Setting
-
 -(void) Setting_InitFontSizeViewBtns
 {
     
