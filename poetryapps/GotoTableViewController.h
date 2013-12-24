@@ -10,7 +10,7 @@
 #import "GotoTableCell.h"
 #import "PoetryCoreData.h"
 
-#define DEBUG_GOTOVIEW
+//#define DEBUG_GOTOVIEW
 #ifdef DEBUG_GOTOVIEW
 #   define GOTO_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
