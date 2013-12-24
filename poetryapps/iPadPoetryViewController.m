@@ -68,7 +68,7 @@
     [_Setting PoetrySetting_Create];
     
     if  (_Setting.DataSaved == NO) {
-        NSLog(@"Empty database, try to save all file in database");
+        IPAD_READING_VIEW_LOG(@"Empty database, try to save all file in database");
         _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
         [_PoetrySaved isCoreDataSave];
     }
@@ -207,23 +207,7 @@
     if (_CurrentView == VIEW1) {
         
         [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1 ViewExist:YES];
-        /*
-        [_ReadingView1.ContentTextLabel setFont:_font];
-        if (_DisplayTheme == THEME_LIGHT_DARK) {
-            
-            // Font color = Black, Background = White
-            _ReadingView1.ContentTextLabel.textColor = [UIColor blackColor];
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-
-            
-        } else {
-            
-            // Font color = Black, Background = White
-            _ReadingView1.ContentTextLabel.textColor = [UIColor whiteColor];
-            [self.view setBackgroundColor:[UIColor blackColor]];
-            
-        }
-         */
+       
     } else {
         
         [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView2 ViewExist:YES];
@@ -598,8 +582,9 @@
 // return NO to not become first responder
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    NSLog(@"TEST searchBarShouldBeginEditing  set _isSearching YES");
+    IPAD_READING_VIEW_LOG(@"searchBarShouldBeginEditing  set _isSearching YES");
     _isSearching = YES;     //[CASPER] 2013.12.24
+    [_TableView reloadData];
     return YES;
 }
 
@@ -611,20 +596,21 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText {
     
+    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
+
     _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
-    
+
     _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
     
     _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
     
-    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
     
     
     if ([searchText length] > 3 ) {
     
-    [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
-    [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
-    [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
+        [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
     
     }
     
@@ -643,8 +629,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView.tag == TAG_TABLE_VIEW) {
-
+        
+        if (_isSearching) {
+            // Search table
+            return 4;
+        }
         return 1;
+        
     } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
         
         return 4;
@@ -661,14 +652,21 @@
 
     
     if (tableView.tag == TAG_TABLE_VIEW) {
-        NSLog(@"TEST3 _isSearching = %d", _isSearching);
-        
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         
-        cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+        if (_isSearching) {
+            
+            cell.textLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+            cell.detailTextLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+            
+        } else {
+            
+            cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+        }
+       
     
     } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
     
@@ -708,9 +706,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == TAG_TABLE_VIEW) {
-        NSLog(@"TEST _isSearching = %d", _isSearching);
+        if (_isSearching) {
+            return [[_SearchResultDisplayArray objectAtIndex:section] count];
+        } else {
+            return [_TableData count];
+        }
         
-        return [_TableData count];
         
     } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
         
@@ -775,8 +776,32 @@
         
     } else {
         
-        NSLog(@"TEST2 _isSearching = %d", _isSearching);
-        sectionStr = nil;
+        if (_isSearching) {
+            switch (section) {
+                case 0:
+                    sectionStr = nil;
+                    break;
+                    
+                case 1:
+                    sectionStr = @"GUARD READING";
+                    break;
+                    
+                case 2:
+                    sectionStr = @"POETRY";
+                    break;
+                    
+                case 3:
+                    sectionStr = @"RESPONSIVE PRAYER";
+                    break;
+                default:
+                    break;
+            }
+
+        } else {
+            
+            sectionStr = nil;
+            
+        }
     }
     
     return sectionStr;
@@ -1482,7 +1507,7 @@
             
         case FONT_SIZE_SMALL:
             
-            NSLog(@"FONT  = SMALL SIZE ");
+            IPAD_READING_VIEW_LOG(@"FONT  = SMALL SIZE ");
             [_FontSizeSettingView.SmallSizeBtn setTintColor:DefaultTintColor_iOS7];
             [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
             [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
@@ -1492,7 +1517,7 @@
             
         case FONT_SIZE_MEDIUM:
             
-            NSLog(@"FONT  = MEDIUM SIZE ");
+            IPAD_READING_VIEW_LOG(@"FONT  = MEDIUM SIZE ");
             [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
             [_FontSizeSettingView.MidiumSizeBtn setTintColor:DefaultTintColor_iOS7];
             [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
@@ -1501,7 +1526,7 @@
             
         case FONT_SIZE_LARGE:
             
-            NSLog(@"FONT  = LARGE SIZE ");
+            IPAD_READING_VIEW_LOG(@"FONT  = LARGE SIZE ");
             [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
             [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
             [_FontSizeSettingView.LargeSizeBtn setTintColor:DefaultTintColor_iOS7];
@@ -1515,19 +1540,19 @@
 
 -(void) SmallSizeBtnClicked
 {
-    NSLog(@"small");
+    IPAD_READING_VIEW_LOG(@"small");
     [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_SMALL andSave:YES];
 }
 
 -(void) MediumSizeBtnClicked
 {
-    NSLog(@"medium");
+    IPAD_READING_VIEW_LOG(@"medium");
     [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_MEDIUM andSave:YES];
 }
 
 -(void) LargeSizeBtnClicked
 {
-    NSLog(@"large");
+    IPAD_READING_VIEW_LOG(@"large");
     [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_LARGE andSave:YES];
 }
 
@@ -1573,9 +1598,6 @@
     if (Save) {
         [_Setting PoetrySetting_SetTheme:ThemeSetting];
     }
-    NSRange range;
-    range.length = 30;
-    range.location = 2;
     
     // [CASPER] Add for iPad Ver
     _NowReadingText = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
@@ -1583,22 +1605,20 @@
     switch (ThemeSetting) {
             
         case THEME_LIGHT_DARK:
-            NSLog(@"THEME_LIGHT_DARK");
+            IPAD_READING_VIEW_LOG(@"THEME_LIGHT_DARK");
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
             _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
             _ThemePreViewLab.textColor = [UIColor blackColor];
             _ThemePreViewLab.text = _NowReadingText;
-            NSLog(@"now reading = %@", _NowReadingText);
             break;
             
         case THEME_DARK_LIGHT:
-            NSLog(@"THEME_DARK_LIGHT");
+            IPAD_READING_VIEW_LOG(@"THEME_DARK_LIGHT");
             
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
             _ThemePreViewLab.backgroundColor = [UIColor blackColor];
             _ThemePreViewLab.textColor = [UIColor whiteColor];
             _ThemePreViewLab.text = _NowReadingText;
-            NSLog(@"now reading = %@", _NowReadingText);
             
             
             break;
