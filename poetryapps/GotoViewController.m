@@ -55,7 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //NSLog(@"viewWillAppear");
+
     _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
     [_TableView reloadData];
 }
@@ -69,8 +69,6 @@
 
 - (IBAction)guideBtnClicked:(id)sender
 {
-    NSLog(@"guideBtnClicked");
-    
     gotoType = 0; //guide type
     
     [_guideView setFlag:TRUE];
@@ -86,8 +84,6 @@
 
 - (IBAction)poetryBtnClicked:(id)sender
 {
-    NSLog(@"poetryBtnClicked");
-    
     gotoType = 1; // poetry type
     
     [_guideView setFlag:FALSE];
@@ -102,8 +98,6 @@
 
 - (IBAction)responseBtnClicked:(id)sender
 {
-    NSLog(@"responseBtnClicked");
-    
     gotoType = 2; // response type
     
     [_guideView setFlag:FALSE];
@@ -198,7 +192,7 @@
         return [_historyArr count];//history array count
     else
     {
-        NSLog(@"It is a bug !!!!!!!");
+        GOTO_VIEW_ERROR_LOG(@"It is a bug !!!!!!!");
         return 0;
     }
 }
@@ -270,12 +264,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"section = %d",indexPath.section);
+    GOTO_VIEW_LOG(@"section = %d",indexPath.section);
     if (indexPath.section == BASICGUIDE)
     {
         switch (indexPath.row) {
             case 0: // guide
-                //NSLog(@"guide press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:0];
@@ -290,7 +283,6 @@
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 1: // poetry
-                //NSLog(@"poetry press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:1];
@@ -305,7 +297,6 @@
                 [self performSegueWithIdentifier: @"detailTableView" sender: self];
                 break;
             case 2: // response
-                //NSLog(@"response press");
                 if(!_detailTableView)
                 {
                     _detailTableView = [[GotoTableViewController alloc]initWithStyle:UITableViewStylePlain TYPE:2];
@@ -327,7 +318,7 @@
     else //histroy
     {
         NSDictionary *SelectedDic = [_historyArr objectAtIndex:indexPath.row];
-        //NSLog(@"history = %@", SelectedDic);
+        GOTO_VIEW_LOG(@"history = %@", SelectedDic);
     
         [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
         [_TableView reloadData];

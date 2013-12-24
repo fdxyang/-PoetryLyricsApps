@@ -14,8 +14,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        //NSLog(@"poetrypicker init");
         // Initialization code
         
         isTurnOnView = isTurnOn;
@@ -27,12 +25,7 @@
         poetryArr = [[NSMutableArray alloc] init];
         PoetryDataBase = [[PoetryCoreData alloc] init];
         
-        
         poetryArr = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:POETRYS];
-        //NSLog(@"poetryArr List Count = %d", [poetryArr count]);
-        //NSLog(@"poetryArr Name = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        //NSLog(@"poetryArr Content = %@", [[poetryArr objectAtIndex:2] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-
         poetryPicker.delegate = self;
         poetryPicker.dataSource = self;
         [self addSubview:poetryPicker];
@@ -70,7 +63,6 @@
 //內建函式印出字串在Picker上以免出現"?"
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"!!! ROW: %d, poetry titleForRow = %@", row,[[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]);
     switch (component) {
         case 0:
             _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
@@ -93,7 +85,6 @@
 {
     _pickerContent = [NSString stringWithFormat:@"%@", [[poetryArr objectAtIndex:row] valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     
-    //NSLog(@"_pickerContent = %@",_pickerContent);
     if(isTurnOnView)
         [_btn setTitle:[NSString stringWithFormat:@"%@", _pickerContent] forState:UIControlStateNormal];
     
