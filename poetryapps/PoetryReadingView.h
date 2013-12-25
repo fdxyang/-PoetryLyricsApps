@@ -10,4 +10,5 @@
 
 @interface PoetryReadingView : UIView
 @property (nonatomic, strong) UILabel *ContentTextLabel;
+@property (nonatomic, strong) UILabel *TitleTextLabel; //Only for iPad
 @end

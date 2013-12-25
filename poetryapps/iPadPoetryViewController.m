@@ -12,6 +12,12 @@
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
 
+#define UI_IPAD_READING_TITLE_RECT_LABEL            CGRectMake(0, 90, UI_IPAD_READINGVIEW_WIDTH, 100);
+
+#define UI_IPAD_NAVI_VIEW_WIDTH                     150
+#define UI_IPAD_PREV_VIEW_RECT_INIT                 CGRectMake(0, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
+#define UI_IPAD_NEXT_VIEW_RECT_INIT                 CGRectMake(UI_IPAD_SCREEN_WIDTH - UI_IPAD_NAVI_VIEW_WIDTH, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
+
 #define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 50, 70, 60)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
@@ -41,7 +47,7 @@
     BOOL                    _isSettingTableOn;
     BOOL                    _isSearchBarOn;
     BOOL                    _isSearching;       //[CASPER] 2013.12.24
-
+    BOOL                    _isHandlingTouchSwitch;
     
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
@@ -66,7 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     _Setting = [[PoetrySettingCoreData alloc] init];
     [_Setting PoetrySetting_Create];
     
@@ -80,7 +86,7 @@
     _Scroller.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
     [_Scroller setScrollEnabled:YES];
     [self.view addSubview:_Scroller];
-    
+
     
     _ReadingView1 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
     _ReadingView2 = [[PoetryReadingView alloc] initWithFrame:CGRectMake(UI_READING_VIEW_ORIGIN_X, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
@@ -97,6 +103,16 @@
     panRecognizer.maximumNumberOfTouches = 1;
     panRecognizer.delegate = self;
     
+    /*
+    _PrevTouchView = [[UIView alloc] initWithFrame:UI_IPAD_PREV_VIEW_RECT_INIT];
+    _NextTouchView = [[UIView alloc] initWithFrame:UI_IPAD_NEXT_VIEW_RECT_INIT];
+    [_PrevTouchView setBackgroundColor:[UIColor redColor]];
+    [_NextTouchView setBackgroundColor:[UIColor redColor]];
+    [_PrevTouchView setTag:TAG_PREV_TOUCH_VIEW];
+    [_NextTouchView setTag:TAG_NEXT_TOUCH_VIEW];
+    [self.view addSubview:_PrevTouchView];
+    [self.view addSubview:_NextTouchView];
+    */
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,6 +145,7 @@
     _isSettingTableOn = NO;
     _isSearchBarOn = NO;
     _isSearching = NO;      //[CASPER] 2013.12.24
+    _isHandlingTouchSwitch = NO;
     [self InitReadingViewSetupScroller];
     [self InitCoverViewItems];
 }
@@ -154,7 +171,8 @@
         _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
     }
     [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
-    
+    [_CoverView setTag:TAG_NAVI_BTN];
+
     _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
     _NaviBtn.opaque = YES;
     [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
@@ -315,12 +333,23 @@
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView ViewExist : (BOOL) Exist
 {
     
+    // [CASPER] 2013 12 24 iPad Only: Title label
+    if (PoetryReadingView.TitleTextLabel == nil) {
+        PoetryReadingView.TitleTextLabel = [[UILabel alloc] init];
+    }
+    [PoetryReadingView.TitleTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+    [PoetryReadingView.TitleTextLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:60]];
+    [PoetryReadingView.TitleTextLabel setBackgroundColor:[UIColor clearColor]];
+    PoetryReadingView.TitleTextLabel.numberOfLines = 0;
+    PoetryReadingView.TitleTextLabel.textAlignment = NSTextAlignmentCenter;
+    PoetryReadingView.TitleTextLabel.frame = UI_IPAD_READING_TITLE_RECT_LABEL;
+    
+    
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
     
-    [PoetryReadingView.ContentTextLabel setText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
-    ;
+    [PoetryReadingView.ContentTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
@@ -332,12 +361,14 @@
     if (_DisplayTheme == THEME_LIGHT_DARK) {
         
         // Font color = Black, Background = White
+        PoetryReadingView.TitleTextLabel.textColor = [UIColor blackColor];
         PoetryReadingView.ContentTextLabel.textColor = [UIColor blackColor];
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
     } else {
         
-        // Font color = Black, Background = White
+        // Font color = White, Background = Black
+        PoetryReadingView.TitleTextLabel.textColor = [UIColor whiteColor];
         PoetryReadingView.ContentTextLabel.textColor = [UIColor whiteColor];
         [self.view setBackgroundColor:[UIColor blackColor]];
         
@@ -359,6 +390,7 @@
     //IPAD_READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
 
     if (Exist == NO) {
+        [PoetryReadingView addSubview:PoetryReadingView.TitleTextLabel];
         [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     }
     [PoetryReadingView setFrame:CGRectMake(20, 0, UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
@@ -417,13 +449,6 @@
     }
 }
 
-// Only cover view use this gesture detection
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    _CoverViewState = COVER_IDLE;
-    [self CoverViewStateMachine];
-}
 
 
 -(void) ExecuteTableViewAnnimation
@@ -822,6 +847,42 @@
 
 #pragma mark - Gensture recognizer methods
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    
+    //UITouch *touch = [touches anyObject];
+    if (_CoverViewState == COVER_IDLE) {
+        /*
+        if ((touch.view.tag == TAG_PREV_TOUCH_VIEW) || (touch.view.tag == TAG_NEXT_TOUCH_VIEW)) {
+            NSLog(@"TEST!!");
+         
+        }
+         */
+    }
+
+
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+
+}
+
+
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+
+    if (_CoverViewState > COVER_IDLE) {
+        
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
+        
+    }
+}
+
+
 -(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
     if (_EmptyReadingView == nil) {
@@ -866,6 +927,9 @@
     if ((touch.view.tag == TAG_READING_VIEW_1) || (touch.view.tag == TAG_READING_VIEW_2)) {
         
         return YES;
+    } else if (touch.view.tag == TAG_NAVI_BTN) {
+        
+        return NO;
     }
     
     return YES;
@@ -878,6 +942,7 @@
     if (_isNavTableOn) {
         return;
     }
+    
     if (_CurrentView == VIEW1) {
         
         if (_ReadingView2 == nil) {
@@ -903,54 +968,33 @@
 -(PoetryReadingView *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledView : (PoetryReadingView *) View
 {
     
-    if ((recognizer.view.tag == TAG_COVER_VIEW) || (recognizer.view.tag == TAG_TABLE_VIEW)) {
-        
+    CGPoint location = [recognizer locationInView:_Scroller];
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            _TouchInit = location;
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            
+            [self HandleGestureChangedWithLocation:location andView:View];
+            
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+            [self HandleGestureEndWithLocation:location andView:View];
 
-        switch (recognizer.state) {
-            case UIGestureRecognizerStateBegan:
-                break;
-                
-            case UIGestureRecognizerStateEnded:
-                
-                if (recognizer.view.tag == TAG_COVER_VIEW) {
-                }
-                
-                break;
-                
-            default:
-                break;
+            break;
+        case UIGestureRecognizerStateCancelled:
+        {
+            IPAD_READING_VIEW_LOG(@"UIGestureRecognizerStateCancelled");
         }
-
-    } else {
-        
-        CGPoint location = [recognizer locationInView:_Scroller];
-        switch (recognizer.state) {
-            case UIGestureRecognizerStateBegan:
-                _TouchInit = location;
-                break;
-                
-            case UIGestureRecognizerStateChanged:
-                
-                [self HandleGestureChangedWithLocation:location andView:View];
-                
-                break;
-                
-            case UIGestureRecognizerStateEnded:
-                
-                [self HandleGestureEndWithLocation:location andView:View];
-                
-                break;
-            case UIGestureRecognizerStateCancelled:
-            {
-                IPAD_READING_VIEW_LOG(@"!!!!UIGestureRecognizerStateCancelled");
-            }
-                
-                
-            default:
-                break;
-        }
-
+            
+            
+        default:
+            break;
     }
+    
+    
     
     return View;
 }
@@ -959,8 +1003,6 @@
 -(void) HandleGestureChangedWithLocation : (CGPoint) location andView : (PoetryReadingView *) View
 {
 
-    
-    
     if (((location.x - _TouchInit.x) > 0) && (abs(location.x - _TouchInit.x) > 10)) {
         
         if ( _SlideDirection != SlideLabelLeftToRigth ) {

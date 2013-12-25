@@ -28,9 +28,13 @@
 #define TAG_COVER_VIEW                  3
 #define TAG_TABLE_VIEW                  4
 #define TAG_SETTING_TABLE_VIEW          5
+#define TAG_NAVI_BTN                    6
+/*
+#define TAG_PREV_TOUCH_VIEW             7
+#define TAG_NEXT_TOUCH_VIEW             8
+*/
 
-
-#define DEBUG_IPAD_READINGVIEW
+//#define DEBUG_IPAD_READINGVIEW
 #ifdef DEBUG_IPAD_READINGVIEW
 #   define IPAD_READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -53,7 +57,6 @@
 @property (nonatomic, strong) UIView                    *CoverView;
 
 @property (nonatomic, strong) NSMutableArray            *NowReadingCategoryArray;
-
 @property (nonatomic, strong) PoetryReadingView         *ReadingView1;
 @property (nonatomic, strong) PoetryReadingView         *ReadingView2;
 @property (nonatomic, strong) PoetryReadingView         *EmptyReadingView;
@@ -67,6 +70,10 @@
 @property                     THEME_SETTING             DisplayTheme;
 
 @property (nonatomic, strong) UIButton                  *NaviBtn;
+/*
+@property (nonatomic, strong) UIView                    *PrevTouchView; 
+@property (nonatomic, strong) UIView                    *NextTouchView;
+ */
 @property (nonatomic, strong) UIButton                  *SettingBtn;
 
 // Setting members
