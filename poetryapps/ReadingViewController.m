@@ -76,6 +76,8 @@
     
     // Read Setting
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 4];
+
     _DisplayTheme = _PoetrySetting.SettingTheme;
     _SlideDirection = SlideLabelNone;
     _LabelSizeInit = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 0);
@@ -211,16 +213,21 @@
     READING_VIEW_LOG(@"SetupStringAttrForDisplayWithContentText");
     
     //TODO : Find @@ line
-    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 4];
-
+    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize];
     NSArray *Lines = [ContentText componentsSeparatedByString:@"\n"];
+    
     NSRange AttrRange = NSMakeRange(0, 0);
     NSRange StringRange = NSMakeRange(0, 0);
-
+    NSRange KeyWord2Range = NSMakeRange(0, 0);
     NSMutableArray *RangeArray = [[NSMutableArray alloc] init];
+    
     NSString *KeyWord1 = @"@@";
-    NSString *KeyWord2 = @"亻因";
+    NSString *KeyWord2 = @"（";
+    //NSString *KeyWord2 = @"亻因";
     // Find "@@" and save range
+    
+    UInt16 KeyWord2Count = 0;
+    
     for (int i = 0; i < [Lines count]; i++) {
         
         StringRange = NSMakeRange(0, 0);
@@ -228,13 +235,34 @@
         
         if (StringRange.length != 0) {
             
-            AttrRange.length = ([[Lines objectAtIndex:i] length]);
-            [RangeArray addObject:[NSValue valueWithRange:AttrRange]];
+            //[CASPER] 2013.12.25 Fix Bold font bug
+            StringRange.location = StringRange.location + AttrRange.location + 2;
+
+            // To Handle "("
+            KeyWord2Range = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+            
+            if (KeyWord2Range.length != 0) {
+                KeyWord2Count ++;
+                
+                StringRange.location = StringRange.location - 2;
+                StringRange.length = ([[Lines objectAtIndex:i] length]);
+                AttrRange.location = AttrRange.location - 1;
+                
+            } else {
+                
+                StringRange.length = ([[Lines objectAtIndex:i] length] - 1 + KeyWord2Count);
+                
+            }
+            
+            
+
+            //[CASPER] 2013.12.25 Fix Bold font bug ==
+            [RangeArray addObject:[NSValue valueWithRange:StringRange]];
             
         }
         
-        AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
-
+        AttrRange.location = AttrRange.location + ([[Lines objectAtIndex:i] length]);
+        
     }
 
     // Remove @@ and add attribute
@@ -246,14 +274,14 @@
     // Add General Attribute
     AttrRange = NSMakeRange(0, [ContentText length]);
     [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:1]range:AttrRange];
-    [string addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:2]range:AttrRange];
+//    [string addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:2]range:AttrRange];
     
-    AttrRange = NSMakeRange(0, 0);
 
     if ([RangeArray count] != 0) {
         
         for (int i = 0; i < [RangeArray count]; i++) {
-            
+            AttrRange = NSMakeRange(0, 0);
+
             AttrRange = [[RangeArray objectAtIndex:i] rangeValue];
             if ((AttrRange.location + AttrRange.length) > [ContentText length]) {
                 AttrRange.length = [ContentText length] - AttrRange.location;
@@ -262,7 +290,9 @@
             [string addAttribute:NSFontAttributeName value:BoldFont range:AttrRange];
         }
     }
-
+    
+    
+/*
     // Find [亻因]
     [RangeArray removeAllObjects];
     StringRange = NSMakeRange(0, 0);
@@ -284,7 +314,7 @@
             AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
         }
     }
-    /*
+ 
     if ([RangeArray count] != 0) {
         for (int i = 0; i < [RangeArray count]; i++) {
             
@@ -294,8 +324,8 @@
         }
 
     }
-    */
-    
+ 
+   */
     
     return string;
 }
@@ -337,17 +367,17 @@
         [self.view setBackgroundColor:[UIColor blackColor]];
         
     }
-    
-    [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
+    CGFloat ViewHeight = _LabelSizeInit.height;
+        [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
     
     READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
-
-    CGFloat ViewHeight = _LabelSizeInit.height;
     if (ViewHeight< (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
-     ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+        ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     }
     
-    ViewHeight = ViewHeight + 20; // To add buff in the bottom of the view
+    ViewHeight = ViewHeight + 30; // To add buff in the bottom of the view
+    
+
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
     [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];

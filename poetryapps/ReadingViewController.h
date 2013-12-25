@@ -46,6 +46,7 @@
 @property (nonatomic, strong)           NSDictionary                *NewDataDic;
 @property (nonatomic, strong)           UIFont                      *font;
 @property                               THEME_SETTING               DisplayTheme;
+@property (nonatomic, strong)           UIFont                      *BoldFont;
 
 //[CASPER] Improve Reading View
 @property (nonatomic, strong)           NSMutableArray              *NowReadingCategoryArray;
