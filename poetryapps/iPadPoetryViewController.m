@@ -9,12 +9,15 @@
 
 #import "iPadPoetryViewController.h"
 
+#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 30, 70, 60)
+
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    44 * 5
-#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT
-#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT
-
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT - 160
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
+#define UI_IPAD_TABLEVIEW_WIDTH                     280
+#define UI_IPAD_TOC_TABLEVIEW_WIDTH                 300
 
 #define UI_IPAD_READING_TITLE_RECT_LABEL            CGRectMake(0, 90, UI_IPAD_READINGVIEW_WIDTH, 100);
 
@@ -22,19 +25,20 @@
 #define UI_IPAD_PREV_VIEW_RECT_INIT                 CGRectMake(0, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
 #define UI_IPAD_NEXT_VIEW_RECT_INIT                 CGRectMake(UI_IPAD_SCREEN_WIDTH - UI_IPAD_NAVI_VIEW_WIDTH, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
 
-#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 50, 70, 60)
-#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(30, 768, 100, 50)
 #define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 668, 100, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 300, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(674, 300, 300, 50)
 #define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 150, 320, 568)
 
-#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
-#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY            CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY)
-#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE        CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON)
+
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER                 CGRectMake(-300, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, 50)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY            CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE        CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON)
 
 
 
@@ -419,6 +423,37 @@
 
 #pragma mark - Cover view state control
 
+-(void) PlaceCoverView
+{
+    
+    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
+    
+    // And init all item on the init location
+    [_CoverView addSubview:_TableView];
+    [_CoverView insertSubview:_TocTableView belowSubview:_TableView];
+
+    [_CoverView insertSubview:_NavigationHeader belowSubview:_TableView];
+    [_CoverView addSubview:_SettingBtn];
+    [_CoverView addSubview:_SettingTableView];
+    [_CoverView addSubview:_SearchBar];
+    
+    NSString *ShadowType = @"Customized";
+    [Animations frameAndShadow:_TableView];
+    [Animations frameAndShadow:_TocTableView];
+
+
+    //[Animations shadowOnView:_TableView andShadowType:ShadowType];
+    //[Animations shadowOnView:_TocTableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingBtn andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingTableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SearchBar andShadowType:ShadowType];
+//    [Animations shadowOnView:_NavigationHeader andShadowType:ShadowType];
+    [Animations frameAndShadow:_NavigationHeader];
+    
+    _SearchBar.text = @"";
+    
+}
+
 // All element on cover view should use this SM to control
 -(void) CoverViewStateMachine
 {
@@ -471,7 +506,7 @@
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"iPadNavTableHeader" owner:self options:nil];
     _NavigationHeader = (iPadNavTableHeader *)[subviewArray objectAtIndex:0];
     NSLog(@"%@", _NavigationHeader);
-    [_NavigationHeader setFrame:CGRectMake(0, 0, 300, UI_IPAD_COVER_TABLE_CELL_HEIGHT)];
+    [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
     [_NavigationHeader.BackBtn addTarget:self action:@selector(RemoveTocTableViewAnimation) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -522,6 +557,7 @@
                          [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
                          [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
                          [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                         [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
                          
                      }
                      completion:^(BOOL finished) {
@@ -531,6 +567,7 @@
                          [_SettingTableView removeFromSuperview];
                          [_SearchBar removeFromSuperview];
                          [_TocTableView removeFromSuperview];
+                         [_NavigationHeader removeFromSuperview];
                          
                          //TODO: Force Update Reading View followed Setting
                          [self ReloadReadingView];
@@ -578,29 +615,6 @@
     [_SettingTableView removeFromSuperview];
 }
 
--(void) PlaceCoverView
-{
-    
-    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
-    
-    // And init all item on the init location
-    [_CoverView addSubview:_TableView];
-    [_CoverView insertSubview:_TocTableView belowSubview:_TableView];
-    [_CoverView addSubview:_SettingBtn];
-    [_CoverView addSubview:_SettingTableView];
-    [_CoverView addSubview:_SearchBar];
-   
-    NSString *ShadowType = @"Customized";
-    [Animations frameAndShadow:_TableView];
-//    [Animations shadowOnView:_TableView andShadowType:ShadowType];
-    [Animations shadowOnView:_SettingBtn andShadowType:ShadowType];
-    [Animations shadowOnView:_SettingTableView andShadowType:ShadowType];
-    [Animations shadowOnView:_SearchBar andShadowType:ShadowType];
-
-    
-    _SearchBar.text = @"";
-    
-}
 
 
 -(void) ReinitSearchBar
@@ -789,20 +803,25 @@
 
 - (void) ExecuteTocTableViewAnimation
 {
-    [Animations moveRight:_TocTableView andAnimationDuration:0.3 andWait:YES andLength:300+280];
-    [Animations moveLeft:_TocTableView andAnimationDuration:0.5 andWait:NO andLength:280];
-    [Animations moveLeft:_TableView andAnimationDuration:0.5 andWait:NO andLength:280];
+    // TODO: Handle the hotcodes
+    [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveRight:_TocTableView andAnimationDuration:0.3 andWait:YES andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
+    
+    [Animations moveLeft:_TocTableView andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveLeft:_NavigationHeader andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    
 }
 
 
 -(void) RemoveTocTableViewAnimation
 {
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.3
                      animations:^{
                          
                         [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
                         [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
-                         
+                        [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
                      }
                      completion:^(BOOL finished) {
                          
