@@ -61,7 +61,7 @@
 @property (nonatomic, strong) PoetryReadingView         *ReadingView2;
 @property (nonatomic, strong) PoetryReadingView         *EmptyReadingView;
 @property (nonatomic, strong) PoetryCoreData            *PoetryDatabase;
-@property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
+//@property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
 @property (nonatomic, strong) PoetrySettingCoreData     *Setting;
 
 @property (nonatomic, strong) NSDictionary              *PoetryNowReading;

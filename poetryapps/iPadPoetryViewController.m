@@ -88,13 +88,14 @@
     [super viewDidLoad];
 
     _Setting = [[PoetrySettingCoreData alloc] init];
-    [_Setting PoetrySetting_Create];
-    
+    //[_Setting PoetrySetting_Create];
+/*
     if  (_Setting.DataSaved == NO) {
         IPAD_READING_VIEW_LOG(@"Empty database, try to save all file in database");
         _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
         [_PoetrySaved isCoreDataSave];
     }
+ */
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _Scroller = [[UIScrollView alloc] init];
     _Scroller.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT);
@@ -371,6 +372,7 @@
     }
     
     [PoetryReadingView.ContentTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    //NSLog(@"content = %@",[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
