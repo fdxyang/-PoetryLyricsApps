@@ -13,7 +13,7 @@
 #import "Animations.h"
 #import "PoetrySaveIntoCoreData.h"
 #import "SettingViewController.h"
-
+#import "iPadNavTableHeader.h"
 
 #define UI_IPAD_SCREEN_WIDTH            1024
 #define UI_IPAD_SCREEN_HEIGHT           768
@@ -29,6 +29,7 @@
 #define TAG_TABLE_VIEW                  4
 #define TAG_SETTING_TABLE_VIEW          5
 #define TAG_NAVI_BTN                    6
+#define TAG_TOC_TABLE_VIEW              7
 /*
 #define TAG_PREV_TOUCH_VIEW             7
 #define TAG_NEXT_TOUCH_VIEW             8
@@ -51,8 +52,7 @@
                                                         UIGestureRecognizerDelegate,
                                                         UISearchBarDelegate>
 
-@property (nonatomic, strong) NSMutableArray            *TableData;
-@property (nonatomic, strong) UITableView               *TableView;
+
 @property (nonatomic, strong) UIScrollView              *Scroller;
 @property (nonatomic, strong) UIView                    *CoverView;
 
@@ -61,7 +61,7 @@
 @property (nonatomic, strong) PoetryReadingView         *ReadingView2;
 @property (nonatomic, strong) PoetryReadingView         *EmptyReadingView;
 @property (nonatomic, strong) PoetryCoreData            *PoetryDatabase;
-@property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
+//@property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;
 @property (nonatomic, strong) PoetrySettingCoreData     *Setting;
 
 @property (nonatomic, strong) NSDictionary              *PoetryNowReading;
@@ -95,6 +95,11 @@
 @property (nonatomic, strong)   NSMutableArray          *SearchRespose;
 @property (nonatomic, strong)   NSArray                 *SearchResultDisplayArray;
 
+@property (nonatomic, strong)   NSMutableArray          *TableData;
+@property (nonatomic, strong)   UITableView             *TableView;
+@property (nonatomic, strong)   NSMutableArray          *TocTableData;
+@property (nonatomic, strong)   UITableView             *TocTableView;
+@property (nonatomic, strong)   iPadNavTableHeader      *NavigationHeader;
 
 typedef enum {
     VIEW1 = 0x00,
