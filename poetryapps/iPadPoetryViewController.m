@@ -11,6 +11,10 @@
 
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    44 * 5
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT
+
 
 #define UI_IPAD_READING_TITLE_RECT_LABEL            CGRectMake(0, 90, UI_IPAD_READINGVIEW_WIDTH, 100);
 
@@ -21,11 +25,17 @@
 #define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 50, 70, 60)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, 280, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(30, 768, 100, 50)
 #define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 668, 100, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 300, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(674, 300, 300, 50)
 #define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 150, 320, 568)
+
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY            CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY)
+#define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE        CGRectMake(-300, 100, 300, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON)
+
 
 
 @interface iPadPoetryViewController () {
@@ -47,7 +57,7 @@
     BOOL                    _isSettingTableOn;
     BOOL                    _isSearchBarOn;
     BOOL                    _isSearching;       //[CASPER] 2013.12.24
-    BOOL                    _isHandlingTouchSwitch;
+    BOOL                    _isHandlingTouchSwitch;     // NOT USED YET
     
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
@@ -214,6 +224,13 @@
     
     [_TableView reloadData];
    
+    _TocTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    _TocTableView.delegate = self;
+    _TocTableView.dataSource = self;
+    _TocTableView.scrollEnabled = YES;
+    [_TocTableView setTag:TAG_TOC_TABLE_VIEW];
+
+    [self InitNavigationHeader];
     
     if (_SettingTableView == nil) {
         _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
@@ -449,7 +466,14 @@
     }
 }
 
-
+-(void) InitNavigationHeader
+{
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"iPadNavTableHeader" owner:self options:nil];
+    _NavigationHeader = (iPadNavTableHeader *)[subviewArray objectAtIndex:0];
+    NSLog(@"%@", _NavigationHeader);
+    [_NavigationHeader setFrame:CGRectMake(0, 0, 300, UI_IPAD_COVER_TABLE_CELL_HEIGHT)];
+    [_NavigationHeader.BackBtn addTarget:self action:@selector(RemoveTocTableViewAnimation) forControlEvents:UIControlEventTouchUpInside];
+}
 
 -(void) ExecuteTableViewAnnimation
 {
@@ -497,6 +521,7 @@
                          [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
                          [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
                          [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+                         [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
                          
                      }
                      completion:^(BOOL finished) {
@@ -505,6 +530,7 @@
                          [_TableView removeFromSuperview];
                          [_SettingTableView removeFromSuperview];
                          [_SearchBar removeFromSuperview];
+                         [_TocTableView removeFromSuperview];
                          
                          //TODO: Force Update Reading View followed Setting
                          [self ReloadReadingView];
@@ -559,6 +585,7 @@
     
     // And init all item on the init location
     [_CoverView addSubview:_TableView];
+    [_CoverView insertSubview:_TocTableView belowSubview:_TableView];
     [_CoverView addSubview:_SettingBtn];
     [_CoverView addSubview:_SettingTableView];
     [_CoverView addSubview:_SearchBar];
@@ -730,15 +757,113 @@
             [self Setting_InitThemeView];
             [cell addSubview:_ThemePreViewLab];
             
-        } else if (indexPath.section ==3) {
+        } else if (indexPath.section == 3) {
             cell.textLabel.text = @"About me";
         }
         
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
 
+        NSLog(@"TAG_TOC_TABLE_VIEW");
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.textLabel.text = [[_TocTableData objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+
+        /*if (indexPath.row == 0) {
+            
+           // [cell setHighlighted:NO];
+            [cell addSubview:_NavigationHeader];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+            
+        } else {
+            
+         
+        }*/
+        
     }
     
     return cell;
 }
+
+- (void) ExecuteTocTableViewAnimation
+{
+    [Animations moveRight:_TocTableView andAnimationDuration:0.3 andWait:YES andLength:300+280];
+    [Animations moveLeft:_TocTableView andAnimationDuration:0.5 andWait:NO andLength:280];
+    [Animations moveLeft:_TableView andAnimationDuration:0.5 andWait:NO andLength:280];
+}
+
+
+-(void) RemoveTocTableViewAnimation
+{
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                        [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                        [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                    }];
+
+}
+
+// TODO: Handle selected on the table
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == TAG_TABLE_VIEW) {
+        if (_isSearching) {
+            // For Searching
+        } else {
+
+            switch (indexPath.row) {
+                case 0:
+                    NSLog(@"guard reading pressed");
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING];
+                    _NavigationHeader.TitleLab.text = @"導讀";
+                    _TocTableView.scrollEnabled = NO;
+                    [self ExecuteTocTableViewAnimation];
+                    break;
+                case 1:
+                    NSLog(@"poetry reading pressed");
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY];
+                    _NavigationHeader.TitleLab.text = @"聖詩";
+                    _TocTableView.scrollEnabled = YES;
+                    [self ExecuteTocTableViewAnimation];
+
+                    break;
+                case 2:
+                    NSLog(@"responsive pressed");
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE];
+                    _NavigationHeader.TitleLab.text = @"啟應文";
+                    _TocTableView.scrollEnabled = YES;
+                    [self ExecuteTocTableViewAnimation];
+
+                    break;
+                case 3:
+                    NSLog(@"history pressed");
+                    break;
+                default:
+                    break;
+            }
+        }
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        // Remember to ignore 1, because index 0 is header.
+        NSLog(@"%d", indexPath.row);
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -754,7 +879,13 @@
         
         return 1;
         
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        
+        // TODO : Add 1, after adding title in the first cell
+        return [_TocTableData count];
     }
+    
+    
     return 1;
 }
 
@@ -820,15 +951,15 @@
                     break;
                     
                 case 1:
-                    sectionStr = @"GUARD READING";
+                    sectionStr = @"導讀";
                     break;
                     
                 case 2:
-                    sectionStr = @"POETRY";
+                    sectionStr = @"聖詩";
                     break;
                     
                 case 3:
-                    sectionStr = @"RESPONSIVE PRAYER";
+                    sectionStr = @"啟應文";
                     break;
                 default:
                     break;
@@ -1121,7 +1252,6 @@
                         
                     }
                     
-                    // TODO: Add this view between Current view and Scroller
                     //[_Scroller addSubview:View];
                     
                     if (_CurrentView == VIEW1) {
