@@ -718,13 +718,11 @@
         _isSearching = NO;
         [UIView animateWithDuration:0.3
                          animations:^{
-                             
-                             //[_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
-                             //[_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
                              [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
                          }
                          completion:^(BOOL finished) {
                              [self.view endEditing:YES];
+                             _SearchResultDisplayArray = nil;
                              [_SearchBar setText:@""];
                              [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
                              [_TableView reloadData];
