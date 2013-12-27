@@ -1081,17 +1081,20 @@
         [self RemoveTocTableViewAnimation];
     }
     // TODO: Setup Table frame
-    _isSearching = YES;     //[CASPER] 2013.12.24
-    
-    [_NavigationHeader.TitleLab setText:@"搜尋"];
-    [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH];
-    CGFloat TableHeight = (3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
-    _TableView.frame = CGRectMake(_TableView.frame.origin.x,
-                                  _TableView.frame.origin.y,
-                                  _TableView.frame.size.width,
-                                  TableHeight);
+    if (_isSearching == NO) {
+        _isSearching = YES;     //[CASPER] 2013.12.24
+        
+        [_NavigationHeader.TitleLab setText:@"搜尋"];
+        [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH];
+        CGFloat TableHeight = (3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
+        _TableView.frame = CGRectMake(_TableView.frame.origin.x,
+                                      _TableView.frame.origin.y,
+                                      _TableView.frame.size.width,
+                                      TableHeight);
+        
+        [_TableView reloadData];
 
-    [_TableView reloadData];
+    }
     return YES;
 }
 
