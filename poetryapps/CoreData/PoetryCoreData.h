@@ -24,7 +24,7 @@
 
 #define POETRY_MAX_NUMBER_IN_HISTORY            10              // [CASPER] History only save 10 object
 
-#define DEBUG_COREDATA
+//#define DEBUG_COREDATA
 #ifdef DEBUG_COREDATA
 #   define CORE_DATA_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else

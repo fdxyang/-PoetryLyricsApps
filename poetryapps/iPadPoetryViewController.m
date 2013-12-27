@@ -13,10 +13,14 @@
 #define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 30, 70, 60)
 
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
+#define UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT      17
+
 #define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    44 * 5
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT - 160
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX      UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY
+
 #define UI_IPAD_TABLEVIEW_WIDTH                     280
 #define UI_IPAD_TOC_TABLEVIEW_WIDTH                 300
 
@@ -546,7 +550,6 @@
 {
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"iPadNavTableHeader" owner:self options:nil];
     _NavigationHeader = (iPadNavTableHeader *)[subviewArray objectAtIndex:0];
-    NSLog(@"%@", _NavigationHeader);
     [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
     [_NavigationHeader.BackBtn addTarget:self action:@selector(RemoveTocTableViewAnimation) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -669,59 +672,6 @@
     
 }
 
-// return NO to not become first responder
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-{
-    IPAD_READING_VIEW_LOG(@"searchBarShouldBeginEditing  set _isSearching YES");
-    _isSearching = YES;     //[CASPER] 2013.12.24
-    
-    if (_isTocTableOn) {    //[CASPER] 2013.12.27
-        [self RemoveTocTableViewAnimation];
-    }
-    // TODO: Setup Table frame
-    
-    [_TableView reloadData];
-    return YES;
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    [self filterContentForSearchText:searchText];
-    [_TableView reloadData];
-}
-
-- (void)filterContentForSearchText:(NSString*)searchText {
-    
-    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
-
-    _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
-
-    _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
-    
-    _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
-    
-    
-    
-    if ([searchText length] > 3 ) {
-    
-        [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
-        [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
-        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
-    
-    }
-    
-    
-    _SearchResultDisplayArray = [NSArray arrayWithObjects:
-                                 _SearchHistoryData,
-                                 _SearchGuidedReading,
-                                 _SearchPoetryData,
-                                 _SearchRespose,
-                                 nil];
-    
-}
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView.tag == TAG_TABLE_VIEW) {
@@ -738,84 +688,6 @@
     }
     
     return 1;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    
-    if (tableView.tag == TAG_TABLE_VIEW) {
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        
-        if (_isSearching) {
-            
-            cell.textLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
-            cell.detailTextLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
-            
-        } else {
-            
-            cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
-        }
-       
-    
-    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
-    
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        if (indexPath.section == 0) {
-            
-            [self Setting_InitFontSizeViewBtns];
-            [cell addSubview:_FontSizeSettingView];
-            
-        } else if (indexPath.section == 1) {
-            
-            [self Setting_InitThemeSettingView];
-            [cell addSubview:_ThemeSettingView];
-            
-            
-        } else if (indexPath.section == 2) {
-            [self InitPreviewLab];
-            [self Setting_InitThemeView];
-            [cell addSubview:_ThemePreViewLab];
-            
-        } else if (indexPath.section == 3) {
-            cell.textLabel.text = @"About me";
-        }
-        
-    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.textLabel.text = [[_TocTableData objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
-
-        /*if (indexPath.row == 0) {
-            
-           // [cell setHighlighted:NO];
-            [cell addSubview:_NavigationHeader];
-            ce ll.selectionStyle = UITableViewCellSelectionStyleNone;
-
-            
-        } else {
-            
-         
-        }*/
-        
-    }
-    
-    return cell;
 }
 
 - (void) ExecuteTocTableViewAnimation
@@ -1012,6 +884,166 @@
 }
 
 
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
+    if (tableView.tag == TAG_TABLE_VIEW) {
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        if (_isSearching) {
+            
+            // Search result handling
+            cell.textLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+            cell.detailTextLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+            
+        } else {
+            
+            cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+        }
+        
+        
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.section == 0) {
+            
+            [self Setting_InitFontSizeViewBtns];
+            [cell addSubview:_FontSizeSettingView];
+            
+        } else if (indexPath.section == 1) {
+            
+            [self Setting_InitThemeSettingView];
+            [cell addSubview:_ThemeSettingView];
+            
+            
+        } else if (indexPath.section == 2) {
+            [self InitPreviewLab];
+            [self Setting_InitThemeView];
+            [cell addSubview:_ThemePreViewLab];
+            
+        } else if (indexPath.section == 3) {
+            cell.textLabel.text = @"About me";
+        }
+        
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.textLabel.text = [[_TocTableData objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+        
+        /*if (indexPath.row == 0) {
+         
+         // [cell setHighlighted:NO];
+         [cell addSubview:_NavigationHeader];
+         ce ll.selectionStyle = UITableViewCellSelectionStyleNone;
+         
+         
+         } else {
+         
+         
+         }*/
+        
+    }
+    
+    return cell;
+}
+
+
+
+#pragma mark - Search Handling Methods
+
+// return NO to not become first responder
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    IPAD_READING_VIEW_LOG(@"searchBarShouldBeginEditing  set _isSearching YES");
+    
+    if (_isTocTableOn) {    //[CASPER] 2013.12.27
+        [self RemoveTocTableViewAnimation];
+    }
+    // TODO: Setup Table frame
+    
+    //[_TableView reloadData];
+    return YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    _isSearching = YES;     //[CASPER] 2013.12.24
+    
+    [self filterContentForSearchText:searchText];
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText {
+    
+    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
+    
+    _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
+    
+    _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
+    
+    _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
+    
+    
+    
+    if ([searchText length] > 3 ) {
+        
+        [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
+        [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        
+    }
+    
+    
+    _SearchResultDisplayArray = [NSArray arrayWithObjects:
+                                 _SearchHistoryData,
+                                 _SearchGuidedReading,
+                                 _SearchPoetryData,
+                                 _SearchRespose,
+                                 nil];
+    
+    CGFloat TableHeight = ((UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchGuidedReading count]) +
+                           (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchPoetryData count]) +
+                           (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchRespose count]) +
+                           3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
+    
+    if (TableHeight > UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX) {
+        
+        TableHeight = UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX;
+        _TableView.scrollEnabled = YES;
+        
+    } else {
+        
+        _TableView.scrollEnabled = NO;
+
+    }
+    
+    _TableView.frame = CGRectMake(_TableView.frame.origin.x,
+                                  _TableView.frame.origin.y,
+                                  _TableView.frame.size.width,
+                                  TableHeight);
+    
+    [_TableView reloadData];
+    
+}
+
+
+
+
 #pragma mark - Gensture recognizer methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1043,7 +1075,7 @@
 
     if (_CoverViewState > COVER_IDLE) {
         
-        if ([_SearchBar.text length] != 0) {
+        //if ([_SearchBar.text length] != 0) {
             
             if (_SearchBar.resignFirstResponder) {
                 
@@ -1055,13 +1087,14 @@
                 [self CoverViewStateMachine];
                 
             }
-            
+      /*
         } else {
             
             _CoverViewState = COVER_IDLE;
             [self CoverViewStateMachine];
             
         }
+       */
     }
 }
 
