@@ -10,6 +10,8 @@
 #import "PoetrySaveIntoCoreData.h"
 #import "PoetrySettingCoreData.h"
 
+#define MAIN_PAGE_LOADING_TIME  2
+
 @interface iPadMainPoetryViewController : UIViewController
 
 @property (nonatomic, strong) PoetrySaveIntoCoreData    *PoetrySaved;

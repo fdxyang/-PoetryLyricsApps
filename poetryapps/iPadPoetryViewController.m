@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 cc. All rights reserved.
 //
 //  [CASPER] 2013.12.24 Add search funciton
+//  [CASPER] 2013.12.27 Add isTocTableOn flag to identify the TOC table state
 
 #import "iPadPoetryViewController.h"
 
@@ -61,6 +62,7 @@
     BOOL                    _isSettingTableOn;
     BOOL                    _isSearchBarOn;
     BOOL                    _isSearching;       //[CASPER] 2013.12.24
+    BOOL                    _isTocTableOn;      //[CASPER] 2013.12.27
     BOOL                    _isHandlingTouchSwitch;     // NOT USED YET
     
     CURRENT_VIEW            _CurrentView;
@@ -160,6 +162,7 @@
     _isSettingTableOn = NO;
     _isSearchBarOn = NO;
     _isSearching = NO;      //[CASPER] 2013.12.24
+    _isTocTableOn = NO;     //[CASPER] 2013.12.27
     _isHandlingTouchSwitch = NO;
     [self InitReadingViewSetupScroller];
     [self InitCoverViewItems];
@@ -456,6 +459,39 @@
     
 }
 
+
+
+-(void)RemoveCoverViewAnimation
+{
+    
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+                         [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+                         [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                         [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         [_CoverView removeFromSuperview];
+                         [_TableView removeFromSuperview];
+                         [_SettingTableView removeFromSuperview];
+                         [_SearchBar removeFromSuperview];
+                         [_TocTableView removeFromSuperview];
+                         [_NavigationHeader removeFromSuperview];
+                         _SearchBar.text = @"";
+                         _SearchResultDisplayArray = nil;
+                         
+                         //TODO: Force Update Reading View followed Setting
+                         [self ReloadReadingView];
+                     }];
+    
+}
+
 // All element on cover view should use this SM to control
 -(void) CoverViewStateMachine
 {
@@ -464,8 +500,9 @@
             _isNavTableOn = NO;
             _isSearchBarOn = NO;
             _isSettingTableOn = NO;
-            _isSearching = NO; //[CASPER] 2013.12.24
-            
+            _isSearching = NO;  //[CASPER] 2013.12.24
+            _isTocTableOn = NO; //[CASPER] 2013.12.27
+
             [self RemoveCoverViewAnimation];
             break;
         
@@ -473,6 +510,8 @@
             _isNavTableOn = YES;
             _isSearchBarOn = YES;
             _isSettingTableOn = NO;
+            _isSearching = NO; //[CASPER] 2013.12.24
+
             
             [self PlaceCoverView];
             [self ExecuteTableViewAnnimation];
@@ -547,35 +586,6 @@
     */
 }
 
-
--(void)RemoveCoverViewAnimation
-{
-    
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         
-                         [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
-                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
-                         [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
-                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
-                         [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
-                         [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
-                         
-                     }
-                     completion:^(BOOL finished) {
-                         
-                         [_CoverView removeFromSuperview];
-                         [_TableView removeFromSuperview];
-                         [_SettingTableView removeFromSuperview];
-                         [_SearchBar removeFromSuperview];
-                         [_TocTableView removeFromSuperview];
-                         [_NavigationHeader removeFromSuperview];
-                         
-                         //TODO: Force Update Reading View followed Setting
-                         [self ReloadReadingView];
-                     }];
-    
-}
 
 
 
@@ -664,6 +674,12 @@
 {
     IPAD_READING_VIEW_LOG(@"searchBarShouldBeginEditing  set _isSearching YES");
     _isSearching = YES;     //[CASPER] 2013.12.24
+    
+    if (_isTocTableOn) {    //[CASPER] 2013.12.27
+        [self RemoveTocTableViewAnimation];
+    }
+    // TODO: Setup Table frame
+    
     [_TableView reloadData];
     return YES;
 }
@@ -782,7 +798,6 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
 
-        NSLog(@"TAG_TOC_TABLE_VIEW");
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.text = [[_TocTableData objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
 
@@ -790,7 +805,7 @@
             
            // [cell setHighlighted:NO];
             [cell addSubview:_NavigationHeader];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            ce ll.selectionStyle = UITableViewCellSelectionStyleNone;
 
             
         } else {
@@ -805,7 +820,7 @@
 
 - (void) ExecuteTocTableViewAnimation
 {
-    // TODO: Handle the hotcodes
+    _isTocTableOn = YES; //[CASPER] 2013.12.27
     [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
     [Animations moveRight:_TocTableView andAnimationDuration:0.3 andWait:YES andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
     
@@ -818,6 +833,7 @@
 
 -(void) RemoveTocTableViewAnimation
 {
+    _isTocTableOn = NO;
     [UIView animateWithDuration:0.3
                      animations:^{
                          
@@ -841,7 +857,6 @@
 
             switch (indexPath.row) {
                 case 0:
-                    NSLog(@"guard reading pressed");
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
@@ -850,8 +865,8 @@
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
                     break;
+                    
                 case 1:
-                    NSLog(@"poetry reading pressed");
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
                     [_TocTableView reloadData];
@@ -861,8 +876,8 @@
                     [self ExecuteTocTableViewAnimation];
 
                     break;
+                    
                 case 2:
-                    NSLog(@"responsive pressed");
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
                     [_TocTableView reloadData];
@@ -1028,9 +1043,25 @@
 
     if (_CoverViewState > COVER_IDLE) {
         
-        _CoverViewState = COVER_IDLE;
-        [self CoverViewStateMachine];
-        
+        if ([_SearchBar.text length] != 0) {
+            
+            if (_SearchBar.resignFirstResponder) {
+                
+                [self.view endEditing:YES];
+                
+            } else {
+                
+                _CoverViewState = COVER_IDLE;
+                [self CoverViewStateMachine];
+                
+            }
+            
+        } else {
+            
+            _CoverViewState = COVER_IDLE;
+            [self CoverViewStateMachine];
+            
+        }
     }
 }
 

@@ -72,7 +72,7 @@
 {
     _TimerCount++;
     //NSLog(@"%d", TimerCount);
-    if (_TimerCount == 4) {
+    if (_TimerCount == MAIN_PAGE_LOADING_TIME) {
         
         UIViewController *View = [self.storyboard instantiateViewControllerWithIdentifier:@"iPadViewController"];
 
@@ -81,7 +81,7 @@
         }];
     } else {
         
-        _CountDownLab.text = [NSString stringWithFormat:@"%d", (4 - _TimerCount)];
+        _CountDownLab.text = [NSString stringWithFormat:@"%d", (MAIN_PAGE_LOADING_TIME - _TimerCount)];
     }
     
     
