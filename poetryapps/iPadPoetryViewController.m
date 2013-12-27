@@ -801,6 +801,12 @@
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
         // Remember to ignore 1, because index 0 is header.
         NSLog(@"%d", indexPath.row);
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
+        
+        [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row]];
+            
+        
     }
 }
 
@@ -995,6 +1001,51 @@
     return cell;
 }
 
+// TODO: Generate new reading view
+-(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData
+{
+    
+    // Update reading array
+    _PoetryNowReading = NewReadingData;
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+    _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+    _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
+    
+    // To get idle view
+    if (_CurrentView == VIEW1) {
+        
+        _ReadingView2 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView2 ViewExist:NO];
+        
+    } else {
+        
+        _ReadingView1 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView1 ViewExist:NO];
+        
+    }
+
+    /*
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         
+                     }
+     
+                     completion:^(BOOL finished) {
+                         
+                         if (_CurrentView == VIEW1) {
+                             
+                             [_ReadingView1 removeFromSuperview];
+                             _CurrentView = VIEW2;
+                             
+                         } else {
+                         
+                             [_ReadingView2 removeFromSuperview];
+                             _CurrentView = VIEW1;
+                             
+                         }
+                         
+                     }];
+    */
+}
 
 
 #pragma mark - Search Handling Methods
@@ -1085,28 +1136,6 @@
 
 
 #pragma mark - Gensture recognizer methods
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    
-    //UITouch *touch = [touches anyObject];
-    if (_CoverViewState == COVER_IDLE) {
-        /*
-        if ((touch.view.tag == TAG_PREV_TOUCH_VIEW) || (touch.view.tag == TAG_NEXT_TOUCH_VIEW)) {
-            NSLog(@"TEST!!");
-         
-        }
-         */
-    }
-
-
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-
-}
 
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1359,26 +1388,8 @@
                     
                     View.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
                     View = [self DisplayHandlingWithData:_NewDataDic onView:View ViewExist:NO];
-                    //IPAD_READING_VIEW_LOG(@"View Generate = %@", View);
                     
-                    if (_DisplayTheme == THEME_LIGHT_DARK) {
-                        
-                        // Font color = Black, Background = White
-                        View.ContentTextLabel.textColor = [UIColor blackColor];
-                        [View setBackgroundColor:[UIColor whiteColor]];
-                        [self.view setBackgroundColor:[UIColor whiteColor]];
-                        
-                    } else {
-                        
-                        // Font color = Black, Background = White
-                        View.ContentTextLabel.textColor = [UIColor whiteColor];
-                        [View setBackgroundColor:[UIColor blackColor]];
-                        [self.view setBackgroundColor:[UIColor blackColor]];
-                        
-                    }
-                    
-                    //[_Scroller addSubview:View];
-                    
+
                     if (_CurrentView == VIEW1) {
                         
                         IPAD_READING_VIEW_LOG(@"Add view below readingview1");
@@ -1387,7 +1398,6 @@
                         } else {
                             [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                         }
-                        
                         [_Scroller insertSubview:View belowSubview:_ReadingView1];
                         
                     } else {
