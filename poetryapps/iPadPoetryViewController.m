@@ -753,8 +753,32 @@
     if (tableView.tag == TAG_TABLE_VIEW) {
         if (_isSearching) {
             // For Searching
-            if ([_SearchBar.text length] == 0) {
-                
+            if ([_SearchBar.text length] != 0) {
+                NSLog(@"%d %d", indexPath.section, indexPath.row);
+                if (indexPath.section == 0) {
+                    // HISTORY, Ignore
+                } else if (indexPath.section == 1) {
+                    
+                    // Guard reading
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row]];
+                    
+                    
+                } else if (indexPath.section == 2) {
+                    // Poetry
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row]];
+                    
+                } else if (indexPath.section == 3) {
+                    // responsive
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row]];
+                    
+                }
+
             }
             
         } else {
@@ -799,14 +823,12 @@
             }
         }
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
-        // Remember to ignore 1, because index 0 is header.
+        
         NSLog(@"%d", indexPath.row);
         _CoverViewState = COVER_IDLE;
         [self CoverViewStateMachine];
-        
         [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row]];
             
-        
     }
 }
 
