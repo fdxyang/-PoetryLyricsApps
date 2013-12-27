@@ -10,7 +10,9 @@
 
 #import "iPadPoetryViewController.h"
 
-#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 30, 70, 60)
+#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 50, 70, 60)
+#define UI_IPAD_NAVI_BTN_RECT_HIDE                  CGRectMake(-70, 50, 70, 60)
+
 
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT      17
@@ -21,7 +23,7 @@
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX      UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY
 
-#define UI_IPAD_TABLEVIEW_WIDTH                     280
+#define UI_IPAD_TABLEVIEW_WIDTH                     300
 #define UI_IPAD_TOC_TABLEVIEW_WIDTH                 300
 
 #define UI_IPAD_READING_TITLE_RECT_LABEL            CGRectMake(0, 90, UI_IPAD_READINGVIEW_WIDTH, 100);
@@ -30,14 +32,14 @@
 #define UI_IPAD_PREV_VIEW_RECT_INIT                 CGRectMake(0, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
 #define UI_IPAD_NEXT_VIEW_RECT_INIT                 CGRectMake(UI_IPAD_SCREEN_WIDTH - UI_IPAD_NAVI_VIEW_WIDTH, 0, UI_IPAD_NAVI_VIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)
 
-#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 100, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 100, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
+#define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(30, 768, 100, 50)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(30, 668, 100, 50)
-#define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 300, 50)
-#define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(674, 300, 300, 50)
-#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 150, 320, 568)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(UI_IPAD_SCREEN_WIDTH - 200, -50, 100, 50)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 200, 100, 100, 50)
+#define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 350, 50)
+#define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(574, 300, 350, 50)
+#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 200, 320, 550)
 
 
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER                 CGRectMake(-300, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, 50)
@@ -440,8 +442,7 @@
     // And init all item on the init location
     [_CoverView addSubview:_TableView];
     [_CoverView insertSubview:_TocTableView belowSubview:_TableView];
-
-    [_CoverView insertSubview:_NavigationHeader belowSubview:_TableView];
+    [_CoverView insertSubview:_NavigationHeader aboveSubview:_TableView];
     [_CoverView addSubview:_SettingBtn];
     [_CoverView addSubview:_SettingTableView];
     [_CoverView addSubview:_SearchBar];
@@ -477,7 +478,8 @@
                          [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
                          [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
                          [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
-                         
+                         [_NaviBtn setFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+
                      }
                      completion:^(BOOL finished) {
                          
@@ -506,6 +508,7 @@
             _isSettingTableOn = NO;
             _isSearching = NO;  //[CASPER] 2013.12.24
             _isTocTableOn = NO; //[CASPER] 2013.12.27
+            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
 
             [self RemoveCoverViewAnimation];
             break;
@@ -525,7 +528,9 @@
             _isNavTableOn = YES;
             _isSearchBarOn = YES;
             _isSettingTableOn = NO;
-            
+            //_SettingBtn.titleLabel.text = @"SETTING";
+            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+
             [self RemoveSettingTableViewAnnimation];
             [self ExecuteSearchBarAnnimation];
             break;
@@ -536,6 +541,9 @@
             _isSearchBarOn = NO;
             _isSettingTableOn = YES;
             _isSearching = NO;
+            //_SettingBtn.titleLabel.text = @"SEARCH";
+            [_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+
             
             [self RemoveSearchbarAnimation];
             [self ExecuteSettingTableViewAnnimation];
@@ -558,12 +566,13 @@
 {
     
     [_TableView reloadData];
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.4
                      animations:^{
                          
                          [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
                          [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER];
                          [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER];
+                         [_NaviBtn setFrame:UI_IPAD_NAVI_BTN_RECT_HIDE];
                          
                      }
                      completion:^(BOOL finished) {
@@ -705,18 +714,39 @@
 
 -(void) RemoveTocTableViewAnimation
 {
-    _isTocTableOn = NO;
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         
-                        [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
-                        [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
-                        [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
-                     }
-                     completion:^(BOOL finished) {
-                         
-                    }];
+    if (_isSearching) {
+        _isSearching = NO;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             
+                             //[_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                             //[_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                             [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         }
+                         completion:^(BOOL finished) {
+                             [self.view endEditing:YES];
+                             [_SearchBar setText:@""];
+                             [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                             [_TableView reloadData];
+                         }];
 
+        
+        
+    } else {
+        _isTocTableOn = NO;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             
+                             [_TableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                             [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                             [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         }
+                         completion:^(BOOL finished) {
+                             
+                         }];
+
+    }
+    
 }
 
 // TODO: Handle selected on the table
@@ -725,6 +755,10 @@
     if (tableView.tag == TAG_TABLE_VIEW) {
         if (_isSearching) {
             // For Searching
+            if ([_SearchBar.text length] == 0) {
+                
+            }
+            
         } else {
 
             switch (indexPath.row) {
@@ -976,15 +1010,22 @@
         [self RemoveTocTableViewAnimation];
     }
     // TODO: Setup Table frame
+    _isSearching = YES;     //[CASPER] 2013.12.24
     
-    //[_TableView reloadData];
+    [_NavigationHeader.TitleLab setText:@"搜尋"];
+    [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH];
+    CGFloat TableHeight = (3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
+    _TableView.frame = CGRectMake(_TableView.frame.origin.x,
+                                  _TableView.frame.origin.y,
+                                  _TableView.frame.size.width,
+                                  TableHeight);
+
+    [_TableView reloadData];
     return YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    _isSearching = YES;     //[CASPER] 2013.12.24
-    
     [self filterContentForSearchText:searchText];
 }
 
@@ -1016,6 +1057,7 @@
                                  _SearchRespose,
                                  nil];
     
+    // Calculate height of table view
     CGFloat TableHeight = ((UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchGuidedReading count]) +
                            (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchPoetryData count]) +
                            (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchRespose count]) +
@@ -1077,16 +1119,16 @@
         
         //if ([_SearchBar.text length] != 0) {
             
-            if (_SearchBar.resignFirstResponder) {
-                
-                [self.view endEditing:YES];
-                
-            } else {
-                
-                _CoverViewState = COVER_IDLE;
-                [self CoverViewStateMachine];
-                
-            }
+        if (_SearchBar.resignFirstResponder) {
+            
+            [self.view endEditing:YES];
+            
+        } else {
+            
+            _CoverViewState = COVER_IDLE;
+            [self CoverViewStateMachine];
+            
+        }
       /*
         } else {
             
