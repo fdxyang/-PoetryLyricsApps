@@ -1187,6 +1187,7 @@
     if (SaveIntoHistory) {
         [_PoetryDatabase PoetryCoreDataSaveIntoHistory:_PoetryNowReading];
     }
+    [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
@@ -1451,7 +1452,6 @@
             
         case UIGestureRecognizerStateEnded:
             [self HandleGestureEndWithLocation:location andView:View];
-
             break;
         case UIGestureRecognizerStateCancelled:
         {
@@ -1899,7 +1899,8 @@
                                              
                                              _CurrentView = VIEW2;
                                              _PoetryNowReading = _NewDataDic;
-                                             
+                                             [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                              [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                              
