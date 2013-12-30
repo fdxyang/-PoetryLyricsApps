@@ -543,7 +543,8 @@
             _isSearching = NO;
             //_SettingBtn.titleLabel.text = @"SEARCH";
             [_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
-
+            
+            [_SettingTableView reloadData];
             
             [self RemoveSearchbarAnimation];
             [self ExecuteSettingTableViewAnnimation];

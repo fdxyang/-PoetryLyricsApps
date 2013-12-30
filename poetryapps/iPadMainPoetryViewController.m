@@ -52,7 +52,8 @@
         _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
         [_PoetrySaved isCoreDataSave];
     }
-    
+    _CountDownLab.text = [NSString stringWithFormat:@"%d", MAIN_PAGE_LOADING_TIME];
+
     
     _Timer = [NSTimer scheduledTimerWithTimeInterval: 1
                                              target: self
