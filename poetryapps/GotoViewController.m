@@ -135,7 +135,7 @@
     
     
         // set up an animation for the transition between the views
-        [animation setDuration:1.0];
+        [animation setDuration:0.5];
         [animation setType:kCATransitionPush];
         [animation setSubtype:kCATransitionFromBottom];
     
@@ -148,7 +148,7 @@
     {
         [_TableView removeFromSuperview];
         
-        [animation setDuration:1.0];
+        [animation setDuration:0.5];
         [animation setType:kCATransitionPush];
         [animation setSubtype:kCATransitionFromTop];
         
