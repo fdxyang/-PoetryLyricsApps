@@ -97,6 +97,7 @@
     [super viewDidLoad];
 
     _Setting = [[PoetrySettingCoreData alloc] init];
+    
     //[_Setting PoetrySetting_Create];
 /*
     if  (_Setting.DataSaved == NO) {
@@ -362,6 +363,129 @@
     return Articel;
 }
 
+-(NSMutableAttributedString *) SetupStringAttrForDisplayWithContentText : (NSString*) ContentText
+{
+    //READING_VIEW_LOG(@"SetupStringAttrForDisplayWithContentText");
+    
+    //TODO : Find @@ line
+    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_Setting.SettingFontSize];
+    NSArray *Lines = [ContentText componentsSeparatedByString:@"\n"];
+    
+    NSRange AttrRange = NSMakeRange(0, 0);
+    NSRange StringRange = NSMakeRange(0, 0);
+    NSRange KeyWord2Range = NSMakeRange(0, 0);
+    NSMutableArray *RangeArray = [[NSMutableArray alloc] init];
+    
+    NSString *KeyWord1 = @"@@";
+    NSString *KeyWord2 = @"（";
+    //NSString *KeyWord2 = @"亻因";
+    // Find "@@" and save range
+    
+    UInt16 KeyWord2Count = 0;
+    
+    for (int i = 0; i < [Lines count]; i++) {
+        
+        StringRange = NSMakeRange(0, 0);
+        StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord1];
+        
+        if (StringRange.length != 0) {
+            
+            //[CASPER] 2013.12.25 Fix Bold font bug
+            StringRange.location = StringRange.location + AttrRange.location + 2;
+            
+            // To Handle "("
+            KeyWord2Range = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+            
+            if (KeyWord2Range.length != 0) {
+                KeyWord2Count ++;
+                
+                StringRange.location = StringRange.location - 2;
+                StringRange.length = ([[Lines objectAtIndex:i] length]);
+                AttrRange.location = AttrRange.location - 1;
+                
+            } else {
+                
+                StringRange.length = ([[Lines objectAtIndex:i] length] - 1 + KeyWord2Count);
+                
+            }
+            
+            
+            
+            //[CASPER] 2013.12.25 Fix Bold font bug ==
+            [RangeArray addObject:[NSValue valueWithRange:StringRange]];
+            
+        }
+        
+        AttrRange.location = AttrRange.location + ([[Lines objectAtIndex:i] length]);
+        
+    }
+    
+    // Remove @@ and add attribute
+    ContentText = [ContentText stringByReplacingOccurrencesOfString:KeyWord1 withString:@""];
+    //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ContentText];
+    
+    // Add General Attribute
+    AttrRange = NSMakeRange(0, [ContentText length]);
+    [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:1]range:AttrRange];
+    //    [string addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:2]range:AttrRange];
+    
+    
+    if ([RangeArray count] != 0) {
+        
+        for (int i = 0; i < [RangeArray count]; i++) {
+            AttrRange = NSMakeRange(0, 0);
+            
+            AttrRange = [[RangeArray objectAtIndex:i] rangeValue];
+            if ((AttrRange.location + AttrRange.length) > [ContentText length]) {
+                AttrRange.length = [ContentText length] - AttrRange.location;
+            }
+            
+            [string addAttribute:NSFontAttributeName value:BoldFont range:AttrRange];
+        }
+    }
+    
+    
+    /*
+     // Find [亻因]
+     [RangeArray removeAllObjects];
+     StringRange = NSMakeRange(0, 0);
+     AttrRange = NSMakeRange(0, 0);
+     
+     StringRange = [ContentText rangeOfString:KeyWord2];
+     
+     if (StringRange.length != 0) {
+     for (int i = 0; i < [Lines count]; i++) {
+     
+     StringRange = NSMakeRange(0, 0);
+     StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+     if (StringRange.length != 0 ) {
+     
+     StringRange.location = AttrRange.location + StringRange.location;
+     [RangeArray addObject:[NSValue valueWithRange:StringRange]];
+     NSLog(@"亻因 location = %d langth = %d", StringRange.location, StringRange.length);
+     }
+     AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
+     }
+     }
+     
+     if ([RangeArray count] != 0) {
+     for (int i = 0; i < [RangeArray count]; i++) {
+     
+     NSRange TempRange = [[RangeArray objectAtIndex:i] rangeValue];
+     [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:0] range:TempRange];
+     
+     }
+     
+     }
+     
+     */
+    
+    return string;
+}
+
+
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView ViewExist : (BOOL) Exist
 {
     
@@ -377,18 +501,22 @@
     PoetryReadingView.TitleTextLabel.textAlignment = NSTextAlignmentCenter;
     PoetryReadingView.TitleTextLabel.frame = UI_IPAD_READING_TITLE_RECT_LABEL;
     
-    
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
     
-    [PoetryReadingView.ContentTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
-    //NSLog(@"content = %@",[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
     PoetryReadingView.ContentTextLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // [CASPER] 2013.12.23 do not clean up text, since file already did.
+    //[PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
+    [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    // [CASPER] 2013.12.23 ==
+    
     CGSize constraint = CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, 20000.0f);
+    
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
     
