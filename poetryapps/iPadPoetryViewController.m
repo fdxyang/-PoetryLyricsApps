@@ -17,11 +17,13 @@
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT      17
 
-#define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
-#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    44 * 5
+#define UI_IPAD_COVER_TABLEVIEW_HEIGHT              UI_IPAD_COVER_TABLE_CELL_HEIGHT * 4
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    UI_IPAD_COVER_TABLE_CELL_HEIGHT * 5
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT - 160
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_HISTORY  UI_IPAD_COVER_TABLE_CELL_HEIGHT * POETRY_MAX_NUMBER_IN_HISTORY
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX      UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY
+
 
 #define UI_IPAD_TABLEVIEW_WIDTH                     300
 #define UI_IPAD_TOC_TABLEVIEW_WIDTH                 300
@@ -46,7 +48,6 @@
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY            CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE        CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON)
-
 
 
 @interface iPadPoetryViewController () {
@@ -368,6 +369,7 @@
     if (PoetryReadingView.TitleTextLabel == nil) {
         PoetryReadingView.TitleTextLabel = [[UILabel alloc] init];
     }
+    
     [PoetryReadingView.TitleTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     [PoetryReadingView.TitleTextLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:60]];
     [PoetryReadingView.TitleTextLabel setBackgroundColor:[UIColor clearColor]];
@@ -581,22 +583,6 @@
                          
                      }];
     
-
-/*
-    
-    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    
-    [self InitSettingBtn];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    */
 }
 
 
@@ -763,29 +749,32 @@
                     // Guard reading
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                     
                 } else if (indexPath.section == 2) {
+                    
                     // Poetry
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 } else if (indexPath.section == 3) {
+                    
                     // responsive
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 }
-
             }
             
         } else {
 
             switch (indexPath.row) {
+                    
                 case 0:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
@@ -793,9 +782,11 @@
                     _NavigationHeader.TitleLab.text = @"導讀";
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
+                    
                     break;
                     
                 case 1:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
                     [_TocTableView reloadData];
@@ -807,6 +798,7 @@
                     break;
                     
                 case 2:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
                     [_TocTableView reloadData];
@@ -816,9 +808,31 @@
                     [self ExecuteTocTableViewAnimation];
 
                     break;
+                    
                 case 3:
-                    NSLog(@"history pressed");
+
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
+                    UInt16 TableHeight = [_TocTableData count] * UI_IPAD_COVER_TABLE_CELL_HEIGHT;
+                    [_TocTableView reloadData];
+                    
+                    if (TableHeight == 0) {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"還沒有";
+
+                    } else {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"閱讀歷史";
+                        _TocTableView.scrollEnabled = YES;
+
+                    }
+                    
+                    [self ExecuteTocTableViewAnimation];
+                    
                     break;
+                    
                 default:
                     break;
             }
@@ -828,8 +842,17 @@
         NSLog(@"%d", indexPath.row);
         _CoverViewState = COVER_IDLE;
         [self CoverViewStateMachine];
-        [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row]];
+        if ([_NavigationHeader.TitleLab.text isEqualToString:@"閱讀歷史"]) {
             
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:NO];
+
+        } else {
+        
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+
+        }
+
+        
     }
 }
 
@@ -1025,11 +1048,18 @@
 }
 
 // TODO: Generate new reading view
--(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData
+-(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData andSaveIntoHistory : (BOOL) SaveIntoHistory
 {
     
     // Update reading array
     _PoetryNowReading = NewReadingData;
+    NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    
+    // Save into Coredata
+    if (SaveIntoHistory) {
+        [_PoetryDatabase PoetryCoreDataSaveIntoHistory:_PoetryNowReading];
+    }
+
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
     _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
