@@ -8,6 +8,10 @@
 
 #import "ReadingViewController.h"
 
+#define UI_IPHONE_SCREEN_WIDTH  320
+#define UI_IPHONE_SCREEN_HEIGHT 568
+#define UI_READING_SCROLLER_RECT  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_IPHONE_SCREEN_WIDTH, UI_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+
 @interface ReadingViewController (){
     
     CGSize                  _LabelSizeInit;
@@ -51,10 +55,11 @@
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
     
+    /*
     if (_Scroller == nil) {
         _Scroller = [[UIScrollView alloc] init];
     }
-    
+    */
     _Scroller.frame = CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, screenRect.size.width, screenRect.size.height - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     [self.view addSubview:_Scroller];
     
@@ -178,9 +183,10 @@
     }
     READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
     // Setup Scroll View, the height would be handled in (DisplayHandlingWithData)
+    /*
     [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 0)];
     [_Scroller setScrollEnabled:YES];
-
+*/
     
     /*NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
     if (subviewArray == nil) {
@@ -333,7 +339,14 @@
 
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
 {
+ 
+    // [CASPER] 20131230
+    if (PoetryReadingView.Scroller == nil) {
+        PoetryReadingView.Scroller = [[UIScrollView alloc] init];
+    }
+    PoetryReadingView.Scroller.frame = UI_READING_SCROLLER_RECT;
     
+    // [CASPER] 20131230 ==
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
@@ -358,13 +371,15 @@
         
         // Font color = Black, Background = White
         PoetryReadingView.ContentTextLabel.textColor = [UIColor blackColor];
-        [self.view setBackgroundColor:[UIColor whiteColor]];
+        //[self.view setBackgroundColor:[UIColor whiteColor]];
+        [PoetryReadingView setBackgroundColor:[UIColor whiteColor]];
         
     } else {
         
         // Font color = Black, Background = White
         PoetryReadingView.ContentTextLabel.textColor = [UIColor whiteColor];
-        [self.view setBackgroundColor:[UIColor blackColor]];
+        //[self.view setBackgroundColor:[UIColor blackColor]];
+        [PoetryReadingView setBackgroundColor:[UIColor blackColor]];
         
     }
     CGFloat ViewHeight = _LabelSizeInit.height;
@@ -377,10 +392,10 @@
     
     ViewHeight = ViewHeight + 30; // To add buff in the bottom of the view
     
-
+    [PoetryReadingView.Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
     [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
+    //[_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
     
     return PoetryReadingView;
     
