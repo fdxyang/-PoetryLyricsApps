@@ -17,11 +17,13 @@
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44
 #define UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT      17
 
-#define UI_IPAD_COVER_TABLEVIEW_HEIGHT              44 * 4
-#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    44 * 5
+#define UI_IPAD_COVER_TABLEVIEW_HEIGHT              UI_IPAD_COVER_TABLE_CELL_HEIGHT * 4
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    UI_IPAD_COVER_TABLE_CELL_HEIGHT * 5
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT - 160
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_HISTORY  UI_IPAD_COVER_TABLE_CELL_HEIGHT * POETRY_MAX_NUMBER_IN_HISTORY
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX      UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY
+
 
 #define UI_IPAD_TABLEVIEW_WIDTH                     300
 #define UI_IPAD_TOC_TABLEVIEW_WIDTH                 300
@@ -46,7 +48,6 @@
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY            CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE        CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON)
-
 
 
 @interface iPadPoetryViewController () {
@@ -96,6 +97,7 @@
     [super viewDidLoad];
 
     _Setting = [[PoetrySettingCoreData alloc] init];
+    
     //[_Setting PoetrySetting_Create];
 /*
     if  (_Setting.DataSaved == NO) {
@@ -361,6 +363,129 @@
     return Articel;
 }
 
+-(NSMutableAttributedString *) SetupStringAttrForDisplayWithContentText : (NSString*) ContentText
+{
+    //READING_VIEW_LOG(@"SetupStringAttrForDisplayWithContentText");
+    
+    //TODO : Find @@ line
+    UIFont *BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_Setting.SettingFontSize];
+    NSArray *Lines = [ContentText componentsSeparatedByString:@"\n"];
+    
+    NSRange AttrRange = NSMakeRange(0, 0);
+    NSRange StringRange = NSMakeRange(0, 0);
+    NSRange KeyWord2Range = NSMakeRange(0, 0);
+    NSMutableArray *RangeArray = [[NSMutableArray alloc] init];
+    
+    NSString *KeyWord1 = @"@@";
+    NSString *KeyWord2 = @"（";
+    //NSString *KeyWord2 = @"亻因";
+    // Find "@@" and save range
+    
+    UInt16 KeyWord2Count = 0;
+    
+    for (int i = 0; i < [Lines count]; i++) {
+        
+        StringRange = NSMakeRange(0, 0);
+        StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord1];
+        
+        if (StringRange.length != 0) {
+            
+            //[CASPER] 2013.12.25 Fix Bold font bug
+            StringRange.location = StringRange.location + AttrRange.location + 2;
+            
+            // To Handle "("
+            KeyWord2Range = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+            
+            if (KeyWord2Range.length != 0) {
+                KeyWord2Count ++;
+                
+                StringRange.location = StringRange.location - 2;
+                StringRange.length = ([[Lines objectAtIndex:i] length]);
+                AttrRange.location = AttrRange.location - 1;
+                
+            } else {
+                
+                StringRange.length = ([[Lines objectAtIndex:i] length] - 1 + KeyWord2Count);
+                
+            }
+            
+            
+            
+            //[CASPER] 2013.12.25 Fix Bold font bug ==
+            [RangeArray addObject:[NSValue valueWithRange:StringRange]];
+            
+        }
+        
+        AttrRange.location = AttrRange.location + ([[Lines objectAtIndex:i] length]);
+        
+    }
+    
+    // Remove @@ and add attribute
+    ContentText = [ContentText stringByReplacingOccurrencesOfString:KeyWord1 withString:@""];
+    //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    //ContentText = [ContentText stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ContentText];
+    
+    // Add General Attribute
+    AttrRange = NSMakeRange(0, [ContentText length]);
+    [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:1]range:AttrRange];
+    //    [string addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:2]range:AttrRange];
+    
+    
+    if ([RangeArray count] != 0) {
+        
+        for (int i = 0; i < [RangeArray count]; i++) {
+            AttrRange = NSMakeRange(0, 0);
+            
+            AttrRange = [[RangeArray objectAtIndex:i] rangeValue];
+            if ((AttrRange.location + AttrRange.length) > [ContentText length]) {
+                AttrRange.length = [ContentText length] - AttrRange.location;
+            }
+            
+            [string addAttribute:NSFontAttributeName value:BoldFont range:AttrRange];
+        }
+    }
+    
+    
+    /*
+     // Find [亻因]
+     [RangeArray removeAllObjects];
+     StringRange = NSMakeRange(0, 0);
+     AttrRange = NSMakeRange(0, 0);
+     
+     StringRange = [ContentText rangeOfString:KeyWord2];
+     
+     if (StringRange.length != 0) {
+     for (int i = 0; i < [Lines count]; i++) {
+     
+     StringRange = NSMakeRange(0, 0);
+     StringRange = [[Lines objectAtIndex:i] rangeOfString:KeyWord2];
+     if (StringRange.length != 0 ) {
+     
+     StringRange.location = AttrRange.location + StringRange.location;
+     [RangeArray addObject:[NSValue valueWithRange:StringRange]];
+     NSLog(@"亻因 location = %d langth = %d", StringRange.location, StringRange.length);
+     }
+     AttrRange.location = AttrRange.location + [[Lines objectAtIndex:i] length];
+     }
+     }
+     
+     if ([RangeArray count] != 0) {
+     for (int i = 0; i < [RangeArray count]; i++) {
+     
+     NSRange TempRange = [[RangeArray objectAtIndex:i] rangeValue];
+     [string addAttribute:NSKernAttributeName value:[NSNumber numberWithInt:0] range:TempRange];
+     
+     }
+     
+     }
+     
+     */
+    
+    return string;
+}
+
+
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView ViewExist : (BOOL) Exist
 {
     
@@ -368,6 +493,7 @@
     if (PoetryReadingView.TitleTextLabel == nil) {
         PoetryReadingView.TitleTextLabel = [[UILabel alloc] init];
     }
+    
     [PoetryReadingView.TitleTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     [PoetryReadingView.TitleTextLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:60]];
     [PoetryReadingView.TitleTextLabel setBackgroundColor:[UIColor clearColor]];
@@ -375,18 +501,22 @@
     PoetryReadingView.TitleTextLabel.textAlignment = NSTextAlignmentCenter;
     PoetryReadingView.TitleTextLabel.frame = UI_IPAD_READING_TITLE_RECT_LABEL;
     
-    
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
     
-    [PoetryReadingView.ContentTextLabel setText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
-    //NSLog(@"content = %@",[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
     PoetryReadingView.ContentTextLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // [CASPER] 2013.12.23 do not clean up text, since file already did.
+    //[PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
+    [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
+    // [CASPER] 2013.12.23 ==
+    
     CGSize constraint = CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, 20000.0f);
+    
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
     
@@ -543,7 +673,8 @@
             _isSearching = NO;
             //_SettingBtn.titleLabel.text = @"SEARCH";
             [_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
-
+            
+            [_SettingTableView reloadData];
             
             [self RemoveSearchbarAnimation];
             [self ExecuteSettingTableViewAnnimation];
@@ -580,22 +711,6 @@
                          
                      }];
     
-
-/*
-    
-    [Animations moveRight:_TableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveLeft:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveRight:_TableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    
-    [self InitSettingBtn];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:200.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.2 andWait:YES andLength:20.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:20.0];
-    [Animations moveDown:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    [Animations moveUp:_SettingBtn andAnimationDuration:0.1 andWait:YES andLength:12.0];
-    */
 }
 
 
@@ -762,29 +877,32 @@
                     // Guard reading
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                     
                 } else if (indexPath.section == 2) {
+                    
                     // Poetry
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 } else if (indexPath.section == 3) {
+                    
                     // responsive
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row]];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 }
-
             }
             
         } else {
 
             switch (indexPath.row) {
+                    
                 case 0:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
@@ -792,9 +910,11 @@
                     _NavigationHeader.TitleLab.text = @"導讀";
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
+                    
                     break;
                     
                 case 1:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
                     [_TocTableView reloadData];
@@ -806,6 +926,7 @@
                     break;
                     
                 case 2:
+                    
                     [_TocTableData removeAllObjects];
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
                     [_TocTableView reloadData];
@@ -815,9 +936,31 @@
                     [self ExecuteTocTableViewAnimation];
 
                     break;
+                    
                 case 3:
-                    NSLog(@"history pressed");
+
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
+                    UInt16 TableHeight = [_TocTableData count] * UI_IPAD_COVER_TABLE_CELL_HEIGHT;
+                    [_TocTableView reloadData];
+                    
+                    if (TableHeight == 0) {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"還沒有";
+
+                    } else {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"閱讀歷史";
+                        _TocTableView.scrollEnabled = YES;
+
+                    }
+                    
+                    [self ExecuteTocTableViewAnimation];
+                    
                     break;
+                    
                 default:
                     break;
             }
@@ -827,8 +970,17 @@
         NSLog(@"%d", indexPath.row);
         _CoverViewState = COVER_IDLE;
         [self CoverViewStateMachine];
-        [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row]];
+        if ([_NavigationHeader.TitleLab.text isEqualToString:@"閱讀歷史"]) {
             
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:NO];
+
+        } else {
+        
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+
+        }
+
+        
     }
 }
 
@@ -1024,11 +1176,19 @@
 }
 
 // TODO: Generate new reading view
--(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData
+-(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData andSaveIntoHistory : (BOOL) SaveIntoHistory
 {
     
     // Update reading array
     _PoetryNowReading = NewReadingData;
+    NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    
+    // Save into Coredata
+    if (SaveIntoHistory) {
+        [_PoetryDatabase PoetryCoreDataSaveIntoHistory:_PoetryNowReading];
+    }
+    [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+
     POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
     _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
@@ -1292,7 +1452,6 @@
             
         case UIGestureRecognizerStateEnded:
             [self HandleGestureEndWithLocation:location andView:View];
-
             break;
         case UIGestureRecognizerStateCancelled:
         {
@@ -1740,7 +1899,8 @@
                                              
                                              _CurrentView = VIEW2;
                                              _PoetryNowReading = _NewDataDic;
-                                             
+                                             [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                              [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                              

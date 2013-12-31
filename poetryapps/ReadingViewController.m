@@ -914,6 +914,8 @@
                                                      _GetSlideInLabel = NO;
                                                      _ConfirmToSwitch = NO;
                                                  }
+                                                 [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+
                                              }];
                         } else {
                         
