@@ -10,12 +10,7 @@
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
 #import "PoetryReadingView.h"
-
-#define UI_4_INCH_HEIGHT                568
-#define UI_3_5_INCH_HEIGHT              480
-#define UI_IOS7_VERSION_FLOATING        7.0f
-#define UI_IOS7_TAB_BAR_HEIGHT          49
-#define UI_IOS7_NAV_BAR_HEIGHT          44
+#import "Animations.h"
 
 #define UI_DEFAULT_PREVIOUS_ORIGIN_X    -320
 #define UI_DEFAULT_NEXT_ORIGIN_X        320
@@ -26,7 +21,7 @@
 
 #define SWITCH_VIEW_THRESHOLD           40
 
-//#define DEBUG_READINGVIEW
+#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -53,6 +48,9 @@
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView1;
 @property (nonatomic, strong)           PoetryReadingView           *ReadingView2;
 @property (nonatomic, strong)           PoetryReadingView           *EmptyReadingView;
+
+@property (nonatomic)                   UILabel                     *HeadAndTailLabel;
+
 
 typedef enum {
     VIEW1 = 0x00,

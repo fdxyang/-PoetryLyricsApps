@@ -10,7 +10,10 @@
 
 #define UI_IPHONE_SCREEN_WIDTH  320
 #define UI_IPHONE_SCREEN_HEIGHT 568
-#define UI_READING_SCROLLER_RECT  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_IPHONE_SCREEN_WIDTH, UI_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+#define UI_READING_SCROLLER_RECT  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_IPHONE_SCREEN_WIDTH, UI_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_HEAD_TAIL_LAB_RECT     CGRectMake(10, UI_IPHONE_SCREEN_HEIGHT/2, UI_IPHONE_SCREEN_WIDTH, 50)
+
 
 @interface ReadingViewController (){
     
@@ -49,20 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
     
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
-    
-    /*
-    if (_Scroller == nil) {
-        _Scroller = [[UIScrollView alloc] init];
-    }
-    */
-    _Scroller.frame = CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, screenRect.size.width, screenRect.size.height - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
-    [self.view addSubview:_Scroller];
-    
     
     // GestureRecognize
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
@@ -92,11 +84,36 @@
     _CrossCategoryFlag = NO;
     _HeadAndTailFlag = NO;
     _ConfirmToSwitch = NO;
+    
+    
+    
+    [self.view setBackgroundColor:[UIColor grayColor]];
+    if (_HeadAndTailLabel == nil) {
+        _HeadAndTailLabel = [[UILabel alloc] initWithFrame:UI_HEAD_TAIL_LAB_RECT];
+    }
+
+    [_HeadAndTailLabel setBackgroundColor:[UIColor clearColor]];
+    [_HeadAndTailLabel setTextColor:[UIColor whiteColor]];
+    [_HeadAndTailLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:26]];
+    [_HeadAndTailLabel setText:@"最前的一首"];
+    [_HeadAndTailLabel setTextAlignment:NSTextAlignmentLeft];
+    [Animations shadowOnView:_HeadAndTailLabel andShadowType:@"SHADOW"];
+
+    [self.view addSubview:_HeadAndTailLabel];
+    NSLog(@"%@", _HeadAndTailLabel);
+    
+    if (_ReadingView1 == nil) {
+        _ReadingView1 = [[PoetryReadingView alloc] init];
+        //[Animations shadowOnView:_ReadingView1 andShadowType:@"SHADOW"];
+    }
+    
+    if (_ReadingView2 == nil) {
+        _ReadingView2 = [[PoetryReadingView alloc] init];
+        //[Animations shadowOnView:_ReadingView2 andShadowType:@"SHADOW"];
+    }
+    
     [self InitReadingViewSetupScroller];
 
-    
-    //_CurrentLab = LABEL1;
-    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -107,10 +124,7 @@
     [_ReadingView1 removeFromSuperview];
     [_ReadingView2 removeFromSuperview];
     
-    /*
-    [_Label1 removeFromSuperview];
-    [_Label2 removeFromSuperview];
-*/
+   
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }
@@ -118,7 +132,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 // Remove "\n" in the beginning of the article
@@ -165,10 +178,6 @@
         POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
-
-        //READING_VIEW_LOG(@"READING EXIST  = %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
-        
-
         
     } else {
         
@@ -182,33 +191,15 @@
 
     }
     READING_VIEW_LOG(@"_CurrentIndex = %d", _CurrentIndex);
-    // Setup Scroll View, the height would be handled in (DisplayHandlingWithData)
-    /*
-    [_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, 0)];
-    [_Scroller setScrollEnabled:YES];
-*/
-    
-    /*NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ReadingScroller" owner:self options:nil];
-    if (subviewArray == nil) {
-        READING_VIEW_ERROR_LOG(@"CANNOT FIND ReadingScroller");
-    }
-    */
+
     // Init View1 for first launch
-    if (_ReadingView1 == nil) {
-        _ReadingView1 = [[PoetryReadingView alloc] init];
-    }
-    
-    if (_ReadingView2 == nil) {
-        _ReadingView2 = [[PoetryReadingView alloc] init];
-    }
-    
     _ReadingView1 = [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1];
+    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    //[_ReadingView1 setBackgroundColor:[UIColor clearColor]];
     READING_VIEW_LOG(@"init _ReadingView1 = %@", _ReadingView1);
     
-    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-    [_ReadingView1 setBackgroundColor:[UIColor clearColor]];
-
-    [_Scroller addSubview: _ReadingView1];
+    
+    [self.view addSubview: _ReadingView1];
 
     
 }
@@ -336,7 +327,21 @@
     return string;
 }
 
-
+- (void)listSubviewsOfView:(UIView *)view {
+    
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+    
+    // Return if there are no subviews
+    if ([subviews count] == 0) return;
+    
+    for (UIView *subview in subviews) {
+        
+        
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
+}
 -(PoetryReadingView *) DisplayHandlingWithData :(NSDictionary*) PoetryData onView : (PoetryReadingView*) PoetryReadingView
 {
  
@@ -346,7 +351,6 @@
     }
     PoetryReadingView.Scroller.frame = UI_READING_SCROLLER_RECT;
     
-    // [CASPER] 20131230 ==
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
@@ -355,15 +359,11 @@
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
     //PoetryReadingView.ContentTextLabel.textAlignment = NSTextAlignmentCenter;
-    
-    // [CASPER] 2013.12.23 do not clean up text, since file already did.
-    //[PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[self ReadingViewCleanUpTextWithTheArticle:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]]];
+    //[PoetryReadingView.ContentTextLabel setText:@"TEST"];
     [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
     // [CASPER] 2013.12.23 ==
     
     CGSize constraint = CGSizeMake(UI_DEFAULT_LABEL_WIDTH, 20000.0f);
-    
-    
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
     
@@ -371,14 +371,12 @@
         
         // Font color = Black, Background = White
         PoetryReadingView.ContentTextLabel.textColor = [UIColor blackColor];
-        //[self.view setBackgroundColor:[UIColor whiteColor]];
         [PoetryReadingView setBackgroundColor:[UIColor whiteColor]];
         
     } else {
         
         // Font color = Black, Background = White
         PoetryReadingView.ContentTextLabel.textColor = [UIColor whiteColor];
-        //[self.view setBackgroundColor:[UIColor blackColor]];
         [PoetryReadingView setBackgroundColor:[UIColor blackColor]];
         
     }
@@ -390,26 +388,19 @@
         ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
     }
     
-    ViewHeight = ViewHeight + 30; // To add buff in the bottom of the view
-    
     [PoetryReadingView.Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    [PoetryReadingView addSubview:PoetryReadingView.ContentTextLabel];
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    //[_Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    
     return PoetryReadingView;
     
 }
-
+/*
 -(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
     if (_EmptyReadingView == nil) {
         _EmptyReadingView = [[PoetryReadingView alloc] init];
     }
-    if (_EmptyReadingView.ContentTextLabel == nil) {
-        _EmptyReadingView.ContentTextLabel = [[UILabel alloc] init];
-    }
-    [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
+    
+    //[_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
     
     _EmptyReadingView.ContentTextLabel.backgroundColor = [UIColor clearColor];
     _EmptyReadingView.ContentTextLabel.textColor = [UIColor grayColor];
@@ -434,9 +425,10 @@
     
     }
     
-    
+    NSLog(@"%@", _EmptyReadingView);
     return _EmptyReadingView;
 }
+ */
 
 #pragma mark - Gesture Recognizer Method
 
@@ -464,6 +456,13 @@
                 
                 if ( _SlideDirection != SlideLabelLeftToRigth ) {
                     // Need to reinit new view and data
+                    if (_CurrentView == VIEW1) {
+//                        [_ReadingView1 setFrame:CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height)];
+                    } else {
+  //                      [_ReadingView2 setFrame:CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height)];
+                    }
+                    
+                    
                     _GetSlideInLabel = NO;
                     _DataFlag = NO;
                     
@@ -484,6 +483,7 @@
                             // This is the first poetry in this category
                             // Check the Category
                             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+                            
                             if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
                                 
                                 // To get the previous category list as temp.
@@ -512,34 +512,8 @@
                                 
                             } else {
                                 
-                                // Generate empty view to notify user
-                                if (_CurrentView == VIEW1) {
-                                    
-                                    READING_VIEW_LOG(@"Add view below readingview1");
-                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                        [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
-                                    } else {
-                                        [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
-                                    }
-                                    
-                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView1];
-                                    
-
-                                } else {
-                                    
-                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                        [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
-                                    } else {
-                                        [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
-                                    }
-                                    
-                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView2];
-
-                                }
-                               
                                 
+                                // Generate empty view to notify user
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
@@ -567,14 +541,14 @@
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor blackColor];
                                 [View setBackgroundColor:[UIColor whiteColor]];
-                                [self.view setBackgroundColor:[UIColor whiteColor]];
+                                //[self.view setBackgroundColor:[UIColor whiteColor]];
                                 
                             } else {
                                 
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor whiteColor];
                                 [View setBackgroundColor:[UIColor blackColor]];
-                                [self.view setBackgroundColor:[UIColor blackColor]];
+                                //[self.view setBackgroundColor:[UIColor blackColor]];
                                 
                             }
 
@@ -590,7 +564,7 @@
                                     [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                 }
                                 
-                                [_Scroller insertSubview:View belowSubview:_ReadingView1];
+                                [self.view insertSubview:View belowSubview:_ReadingView1];
                                 
                             } else {
                                 
@@ -600,7 +574,7 @@
                                     [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                 }
                                 
-                                [_Scroller insertSubview:View belowSubview:_ReadingView2];
+                                [self.view insertSubview:View belowSubview:_ReadingView2];
                             }
 
                             
@@ -681,31 +655,7 @@
                             } else {
                                 
                                 // Generate empty view to notify user
-                                if (_CurrentView == VIEW1) {
-                                    
-                                    READING_VIEW_LOG(@"Add view below readingview1");
-                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                        [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
-                                    } else {
-                                        [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
-                                    }
-                                    
-                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller addSubview:_EmptyReadingView];
-                                    
-                                } else {
-                                    
-                                    if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                        [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
-                                    } else {
-                                        [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
-                                    }
-                                    
-                                    [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                                    [_Scroller addSubview:_EmptyReadingView];
-                                    
-                                }
-
+                                
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
@@ -731,19 +681,19 @@
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor blackColor];
                                 [View setBackgroundColor:[UIColor whiteColor]];
-                                [self.view setBackgroundColor:[UIColor whiteColor]];
+                                //[self.view setBackgroundColor:[UIColor whiteColor]];
                                 
                             } else {
                                 
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor whiteColor];
                                 [View setBackgroundColor:[UIColor blackColor]];
-                                [self.view setBackgroundColor:[UIColor blackColor]];
+                                //[self.view setBackgroundColor:[UIColor blackColor]];
                                 
                             }
                             
-                            
-                            [_Scroller addSubview:View];
+                            [self.view addSubview:View];
+                            //[_Scroller addSubview:View];
 
                         }
                         
@@ -903,7 +853,7 @@
                                                      READING_VIEW_LOG(@"move done remove label 1");
                                                      
                                                      [_ReadingView1 removeFromSuperview];
-                                                     [View setBackgroundColor:[UIColor clearColor]];
+                                                     //[View setBackgroundColor:[UIColor clearColor]];
                                                      
                                                      _CurrentView = VIEW2;
                                                      _PoetryNowReading = _NewDataDic;
@@ -918,7 +868,7 @@
                                                      
                                                      READING_VIEW_LOG(@"move done remove label 2");
                                                      [_ReadingView2 removeFromSuperview];
-                                                     [View setBackgroundColor:[UIColor clearColor]];
+                                                     //[View setBackgroundColor:[UIColor clearColor]];
                                                      
                                                      _CurrentView = VIEW1;
                                                      _PoetryNowReading = _NewDataDic;
