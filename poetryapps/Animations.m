@@ -202,10 +202,10 @@
     else{
         view.layer.shadowColor = [UIColor blackColor].CGColor;
     }
-
+    
     view.layer.shadowOpacity = 0.7f;
-    view.layer.shadowOffset = CGSizeMake(10.0f, 10.0f);
-    view.layer.shadowRadius = 5.0f;
+    view.layer.shadowOffset = CGSizeMake(-0.5f, 0.0f);
+    view.layer.shadowRadius = 3.0f;
     view.layer.masksToBounds = NO;
  
     if ([shadowType isEqualToString:@"Trapezoidal"]){
