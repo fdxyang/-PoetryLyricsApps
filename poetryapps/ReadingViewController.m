@@ -85,7 +85,7 @@
     _HeadAndTailFlag = NO;
     _ConfirmToSwitch = NO;
     
-    
+    /*
     
     [self.view setBackgroundColor:[UIColor grayColor]];
     if (_HeadAndTailLabel == nil) {
@@ -101,7 +101,7 @@
 
     [self.view addSubview:_HeadAndTailLabel];
     NSLog(@"%@", _HeadAndTailLabel);
-    
+    */
     if (_ReadingView1 == nil) {
         _ReadingView1 = [[PoetryReadingView alloc] init];
         //[Animations shadowOnView:_ReadingView1 andShadowType:@"SHADOW"];
@@ -393,7 +393,7 @@
     return PoetryReadingView;
     
 }
-/*
+
 -(PoetryReadingView *) PlaceEmptyViewForSlideDirection : (SLIDE_DIRECTION) SlideDirection
 {
     if (_EmptyReadingView == nil) {
@@ -401,6 +401,8 @@
     }
     
     //[_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
+    
+    [_EmptyReadingView setBackgroundColor:[UIColor colorWithRed:(242/255.0f) green:(243/255.0f) blue:(224/255.0f) alpha:1]];
     
     _EmptyReadingView.ContentTextLabel.backgroundColor = [UIColor clearColor];
     _EmptyReadingView.ContentTextLabel.textColor = [UIColor grayColor];
@@ -410,17 +412,18 @@
         
         // PREV
         READING_VIEW_LOG(@"The most first poetry, try to init view below");
-        
-        _EmptyReadingView.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_DEFAULT_SCREEN_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
+        [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
+        NSLog(@"%@", _EmptyReadingView.ContentTextLabel);
         
     } else {
         //NEXT
         READING_VIEW_LOG(@"The latest poetry, try to init view ");
         
-        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT));
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT) / 2, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, UI_4_INCH_HEIGHT);
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_DEFAULT_SCREEN_WIDTH, 50);
+        [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
         _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
     
     }
@@ -428,7 +431,7 @@
     NSLog(@"%@", _EmptyReadingView);
     return _EmptyReadingView;
 }
- */
+
 
 #pragma mark - Gesture Recognizer Method
 
@@ -514,7 +517,10 @@
                                 
                                 
                                 // Generate empty view to notify user
+                                
+                                
                                 READING_VIEW_LOG(@"NO DATA");
+                                [self.view insertSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection] atIndex:0];
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
                                 
@@ -655,7 +661,7 @@
                             } else {
                                 
                                 // Generate empty view to notify user
-                                
+                                [self.view addSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection]];
                                 READING_VIEW_LOG(@"NO DATA");
                                 _HeadAndTailFlag = YES;
                                 _NewDataDic = nil;
