@@ -77,7 +77,7 @@
 #define TAG_NEXT_TOUCH_VIEW             8
 */
 
-#define DEBUG_IPAD_READINGVIEW
+//#define DEBUG_IPAD_READINGVIEW
 #ifdef DEBUG_IPAD_READINGVIEW
 #   define IPAD_READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else

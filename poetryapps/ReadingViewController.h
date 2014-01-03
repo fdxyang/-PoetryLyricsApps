@@ -21,7 +21,7 @@
 
 #define SWITCH_VIEW_THRESHOLD           40
 
-#define DEBUG_READINGVIEW
+//#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else

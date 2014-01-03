@@ -637,7 +637,7 @@
     
     if (count == 1) {
         
-        NSLog(@"In Poetry NowReading : Update NowReading ");
+        //NSLog(@"In Poetry NowReading : Update NowReading ");
         
         NSManagedObject *Reading = [FetchResult objectAtIndex:0];
         
