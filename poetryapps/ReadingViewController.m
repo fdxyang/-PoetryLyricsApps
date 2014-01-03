@@ -33,6 +33,8 @@
     CURRENT_VIEW            _CurrentView;
     UInt16                  _CurrentIndex;
     NSMutableArray          *TempPoetryList;
+    
+    UIColor                 *_LightBackgroundColor;
 
 }
 
@@ -102,13 +104,18 @@
     [self.view addSubview:_HeadAndTailLabel];
     NSLog(@"%@", _HeadAndTailLabel);
     */
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+
     if (_ReadingView1 == nil) {
         _ReadingView1 = [[PoetryReadingView alloc] init];
+        //[_ReadingView1 setBackgroundColor:_LightBackgroundColor];
         //[Animations shadowOnView:_ReadingView1 andShadowType:@"SHADOW"];
     }
     
     if (_ReadingView2 == nil) {
         _ReadingView2 = [[PoetryReadingView alloc] init];
+        //[_ReadingView2 setBackgroundColor:_LightBackgroundColor];
+
         //[Animations shadowOnView:_ReadingView2 andShadowType:@"SHADOW"];
     }
     
@@ -369,7 +376,7 @@
         
         // Font color = Black, Background = White
         PoetryReadingView.ContentTextLabel.textColor = [UIColor blackColor];
-        [PoetryReadingView setBackgroundColor:[UIColor whiteColor]];
+        [PoetryReadingView setBackgroundColor:_LightBackgroundColor];
         
     } else {
         
@@ -543,7 +550,7 @@
                                 
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor blackColor];
-                                [View setBackgroundColor:[UIColor whiteColor]];
+                                [View setBackgroundColor:_LightBackgroundColor];
                                 //[self.view setBackgroundColor:[UIColor whiteColor]];
                                 
                             } else {
@@ -562,7 +569,7 @@
                                 
                                 READING_VIEW_LOG(@"Add view below readingview1");
                                 if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                    [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
+                                    [_ReadingView1 setBackgroundColor:_LightBackgroundColor];
                                 } else {
                                     [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                                 }
@@ -572,7 +579,7 @@
                             } else {
                                 
                                 if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                    [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
+                                    [_ReadingView2 setBackgroundColor:_LightBackgroundColor];
                                 } else {
                                     [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                                 }
@@ -686,7 +693,7 @@
                                 
                                 // Font color = Black, Background = White
                                 View.ContentTextLabel.textColor = [UIColor blackColor];
-                                [View setBackgroundColor:[UIColor whiteColor]];
+                                [View setBackgroundColor:_LightBackgroundColor];
                                 //[self.view setBackgroundColor:[UIColor whiteColor]];
                                 
                             } else {

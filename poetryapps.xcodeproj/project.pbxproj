@@ -16,6 +16,8 @@
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
+		10AC47781876B9B500BADD8C /* Light_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AC47761876B9B500BADD8C /* Light_bgiPhone.png */; };
+		10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
@@ -799,6 +801,8 @@
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
 		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
+		10AC47761876B9B500BADD8C /* Light_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Light_bgiPhone.png; sourceTree = "<group>"; };
+		10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light_bgiPhone@2x.png"; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
@@ -1778,6 +1782,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				10AC47761876B9B500BADD8C /* Light_bgiPhone.png */,
+				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
 				CB54FA7118695CC200CED47E /* arrow_down.png */,
 			);
 			name = image;
@@ -2725,6 +2731,7 @@
 				CB54FD5518695CCE00CED47E /* 113.txt in Resources */,
 				CB54FFBC18695CCE00CED47E /* 668.txt in Resources */,
 				CB54FE6E18695CCE00CED47E /* 367.txt in Resources */,
+				10AC47781876B9B500BADD8C /* Light_bgiPhone.png in Resources */,
 				CB54FF1C18695CCE00CED47E /* 523.txt in Resources */,
 				CB54FF3018695CCE00CED47E /* 541.txt in Resources */,
 				CB54FE7118695CCE00CED47E /* 37.txt in Resources */,
@@ -3207,6 +3214,7 @@
 				CB54FFF218695CCE00CED47E /* 716.txt in Resources */,
 				CB54FE1D18695CCE00CED47E /* 294.txt in Resources */,
 				CB54000818695CCE00CED47E /* 87.txt in Resources */,
+				10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */,
 				CB54FF4318695CCE00CED47E /* 559.txt in Resources */,
 				CB54FE3218695CCE00CED47E /* 312.txt in Resources */,
 				CB54FF4B18695CCE00CED47E /* 566.txt in Resources */,
