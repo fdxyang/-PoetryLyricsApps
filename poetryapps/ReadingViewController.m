@@ -358,8 +358,6 @@
     [PoetryReadingView.ContentTextLabel setFont:_font];
     [PoetryReadingView.ContentTextLabel setBackgroundColor:[UIColor clearColor]];
     PoetryReadingView.ContentTextLabel.numberOfLines = 0;
-    //PoetryReadingView.ContentTextLabel.textAlignment = NSTextAlignmentCenter;
-    //[PoetryReadingView.ContentTextLabel setText:@"TEST"];
     [PoetryReadingView.ContentTextLabel setAttributedText:[self SetupStringAttrForDisplayWithContentText:[PoetryData valueForKey:POETRY_CORE_DATA_CONTENT_KEY]]];
     // [CASPER] 2013.12.23 ==
     
@@ -428,7 +426,6 @@
     
     }
     
-    NSLog(@"%@", _EmptyReadingView);
     return _EmptyReadingView;
 }
 
@@ -460,14 +457,14 @@
                 if ( _SlideDirection != SlideLabelLeftToRigth ) {
                     // Need to reinit new view and data
                     if (_CurrentView == VIEW1) {
-//                        [_ReadingView1 setFrame:CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height)];
+                        [_ReadingView1 setFrame:CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height)];
                     } else {
-  //                      [_ReadingView2 setFrame:CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height)];
+                        [_ReadingView2 setFrame:CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height)];
                     }
-                    
                     
                     _GetSlideInLabel = NO;
                     _DataFlag = NO;
+                    _HeadAndTailFlag = NO;
                     
                 }
                 
@@ -612,9 +609,12 @@
             } else if ((location.x - _TouchInit.x) < 0) {
             
                 if ( _SlideDirection != SlideLabelRightToLegt ) {
+                    
+
                     // Need to reinit new view and data
                     _GetSlideInLabel = NO;
                     _DataFlag = NO;
+                    _HeadAndTailFlag = NO;
                     
                 }
 
