@@ -1328,13 +1328,13 @@
     if (_EmptyReadingView.ContentTextLabel == nil) {
         _EmptyReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
-    [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
     [_EmptyReadingView setBackgroundColor:[UIColor colorWithRed:(242/255.0f) green:(243/255.0f) blue:(224/255.0f) alpha:1]];
 
     _EmptyReadingView.ContentTextLabel.backgroundColor = [UIColor clearColor];
     _EmptyReadingView.ContentTextLabel.textColor = [UIColor grayColor];
     _EmptyReadingView.ContentTextLabel.font = _font;
-    
+    [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
+
     if (SlideDirection == SlideLabelLeftToRigth) {
         
         // PREV
@@ -1406,7 +1406,7 @@
 -(PoetryReadingView *) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledView : (PoetryReadingView *) View
 {
     
-    CGPoint location = [recognizer locationInView:_Scroller];
+    CGPoint location = [recognizer locationInView:self.view];
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
             _TouchInit = location;
@@ -1446,6 +1446,7 @@
             // Need to reinit new view and data
             _GetSlideInLabel = NO;
             _DataFlag = NO;
+            _HeadAndTailFlag = NO;
             
         }
         
@@ -1493,34 +1494,10 @@
                     } else {
                         
                         // Generate empty view to notify user
-                        if (_CurrentView == VIEW1) {
-                            
-                            IPAD_READING_VIEW_LOG(@"Add view below readingview1");
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
-                            } else {
-                                [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
-                            }
-                            
-                            [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                            [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView1];
-                            
-                            
-                        } else {
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
-                            } else {
-                                [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
-                            }
-                            
-                            [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                            [_Scroller insertSubview:_EmptyReadingView belowSubview:_ReadingView2];
-                            
-                        }
+                        [self.view insertSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection] atIndex:0];
+
                         
-                        
-                        IPAD_READING_VIEW_LOG(@"NO DATA");
+                        IPAD_READING_VIEW_LOG(@"NO DATA1");
                         _HeadAndTailFlag = YES;
                         _NewDataDic = nil;
                         
@@ -1550,7 +1527,7 @@
                         } else {
                             [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
                         }
-                        [_Scroller insertSubview:View belowSubview:_ReadingView1];
+                        [self.view insertSubview:View belowSubview:_ReadingView1];
                         
                     } else {
                         
@@ -1560,7 +1537,7 @@
                             [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
                         }
                         
-                        [_Scroller insertSubview:View belowSubview:_ReadingView2];
+                        [self.view insertSubview:View belowSubview:_ReadingView2];
                     }
                     
                     
@@ -1595,6 +1572,7 @@
             // Need to reinit new view and data
             _GetSlideInLabel = NO;
             _DataFlag = NO;
+            _HeadAndTailFlag = NO;
             
         }
         
@@ -1641,30 +1619,7 @@
                     } else {
                         
                         // Generate empty view to notify user
-                        if (_CurrentView == VIEW1) {
-                            
-                            IPAD_READING_VIEW_LOG(@"Add view below readingview1");
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                [_ReadingView1 setBackgroundColor:[UIColor whiteColor]];
-                            } else {
-                                [_ReadingView1 setBackgroundColor:[UIColor blackColor]];
-                            }
-                            
-                            [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                            [_Scroller addSubview:_EmptyReadingView];
-                            
-                        } else {
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                [_ReadingView2 setBackgroundColor:[UIColor whiteColor]];
-                            } else {
-                                [_ReadingView2 setBackgroundColor:[UIColor blackColor]];
-                            }
-                            
-                            [self PlaceEmptyViewForSlideDirection:_SlideDirection];
-                            [_Scroller addSubview:_EmptyReadingView];
-                            
-                        }
+                        [self.view insertSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection] belowSubview:_NaviBtn];
                         
                         IPAD_READING_VIEW_LOG(@"NO DATA");
                         _HeadAndTailFlag = YES;
@@ -1702,8 +1657,8 @@
                         
                     }
                     
-                    [_Scroller addSubview:View];
-                    
+                    //[self.view addSubview:View];
+                    [self.view insertSubview:View belowSubview:_NaviBtn];
                 }
                 
                 
@@ -1863,14 +1818,14 @@
                                              IPAD_READING_VIEW_LOG(@"move done remove label 1");
                                              
                                              [_ReadingView1 removeFromSuperview];
-                                             [View setBackgroundColor:[UIColor clearColor]];
+                                             //[View setBackgroundColor:[UIColor clearColor]];
                                              
                                              _CurrentView = VIEW2;
                                              _PoetryNowReading = _NewDataDic;
                                              [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                              
                                              _DataFlag = NO;
                                              _GetSlideInLabel = NO;
@@ -1879,13 +1834,13 @@
                                              
                                              IPAD_READING_VIEW_LOG(@"move done remove label 2");
                                              [_ReadingView2 removeFromSuperview];
-                                             [View setBackgroundColor:[UIColor clearColor]];
+                                             //[View setBackgroundColor:[UIColor clearColor]];
                                              
                                              _CurrentView = VIEW1;
                                              _PoetryNowReading = _NewDataDic;
                                              
                                              self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                             [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                             //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                              _DataFlag = NO;
                                              _GetSlideInLabel = NO;
                                              _ConfirmToSwitch = NO;
