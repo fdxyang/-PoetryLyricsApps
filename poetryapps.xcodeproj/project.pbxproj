@@ -69,7 +69,6 @@
 		CB54001318695CCE00CED47E /* 97.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD4118695CCE00CED47E /* 97.txt */; };
 		CB54001418695CCE00CED47E /* 98.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD4218695CCE00CED47E /* 98.txt */; };
 		CB54001518695CCE00CED47E /* 99.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD4318695CCE00CED47E /* 99.txt */; };
-		CB54FD4418695CCE00CED47E /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = CB54FA7118695CC200CED47E /* arrow_down.png */; };
 		CB54FD4518695CCE00CED47E /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FA7318695CC200CED47E /* 1.txt */; };
 		CB54FD4618695CCE00CED47E /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FA7418695CC200CED47E /* 10.txt */; };
 		CB54FD4718695CCE00CED47E /* 100.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FA7518695CC200CED47E /* 100.txt */; };
@@ -849,7 +848,6 @@
 		CB381FB31849B056000ECB84 /* GotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoViewController.m; sourceTree = "<group>"; };
 		CB381FB81849BD5A000ECB84 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
 		CB381FB91849BD5A000ECB84 /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
-		CB54FA7118695CC200CED47E /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
 		CB54FA7318695CC200CED47E /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		CB54FA7418695CC200CED47E /* 10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 10.txt; sourceTree = "<group>"; };
 		CB54FA7518695CC200CED47E /* 100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 100.txt; sourceTree = "<group>"; };
@@ -1784,7 +1782,6 @@
 			children = (
 				10AC47761876B9B500BADD8C /* Light_bgiPhone.png */,
 				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
-				CB54FA7118695CC200CED47E /* arrow_down.png */,
 			);
 			name = image;
 			path = poetryapps/Resource/image;
@@ -2853,7 +2850,6 @@
 				CB54FF4718695CCE00CED47E /* 562.txt in Resources */,
 				CB54FE4E18695CCE00CED47E /* 338.txt in Resources */,
 				CB54FF6D18695CCE00CED47E /* 597.txt in Resources */,
-				CB54FD4418695CCE00CED47E /* arrow_down.png in Resources */,
 				CB54FE4918695CCE00CED47E /* 333.txt in Resources */,
 				CB54FE2B18695CCE00CED47E /* 306.txt in Resources */,
 				CB54FE0E18695CCE00CED47E /* 280.txt in Resources */,
