@@ -50,6 +50,9 @@
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
     PoetryDataBase = [[PoetryCoreData alloc] init];
+    
+    self.navigationItem.title = @"快速查詢";
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

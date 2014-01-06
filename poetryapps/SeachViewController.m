@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
-    
+    self.navigationItem.title = @"搜尋";
     //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
     //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchData];
     

@@ -30,6 +30,7 @@
     
     _Setting = [[PoetrySettingCoreData alloc] init];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
+    self.navigationItem.title = @"設定";
 
 }
 
