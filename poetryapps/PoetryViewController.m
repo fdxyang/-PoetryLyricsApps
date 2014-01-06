@@ -5,13 +5,20 @@
 //  Created by Goda on 2013/11/25.
 //  Copyright (c) 2013年 cc. All rights reserved.
 //
+//  2014.01.06 [CASPER] Add timer 
 
 #import "PoetryViewController.h"
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
 #import "PoetrySaveIntoCoreData.h"
 
-@interface PoetryViewController ()
+// 2014.01.06 [CASPER]
+#define MAIN_PAGE_LOADING_TIME  2
+
+@interface PoetryViewController () {
+    NSTimer     *_Timer;
+    UInt16      _TimerCount;
+}
 
 @end
 
@@ -21,6 +28,16 @@
 {
     [super viewDidLoad];
     
+    _TimerCount = 0;
+    _Timer = [NSTimer scheduledTimerWithTimeInterval: 1
+                                              target: self
+                                            selector: @selector(handleTimer:)
+                                            userInfo: nil
+                                             repeats: YES];
+
+    UIColor *Background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"welcome_page.png"]];
+
+    [self.view setBackgroundColor:Background];
     // Kevin add timer for test
     NSTimeInterval time1 = [[NSDate date] timeIntervalSince1970];
     long int date1 = (long int)time1;
@@ -52,5 +69,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+// 2014.01.06 [CASPER]
+- (void) handleTimer: (NSTimer *) timer
+{
+    _TimerCount++;
+    //NSLog(@"%d", TimerCount);
+    if (_TimerCount == MAIN_PAGE_LOADING_TIME) {
+        
+        UIViewController *View = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabView"];
+        
+        [self presentViewController:View animated:YES completion:^{
+            [_Timer invalidate];
+        }];
+    } else {
+        
+        NSLog(@"Count down");
+        //_CountDownLab.text = [NSString stringWithFormat:@"%d", (MAIN_PAGE_LOADING_TIME - _TimerCount)];
+    }
+}
+
+// 2014.01.06 [CASPER] ==
 
 @end

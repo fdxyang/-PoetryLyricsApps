@@ -14,6 +14,11 @@
 		10449957184D87E700C58526 /* FontSizeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 10449956184D87E700C58526 /* FontSizeSetting.m */; };
 		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
+		10455193187AA16B00DECB38 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455191187AA16B00DECB38 /* Dark_bgiPhone@2x.png */; };
+		10455194187AA16B00DECB38 /* Dark_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455192187AA16B00DECB38 /* Dark_bgiPhone.png */; };
+		10455197187AA46D00DECB38 /* welcome_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455195187AA46D00DECB38 /* welcome_page@2x.png */; };
+		10455198187AA46D00DECB38 /* welcome_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455196187AA46D00DECB38 /* welcome_page.png */; };
+		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
 		10AC47781876B9B500BADD8C /* Light_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AC47761876B9B500BADD8C /* Light_bgiPhone.png */; };
@@ -795,6 +800,11 @@
 		10449958184DA42500C58526 /* ThemeSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThemeSetting.xib; sourceTree = "<group>"; };
 		1044995A184DA5EF00C58526 /* ThemeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSetting.h; sourceTree = "<group>"; };
 		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
+		10455191187AA16B00DECB38 /* Dark_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPhone@2x.png"; sourceTree = "<group>"; };
+		10455192187AA16B00DECB38 /* Dark_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPhone.png; sourceTree = "<group>"; };
+		10455195187AA46D00DECB38 /* welcome_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page@2x.png"; sourceTree = "<group>"; };
+		10455196187AA46D00DECB38 /* welcome_page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page.png; sourceTree = "<group>"; };
+		10455199187AAB1900DECB38 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		10771DC01849D0B600A3B342 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		10771DC11849D0B600A3B342 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
@@ -1780,6 +1790,11 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				10455199187AAB1900DECB38 /* Default-568h@2x.png */,
+				10455195187AA46D00DECB38 /* welcome_page@2x.png */,
+				10455196187AA46D00DECB38 /* welcome_page.png */,
+				10455192187AA16B00DECB38 /* Dark_bgiPhone.png */,
+				10455191187AA16B00DECB38 /* Dark_bgiPhone@2x.png */,
 				10AC47761876B9B500BADD8C /* Light_bgiPhone.png */,
 				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
 			);
@@ -2723,6 +2738,7 @@
 				CB54FFE618695CCE00CED47E /* 705.txt in Resources */,
 				CB54FD9F18695CCE00CED47E /* 180.txt in Resources */,
 				CB54FF1D18695CCE00CED47E /* 524.txt in Resources */,
+				1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */,
 				CB54FDB418695CCE00CED47E /* 2.txt in Resources */,
 				CB54FDCE18695CCE00CED47E /* 222.txt in Resources */,
 				CB54FD5518695CCE00CED47E /* 113.txt in Resources */,
@@ -2740,6 +2756,7 @@
 				CB54FDDD18695CCE00CED47E /* 236.txt in Resources */,
 				CB54FEF318695CCE00CED47E /* 487.txt in Resources */,
 				CB54000D18695CCE00CED47E /* 91.txt in Resources */,
+				10455193187AA16B00DECB38 /* Dark_bgiPhone@2x.png in Resources */,
 				CB54000418695CCE00CED47E /* 83.txt in Resources */,
 				CB54FDA318695CCE00CED47E /* 184.txt in Resources */,
 				CB54FE0618695CCE00CED47E /* 273.txt in Resources */,
@@ -2813,6 +2830,7 @@
 				CB54FF7118695CCE00CED47E /* 60.txt in Resources */,
 				CB54FEBD18695CCE00CED47E /* 438.txt in Resources */,
 				CB54FEDB18695CCE00CED47E /* 465.txt in Resources */,
+				10455197187AA46D00DECB38 /* welcome_page@2x.png in Resources */,
 				CB54FECB18695CCE00CED47E /* 450.txt in Resources */,
 				CB54FF5918695CCE00CED47E /* 579.txt in Resources */,
 				CB54001518695CCE00CED47E /* 99.txt in Resources */,
@@ -2951,6 +2969,7 @@
 				CB54FE7E18695CCE00CED47E /* 381.txt in Resources */,
 				CB54FDD518695CCE00CED47E /* 229.txt in Resources */,
 				CB54FFE718695CCE00CED47E /* 706.txt in Resources */,
+				10455194187AA16B00DECB38 /* Dark_bgiPhone.png in Resources */,
 				CB54FF3718695CCE00CED47E /* 548.txt in Resources */,
 				CB54FE7818695CCE00CED47E /* 376.txt in Resources */,
 				CB54FEC518695CCE00CED47E /* 445.txt in Resources */,
@@ -3208,6 +3227,7 @@
 				CB54FD8618695CCE00CED47E /* 158.txt in Resources */,
 				CB54FF3418695CCE00CED47E /* 545.txt in Resources */,
 				CB54FFF218695CCE00CED47E /* 716.txt in Resources */,
+				10455198187AA46D00DECB38 /* welcome_page.png in Resources */,
 				CB54FE1D18695CCE00CED47E /* 294.txt in Resources */,
 				CB54000818695CCE00CED47E /* 87.txt in Resources */,
 				10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */,
@@ -3522,7 +3542,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";
@@ -3540,7 +3559,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";

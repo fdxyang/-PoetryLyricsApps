@@ -105,7 +105,11 @@
         NSManagedObject *Poetry = [_HistoryData objectAtIndex:indexPath.row];
 
         cell.textLabel.text = [NSString stringWithFormat:@"%@", [Poetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+        
+        // [CASPER] 20140106 replace @@ string with empty char
+        cell.detailTextLabel.text = [[NSString stringWithFormat:@"%@", [[Poetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] stringByReplacingOccurrencesOfString:@"\n" withString:@""]] stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+        
+        
     }
     
     

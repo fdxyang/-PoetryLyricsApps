@@ -485,7 +485,7 @@
     
     
     _LabelSizeInit = [PoetryReadingView.ContentTextLabel sizeThatFits:constraint];
-    NSLog(@"_LabelSizeInit = %f", _LabelSizeInit.height);
+    
     if (_DisplayTheme == THEME_LIGHT_DARK) {
         
         // Font color = Black, Background = White
@@ -523,7 +523,7 @@
     }
     [PoetryReadingView setFrame:CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
     [PoetryReadingView.Scroller setContentSize:CGSizeMake(UI_IPAD_READINGVIEW_WIDTH, ViewHeight)];
-    NSLog(@"scroller = %@", PoetryReadingView.Scroller);
+    //NSLog(@"scroller = %@", PoetryReadingView.Scroller);
 
     return PoetryReadingView;
     
@@ -674,7 +674,6 @@
                          
                      }
                      completion:^(BOOL finished) {
-                         
                          
                      }];
     
@@ -836,7 +835,6 @@
         if (_isSearching) {
             // For Searching
             if ([_SearchBar.text length] != 0) {
-                NSLog(@"%d %d", indexPath.section, indexPath.row);
                 if (indexPath.section == 0) {
                     // HISTORY, Ignore
                 } else if (indexPath.section == 1) {
@@ -934,7 +932,6 @@
         }
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
         
-        NSLog(@"%d", indexPath.row);
         _CoverViewState = COVER_IDLE;
         [self CoverViewStateMachine];
         if ([_NavigationHeader.TitleLab.text isEqualToString:@"閱讀歷史"]) {
@@ -1148,7 +1145,6 @@
     
     // Update reading array
     _PoetryNowReading = NewReadingData;
-    NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]);
     
     // Save into Coredata
     if (SaveIntoHistory) {
@@ -1171,29 +1167,6 @@
         
     }
 
-    /*
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         
-                         
-                     }
-     
-                     completion:^(BOOL finished) {
-                         
-                         if (_CurrentView == VIEW1) {
-                             
-                             [_ReadingView1 removeFromSuperview];
-                             _CurrentView = VIEW2;
-                             
-                         } else {
-                         
-                             [_ReadingView2 removeFromSuperview];
-                             _CurrentView = VIEW1;
-                             
-                         }
-                         
-                     }];
-    */
 }
 
 
