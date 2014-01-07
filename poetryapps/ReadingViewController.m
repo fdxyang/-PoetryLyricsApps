@@ -7,12 +7,14 @@
 //
 
 #import "ReadingViewController.h"
+#import "General.h"
 
-#define UI_IPHONE_SCREEN_WIDTH  320
-#define UI_IPHONE_SCREEN_HEIGHT 568
-#define UI_READING_SCROLLER_RECT  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_IPHONE_SCREEN_WIDTH, UI_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
-#define UI_HEAD_TAIL_LAB_RECT     CGRectMake(10, UI_IPHONE_SCREEN_HEIGHT/2, UI_IPHONE_SCREEN_WIDTH, 50)
+#define UI_READING_SCROLLER_RECT_4_INCH  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_READING_SCROLLER_RECT_3_5_INCH  CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_HEAD_TAIL_LAB_RECT_4_INCH     CGRectMake(10, UI_IPHONE_SCREEN_HEIGHT_4_INCH/2, UI_IPHONE_SCREEN_WIDTH, 50)
 
 
 @interface ReadingViewController (){
@@ -73,7 +75,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+    //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
     
     // Read Setting
     _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
@@ -93,7 +95,7 @@
     
     [self.view setBackgroundColor:[UIColor grayColor]];
     if (_HeadAndTailLabel == nil) {
-        _HeadAndTailLabel = [[UILabel alloc] initWithFrame:UI_HEAD_TAIL_LAB_RECT];
+        _HeadAndTailLabel = [[UILabel alloc] initWithFrame:UI_HEAD_TAIL_LAB_RECT_4_INCH];
     }
 
     [_HeadAndTailLabel setBackgroundColor:[UIColor clearColor]];
@@ -359,8 +361,14 @@
     if (PoetryReadingView.Scroller == nil) {
         PoetryReadingView.Scroller = [[UIScrollView alloc] init];
     }
-    PoetryReadingView.Scroller.frame = UI_READING_SCROLLER_RECT;
+    if (IS_IPHONE5) {
+        PoetryReadingView.Scroller.frame = UI_READING_SCROLLER_RECT_4_INCH;
+    } else {
+        PoetryReadingView.Scroller.frame = UI_READING_SCROLLER_RECT_3_5_INCH;
+    }
     
+    [PoetryReadingView.Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+
     if (PoetryReadingView.ContentTextLabel == nil) {
         PoetryReadingView.ContentTextLabel = [[UILabel alloc] init];
     }
@@ -392,12 +400,19 @@
         [PoetryReadingView.ContentTextLabel setFrame:CGRectMake(20, 0, _LabelSizeInit.width, _LabelSizeInit.height)];
     
     READING_VIEW_LOG(@"PoetryReadingView.ContentTextLabel = %@", PoetryReadingView.ContentTextLabel);
-    if (ViewHeight< (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
-        ViewHeight = (UI_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+   
+    if (IS_IPHONE5) {
+        if (ViewHeight< (UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
+            ViewHeight = (UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+        }
+    } else {
+        if (ViewHeight< (UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)) {
+            ViewHeight = (UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT);
+        }
     }
     
-    [PoetryReadingView.Scroller setContentSize:CGSizeMake(UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
-    [PoetryReadingView setFrame:CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, ViewHeight)];
+    [PoetryReadingView.Scroller setContentSize:CGSizeMake(UI_SCREEN_WIDTH, ViewHeight + 30)]; //[CASPER] For margin buff
+    [PoetryReadingView setFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, ViewHeight)];
     return PoetryReadingView;
     
 }
@@ -420,16 +435,19 @@
         
         // PREV
         READING_VIEW_LOG(@"The most first poetry, try to init view below");
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_DEFAULT_SCREEN_WIDTH, 50);
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_SCREEN_WIDTH, 50);
         _EmptyReadingView.ContentTextLabel.text = @"最前的一首";
         [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
         
     } else {
         //NEXT
         READING_VIEW_LOG(@"The latest poetry, try to init view ");
-        
-        _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, UI_4_INCH_HEIGHT);
-        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_DEFAULT_SCREEN_WIDTH, 50);
+        if (IS_IPHONE5) {
+            _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT);
+        } else {
+            _EmptyReadingView.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT);
+        }
+        _EmptyReadingView.ContentTextLabel.frame = CGRectMake(10, 200, UI_SCREEN_WIDTH, 50);
         [_EmptyReadingView addSubview:_EmptyReadingView.ContentTextLabel];
         _EmptyReadingView.ContentTextLabel.text = @"最後的一首";
     
@@ -544,7 +562,7 @@
                     
                         if (_NewDataDic) {
                             
-                            View.frame = CGRectMake(0, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
                             //READING_VIEW_LOG(@"View Generate = %@", View);
                             
@@ -686,7 +704,7 @@
                         if (_NewDataDic) {
                             
                             // Height of view will be set inside the method
-                            View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_DEFAULT_SCREEN_WIDTH, 0);
+                            View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_SCREEN_WIDTH, 0);
                             View = [self DisplayHandlingWithData:_NewDataDic onView:View];
                             //READING_VIEW_LOG(@"View Generate = %@", View);
                             
@@ -874,7 +892,7 @@
                                                      _PoetryNowReading = _NewDataDic;
                                                      
                                                      self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                                     //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                                      
                                                      _DataFlag = NO;
                                                      _GetSlideInLabel = NO;
@@ -889,7 +907,7 @@
                                                      _PoetryNowReading = _NewDataDic;
                                                      
                                                      self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                     [_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+                                                     //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
                                                      _DataFlag = NO;
                                                      _GetSlideInLabel = NO;
                                                      _ConfirmToSwitch = NO;

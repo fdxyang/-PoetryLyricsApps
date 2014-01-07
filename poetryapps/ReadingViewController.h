@@ -16,7 +16,7 @@
 #define UI_DEFAULT_NEXT_ORIGIN_X        320
 #define UI_DEFAULT_LABEL_ORIGIN_Y       10
 #define UI_DEFAULT_LABEL_ORIGIN_X       10
-#define UI_DEFAULT_SCREEN_WIDTH         320
+
 #define UI_DEFAULT_LABEL_WIDTH          280
 
 #define SWITCH_VIEW_THRESHOLD           40
