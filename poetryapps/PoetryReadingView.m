@@ -14,8 +14,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         // Initialization code
-        self.frame = CGRectMake(0, 44, UI_SCREEN_WIDTH, UI_4_INCH_HEIGHT);
+        if (IS_IPHONE5) {
+            self.frame = CGRectMake(0, 44, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT);
+        } else {
+            self.frame = CGRectMake(0, 44, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT);
+        }
+        
         _Scroller = [[UIScrollView alloc] init];
         _TitleTextLabel = [[UILabel alloc] init];
         _ContentTextLabel = [[UILabel alloc] init];
