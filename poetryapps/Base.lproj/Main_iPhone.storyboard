@@ -173,7 +173,7 @@
         <scene sceneID="D5D-oZ-tzg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v8i-aI-qlE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="快速查詢" id="x6G-ze-4Zx"/>
+                    <tabBarItem key="tabBarItem" title="快速查詢" image="BarBtn_GOTO.png" id="x6G-ze-4Zx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pl9-e1-4el">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -192,7 +192,7 @@
         <scene sceneID="gYN-51-DAU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LUF-2Q-sMp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="搜尋" id="xbJ-la-uKi"/>
+                    <tabBarItem key="tabBarItem" title="搜尋" image="BarBtn_Search.png" id="xbJ-la-uKi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6OW-KN-caJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -262,7 +262,7 @@
         <scene sceneID="cRp-lL-z3g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Q7-nF-F61" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" id="M2s-Oh-ogi"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="BarBtn_Setting.png" id="M2s-Oh-ogi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8bI-f5-yMG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -329,6 +329,11 @@
             <point key="canvasLocation" x="693" y="-34"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BarBtn_GOTO.png" width="30" height="30"/>
+        <image name="BarBtn_Search.png" width="30" height="30"/>
+        <image name="BarBtn_Setting.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
+		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
+		1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C4187CFACD00718741 /* BarBtn_Search.png */; };
+		1004E8C7187CFACD00718741 /* BarBtn_Search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C5187CFACD00718741 /* BarBtn_Search@2x.png */; };
+		1004E8CA187CFBF900718741 /* BarBtn_GOTO.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */; };
+		1004E8CB187CFBF900718741 /* BarBtn_GOTO@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */; };
 		102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */; };
 		10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */; };
 		10398C4A186BCF3F00EF5E74 /* iPadNavTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */; };
@@ -789,6 +795,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
+		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
+		1004E8C4187CFACD00718741 /* BarBtn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Search.png; sourceTree = "<group>"; };
+		1004E8C5187CFACD00718741 /* BarBtn_Search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Search@2x.png"; sourceTree = "<group>"; };
+		1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_GOTO.png; sourceTree = "<group>"; };
+		1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_GOTO@2x.png"; sourceTree = "<group>"; };
 		102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadPoetryViewController.h; sourceTree = "<group>"; };
 		102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadPoetryViewController.m; sourceTree = "<group>"; };
 		10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadNavTableHeader.h; sourceTree = "<group>"; };
@@ -1790,6 +1802,12 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */,
+				1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */,
+				1004E8C4187CFACD00718741 /* BarBtn_Search.png */,
+				1004E8C5187CFACD00718741 /* BarBtn_Search@2x.png */,
+				1004E8C0187CFABF00718741 /* BarBtn_Setting.png */,
+				1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */,
 				10A5EF9E187C3C3000ECAD99 /* welcome_page.png */,
 				10A5EF9F187C3C3000ECAD99 /* welcome_page@2X.png */,
 				10455199187AAB1900DECB38 /* Default-568h@2x.png */,
@@ -2688,6 +2706,7 @@
 				CB54FE1018695CCE00CED47E /* 282.txt in Resources */,
 				CB54FD6618695CCE00CED47E /* 129.txt in Resources */,
 				CB54FE2318695CCE00CED47E /* 3.txt in Resources */,
+				1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */,
 				CB54FE9C18695CCE00CED47E /* 408.txt in Resources */,
 				CB54FF8018695CCE00CED47E /* 613.txt in Resources */,
 				CB54FD5318695CCE00CED47E /* 111.txt in Resources */,
@@ -2727,6 +2746,7 @@
 				CB54FFB318695CCE00CED47E /* 66.txt in Resources */,
 				CB54FFD718695CCE00CED47E /* 692.txt in Resources */,
 				CB54FE7C18695CCE00CED47E /* 38.txt in Resources */,
+				1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */,
 				CB54FD7818695CCE00CED47E /* 145.txt in Resources */,
 				CB54FE8218695CCE00CED47E /* 385.txt in Resources */,
 				CB54FDC818695CCE00CED47E /* 217.txt in Resources */,
@@ -3033,6 +3053,7 @@
 				CB54FD9D18695CCE00CED47E /* 179.txt in Resources */,
 				CB54FF1718695CCE00CED47E /* 519.txt in Resources */,
 				CB54FD6818695CCE00CED47E /* 130.txt in Resources */,
+				1004E8C7187CFACD00718741 /* BarBtn_Search@2x.png in Resources */,
 				CB54FFF618695CCE00CED47E /* 72.txt in Resources */,
 				CB54FE7A18695CCE00CED47E /* 378.txt in Resources */,
 				CB54FF3218695CCE00CED47E /* 543.txt in Resources */,
@@ -3152,6 +3173,7 @@
 				CB54FE4418695CCE00CED47E /* 329.txt in Resources */,
 				CB54FDA418695CCE00CED47E /* 185.txt in Resources */,
 				CB54FF8918695CCE00CED47E /* 621.txt in Resources */,
+				1004E8CA187CFBF900718741 /* BarBtn_GOTO.png in Resources */,
 				CB54FF8F18695CCE00CED47E /* 627.txt in Resources */,
 				CB54FE7318695CCE00CED47E /* 371.txt in Resources */,
 				CB54FE6218695CCE00CED47E /* 356.txt in Resources */,
@@ -3276,6 +3298,7 @@
 				CB54000318695CCE00CED47E /* 82.txt in Resources */,
 				CB54FE4818695CCE00CED47E /* 332.txt in Resources */,
 				CB54FE0318695CCE00CED47E /* 270.txt in Resources */,
+				1004E8CB187CFBF900718741 /* BarBtn_GOTO@2x.png in Resources */,
 				CB54FFF318695CCE00CED47E /* 717.txt in Resources */,
 				10A5EFA1187C3C3000ECAD99 /* welcome_page@2X.png in Resources */,
 				CB54FE0018695CCE00CED47E /* 268.txt in Resources */,
@@ -3361,6 +3384,7 @@
 				CB54FEA218695CCE00CED47E /* 413.txt in Resources */,
 				CB54FE9A18695CCE00CED47E /* 406.txt in Resources */,
 				CB54FE9D18695CCE00CED47E /* 409.txt in Resources */,
+				1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */,
 				CB54FDC918695CCE00CED47E /* 218.txt in Resources */,
 				CB54FF3818695CCE00CED47E /* 549.txt in Resources */,
 				CB54FD8B18695CCE00CED47E /* 162.txt in Resources */,
