@@ -9,7 +9,9 @@
 #import "GotoViewController.h"
 
 @interface GotoViewController ()
-
+{
+    UIColor *_BackgroundColor;
+}
 @end
 
 @implementation GotoViewController
@@ -36,6 +38,10 @@
     _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
     _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:TRUE];
     
+    //[_poetryView setBackgroundColor:[UIColor whiteColor]];
+    //[_responseView setBackgroundColor:[UIColor whiteColor]];
+    //[_guideView setBackgroundColor:[UIColor whiteColor]];
+    
     _poetryView.hidden = YES;
     _responseView.hidden = YES;
     _guideView.hidden = NO;
@@ -52,7 +58,9 @@
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     self.navigationItem.title = @"快速查詢";
-
+    
+    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    [self.view setBackgroundColor:_BackgroundColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated

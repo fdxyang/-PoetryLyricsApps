@@ -781,6 +781,9 @@
 		CB54FFFD18695CCE00CED47E /* 77.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2B18695CCD00CED47E /* 77.txt */; };
 		CB54FFFE18695CCE00CED47E /* 78.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2C18695CCD00CED47E /* 78.txt */; };
 		CB54FFFF18695CCE00CED47E /* 79.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2D18695CCD00CED47E /* 79.txt */; };
+		CB6E06EB187D24AB00A9E92E /* GOTOBtntoPageUnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06E9187D24AB00A9E92E /* GOTOBtntoPageUnSelected.png */; };
+		CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */; };
+		CB6E06EF187D270C00A9E92E /* GOTOBtnUnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06EE187D270C00A9E92E /* GOTOBtnUnSelected.png */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
@@ -1595,6 +1598,9 @@
 		CB54FD4118695CCE00CED47E /* 97.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 97.txt; sourceTree = "<group>"; };
 		CB54FD4218695CCE00CED47E /* 98.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 98.txt; sourceTree = "<group>"; };
 		CB54FD4318695CCE00CED47E /* 99.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 99.txt; sourceTree = "<group>"; };
+		CB6E06E9187D24AB00A9E92E /* GOTOBtntoPageUnSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtntoPageUnSelected.png; sourceTree = "<group>"; };
+		CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOGuardBtnSelected.png; sourceTree = "<group>"; };
+		CB6E06EE187D270C00A9E92E /* GOTOBtnUnSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnUnSelected.png; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
@@ -1806,6 +1812,9 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB6E06EE187D270C00A9E92E /* GOTOBtnUnSelected.png */,
+				CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */,
+				CB6E06E9187D24AB00A9E92E /* GOTOBtntoPageUnSelected.png */,
 				1004E8CC187CFED000718741 /* BarBtn_Reading.png */,
 				1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */,
 				1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */,
@@ -2811,6 +2820,7 @@
 				CB54FD7F18695CCE00CED47E /* 151.txt in Resources */,
 				CB54FF5E18695CCE00CED47E /* 583.txt in Resources */,
 				CB54FE7D18695CCE00CED47E /* 380.txt in Resources */,
+				CB6E06EB187D24AB00A9E92E /* GOTOBtntoPageUnSelected.png in Resources */,
 				CB54FE3618695CCE00CED47E /* 316.txt in Resources */,
 				CB54FDF418695CCE00CED47E /* 257.txt in Resources */,
 				CB54FE1218695CCE00CED47E /* 284.txt in Resources */,
@@ -3045,6 +3055,7 @@
 				CB54FF3A18695CCE00CED47E /* 550.txt in Resources */,
 				CB54FD8A18695CCE00CED47E /* 161.txt in Resources */,
 				CB54FF2218695CCE00CED47E /* 529.txt in Resources */,
+				CB6E06EF187D270C00A9E92E /* GOTOBtnUnSelected.png in Resources */,
 				CB54FD7418695CCE00CED47E /* 141.txt in Resources */,
 				CB54FDDE18695CCE00CED47E /* 237.txt in Resources */,
 				CB54FF3918695CCE00CED47E /* 55.txt in Resources */,
@@ -3339,6 +3350,7 @@
 				CB54000118695CCE00CED47E /* 80.txt in Resources */,
 				CB54FE4D18695CCE00CED47E /* 337.txt in Resources */,
 				CB54000F18695CCE00CED47E /* 93.txt in Resources */,
+				CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */,
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
 				CB54FDDA18695CCE00CED47E /* 233.txt in Resources */,
