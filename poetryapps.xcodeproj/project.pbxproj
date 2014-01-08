@@ -13,6 +13,8 @@
 		1004E8C7187CFACD00718741 /* BarBtn_Search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C5187CFACD00718741 /* BarBtn_Search@2x.png */; };
 		1004E8CA187CFBF900718741 /* BarBtn_GOTO.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */; };
 		1004E8CB187CFBF900718741 /* BarBtn_GOTO@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */; };
+		1004E8CE187CFED000718741 /* BarBtn_Reading.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8CC187CFED000718741 /* BarBtn_Reading.png */; };
+		1004E8CF187CFED000718741 /* BarBtn_Reading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */; };
 		102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */; };
 		10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */; };
 		10398C4A186BCF3F00EF5E74 /* iPadNavTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */; };
@@ -801,6 +803,8 @@
 		1004E8C5187CFACD00718741 /* BarBtn_Search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Search@2x.png"; sourceTree = "<group>"; };
 		1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_GOTO.png; sourceTree = "<group>"; };
 		1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_GOTO@2x.png"; sourceTree = "<group>"; };
+		1004E8CC187CFED000718741 /* BarBtn_Reading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Reading.png; sourceTree = "<group>"; };
+		1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Reading@2x.png"; sourceTree = "<group>"; };
 		102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadPoetryViewController.h; sourceTree = "<group>"; };
 		102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadPoetryViewController.m; sourceTree = "<group>"; };
 		10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadNavTableHeader.h; sourceTree = "<group>"; };
@@ -1802,6 +1806,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				1004E8CC187CFED000718741 /* BarBtn_Reading.png */,
+				1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */,
 				1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */,
 				1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */,
 				1004E8C4187CFACD00718741 /* BarBtn_Search.png */,
@@ -2693,6 +2699,7 @@
 				CB54FDEF18695CCE00CED47E /* 252.txt in Resources */,
 				CB54FF5118695CCE00CED47E /* 571.txt in Resources */,
 				CB54FE6918695CCE00CED47E /* 362.txt in Resources */,
+				1004E8CE187CFED000718741 /* BarBtn_Reading.png in Resources */,
 				CB54FFAC18695CCE00CED47E /* 653.txt in Resources */,
 				CB54FD9118695CCE00CED47E /* 168.txt in Resources */,
 				CB54FDF118695CCE00CED47E /* 254.txt in Resources */,
@@ -3277,6 +3284,7 @@
 				CB54FE5518695CCE00CED47E /* 344.txt in Resources */,
 				CB54FD5418695CCE00CED47E /* 112.txt in Resources */,
 				CB54FF7F18695CCE00CED47E /* 612.txt in Resources */,
+				1004E8CF187CFED000718741 /* BarBtn_Reading@2x.png in Resources */,
 				CB54FD7C18695CCE00CED47E /* 149.txt in Resources */,
 				CB54FFC218695CCE00CED47E /* 673.txt in Resources */,
 				CB54FFF818695CCE00CED47E /* 721.txt in Resources */,

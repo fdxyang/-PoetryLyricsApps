@@ -313,7 +313,7 @@
         <scene sceneID="BAA-EL-heM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SFn-Ti-d2S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="導讀" id="8O8-c5-S2D"/>
+                    <tabBarItem key="tabBarItem" title="導讀" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtE-LW-hAQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -331,6 +331,7 @@
     </scenes>
     <resources>
         <image name="BarBtn_GOTO.png" width="30" height="30"/>
+        <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
     </resources>
