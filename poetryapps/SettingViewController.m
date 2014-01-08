@@ -9,7 +9,13 @@
 #import "SettingViewController.h"
 #import "PoetryCoreData.h"
 
-@interface SettingViewController ()
+@interface SettingViewController () {
+    
+    UIColor                 *_LightBackgroundColor;
+    UIColor                 *_DarkBackgroundColor;
+    
+
+}
 
 @end
 
@@ -31,6 +37,11 @@
     _Setting = [[PoetrySettingCoreData alloc] init];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     self.navigationItem.title = @"設定";
+    
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+
+    
 
 }
 
@@ -291,7 +302,7 @@
         case THEME_LIGHT_DARK:
             NSLog(@"THEME_LIGHT_DARK");
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
-            _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
+            _ThemePreViewLab.backgroundColor = _LightBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor blackColor];
             _ThemePreViewLab.text = _NowReadingText;
             NSLog(@"now reading = %@", _NowReadingText);
@@ -301,7 +312,7 @@
             NSLog(@"THEME_DARK_LIGHT");
 
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
-            _ThemePreViewLab.backgroundColor = [UIColor blackColor];
+            _ThemePreViewLab.backgroundColor = _DarkBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor whiteColor];
             _ThemePreViewLab.text = _NowReadingText;
             NSLog(@"now reading = %@", _NowReadingText);
