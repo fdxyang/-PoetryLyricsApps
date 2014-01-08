@@ -124,7 +124,7 @@
             
             _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
-            _TableView.TableData = [[NSArray alloc] initWithObjects:@"導讀", @"詩歌", @"啟應文", nil];
+            _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
             [_TableView reloadData];
             [self.view addSubview:_TableView];
