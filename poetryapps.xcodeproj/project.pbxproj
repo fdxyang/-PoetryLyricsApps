@@ -58,6 +58,7 @@
 		CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF2184C2D3200091BF1 /* Guidepicker.m */; };
 		CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF6184C3CC400091BF1 /* Responsepicker.m */; };
 		CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */; };
+		CB349490187D449200580A60 /* GO-TO-button to page-01.png in Resources */ = {isa = PBXBuildFile; fileRef = CB34948F187D449200580A60 /* GO-TO-button to page-01.png */; };
 		CB381FB41849B056000ECB84 /* GotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB01849B056000ECB84 /* GotoTable.m */; };
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
@@ -786,7 +787,6 @@
 		CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
-		CBCB9A78187D41A10039F6C8 /* GO-TO-button to page-01.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB9A77187D41A10039F6C8 /* GO-TO-button to page-01.png */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 /* End PBXBuildFile section */
 
@@ -873,6 +873,7 @@
 		CB26ADF6184C3CC400091BF1 /* Responsepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Responsepicker.m; sourceTree = "<group>"; };
 		CB26ADF8184C786A00091BF1 /* GotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableViewController.h; sourceTree = "<group>"; };
 		CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableViewController.m; sourceTree = "<group>"; };
+		CB34948F187D449200580A60 /* GO-TO-button to page-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GO-TO-button to page-01.png"; sourceTree = "<group>"; };
 		CB381FAF1849B056000ECB84 /* GotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTable.h; sourceTree = "<group>"; };
 		CB381FB01849B056000ECB84 /* GotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTable.m; sourceTree = "<group>"; };
 		CB381FB11849B056000ECB84 /* GotoTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GotoTable.xib; sourceTree = "<group>"; };
@@ -1606,7 +1607,6 @@
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
-		CBCB9A77187D41A10039F6C8 /* GO-TO-button to page-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GO-TO-button to page-01.png"; sourceTree = "<group>"; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1814,7 +1814,7 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
-				CBCB9A77187D41A10039F6C8 /* GO-TO-button to page-01.png */,
+				CB34948F187D449200580A60 /* GO-TO-button to page-01.png */,
 				CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */,
 				CB10AE02187D407F001BDC12 /* GOTOBackground.png */,
 				CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */,
@@ -3007,7 +3007,7 @@
 				CB54FEC818695CCE00CED47E /* 448.txt in Resources */,
 				CB54FE9118695CCE00CED47E /* 399.txt in Resources */,
 				CB54FD6718695CCE00CED47E /* 13.txt in Resources */,
-				CBCB9A78187D41A10039F6C8 /* GO-TO-button to page-01.png in Resources */,
+				CB349490187D449200580A60 /* GO-TO-button to page-01.png in Resources */,
 				CB54FF9B18695CCE00CED47E /* 638.txt in Resources */,
 				CB54FF6018695CCE00CED47E /* 585.txt in Resources */,
 				CB54FDD318695CCE00CED47E /* 227.txt in Resources */,
