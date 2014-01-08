@@ -59,7 +59,7 @@
     
     self.navigationItem.title = @"快速查詢";
     
-    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"GOTOBackground.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
 }
 
