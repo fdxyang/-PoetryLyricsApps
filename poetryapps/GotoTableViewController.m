@@ -34,6 +34,10 @@
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     
+    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+    [tempImageView setFrame:_detailTableView.frame];
+    _detailTableView.backgroundView = tempImageView;
+    
     if (_tableViewType == 0) // guide
     {
         if(![guideAttr count])
@@ -113,6 +117,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    cell.backgroundColor = [UIColor clearColor];
     
     if (_tableViewType == 0)
     {

@@ -134,6 +134,9 @@
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
             _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+            [tempImageView setFrame:_TableView.frame];
+            _TableView.backgroundView = tempImageView;
             [_TableView reloadData];
             [self.view addSubview:_TableView];
         }
@@ -223,7 +226,7 @@
         return 0;
     }
     else
-        return 40;
+        return 30;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -253,13 +256,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     if(indexPath.section == BASICGUIDE)
     {
         cell.textLabel.text = [_TableView.TableData objectAtIndex:indexPath.row];
