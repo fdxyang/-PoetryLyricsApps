@@ -38,10 +38,6 @@
     _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
     _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:TRUE];
     
-    //[_poetryView setBackgroundColor:[UIColor whiteColor]];
-    //[_responseView setBackgroundColor:[UIColor whiteColor]];
-    //[_guideView setBackgroundColor:[UIColor whiteColor]];
-    
     _poetryView.hidden = YES;
     _responseView.hidden = YES;
     _guideView.hidden = NO;
@@ -123,6 +119,8 @@
 
 - (IBAction)changeModeBtnClicked:(id)sender
 {
+    UIButton *modeBtn = (UIButton*)sender;
+    NSString *imageName;
     CATransition *animation = [CATransition animation];
     if (!_isTreeMode) // tree mode
     {
@@ -147,7 +145,8 @@
             [_TableView reloadData];
         }
     
-    
+        imageName = @"24_24buttonup.png";
+        
         // set up an animation for the transition between the views
         [animation setDuration:0.5];
         [animation setType:kCATransitionPush];
@@ -170,7 +169,10 @@
         
         [[self.view layer] addAnimation:animation forKey:@"GotoTable"];
         _isTreeMode = FALSE;
+        imageName = @"24_24buttondown.png";
     }
+    
+    [modeBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 }
 
 - (IBAction)changeReadingModeClicked:(id)sender
@@ -350,4 +352,5 @@
         [_detailTableView setTableViewType:gotoType];
     }
 }
+
 @end

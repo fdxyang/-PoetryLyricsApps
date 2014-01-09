@@ -39,6 +39,8 @@
 		10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B361951856BF9B00A632AD /* PoetryReadingView.m */; };
 		10DD73DA186C289E00047D12 /* iPadMainPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */; };
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
+		CB0AB8AB187E562200C60DFF /* 24_24buttondown.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */; };
+		CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */; };
 		CB10AE03187D407F001BDC12 /* GOTOBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE02187D407F001BDC12 /* GOTOBackground.png */; };
 		CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
@@ -847,6 +849,8 @@
 		10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadMainPoetryViewController.m; sourceTree = "<group>"; };
 		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
+		CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttondown.png; sourceTree = "<group>"; };
+		CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttonup.png; sourceTree = "<group>"; };
 		CB10AE02187D407F001BDC12 /* GOTOBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBackground.png; sourceTree = "<group>"; };
 		CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnBackground.png; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1816,6 +1820,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
+				CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */,
 				0A4F2989187E1EE600205841 /* GOTOBackground@2x.png */,
 				CB34948F187D449200580A60 /* GO-TO-button to page-01.png */,
 				CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */,
@@ -2691,6 +2697,7 @@
 				CB54FE9618695CCE00CED47E /* 402.txt in Resources */,
 				CB54FDE718695CCE00CED47E /* 245.txt in Resources */,
 				CB54FFAA18695CCE00CED47E /* 651.txt in Resources */,
+				CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */,
 				CB54FF6118695CCE00CED47E /* 586.txt in Resources */,
 				CB54FF4118695CCE00CED47E /* 557.txt in Resources */,
 				CB54FF4C18695CCE00CED47E /* 567.txt in Resources */,
@@ -2862,6 +2869,7 @@
 				CB54FE5618695CCE00CED47E /* 345.txt in Resources */,
 				CB54FD6A18695CCE00CED47E /* 132.txt in Resources */,
 				CB54FECF18695CCE00CED47E /* 454.txt in Resources */,
+				CB0AB8AB187E562200C60DFF /* 24_24buttondown.png in Resources */,
 				CB54FFD918695CCE00CED47E /* 694.txt in Resources */,
 				CB54FD7118695CCE00CED47E /* 139.txt in Resources */,
 				CB54FE8318695CCE00CED47E /* 386.txt in Resources */,
