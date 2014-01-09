@@ -41,6 +41,8 @@
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
 		CB0AB8AB187E562200C60DFF /* 24_24buttondown.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */; };
 		CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */; };
+		CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */; };
+		CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */; };
 		CB10AE03187D407F001BDC12 /* GOTOBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE02187D407F001BDC12 /* GOTOBackground.png */; };
 		CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
@@ -851,6 +853,8 @@
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
 		CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttondown.png; sourceTree = "<group>"; };
 		CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttonup.png; sourceTree = "<group>"; };
+		CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttondown@2x.png"; sourceTree = "<group>"; };
+		CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttonup@2x.png"; sourceTree = "<group>"; };
 		CB10AE02187D407F001BDC12 /* GOTOBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBackground.png; sourceTree = "<group>"; };
 		CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnBackground.png; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1820,6 +1824,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */,
+				CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */,
 				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
 				CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */,
 				0A4F2989187E1EE600205841 /* GOTOBackground@2x.png */,
@@ -2846,6 +2852,7 @@
 				CB54FD6F18695CCE00CED47E /* 137.txt in Resources */,
 				CB54001118695CCE00CED47E /* 95.txt in Resources */,
 				CB54FF7218695CCE00CED47E /* 600.txt in Resources */,
+				CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */,
 				CB54FE6118695CCE00CED47E /* 355.txt in Resources */,
 				CB54FE8E18695CCE00CED47E /* 396.txt in Resources */,
 				CB54FE3C18695CCE00CED47E /* 321.txt in Resources */,
@@ -3143,6 +3150,7 @@
 				CB54FD9618695CCE00CED47E /* 172.txt in Resources */,
 				CB54FDE418695CCE00CED47E /* 242.txt in Resources */,
 				CB54FE1618695CCE00CED47E /* 288.txt in Resources */,
+				CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */,
 				CB54FEA918695CCE00CED47E /* 42.txt in Resources */,
 				CB54FD8C18695CCE00CED47E /* 163.txt in Resources */,
 				CB54FD5818695CCE00CED47E /* 116.txt in Resources */,
