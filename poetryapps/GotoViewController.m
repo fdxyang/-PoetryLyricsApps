@@ -34,9 +34,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
-    _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:FALSE];
-    _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,180,320,162) getbtn:gotoReading getState:TRUE];
+    _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
+    _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
+    _guideView = [[Guidepicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:TRUE];
     
     _poetryView.hidden = YES;
     _responseView.hidden = YES;
@@ -57,6 +57,22 @@
     
     _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"GOTOBackground.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
+    
+    uiOffset = 0.0;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //NSLog(@"height = %f",screenRect.size.height);
+    
+    if(screenRect.size.height == 568)
+    {
+        //NSLog(@"this is 4 inch");
+        uiOffset = 21.0;
+    }
+    else if(screenRect.size.height == 480)
+    {
+        //NSLog(@"this is 3.5 inch");
+        uiOffset = 108.0;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -129,7 +145,8 @@
             NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
             
             _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-            _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height);
+            //NSLog(@"kk height = %f",_TableView.frame.size.height);
+            _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
             _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
             UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];

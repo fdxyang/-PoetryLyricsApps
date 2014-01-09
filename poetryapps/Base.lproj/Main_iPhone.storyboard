@@ -118,9 +118,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-NA-q83">
-                                <rect key="frame" x="0.0" y="390" width="320" height="60"/>
+                                <rect key="frame" x="20" y="378" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" backgroundImage="GO-TO-button to page-01.png">
+                                <state key="normal" title="Button" backgroundImage="gotoBtnToPage.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" backgroundImage="GOTOBtntoPageSelected.png"/>
@@ -353,9 +353,9 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="GO-TO-button to page-01.png" width="2517" height="225"/>
         <image name="GOTOBtntoPageSelected.png" width="2517" height="225"/>
         <image name="GOTOGuardBtnSelected.png" width="850" height="225"/>
+        <image name="gotoBtnToPage.png" width="280" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

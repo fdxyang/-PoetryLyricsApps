@@ -43,6 +43,7 @@
 		CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */; };
 		CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */; };
 		CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */; };
+		CB0AB8B2187E77E300C60DFF /* gotoBtnToPage.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */; };
 		CB10AE03187D407F001BDC12 /* GOTOBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE02187D407F001BDC12 /* GOTOBackground.png */; };
 		CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
@@ -855,6 +856,7 @@
 		CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttonup.png; sourceTree = "<group>"; };
 		CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttondown@2x.png"; sourceTree = "<group>"; };
 		CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttonup@2x.png"; sourceTree = "<group>"; };
+		CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gotoBtnToPage.png; sourceTree = "<group>"; };
 		CB10AE02187D407F001BDC12 /* GOTOBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBackground.png; sourceTree = "<group>"; };
 		CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnBackground.png; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1824,6 +1826,7 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */,
 				CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */,
 				CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */,
 				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
@@ -3038,6 +3041,7 @@
 				CB54FEC518695CCE00CED47E /* 445.txt in Resources */,
 				CB54FE8118695CCE00CED47E /* 384.txt in Resources */,
 				CB54FF7618695CCE00CED47E /* 604.txt in Resources */,
+				CB0AB8B2187E77E300C60DFF /* gotoBtnToPage.png in Resources */,
 				CB54FEAD18695CCE00CED47E /* 423.txt in Resources */,
 				CB54FEA318695CCE00CED47E /* 414.txt in Resources */,
 				CB54FF5F18695CCE00CED47E /* 584.txt in Resources */,

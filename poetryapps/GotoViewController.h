@@ -23,6 +23,7 @@ typedef enum {
 {
     NSInteger gotoType;
     PoetryCoreData *PoetryDataBase;
+    float uiOffset;
 }
 
 @property (nonatomic,strong) NSMutableArray *historyArr;
