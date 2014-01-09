@@ -1979,11 +1979,22 @@
     _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
     _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
     
-    [_ThemeSettingView.LightDarkBtn setTitle:@"白底黑字" forState:UIControlStateNormal];
-    [_ThemeSettingView.DarkLightBtn setTitle:@"黑底白字" forState:UIControlStateNormal];
+    [_ThemeSettingView.LightDarkBtn setTitle:@"淺色主題" forState:UIControlStateNormal];
+    [_ThemeSettingView.DarkLightBtn setTitle:@"深色主題" forState:UIControlStateNormal];
     
     [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_ThemeSettingView.LightDarkBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [_ThemeSettingView.DarkLightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    
+    
+    if (_Setting.SettingTheme == THEME_LIGHT_DARK) {
+        [_ThemeSettingView.LightDarkBtn setEnabled:NO];
+    } else {
+        [_ThemeSettingView.DarkLightBtn setEnabled:NO];
+    }
+
     
 }
 
@@ -2030,12 +2041,16 @@
 
 -(void) LightDarkBtnClicked
 {
+    [_ThemeSettingView.DarkLightBtn setEnabled:YES];
     [self Setting_SetupThemeSettingView:THEME_LIGHT_DARK andSave:YES];
+    [_ThemeSettingView.LightDarkBtn setEnabled:NO];
 }
 
 -(void) DarkLightBtnClicked
 {
+    [_ThemeSettingView.LightDarkBtn setEnabled:YES];
     [self Setting_SetupThemeSettingView:THEME_DARK_LIGHT andSave:YES];
+    [_ThemeSettingView.DarkLightBtn setEnabled:NO];
 }
 
 
