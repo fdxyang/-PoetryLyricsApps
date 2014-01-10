@@ -51,6 +51,10 @@
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
+    [guideBtn setTitle:@"基督基石" forState:UIControlStateNormal];
+    [poetryBtn setTitle:@"詩歌" forState:UIControlStateNormal];
+    [responseBtn setTitle:@"啟應文" forState:UIControlStateNormal];
+    
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     self.navigationItem.title = @"快速查詢";
@@ -103,6 +107,13 @@
     _guideView.hidden = NO;
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
+    
+    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setEnabled:NO];
+    [poetryBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [poetryBtn setEnabled:YES];
+    [responseBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [responseBtn setEnabled:YES];
 }
 
 - (IBAction)poetryBtnClicked:(id)sender
@@ -117,6 +128,13 @@
     _poetryView.hidden = NO;
     [self.view bringSubviewToFront:_poetryView];
     [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
+    
+    [guideBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [guideBtn setEnabled:YES];
+    [poetryBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [poetryBtn setEnabled:NO];
+    [responseBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [responseBtn setEnabled:YES];
 }
 
 - (IBAction)responseBtnClicked:(id)sender
@@ -131,6 +149,13 @@
     _responseView.hidden=NO;
     [self.view bringSubviewToFront:_responseView];
     [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
+    
+    [guideBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [guideBtn setEnabled:YES];
+    [poetryBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [poetryBtn setEnabled:YES];
+    [responseBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [responseBtn setEnabled:NO];
 }
 
 - (IBAction)changeModeBtnClicked:(id)sender

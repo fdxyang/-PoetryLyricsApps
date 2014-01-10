@@ -55,7 +55,6 @@
 		CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */; };
 		CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */; };
 		CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */; };
-		CB0AB8B2187E77E300C60DFF /* gotoBtnToPage.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */; };
 		CB10AE03187D407F001BDC12 /* GOTOBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE02187D407F001BDC12 /* GOTOBackground.png */; };
 		CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
@@ -802,6 +801,10 @@
 		CB54FFFD18695CCE00CED47E /* 77.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2B18695CCD00CED47E /* 77.txt */; };
 		CB54FFFE18695CCE00CED47E /* 78.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2C18695CCD00CED47E /* 78.txt */; };
 		CB54FFFF18695CCE00CED47E /* 79.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2D18695CCD00CED47E /* 79.txt */; };
+		CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E6187FA52F00AF7A1C /* gotobtn1.png */; };
+		CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E7187FA52F00AF7A1C /* gotobtn2.png */; };
+		CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E8187FA52F00AF7A1C /* gotobtn3.png */; };
+		CB6126EE187FA65A00AF7A1C /* gotobtntopage.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */; };
 		CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
@@ -880,7 +883,6 @@
 		CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttonup.png; sourceTree = "<group>"; };
 		CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttondown@2x.png"; sourceTree = "<group>"; };
 		CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttonup@2x.png"; sourceTree = "<group>"; };
-		CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gotoBtnToPage.png; sourceTree = "<group>"; };
 		CB10AE02187D407F001BDC12 /* GOTOBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBackground.png; sourceTree = "<group>"; };
 		CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnBackground.png; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1638,6 +1640,10 @@
 		CB54FD4118695CCE00CED47E /* 97.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 97.txt; sourceTree = "<group>"; };
 		CB54FD4218695CCE00CED47E /* 98.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 98.txt; sourceTree = "<group>"; };
 		CB54FD4318695CCE00CED47E /* 99.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 99.txt; sourceTree = "<group>"; };
+		CB6126E6187FA52F00AF7A1C /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
+		CB6126E7187FA52F00AF7A1C /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
+		CB6126E8187FA52F00AF7A1C /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
+		CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtntopage.png; path = poetryapps/resource/image/gotobtntopage.png; sourceTree = SOURCE_ROOT; };
 		CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOGuardBtnSelected.png; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
@@ -1850,6 +1856,10 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */,
+				CB6126E6187FA52F00AF7A1C /* gotobtn1.png */,
+				CB6126E7187FA52F00AF7A1C /* gotobtn2.png */,
+				CB6126E8187FA52F00AF7A1C /* gotobtn3.png */,
 				10F55C5C187F8E020003DBB2 /* WelcomePage_iPad.png */,
 				10F55C5D187F8E020003DBB2 /* WelcomePage_iPad@2x.png */,
 				10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */,
@@ -1862,7 +1872,6 @@
 				10F55C4D187EA9BF0003DBB2 /* Dark_bgiPad@2x.png */,
 				10F55C4E187EA9BF0003DBB2 /* Light_bgiPad.png */,
 				10F55C4F187EA9BF0003DBB2 /* Light_bgiPad@2x.png */,
-				CB0AB8B1187E77E300C60DFF /* gotoBtnToPage.png */,
 				CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */,
 				CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */,
 				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
@@ -2870,6 +2879,7 @@
 				CB54FF3118695CCE00CED47E /* 542.txt in Resources */,
 				CB54FFAB18695CCE00CED47E /* 652.txt in Resources */,
 				CB54FE8918695CCE00CED47E /* 391.txt in Resources */,
+				CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */,
 				CB54FF0D18695CCE00CED47E /* 51.txt in Resources */,
 				CB54FE5C18695CCE00CED47E /* 350.txt in Resources */,
 				CB54FDCA18695CCE00CED47E /* 219.txt in Resources */,
@@ -2895,6 +2905,7 @@
 				CB54FD6F18695CCE00CED47E /* 137.txt in Resources */,
 				CB54001118695CCE00CED47E /* 95.txt in Resources */,
 				CB54FF7218695CCE00CED47E /* 600.txt in Resources */,
+				CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */,
 				CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */,
 				CB54FE6118695CCE00CED47E /* 355.txt in Resources */,
 				CB54FE8E18695CCE00CED47E /* 396.txt in Resources */,
@@ -3083,7 +3094,6 @@
 				CB54FEC518695CCE00CED47E /* 445.txt in Resources */,
 				CB54FE8118695CCE00CED47E /* 384.txt in Resources */,
 				CB54FF7618695CCE00CED47E /* 604.txt in Resources */,
-				CB0AB8B2187E77E300C60DFF /* gotoBtnToPage.png in Resources */,
 				CB54FEAD18695CCE00CED47E /* 423.txt in Resources */,
 				CB54FEA318695CCE00CED47E /* 414.txt in Resources */,
 				CB54FF5F18695CCE00CED47E /* 584.txt in Resources */,
@@ -3178,6 +3188,7 @@
 				CB54FDF618695CCE00CED47E /* 259.txt in Resources */,
 				CB54FFCF18695CCE00CED47E /* 685.txt in Resources */,
 				CB54FFFD18695CCE00CED47E /* 77.txt in Resources */,
+				CB6126EE187FA65A00AF7A1C /* gotobtntopage.png in Resources */,
 				CB54FFC018695CCE00CED47E /* 671.txt in Resources */,
 				CB54FF4F18695CCE00CED47E /* 57.txt in Resources */,
 				CB54FE8818695CCE00CED47E /* 390.txt in Resources */,
@@ -3312,6 +3323,7 @@
 				CB54FE5118695CCE00CED47E /* 340.txt in Resources */,
 				CB54FFAD18695CCE00CED47E /* 654.txt in Resources */,
 				CB54FF5718695CCE00CED47E /* 577.txt in Resources */,
+				CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */,
 				CB54FD8318695CCE00CED47E /* 155.txt in Resources */,
 				10F55C51187EA9BF0003DBB2 /* Dark_bgiPad@2x.png in Resources */,
 				CB54001018695CCE00CED47E /* 94.txt in Resources */,
