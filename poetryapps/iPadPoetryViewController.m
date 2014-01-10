@@ -163,10 +163,14 @@
     if (_NaviBtn == nil) {
         _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
     }
-    [_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    //[_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
     [_CoverView setTag:TAG_NAVI_BTN];
+    
+    [_NaviBtn setBackgroundImage:[UIImage imageNamed:@"NaviBtnNormal_iPad.png"] forState:UIControlStateNormal];
+    [_NaviBtn setBackgroundImage:[UIImage imageNamed:@"NaviBtnPress_iPad.png"] forState:UIControlStateHighlighted];
 
-    _NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    
+    //_NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
     _NaviBtn.opaque = YES;
     [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_NaviBtn];

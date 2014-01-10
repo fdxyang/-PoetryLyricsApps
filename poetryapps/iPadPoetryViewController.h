@@ -23,8 +23,8 @@
 
 #define UI_READING_VIEW_FRAME_RECT_INIT             CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 768)
 
-#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 50, 70, 60)
-#define UI_IPAD_NAVI_BTN_RECT_HIDE                  CGRectMake(-70, 50, 70, 60)
+#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 50, 70, 70)
+#define UI_IPAD_NAVI_BTN_RECT_HIDE                  CGRectMake(-10, 0, 0, 0)
 
 
 #define UI_IPAD_COVER_TABLE_CELL_HEIGHT             44

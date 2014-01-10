@@ -50,6 +50,8 @@
 		10F55C5F187F8E020003DBB2 /* WelcomePage_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C5D187F8E020003DBB2 /* WelcomePage_iPad@2x.png */; };
 		10F55C62187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */; };
 		10F55C63187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */; };
+		10F55C66187FC23E0003DBB2 /* Navi_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C64187FC23E0003DBB2 /* Navi_White_iPad.png */; };
+		10F55C67187FC23E0003DBB2 /* Navi_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C65187FC23E0003DBB2 /* Navi_White_iPad@2x.png */; };
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
 		CB0AB8AB187E562200C60DFF /* 24_24buttondown.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */; };
 		CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */; };
@@ -877,6 +879,8 @@
 		10F55C5D187F8E020003DBB2 /* WelcomePage_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WelcomePage_iPad@2x.png"; sourceTree = "<group>"; };
 		10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WelcomePage_iPad_Portrait@2x.png"; sourceTree = "<group>"; };
 		10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WelcomePage_iPad_Portrait.png; sourceTree = "<group>"; };
+		10F55C64187FC23E0003DBB2 /* Navi_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navi_White_iPad.png; sourceTree = "<group>"; };
+		10F55C65187FC23E0003DBB2 /* Navi_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navi_White_iPad@2x.png"; sourceTree = "<group>"; };
 		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
 		CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24_24buttondown.png; sourceTree = "<group>"; };
@@ -1864,6 +1868,8 @@
 				10F55C5D187F8E020003DBB2 /* WelcomePage_iPad@2x.png */,
 				10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */,
 				10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */,
+				10F55C64187FC23E0003DBB2 /* Navi_White_iPad.png */,
+				10F55C65187FC23E0003DBB2 /* Navi_White_iPad@2x.png */,
 				10F55C54187EA9DD0003DBB2 /* NaviBtnNormal_iPad.png */,
 				10F55C55187EA9DD0003DBB2 /* NaviBtnNormal_iPad@2x.png */,
 				10F55C56187EA9DD0003DBB2 /* NaviBtnPress_iPad.png */,
@@ -2885,6 +2891,7 @@
 				CB54FDCA18695CCE00CED47E /* 219.txt in Resources */,
 				10F55C5A187EA9DD0003DBB2 /* NaviBtnPress_iPad.png in Resources */,
 				CB54FF1A18695CCE00CED47E /* 521.txt in Resources */,
+				10F55C67187FC23E0003DBB2 /* Navi_White_iPad@2x.png in Resources */,
 				CB54FF7718695CCE00CED47E /* 605.txt in Resources */,
 				CB54FE9318695CCE00CED47E /* 40.txt in Resources */,
 				CB54FFC918695CCE00CED47E /* 68.txt in Resources */,
@@ -3440,6 +3447,7 @@
 				CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */,
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
+				10F55C66187FC23E0003DBB2 /* Navi_White_iPad.png in Resources */,
 				CB54FDDA18695CCE00CED47E /* 233.txt in Resources */,
 				CB54FEAA18695CCE00CED47E /* 420.txt in Resources */,
 				CB54FF0C18695CCE00CED47E /* 509.txt in Resources */,

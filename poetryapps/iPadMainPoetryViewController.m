@@ -11,7 +11,7 @@
 @interface iPadMainPoetryViewController (){
     UInt16      _TimerCount;
     NSTimer     *_Timer;
-    UILabel     *_CountDownLab;
+    //UILabel     *_CountDownLab;
 }
 
 @end
@@ -30,6 +30,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *Background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"WelcomePage_iPad.png"]];
+    [self.view setBackgroundColor:Background];
+    
+    _Setting = [[PoetrySettingCoreData alloc] init];
+    [_Setting PoetrySetting_Create];
+    
+    if  (_Setting.DataSaved == NO) {
+        _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
+        [_PoetrySaved isCoreDataSave];
+    }
+    
+    _TimerCount = 0;
+    
+    _Timer = [NSTimer scheduledTimerWithTimeInterval: 1
+                                              target: self
+                                            selector: @selector(handleTimer:)
+                                            userInfo: nil
+                                             repeats: YES];
+    /*
+    
     UILabel *WelcomeLab = [[UILabel alloc] initWithFrame:CGRectMake(100, 300, 800, 100)];
     _CountDownLab = [[UILabel alloc] initWithFrame:CGRectMake(100, 600, 200, 100)];
     [_CountDownLab setCenter:CGPointMake(1024/2, 600)];
@@ -43,23 +64,8 @@
 
     [self.view addSubview:WelcomeLab];
     [self.view addSubview:_CountDownLab];
+    */
     
-    _TimerCount = 0;
-    _Setting = [[PoetrySettingCoreData alloc] init];
-    [_Setting PoetrySetting_Create];
-    
-    if  (_Setting.DataSaved == NO) {
-        _PoetrySaved = [[PoetrySaveIntoCoreData alloc] init];
-        [_PoetrySaved isCoreDataSave];
-    }
-    _CountDownLab.text = [NSString stringWithFormat:@"%d", MAIN_PAGE_LOADING_TIME];
-
-    
-    _Timer = [NSTimer scheduledTimerWithTimeInterval: 1
-                                             target: self
-                                           selector: @selector(handleTimer:)
-                                           userInfo: nil
-                                            repeats: YES];
 	// Do any additional setup after loading the view.
 }
 
@@ -82,7 +88,7 @@
         }];
     } else {
         
-        _CountDownLab.text = [NSString stringWithFormat:@"%d", (MAIN_PAGE_LOADING_TIME - _TimerCount)];
+        //_CountDownLab.text = [NSString stringWithFormat:@"%d", (MAIN_PAGE_LOADING_TIME - _TimerCount)];
     }
     
     
