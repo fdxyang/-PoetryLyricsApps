@@ -38,7 +38,11 @@
     
     UIColor                 *_LightBackgroundColor;
     UIColor                 *_DarkBackgroundColor;
-
+    
+    UIImage                 *_NaviBtnImgWhiteNormal;
+    UIImage                 *_NaviBtnImgWhitePressed;
+    UIImage                 *_NaviBtnImgDarkNormal;
+    UIImage                 *_NaviBtnImgDarkPressed;
     
 }
 
@@ -95,6 +99,11 @@
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPad.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPad.png"]];
 
+    _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
+    _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
+    _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
+    _NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
+    
     /*
     _PrevTouchView = [[UIView alloc] initWithFrame:UI_IPAD_PREV_VIEW_RECT_INIT];
     _NextTouchView = [[UIView alloc] initWithFrame:UI_IPAD_NEXT_VIEW_RECT_INIT];
@@ -156,6 +165,20 @@
     
 }
 
+-(void) setNaviBtnImage
+{
+    if (_Setting.SettingTheme == THEME_LIGHT_DARK) {
+        
+        [_NaviBtn setBackgroundImage:_NaviBtnImgDarkNormal forState:UIControlStateNormal];
+        [_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
+
+    } else {
+        
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+
+    }
+}
 
 -(void) InitCoverViewItems
 {
@@ -166,9 +189,7 @@
     //[_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
     [_CoverView setTag:TAG_NAVI_BTN];
     
-    [_NaviBtn setBackgroundImage:[UIImage imageNamed:@"NaviBtnNormal_iPad.png"] forState:UIControlStateNormal];
-    [_NaviBtn setBackgroundImage:[UIImage imageNamed:@"NaviBtnPress_iPad.png"] forState:UIControlStateHighlighted];
-
+    [self setNaviBtnImage];
     
     //_NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
     _NaviBtn.opaque = YES;
@@ -2032,6 +2053,8 @@
     if (Save) {
         [_Setting PoetrySetting_SetTheme:ThemeSetting];
     }
+    
+    [self setNaviBtnImage];
     
     // [CASPER] Add for iPad Ver
     _NowReadingText = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
