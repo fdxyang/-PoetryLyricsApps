@@ -73,7 +73,6 @@
                                 <state key="normal" backgroundImage="gotobtn1.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
-                                <state key="selected" backgroundImage="GOTOGuardBtnSelected.png"/>
                                 <state key="highlighted" backgroundImage="GOTOGuardBtnSelected.png"/>
                                 <connections>
                                     <action selector="guideBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="DfP-0k-Ljq"/>
@@ -99,14 +98,15 @@
                                     <action selector="responseBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="iWI-9n-QoO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-NA-q83">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-NA-q83">
                                 <rect key="frame" x="20" y="378" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" backgroundImage="gotobtntopage.png">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button" backgroundImage="gotobtnunselected.png">
                                     <color key="titleColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" backgroundImage="GOTOBtntoPageSelected.png"/>
+                                <state key="selected" backgroundImage="gotobtnselected.png"/>
                                 <connections>
                                     <action selector="changeReadingModeClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="OLO-Qm-NOf"/>
                                 </connections>
@@ -336,12 +336,12 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="GOTOBtntoPageSelected.png" width="2517" height="225"/>
         <image name="GOTOGuardBtnSelected.png" width="850" height="225"/>
         <image name="gotobtn1.png" width="80" height="35"/>
         <image name="gotobtn2.png" width="80" height="35"/>
         <image name="gotobtn3.png" width="80" height="35"/>
-        <image name="gotobtntopage.png" width="240" height="60"/>
+        <image name="gotobtnselected.png" width="280" height="50"/>
+        <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

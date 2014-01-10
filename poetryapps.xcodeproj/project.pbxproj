@@ -60,7 +60,6 @@
 		CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */; };
 		CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */; };
 		CB10AE03187D407F001BDC12 /* GOTOBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE02187D407F001BDC12 /* GOTOBackground.png */; };
-		CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */; };
 		CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */; };
 		CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -79,7 +78,6 @@
 		CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF2184C2D3200091BF1 /* Guidepicker.m */; };
 		CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF6184C3CC400091BF1 /* Responsepicker.m */; };
 		CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */; };
-		CB349490187D449200580A60 /* GO-TO-button to page-01.png in Resources */ = {isa = PBXBuildFile; fileRef = CB34948F187D449200580A60 /* GO-TO-button to page-01.png */; };
 		CB381FB41849B056000ECB84 /* GotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB01849B056000ECB84 /* GotoTable.m */; };
 		CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB381FB11849B056000ECB84 /* GotoTable.xib */; };
 		CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB381FB31849B056000ECB84 /* GotoViewController.m */; };
@@ -805,11 +803,11 @@
 		CB54FFFD18695CCE00CED47E /* 77.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2B18695CCD00CED47E /* 77.txt */; };
 		CB54FFFE18695CCE00CED47E /* 78.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2C18695CCD00CED47E /* 78.txt */; };
 		CB54FFFF18695CCE00CED47E /* 79.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2D18695CCD00CED47E /* 79.txt */; };
+		CB5EFC71187FEA21004955F3 /* gotobtnselected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */; };
+		CB5EFC72187FEA21004955F3 /* gotobtnunselected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */; };
 		CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E6187FA52F00AF7A1C /* gotobtn1.png */; };
 		CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E7187FA52F00AF7A1C /* gotobtn2.png */; };
 		CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E8187FA52F00AF7A1C /* gotobtn3.png */; };
-		CB6126EE187FA65A00AF7A1C /* gotobtntopage.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */; };
-		CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
@@ -892,7 +890,6 @@
 		CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttondown@2x.png"; sourceTree = "<group>"; };
 		CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24_24buttonup@2x.png"; sourceTree = "<group>"; };
 		CB10AE02187D407F001BDC12 /* GOTOBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBackground.png; sourceTree = "<group>"; };
-		CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOBtnBackground.png; sourceTree = "<group>"; };
 		CB25FD091843972D00F3D980 /* poetryapps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poetryapps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD0C1843972D00F3D980 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB25FD0E1843972D00F3D980 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -919,7 +916,6 @@
 		CB26ADF6184C3CC400091BF1 /* Responsepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Responsepicker.m; sourceTree = "<group>"; };
 		CB26ADF8184C786A00091BF1 /* GotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableViewController.h; sourceTree = "<group>"; };
 		CB26ADF9184C786A00091BF1 /* GotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableViewController.m; sourceTree = "<group>"; };
-		CB34948F187D449200580A60 /* GO-TO-button to page-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GO-TO-button to page-01.png"; sourceTree = "<group>"; };
 		CB381FAF1849B056000ECB84 /* GotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTable.h; sourceTree = "<group>"; };
 		CB381FB01849B056000ECB84 /* GotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTable.m; sourceTree = "<group>"; };
 		CB381FB11849B056000ECB84 /* GotoTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GotoTable.xib; sourceTree = "<group>"; };
@@ -1648,11 +1644,11 @@
 		CB54FD4118695CCE00CED47E /* 97.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 97.txt; sourceTree = "<group>"; };
 		CB54FD4218695CCE00CED47E /* 98.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 98.txt; sourceTree = "<group>"; };
 		CB54FD4318695CCE00CED47E /* 99.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 99.txt; sourceTree = "<group>"; };
+		CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtnselected.png; path = poetryapps/resource/image/gotobtnselected.png; sourceTree = SOURCE_ROOT; };
+		CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtnunselected.png; path = poetryapps/resource/image/gotobtnunselected.png; sourceTree = SOURCE_ROOT; };
 		CB6126E6187FA52F00AF7A1C /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
 		CB6126E7187FA52F00AF7A1C /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
 		CB6126E8187FA52F00AF7A1C /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
-		CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtntopage.png; path = poetryapps/resource/image/gotobtntopage.png; sourceTree = SOURCE_ROOT; };
-		CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GOTOGuardBtnSelected.png; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
@@ -1864,7 +1860,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
-				CB6126ED187FA65A00AF7A1C /* gotobtntopage.png */,
+				CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */,
+				CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */,
 				CB6126E6187FA52F00AF7A1C /* gotobtn1.png */,
 				CB6126E7187FA52F00AF7A1C /* gotobtn2.png */,
 				CB6126E8187FA52F00AF7A1C /* gotobtn3.png */,
@@ -1889,10 +1886,7 @@
 				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
 				CB0AB8AA187E562200C60DFF /* 24_24buttonup.png */,
 				0A4F2989187E1EE600205841 /* GOTOBackground@2x.png */,
-				CB34948F187D449200580A60 /* GO-TO-button to page-01.png */,
-				CB10AE04187D40B9001BDC12 /* GOTOBtnBackground.png */,
 				CB10AE02187D407F001BDC12 /* GOTOBackground.png */,
-				CB6E06EC187D257700A9E92E /* GOTOGuardBtnSelected.png */,
 				1004E8CC187CFED000718741 /* BarBtn_Reading.png */,
 				1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */,
 				1004E8C8187CFBF900718741 /* BarBtn_GOTO.png */,
@@ -2973,6 +2967,7 @@
 				CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */,
 				CB54FF9518695CCE00CED47E /* 632.txt in Resources */,
 				CB54FD4918695CCE00CED47E /* 102.txt in Resources */,
+				CB5EFC72187FEA21004955F3 /* gotobtnunselected.png in Resources */,
 				CB54FE0C18695CCE00CED47E /* 279.txt in Resources */,
 				CB54FE1118695CCE00CED47E /* 283.txt in Resources */,
 				CB54FFF918695CCE00CED47E /* 73.txt in Resources */,
@@ -3032,7 +3027,6 @@
 				CB54FDD718695CCE00CED47E /* 230.txt in Resources */,
 				CB54FE1418695CCE00CED47E /* 286.txt in Resources */,
 				CB54FEE718695CCE00CED47E /* 476.txt in Resources */,
-				CB10AE05187D40B9001BDC12 /* GOTOBtnBackground.png in Resources */,
 				CB54FE8B18695CCE00CED47E /* 393.txt in Resources */,
 				CB54FF8C18695CCE00CED47E /* 624.txt in Resources */,
 				CB54FDF318695CCE00CED47E /* 256.txt in Resources */,
@@ -3096,7 +3090,6 @@
 				CB54FEC818695CCE00CED47E /* 448.txt in Resources */,
 				CB54FE9118695CCE00CED47E /* 399.txt in Resources */,
 				CB54FD6718695CCE00CED47E /* 13.txt in Resources */,
-				CB349490187D449200580A60 /* GO-TO-button to page-01.png in Resources */,
 				CB54FF9B18695CCE00CED47E /* 638.txt in Resources */,
 				CB54FF6018695CCE00CED47E /* 585.txt in Resources */,
 				CB54FDD318695CCE00CED47E /* 227.txt in Resources */,
@@ -3202,7 +3195,6 @@
 				CB54FDF618695CCE00CED47E /* 259.txt in Resources */,
 				CB54FFCF18695CCE00CED47E /* 685.txt in Resources */,
 				CB54FFFD18695CCE00CED47E /* 77.txt in Resources */,
-				CB6126EE187FA65A00AF7A1C /* gotobtntopage.png in Resources */,
 				CB54FFC018695CCE00CED47E /* 671.txt in Resources */,
 				CB54FF4F18695CCE00CED47E /* 57.txt in Resources */,
 				CB54FE8818695CCE00CED47E /* 390.txt in Resources */,
@@ -3380,6 +3372,7 @@
 				CB54FF7018695CCE00CED47E /* 6.txt in Resources */,
 				CB54FFB718695CCE00CED47E /* 663.txt in Resources */,
 				CB54FF5C18695CCE00CED47E /* 581.txt in Resources */,
+				CB5EFC71187FEA21004955F3 /* gotobtnselected.png in Resources */,
 				CB54FFA818695CCE00CED47E /* 65.txt in Resources */,
 				CB54FECC18695CCE00CED47E /* 451.txt in Resources */,
 				CB54FE9918695CCE00CED47E /* 405.txt in Resources */,
@@ -3452,7 +3445,6 @@
 				CB54000118695CCE00CED47E /* 80.txt in Resources */,
 				CB54FE4D18695CCE00CED47E /* 337.txt in Resources */,
 				CB54000F18695CCE00CED47E /* 93.txt in Resources */,
-				CB6E06ED187D257700A9E92E /* GOTOGuardBtnSelected.png in Resources */,
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
 				10F55C66187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png in Resources */,
@@ -3699,11 +3691,7 @@
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Goda/Documents/xcode_project/casper_project/poetryapps_development/poetryapps/Library,
-					/Users/kevin/Documents/xcode/poetryapps_development/poetryapps/googleAnalytics,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -3720,11 +3708,7 @@
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				INFOPLIST_FILE = "poetryapps/poetryapps-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Goda/Documents/xcode_project/casper_project/poetryapps_development/poetryapps/Library,
-					/Users/kevin/Documents/xcode/poetryapps_development/poetryapps/googleAnalytics,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

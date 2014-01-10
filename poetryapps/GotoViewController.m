@@ -55,6 +55,9 @@
     [poetryBtn setTitle:@"詩歌" forState:UIControlStateNormal];
     [responseBtn setTitle:@"啟應文" forState:UIControlStateNormal];
     
+    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setEnabled:NO];
+    
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     self.navigationItem.title = @"快速查詢";
