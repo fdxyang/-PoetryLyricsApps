@@ -155,6 +155,7 @@
     [PoetryDataBase PoetryCoreDataSaveIntoNowReading:SelectedDic];
     [PoetryDataBase PoetryCoreDataSaveIntoHistory:SelectedDic];
     [self.tabBarController setSelectedIndex:0];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void) setTableViewType:(NSInteger)type
