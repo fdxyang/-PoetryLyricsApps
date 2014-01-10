@@ -1523,7 +1523,8 @@
                     
                     View.frame = CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
                     View = [self DisplayHandlingWithData:_NewDataDic onView:View ViewExist:NO];
-                    
+                    [View.Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+
 
                     if (_CurrentView == VIEW1) {
                         
@@ -1648,8 +1649,8 @@
                     // Height of view will be set inside the method
                     View.frame = CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, UI_IPAD_READINGVIEW_WIDTH, 0);
                     View = [self DisplayHandlingWithData:_NewDataDic onView:View ViewExist:NO];
-                    IPAD_READING_VIEW_LOG(@"New View Generate = [%@]", View);
-                    
+                    [View.Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
+
                     
                     if (_DisplayTheme == THEME_LIGHT_DARK) {
                         
