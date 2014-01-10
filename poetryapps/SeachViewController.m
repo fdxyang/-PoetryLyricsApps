@@ -128,22 +128,24 @@
                 break;
                 
             case 1:
-                sectionStr = @"GUARD READING";
+                sectionStr = @"基督基石";
                 break;
                 
             case 2:
-                sectionStr = @"POETRY";
+                sectionStr = @"詩歌";
                 break;
                 
             case 3:
-                sectionStr = @"RESPONSIVE PRAYER";
+                sectionStr = @"啟應文";
                 break;
             default:
                 break;
         }
         
     } else {
-        return nil;
+        
+        return @"歷史紀錄";
+        
     }
     return sectionStr;
 }
