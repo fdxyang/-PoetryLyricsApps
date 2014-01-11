@@ -1144,7 +1144,7 @@
             [cell addSubview:_ThemePreViewLab];
             
         } else if (indexPath.section == 3) {
-            cell.textLabel.text = @"About me";
+            cell.textLabel.text = @"Kevin / ioschswc@gmail.com";
         }
         
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
