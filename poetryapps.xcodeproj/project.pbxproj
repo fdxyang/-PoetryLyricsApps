@@ -44,6 +44,7 @@
 		1060F930187FFE1F004AE154 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 1060F920187FFE1F004AE154 /* iTunesArtwork@2x */; };
 		1060F933187FFE91004AE154 /* welcome_page_3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F931187FFE91004AE154 /* welcome_page_3_5.png */; };
 		1060F934187FFE91004AE154 /* welcome_page_3_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F932187FFE91004AE154 /* welcome_page_3_5@2x.png */; };
+		10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10732AEF1880D32300304DA4 /* AboutMeViewController.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
 		10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */; };
@@ -883,6 +884,8 @@
 		1060F920187FFE1F004AE154 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		1060F931187FFE91004AE154 /* welcome_page_3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page_3_5.png; sourceTree = "<group>"; };
 		1060F932187FFE91004AE154 /* welcome_page_3_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page_3_5@2x.png"; sourceTree = "<group>"; };
+		10732AEE1880D32300304DA4 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
+		10732AEF1880D32300304DA4 /* AboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		10771DC01849D0B600A3B342 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		10771DC11849D0B600A3B342 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
@@ -1752,6 +1755,8 @@
 				10449958184DA42500C58526 /* ThemeSetting.xib */,
 				1044995A184DA5EF00C58526 /* ThemeSetting.h */,
 				1044995B184DA5EF00C58526 /* ThemeSetting.m */,
+				10732AEE1880D32300304DA4 /* AboutMeViewController.h */,
+				10732AEF1880D32300304DA4 /* AboutMeViewController.m */,
 			);
 			name = SettingView;
 			sourceTree = "<group>";
@@ -3625,6 +3630,7 @@
 				CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
 				10AF12721862EC7F002F6DB9 /* Animations.m in Sources */,
+				10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */,
 				108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */,
 				CB381FB41849B056000ECB84 /* GotoTable.m in Sources */,
 				CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */,

@@ -57,6 +57,7 @@
     NSLog(@"View did appear");
     
     if ([_PoetryDatabase Poetry_CoreDataReadingExist]) {
+        
         // [CASPER] 2013.12.23 Set text in preview as poetry name
         _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_NAME_KEY];
         // [CASPER] 2013.12.23 == 
@@ -165,6 +166,15 @@
     return sectionStr;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Seleted");
+    if (indexPath.section == 3) {
+        
+        [self performSegueWithIdentifier:@"AboutMe" sender:nil];
+        
+    }
+}
 
 #pragma mark - Font Setting
 
