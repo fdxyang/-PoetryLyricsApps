@@ -32,7 +32,9 @@
 
 
 
-@interface ReadingViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface ReadingViewController : UIViewController <UIGestureRecognizerDelegate,
+                                                        UITableViewDelegate,
+                                                        UITableViewDataSource>
 
 @property (nonatomic, strong)           UIScrollView                *Scroller;
 @property (nonatomic, strong)           PoetryCoreData              *PoetryDatabase;
