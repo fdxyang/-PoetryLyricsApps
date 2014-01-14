@@ -44,6 +44,7 @@
 		1060F930187FFE1F004AE154 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 1060F920187FFE1F004AE154 /* iTunesArtwork@2x */; };
 		1060F933187FFE91004AE154 /* welcome_page_3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F931187FFE91004AE154 /* welcome_page_3_5.png */; };
 		1060F934187FFE91004AE154 /* welcome_page_3_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F932187FFE91004AE154 /* welcome_page_3_5@2x.png */; };
+		107201771883DF0700EC638D /* ReadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 107201761883DF0700EC638D /* ReadingTableViewController.m */; };
 		10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10732AEF1880D32300304DA4 /* AboutMeViewController.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
@@ -884,6 +885,8 @@
 		1060F920187FFE1F004AE154 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		1060F931187FFE91004AE154 /* welcome_page_3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page_3_5.png; sourceTree = "<group>"; };
 		1060F932187FFE91004AE154 /* welcome_page_3_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page_3_5@2x.png"; sourceTree = "<group>"; };
+		107201751883DF0700EC638D /* ReadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTableViewController.h; sourceTree = "<group>"; };
+		107201761883DF0700EC638D /* ReadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTableViewController.m; sourceTree = "<group>"; };
 		10732AEE1880D32300304DA4 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
 		10732AEF1880D32300304DA4 /* AboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		10771DC01849D0B600A3B342 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -1917,6 +1920,8 @@
 				CB381FB91849BD5A000ECB84 /* ReadingViewController.m */,
 				10B361941856BF9B00A632AD /* PoetryReadingView.h */,
 				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
+				107201751883DF0700EC638D /* ReadingTableViewController.h */,
+				107201761883DF0700EC638D /* ReadingTableViewController.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -3619,6 +3624,7 @@
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
 				10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */,
+				107201771883DF0700EC638D /* ReadingTableViewController.m in Sources */,
 				1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */,
 				102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */,
 				10DD73DA186C289E00047D12 /* iPadMainPoetryViewController.m in Sources */,
