@@ -15,10 +15,10 @@
             </objects>
             <point key="canvasLocation" x="-524" y="257"/>
         </scene>
-        <!--Reading View Controller-->
+        <!--Reading Table View Controller-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
-                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rwx-QZ-ePj"/>
                         <viewControllerLayoutGuide type="bottom" id="Jyp-Z9-Xwd"/>

@@ -20,7 +20,6 @@
 #define UI_DEFAULT_LABEL_WIDTH          280
 
 #define SWITCH_VIEW_THRESHOLD           40
-
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -32,9 +31,7 @@
 
 
 
-@interface ReadingViewController : UIViewController <UIGestureRecognizerDelegate,
-                                                        UITableViewDelegate,
-                                                        UITableViewDataSource>
+@interface ReadingViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong)           UIScrollView                *Scroller;
 @property (nonatomic, strong)           PoetryCoreData              *PoetryDatabase;
