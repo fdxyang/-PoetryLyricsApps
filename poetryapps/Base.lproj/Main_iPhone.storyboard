@@ -15,10 +15,10 @@
             </objects>
             <point key="canvasLocation" x="-524" y="257"/>
         </scene>
-        <!--Reading View Controller-->
+        <!--Reading Table View Controller-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
-                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rwx-QZ-ePj"/>
                         <viewControllerLayoutGuide type="bottom" id="Jyp-Z9-Xwd"/>
@@ -68,7 +68,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbU-Kr-hYO">
-                                <rect key="frame" x="40" y="95" width="80" height="35"/>
+                                <rect key="frame" x="20" y="70" width="93" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn1.png">
                                     <attributedString key="attributedTitle"/>
@@ -79,7 +79,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQ6-Iy-REN">
-                                <rect key="frame" x="120" y="95" width="80" height="35"/>
+                                <rect key="frame" x="113" y="70" width="94" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn2.png">
                                     <attributedString key="attributedTitle"/>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Go-Hg-dcK">
-                                <rect key="frame" x="200" y="95" width="80" height="35"/>
+                                <rect key="frame" x="206" y="70" width="93" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn3.png">
                                     <attributedString key="attributedTitle"/>
@@ -359,9 +359,9 @@
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
         <image name="GOTOGuardBtnSelected.png" width="850" height="225"/>
-        <image name="gotobtn1.png" width="80" height="35"/>
-        <image name="gotobtn2.png" width="80" height="35"/>
-        <image name="gotobtn3.png" width="80" height="35"/>
+        <image name="gotobtn1.png" width="93" height="60"/>
+        <image name="gotobtn2.png" width="94" height="60"/>
+        <image name="gotobtn3.png" width="93" height="60"/>
         <image name="gotobtnselected.png" width="280" height="50"/>
         <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>
