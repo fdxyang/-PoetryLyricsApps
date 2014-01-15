@@ -28,8 +28,8 @@
 
 @property (strong, nonatomic)   UITableView                 *TableView1;
 @property (strong, nonatomic)   UITableView                 *TableView2;
-@property (strong, nonatomic)   NSMutableArray              *NowReadingTableDataArray;
-@property (strong, nonatomic)   NSMutableArray              *ReadingTableDataArrayNew;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray1;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray2;
 
 @property (nonatomic, strong)   PoetryCoreData              *PoetryDatabase;
 @property (nonatomic, strong)   PoetrySettingCoreData       *PoetrySetting;
