@@ -14,13 +14,20 @@
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 10);
 // -10 is the buffer for the bottom of the table view
 
-#define UI_SMALL_FONT_SIZE_THRESHOLD    14
-#define UI_MEDIUM_FONT_SIZE_THRESHOLD   12
-#define UI_LARGE_FONT_SIZE_THRESHOLD    10
+#define UI_SMALL_FONT_SIZE_THRESHOLD         14
+#define UI_MEDIUM_FONT_SIZE_THRESHOLD        12
+#define UI_LARGE_FONT_SIZE_THRESHOLD         10
+
+#define UI_BOLD_SMALL_FONT_SIZE_THRESHOLD    11
+#define UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD   10
+#define UI_BOLD_LARGE_FONT_SIZE_THRESHOLD    8
+
+#define UI_BOLD_FONT_BIAS               5
 
 @interface ReadingTableViewController () {
     UInt16                  _CurrentIndex;
     UIFont                  *_Font;
+    UIFont                  *_BoldFont;
     NSMutableArray          *_CellHeightArray;
 }
 
@@ -66,8 +73,8 @@
     
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     _PoetrySetting = [[PoetrySettingCoreData alloc] init];
-    _NowReadingTableDataArray = [[NSMutableArray alloc] init];
-    _ReadingTableDataArrayNew = [[NSMutableArray alloc] init];
+    _ReadingTableArray1 = [[NSMutableArray alloc] init];
+    _ReadingTableArray2 = [[NSMutableArray alloc] init];
     _CellHeightArray = [[NSMutableArray alloc] init];
     
 }
@@ -87,7 +94,7 @@
     [_TableView1 reloadData];
     [self.view addSubview:_TableView1];
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
-
+    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -116,17 +123,121 @@
         _CurrentIndex = 0;
         
     }
-    NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-    _NowReadingCategoryArray = [NSMutableArray arrayWithArray:
+    
+    //NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+    _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
 
 }
 
 #pragma mark - Table view data source
+- (NSInteger) CalculateLineNumberWithContentString : (NSString *) ContentStr
+{
+    NSInteger   LineNumber = 1;
+    NSString    *Keyword = @"@@";
+    UInt16      TextLength;
+    BOOL        isAttrCell = NO;
+    
+    TextLength = [ContentStr length];
+    
+    if ([ContentStr hasPrefix:Keyword]) {
+        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+        TextLength = TextLength - [Keyword length];
+        isAttrCell = YES;
+    }
+    
+    NSLog(@"%@", ContentStr);
+    
+    if (isAttrCell) {
+        
+        switch (_PoetrySetting.SettingFontSize) {
+            case POETRY_SETIING_FONT_SIZE_SMALL:
+                if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_BOLD_SMALL_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_MEDIUM:
+                if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_LARGE:
+                if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_BOLD_LARGE_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+
+                }
+                break;
+                
+            default:
+                break;
+        }
+
+    } else {
+        
+        switch (_PoetrySetting.SettingFontSize) {
+            case POETRY_SETIING_FONT_SIZE_SMALL:
+                if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_SMALL_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_MEDIUM:
+                if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_MEDIUM_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_LARGE:
+                if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                    
+                    if (( TextLength == UI_LARGE_FONT_SIZE_THRESHOLD)
+                        && (LineNumber >= 1)) {
+                        LineNumber--;
+                    }
+                }
+                break;
+                
+            default:
+                break;
+        }
+
+    }
+    NSLog(@"%d", LineNumber);
+    return LineNumber;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_NowReadingCategoryArray count];
+    return [_ReadingTableArray1 count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -143,10 +254,25 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     if (tableView.tag == 1) {
+        NSString    *ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
+
+        if ([ContentStr hasPrefix:@"@@"]) {
+
+            ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+            cell.textLabel.font = _BoldFont;
+
+        } else {
+            
+            cell.textLabel.font = _Font;
+            
+        }
+        
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = _Font;
-        cell.textLabel.text = [_NowReadingCategoryArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = ContentStr;
+        
     } else {
         NSLog(@"222");
         cell.textLabel.text = @"2";
@@ -157,36 +283,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat Height = 0;
-    UInt16  TextLength = [[_NowReadingCategoryArray objectAtIndex:indexPath.row] length];
+    CGFloat     Height = 0;
+    NSString    *ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
+    NSString    *Keyword = @"@@";
     
-    switch (_PoetrySetting.SettingFontSize) {
-        case POETRY_SETIING_FONT_SIZE_SMALL:
-            Height = POETRY_SETIING_FONT_SIZE_SMALL + 10;
-            if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                Height = Height * ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
-            }
-            break;
-            
-        case POETRY_SETIING_FONT_SIZE_MEDIUM:
-            Height = POETRY_SETIING_FONT_SIZE_MEDIUM + 10;
-            if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                Height =  Height * ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
-            }
-            break;
-            
-        case POETRY_SETIING_FONT_SIZE_LARGE:
-            Height = POETRY_SETIING_FONT_SIZE_LARGE + 10;
-            if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                Height = Height * ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
-            }
-            break;
-            
-        default:
-        break;
+    if ([ContentStr hasPrefix:Keyword]) {
+        Height = (_PoetrySetting.SettingFontSize + 20) * [self CalculateLineNumberWithContentString:ContentStr];
+    } else {
+        Height = (_PoetrySetting.SettingFontSize + 10) * [self CalculateLineNumberWithContentString:ContentStr];
     }
     
-    NSLog(@"Length = %d Height = %f", TextLength, Height);
     return Height;
 }
 
@@ -210,7 +316,7 @@
             [_TableView2 setFrame:Frame];
             [self.view addSubview:_TableView2];
         }
-            break;
+        break;
             
         case UIGestureRecognizerStateChanged:
         {
