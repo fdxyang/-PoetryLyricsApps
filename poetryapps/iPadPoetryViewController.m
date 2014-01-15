@@ -2065,7 +2065,7 @@
         case THEME_LIGHT_DARK:
             IPAD_READING_VIEW_LOG(@"THEME_LIGHT_DARK");
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
-            _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
+            _ThemePreViewLab.backgroundColor = _LightBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor blackColor];
             _ThemePreViewLab.text = _NowReadingText;
             break;
@@ -2074,7 +2074,7 @@
             IPAD_READING_VIEW_LOG(@"THEME_DARK_LIGHT");
             
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
-            _ThemePreViewLab.backgroundColor = [UIColor blackColor];
+            _ThemePreViewLab.backgroundColor = _DarkBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor whiteColor];
             _ThemePreViewLab.text = _NowReadingText;
             
