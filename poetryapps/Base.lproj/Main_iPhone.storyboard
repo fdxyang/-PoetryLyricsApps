@@ -73,7 +73,6 @@
                                 <state key="normal" backgroundImage="gotobtn1.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="GOTOGuardBtnSelected.png"/>
                                 <connections>
                                     <action selector="guideBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="DfP-0k-Ljq"/>
                                 </connections>
@@ -358,7 +357,6 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="GOTOGuardBtnSelected.png" width="850" height="225"/>
         <image name="gotobtn1.png" width="93" height="50"/>
         <image name="gotobtn2.png" width="94" height="50"/>
         <image name="gotobtn3.png" width="93" height="50"/>
