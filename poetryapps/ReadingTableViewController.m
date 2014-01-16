@@ -16,12 +16,12 @@
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 10)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH        CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 10)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 // -10 is the buffer for the bottom of the table view
 
 #define UI_SMALL_FONT_SIZE_THRESHOLD         14
@@ -205,12 +205,6 @@
             case POETRY_SETIING_FONT_SIZE_LARGE:
                 if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
-                    
-                    if (( TextLength == UI_BOLD_LARGE_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
-
                 }
                 break;
                 
@@ -247,10 +241,6 @@
                 if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
                     
-                    if (( TextLength == UI_LARGE_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
                 }
                 break;
                 

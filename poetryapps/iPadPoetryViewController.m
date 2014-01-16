@@ -43,6 +43,8 @@
     UIImage                 *_NaviBtnImgWhitePressed;
     UIImage                 *_NaviBtnImgDarkNormal;
     UIImage                 *_NaviBtnImgDarkPressed;
+    UIImage                 *_SettingBtnImg;
+    UIImage                 *_SearchingBtnImg;
     
 }
 
@@ -100,20 +102,12 @@
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPad.png"]];
 
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
-    _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
+    //_NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
     _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
-    _NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
-    
-    /*
-    _PrevTouchView = [[UIView alloc] initWithFrame:UI_IPAD_PREV_VIEW_RECT_INIT];
-    _NextTouchView = [[UIView alloc] initWithFrame:UI_IPAD_NEXT_VIEW_RECT_INIT];
-    [_PrevTouchView setBackgroundColor:[UIColor redColor]];
-    [_NextTouchView setBackgroundColor:[UIColor redColor]];
-    [_PrevTouchView setTag:TAG_PREV_TOUCH_VIEW];
-    [_NextTouchView setTag:TAG_NEXT_TOUCH_VIEW];
-    [self.view addSubview:_PrevTouchView];
-    [self.view addSubview:_NextTouchView];
-    */
+    //_NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
+
+    _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
+    _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,12 +164,12 @@
     if (_Setting.SettingTheme == THEME_LIGHT_DARK) {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgDarkNormal forState:UIControlStateNormal];
-        [_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
 
     } else {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
-        [_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
 
     }
 }
@@ -201,10 +195,10 @@
         _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
     }
     
-    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    //_SettingBtn.backgroundColor = [UIColor grayColor];
     
-    _SettingBtn.backgroundColor = [UIColor grayColor];
-    _SettingBtn.opaque = YES;
+    [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
     [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -638,8 +632,8 @@
             _isSettingTableOn = NO;
             _isSearching = NO;  //[CASPER] 2013.12.24
             _isTocTableOn = NO; //[CASPER] 2013.12.27
-            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
             [self RemoveCoverViewAnimation];
             break;
         
@@ -659,8 +653,9 @@
             _isSearchBarOn = YES;
             _isSettingTableOn = NO;
             //_SettingBtn.titleLabel.text = @"SETTING";
-            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
+            
             [self RemoveSettingTableViewAnnimation];
             [self ExecuteSearchBarAnnimation];
             break;
@@ -672,7 +667,8 @@
             _isSettingTableOn = YES;
             _isSearching = NO;
             //_SettingBtn.titleLabel.text = @"SEARCH";
-            [_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+            //[_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SearchingBtnImg forState:UIControlStateNormal];
             
             [_SettingTableView reloadData];
             
