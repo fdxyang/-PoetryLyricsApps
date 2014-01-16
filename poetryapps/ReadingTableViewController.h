@@ -35,4 +35,26 @@
 @property (nonatomic, strong)   PoetrySettingCoreData       *PoetrySetting;
 @property (nonatomic, strong)   NSDictionary                *PoetryNowReading;
 @property (nonatomic, strong)   NSMutableArray              *NowReadingCategoryArray;
+
+
+typedef enum {
+    VIEW1 = 0x00,
+    VIEW2,
+}CURRENT_VIEW;
+
+
+typedef enum {
+    SlideLabelNone,
+    SlideLabelLeftToRigth,
+    SlideLabelRightToLegt,
+}SLIDE_DIRECTION;
+
+typedef enum {
+    None,
+    DirectionJudgement,
+    ViewMoving,
+    ConfirmedSwitch,
+}GESTURE_MOVE_STATE;
+
+
 @end
