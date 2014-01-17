@@ -113,7 +113,7 @@
         [cell addSubview:_ThemePreViewLab];
         
     } else if (indexPath.section ==3) {
-        cell.textLabel.text = @"Kevin / ioschswc@gmail.com";
+        cell.textLabel.text = @"關於我";
     }
    
     return cell;

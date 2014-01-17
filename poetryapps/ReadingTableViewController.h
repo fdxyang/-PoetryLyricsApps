@@ -35,7 +35,7 @@
 @property (nonatomic, strong)   PoetrySettingCoreData       *PoetrySetting;
 @property (nonatomic, strong)   NSDictionary                *PoetryNowReading;
 @property (nonatomic, strong)   NSMutableArray              *NowReadingCategoryArray;
-
+@property (nonatomic, strong)   UILabel                     *HeadAndTailLab;
 
 typedef enum {
     VIEW1 = 0x00,
