@@ -47,12 +47,12 @@
     NSDictionary            *_NewPoetryDic;
     
     CGPoint                 _TouchInit;
-    BOOL                    _DataFlag;
-    BOOL                    _GetSlideInLabel;
     BOOL                    _CrossCategoryFlag;
     BOOL                    _HeadAndTailFlag;
-    BOOL                    _ConfirmToSwitch;
 
+    UIColor                 *_LightBackgroundColor;
+    UIColor                 *_DarkBackgroundColor;
+    UIColor                 *_FontThemeColor;
 }
 
 @end
@@ -78,7 +78,8 @@
         Frame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
     }
     
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(handlePanFrom:)];
     
     [self.view addGestureRecognizer:panRecognizer];
     panRecognizer.maximumNumberOfTouches = 1;
@@ -86,8 +87,8 @@
     
     _TableView1 = [[UITableView alloc]  initWithFrame:Frame];
     _TableView2 = [[UITableView alloc]  initWithFrame:Frame];
-    //_TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //_TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_TableView1 setTag:1];
     [_TableView2 setTag:2];
     _TableView1.delegate = self;
@@ -103,7 +104,10 @@
     
     _HeadAndTailLab = [[UILabel alloc] init];
     [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
-
+    
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+    _FontThemeColor = [[UIColor alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +118,22 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if  (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
+        
+        [_TableView1 setBackgroundColor:_LightBackgroundColor];
+        [_TableView2 setBackgroundColor:_LightBackgroundColor];
+        _FontThemeColor = [UIColor blackColor];
+        
+    } else {
+        
+        [_TableView1 setBackgroundColor:_DarkBackgroundColor];
+        [_TableView2 setBackgroundColor:_DarkBackgroundColor];
+        _FontThemeColor = [UIColor whiteColor];
+
+    }
+
+    
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
@@ -266,6 +286,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if (tableView.tag == 1) {
@@ -285,6 +306,7 @@
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
+        cell.textLabel.textColor = _FontThemeColor;
         
     } else {
         
@@ -303,6 +325,7 @@
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
+        cell.textLabel.textColor = _FontThemeColor;
     }
     
     return cell;
@@ -313,6 +336,7 @@
     CGFloat     Height = 0;
     NSString    *ContentStr;
     NSString    *Keyword = @"@@";
+    UInt16      LineNumber;
     
     if (tableView.tag == 1) {
         ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
@@ -320,10 +344,21 @@
         ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
     }
     
+    LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
+    
     if ([ContentStr hasPrefix:Keyword]) {
-        Height = (_PoetrySetting.SettingFontSize + 20) * [self CalculateLineNumberWithContentString:ContentStr];
+
+        Height = (_PoetrySetting.SettingFontSize + 20) * LineNumber;
+        if (LineNumber > 1) {
+            Height = Height - 10;
+        }
+        
     } else {
-        Height = (_PoetrySetting.SettingFontSize + 10) * [self CalculateLineNumberWithContentString:ContentStr];
+        Height = (_PoetrySetting.SettingFontSize + 10) * LineNumber;
+        if (LineNumber > 1) {
+            Height = Height - 5;
+        }
+        
     }
     
     return Height;
@@ -505,8 +540,8 @@
 }
 
 -(void) HandleGestureByUsing : (UIPanGestureRecognizer *)recognizer
-               OnCurrentView : (UIView*) CurrentView
-             andTheOtherView : (UIView*) TheOtherView
+               OnCurrentView : (UITableView*) CurrentView
+             andTheOtherView : (UITableView*) TheOtherView
 {
     CGPoint location = [recognizer locationInView:self.view];
     
@@ -532,8 +567,8 @@
 }
 
 -(void) HandleGestureChangeStateWith : (CGPoint) location
-                       OnCurrentView : (UIView*) CurrentView
-                     andTheOtherView : (UIView*) TheOtherView
+                       OnCurrentView : (UITableView*) CurrentView
+                     andTheOtherView : (UITableView*) TheOtherView
 {
     
     CGRect DefaultFrame;
@@ -555,6 +590,7 @@
                 
                 // PREV
                 [TheOtherView setFrame:DefaultFrame];
+                [TheOtherView setScrollsToTop:YES];
                 _SlideDirection = SlideLabelLeftToRigth;
 
                 [self GetNewPoetryByGestureDirection];
@@ -568,7 +604,6 @@
                     
                 } else {
                     
-                    NSLog(@"222");
                     [self.view insertSubview:TheOtherView belowSubview:CurrentView];
                 }
                 
@@ -589,8 +624,10 @@
                     [self.view insertSubview:_HeadAndTailLab aboveSubview:CurrentView];
                     
                 } else {
-                    NSLog(@"222");
+                    
                     [TheOtherView setFrame:NextPoetryFrame];
+                    [TheOtherView setScrollsToTop:YES];
+
                     [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                     
                 }
@@ -607,7 +644,10 @@
                 
                 // PREV
                 if ( _SlideDirection != SlideLabelLeftToRigth ) {
+                    
+                    _HeadAndTailFlag = NO;
                     _ViewMovementState = DirectionJudgement;
+                    
                 }
                 
                 [CurrentView setFrame:CGRectMake(abs(location.x - _TouchInit.x),
@@ -620,6 +660,7 @@
                 // NEXT
                 if ( _SlideDirection != SlideLabelRightToLegt ) {
                     
+                    _HeadAndTailFlag = NO;
                     _ViewMovementState = DirectionJudgement;
                     
                 }
@@ -651,8 +692,8 @@
 
 
 -(void) HandleGestureEndStateWith : (CGPoint) location
-                       OnCurrentView : (UIView*) CurrentView
-                     andTheOtherView : (UIView*) TheOtherView
+                       OnCurrentView : (UITableView*) CurrentView
+                     andTheOtherView : (UITableView*) TheOtherView
 {
     CGRect DefaultFrame;
     CGRect NextPoetryFrame;
