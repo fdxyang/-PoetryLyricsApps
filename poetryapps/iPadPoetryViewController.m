@@ -1135,12 +1135,13 @@
             
             
         } else if (indexPath.section == 2) {
+            
             [self InitPreviewLab];
             [self Setting_InitThemeView];
             [cell addSubview:_ThemePreViewLab];
             
         } else if (indexPath.section == 3) {
-            cell.textLabel.text = @"Kevin / ioschswc@gmail.com";
+            cell.textLabel.text = @"關於我";
         }
         
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {

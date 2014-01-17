@@ -22,7 +22,6 @@
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
                                                                         UI_SCREEN_WIDTH, \
                                                                         UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-// -10 is the buffer for the bottom of the table view
 
 #define UI_SMALL_FONT_SIZE_THRESHOLD         14
 #define UI_MEDIUM_FONT_SIZE_THRESHOLD        12
@@ -32,8 +31,8 @@
 #define UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD   10
 #define UI_BOLD_LARGE_FONT_SIZE_THRESHOLD    8
 
-#define UI_BOLD_FONT_BIAS               5
-#define SWITCH_VIEW_THRESHOLD           40
+#define UI_BOLD_FONT_BIAS                    5
+#define SWITCH_VIEW_THRESHOLD                40
 
 @interface ReadingTableViewController () {
     
@@ -102,17 +101,20 @@
     _ReadingTableArray2 = [[NSMutableArray alloc] init];
     _CellHeightArray = [[NSMutableArray alloc] init];
     
+    _HeadAndTailLab = [[UILabel alloc] init];
+    [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
     [_TableView1 setScrollsToTop:YES];
@@ -155,6 +157,7 @@
         
     }
     
+    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
 
@@ -183,10 +186,6 @@
                 if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
                     
-                    if (( TextLength == UI_BOLD_SMALL_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
                 }
                 break;
                 
@@ -194,10 +193,6 @@
                 if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
                     
-                    if (( TextLength == UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
 
                 }
                 break;
@@ -219,10 +214,7 @@
                 if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
                     
-                    if (( TextLength == UI_SMALL_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
+                    
                 }
                 break;
                 
@@ -230,10 +222,7 @@
                 if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
                     
-                    if (( TextLength == UI_MEDIUM_FONT_SIZE_THRESHOLD)
-                        && (LineNumber >= 1)) {
-                        LineNumber--;
-                    }
+                   
                 }
                 break;
                 
@@ -358,7 +347,7 @@
     if (NewPoetry != nil) {
         ContentStr = [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
     } else {
-        ContentStr = @"NO MORE";
+
     }
     
     
@@ -391,6 +380,7 @@
             // This is the first poetry in this category
             // Check the Category
             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
+            [_TempPoetryList removeAllObjects];
             
             if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
                 
@@ -433,6 +423,7 @@
             // To get the previous poetry of this category
             _NewPoetryDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
             NSLog(@"_NewDataDic index = %d", _CurrentIndex - 1);
+            
         }
     } else {
         
@@ -441,6 +432,8 @@
 
         if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
             
+            [_TempPoetryList removeAllObjects];
+
             // Check the Category
             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
             if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
@@ -457,6 +450,7 @@
                     _TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
                     
                 } else {
+                    
                     NSLog(@"Reading view has some error, plz check");
                 }
                 
@@ -485,7 +479,9 @@
 
     }
     
-    [self UpdateNewTableViewContentWithNewPoetry:_NewPoetryDic];
+    if (!_HeadAndTailFlag) {
+        [self UpdateNewTableViewContentWithNewPoetry:_NewPoetryDic];
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -559,20 +555,48 @@
                 
                 // PREV
                 [TheOtherView setFrame:DefaultFrame];
-                [self.view insertSubview:TheOtherView belowSubview:CurrentView];
                 _SlideDirection = SlideLabelLeftToRigth;
+
+                [self GetNewPoetryByGestureDirection];
+                
+                if (_HeadAndTailFlag) {
+                    
+                    [_HeadAndTailLab setHidden:NO];
+                    [_HeadAndTailLab setText:@"MOST PREV"];
+                    [_HeadAndTailLab setFrame:DefaultFrame];
+                    [self.view insertSubview:_HeadAndTailLab belowSubview:CurrentView];
+                    
+                } else {
+                    
+                    NSLog(@"222");
+                    [self.view insertSubview:TheOtherView belowSubview:CurrentView];
+                }
+                
                 
             } else {
                 
                 // NEXT
                 [CurrentView setFrame:DefaultFrame];
-                [TheOtherView setFrame:NextPoetryFrame];
-                [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                 _SlideDirection = SlideLabelRightToLegt;
+
+                [self GetNewPoetryByGestureDirection];
+                
+                if (_HeadAndTailFlag) {
+                    
+                    [_HeadAndTailLab setHidden:NO];
+                    [_HeadAndTailLab setText:@"LATEST"];
+                    [_HeadAndTailLab setFrame:NextPoetryFrame];
+                    [self.view insertSubview:_HeadAndTailLab aboveSubview:CurrentView];
+                    
+                } else {
+                    NSLog(@"222");
+                    [TheOtherView setFrame:NextPoetryFrame];
+                    [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
+                    
+                }
                 
             }
 
-            [self GetNewPoetryByGestureDirection];
             _ViewMovementState = ViewMoving;
             
             break;
@@ -600,11 +624,22 @@
                     
                 }
                 
-                [TheOtherView setFrame:CGRectMake(NextPoetryFrame.origin.x - abs(location.x - _TouchInit.x),
-                                                  NextPoetryFrame.origin.y,
-                                                  CGRectGetWidth(NextPoetryFrame),
-                                                  CGRectGetHeight(NextPoetryFrame))];
+                if (_HeadAndTailFlag) {
+                    
+                    [_HeadAndTailLab setFrame:CGRectMake(NextPoetryFrame.origin.x - abs(location.x - _TouchInit.x),
+                                                         NextPoetryFrame.origin.y,
+                                                         CGRectGetWidth(NextPoetryFrame),
+                                                         CGRectGetHeight(NextPoetryFrame))];
+                    
+                } else {
+                    
+                    [TheOtherView setFrame:CGRectMake(NextPoetryFrame.origin.x - abs(location.x - _TouchInit.x),
+                                                      NextPoetryFrame.origin.y,
+                                                      CGRectGetWidth(NextPoetryFrame),
+                                                      CGRectGetHeight(NextPoetryFrame))];
 
+                }
+                
             }
             
             
@@ -619,7 +654,6 @@
                        OnCurrentView : (UIView*) CurrentView
                      andTheOtherView : (UIView*) TheOtherView
 {
-    _ViewMovementState = None;
     CGRect DefaultFrame;
     CGRect NextPoetryFrame;
     
@@ -631,45 +665,7 @@
         NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
     }
 
-    if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
-        
-        [UIView animateWithDuration:0.2
-                         animations:^{
-                             
-                             if (_SlideDirection == SlideLabelLeftToRigth) {
-
-                                 // PREV
-                                 [CurrentView setFrame:NextPoetryFrame];
-                                 
-                             } else {
-                                 
-                                 // NEXT
-                                 [TheOtherView setFrame:DefaultFrame];
-                             }
-                             
-                         }
-                         completion:^(BOOL finished) {
-                             
-                             if (_SlideDirection == SlideLabelLeftToRigth) {
-                                 
-                                 // PREV
-                                 _CurrentIndex--;
-                                 [CurrentView removeFromSuperview];
-                                 
-                                 
-                             } else {
-                                 
-                                 // NEXT
-                                 _CurrentIndex++;
-                                 [CurrentView removeFromSuperview];
-                             }
-                             
-                             NSLog(@"_CurrentIndex = %d", _CurrentIndex);
-                             _PoetryNowReading = _NewPoetryDic;
-                             [self SwitchCurrentView];
-                             
-                         }];
-    } else {
+    if (_HeadAndTailFlag) {
         
         [UIView animateWithDuration:0.2
                          animations:^{
@@ -682,16 +678,107 @@
                              } else {
                                  
                                  // NEXT
-                                 [TheOtherView setFrame:NextPoetryFrame];
+                                 [_HeadAndTailLab setFrame:NextPoetryFrame];
                              }
                              
                          }
                          completion:^(BOOL finished) {
-                             
-                             [TheOtherView removeFromSuperview];
+                           
+                             _HeadAndTailFlag = NO;
+                             [_HeadAndTailLab setHidden:YES];
                              
                          }];
+        
+    } else {
+        
+        NSLog(@"HERE");
+        if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
+            
+            [UIView animateWithDuration:0.2
+                             animations:^{
+                                 
+                                 if (_SlideDirection == SlideLabelLeftToRigth) {
+                                     
+                                     // PREV
+                                     [CurrentView setFrame:NextPoetryFrame];
+                                     
+                                 } else {
+                                     
+                                     // NEXT
+                                     [TheOtherView setFrame:DefaultFrame];
+                                 }
+                                 
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                                 if (_CrossCategoryFlag) {
+                                     
+                                     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:_TempPoetryList];
+                                     _CrossCategoryFlag = NO;
+                                     
+                                     if (_SlideDirection == SlideLabelLeftToRigth) {
+                                         
+                                         _CurrentIndex = [_NowReadingCategoryArray count] - 1;
+                                         
+                                     } else {
+                                         
+                                         _CurrentIndex = 0;
+                                         
+                                     }
+                                     
+                                 } else {
+                                     
+                                     if (_SlideDirection == SlideLabelLeftToRigth) {
+                                         
+                                         // PREV
+                                         _CurrentIndex--;
+                                         [CurrentView removeFromSuperview];
+                                         
+                                     } else {
+                                         
+                                         // NEXT
+                                         _CurrentIndex++;
+                                         [CurrentView removeFromSuperview];
+                                         
+                                     }
+                                     
+                                 }
+                                 
+                                 
+                                 NSLog(@"_CurrentIndex = %d", _CurrentIndex);
+                                 _PoetryNowReading = _NewPoetryDic;
+                                 self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 [self SwitchCurrentView];
+                                 
+                             }];
+        } else {
+            
+            [UIView animateWithDuration:0.2
+                             animations:^{
+                                 
+                                 if (_SlideDirection == SlideLabelLeftToRigth) {
+                                     
+                                     // PREV
+                                     [CurrentView setFrame:DefaultFrame];
+                                     
+                                 } else {
+                                     
+                                     // NEXT
+                                     [TheOtherView setFrame:NextPoetryFrame];
+                                 }
+                                 
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                                 [TheOtherView removeFromSuperview];
+                                 
+                             }];
+        }
     }
+    
+    
+    _ViewMovementState = None;
+
 }
 
 
