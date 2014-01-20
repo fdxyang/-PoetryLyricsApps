@@ -105,8 +105,11 @@
     _HeadAndTailLab = [[UILabel alloc] init];
     [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
     
-    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+    
+    _LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
+    
     _FontThemeColor = [[UIColor alloc] init];
 }
 
