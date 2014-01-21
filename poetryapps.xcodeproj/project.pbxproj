@@ -30,6 +30,7 @@
 		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
+		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		1060F921187FFE1F004AE154 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F911187FFE1F004AE154 /* Icon-60.png */; };
 		1060F922187FFE1F004AE154 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F912187FFE1F004AE154 /* Icon-60@2x.png */; };
 		1060F923187FFE1F004AE154 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F913187FFE1F004AE154 /* Icon-72.png */; };
@@ -876,6 +877,8 @@
 		1044995A184DA5EF00C58526 /* ThemeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSetting.h; sourceTree = "<group>"; };
 		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
 		10455199187AAB1900DECB38 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
+		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
 		1060F911187FFE1F004AE154 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		1060F912187FFE1F004AE154 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		1060F913187FFE1F004AE154 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -1861,6 +1864,8 @@
 				10C4B2B7187506F30074B8E3 /* General.h */,
 				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
+				105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */,
+				105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -3640,6 +3645,7 @@
 				CB26ADF7184C3CC400091BF1 /* Responsepicker.m in Sources */,
 				10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */,
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
+				105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
 				CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */,
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,

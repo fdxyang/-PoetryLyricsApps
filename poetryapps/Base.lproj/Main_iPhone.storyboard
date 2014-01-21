@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="1049" y="-34"/>
         </scene>
-        <!--Tab Bar Controller - GOTO-->
+        <!--Poetry Tab Bar Controller - GOTO-->
         <scene sceneID="EF1-TU-lpR">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabView" title="GOTO" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKE-jU-Z4D" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabView" title="GOTO" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKE-jU-Z4D" customClass="PoetryTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="EOk-b3-DBw">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -357,9 +357,9 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="gotobtn1.png" width="93" height="50"/>
-        <image name="gotobtn2.png" width="94" height="50"/>
-        <image name="gotobtn3.png" width="93" height="50"/>
+        <image name="gotobtn1.png" width="93" height="30"/>
+        <image name="gotobtn2.png" width="94" height="30"/>
+        <image name="gotobtn3.png" width="93" height="30"/>
         <image name="gotobtnselected.png" width="280" height="50"/>
         <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>

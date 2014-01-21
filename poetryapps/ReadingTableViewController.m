@@ -25,7 +25,7 @@
 
 #define UI_SMALL_FONT_SIZE_THRESHOLD         14
 #define UI_MEDIUM_FONT_SIZE_THRESHOLD        12
-#define UI_LARGE_FONT_SIZE_THRESHOLD         10
+#define UI_LARGE_FONT_SIZE_THRESHOLD         9
 
 #define UI_BOLD_SMALL_FONT_SIZE_THRESHOLD    11
 #define UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD   10
@@ -107,9 +107,8 @@
     
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
-    
     _LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
-    
+    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     _FontThemeColor = [[UIColor alloc] init];
 }
 
@@ -135,7 +134,7 @@
         _FontThemeColor = [UIColor whiteColor];
 
     }
-
+    
     
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
@@ -151,6 +150,20 @@
     [self.view addSubview:_TableView1];
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
+    
+    // 2014.01.21 [CASPER] color setting
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:1]];
+    
+    [self.tabBarController.tabBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                         green:(159/255.0f)
+                                                                          blue:(191/255.0f)
+                                                                         alpha:1]];
+
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -187,6 +200,10 @@
 }
 
 #pragma mark - Table view data source
+//
+// Calculating line number for each cell in table view
+// accroding to the threshold for every kind of font size
+//
 - (NSInteger) CalculateLineNumberWithContentString : (NSString *) ContentStr
 {
     NSInteger   LineNumber = 1;
@@ -825,521 +842,4 @@
 
 }
 
-
-
-#if 0
--(void) HandleGestureWith:(UIPanGestureRecognizer *)recognizer andHandledView : (UIView *) View
-{
-    CGPoint location = [recognizer locationInView:self.view];
-    
-    switch (recognizer.state) {
-        case UIGestureRecognizerStateBegan:
-            _TouchInit = location;
-            break;
-            
-        case UIGestureRecognizerStateChanged:
-            
-            //READING_VIEW_LOG(@"MOVE --- %d" , abs(location.x - _TouchInit.x));
-            
-            if ((location.x - _TouchInit.x) > 0) {
-                
-                if ( _SlideDirection != SlideLabelLeftToRigth ) {
-                    
-                    // Need to reinit new view and data
-                    if (_CurrentView == VIEW1) {
-                        [_TableView1 setFrame:CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height)];
-                    } else {
-                        [_TableView2 setFrame:CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height)];
-                    }
-                    
-                    _GetSlideInLabel = NO;
-                    _DataFlag = NO;
-                    _HeadAndTailFlag = NO;
-                    
-                }
-                
-                _SlideDirection = SlideLabelLeftToRigth;
-                
-                if (!_GetSlideInLabel) {
-                    
-                    READING_VIEW_LOG(@"Drag to right, use the previous poetry");
-                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
-                    // Set Lable on the left of the screen and config it
-                    
-                    if (!_DataFlag) {
-                        
-                        if (_CurrentIndex == 0) {
-                            
-                            // This is the first poetry in this category
-                            // Check the Category
-                            NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
-                            
-                            if (GUARD_READING != (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                
-                                // To get the previous category list as temp.
-                                if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                    
-                                    READING_VIEW_LOG(@"Get Guard Reading list");
-                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
-                                    
-                                } else if (RESPONSIVE_PRAYER == (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                    
-                                    READING_VIEW_LOG(@"Get Poetry list");
-                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
-                                    
-                                } else {
-                                    
-                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
-                                    
-                                }
-                                
-                                if (TempPoetryList != nil) {
-                                    
-                                    _CrossCategoryFlag = YES;
-                                    _NewDataDic = [TempPoetryList lastObject];
-                                    READING_VIEW_LOG(@"Get Poetry at cross category");
-                                }
-                                
-                            } else {
-                                
-                                
-                                // Generate empty view to notify user
-                                
-                                
-                                READING_VIEW_LOG(@"NO DATA");
-                                [self.view insertSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection] atIndex:0];
-                                _HeadAndTailFlag = YES;
-                                _NewDataDic = nil;
-                                
-                            }
-                            
-                            
-                            
-                        } else {
-                            
-                            // To get the previous poetry of this category
-                            _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex - 1)];
-                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex - 1);
-                            // Height of view will be set inside the method
-                        }
-                        
-                        if (_NewDataDic) {
-                            
-                            View.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, 0);
-                            View = [self DisplayHandlingWithData:_NewDataDic onView:View];
-                            //READING_VIEW_LOG(@"View Generate = %@", View);
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                
-                                // Font color = Black, Background = White
-                                View.ContentTextLabel.textColor = [UIColor blackColor];
-                                [View setBackgroundColor:_LightBackgroundColor];
-                                //[self.view setBackgroundColor:[UIColor whiteColor]];
-                                
-                            } else {
-                                
-                                // Font color = Black, Background = White
-                                View.ContentTextLabel.textColor = [UIColor whiteColor];
-                                [View setBackgroundColor:_DarkBackgroundColor];
-                                //[self.view setBackgroundColor:[UIColor blackColor]];
-                                
-                            }
-                            
-                            //[_Scroller addSubview:View];
-                            
-                            if (_CurrentView == VIEW1) {
-                                
-                                READING_VIEW_LOG(@"Add view below readingview1");
-                                if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                    [_ReadingView1 setBackgroundColor:_LightBackgroundColor];
-                                } else {
-                                    [_ReadingView1 setBackgroundColor:_DarkBackgroundColor];
-                                }
-                                
-                                [self.view insertSubview:View belowSubview:_ReadingView1];
-                                
-                            } else {
-                                
-                                if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                    [_ReadingView2 setBackgroundColor:_LightBackgroundColor];
-                                } else {
-                                    [_ReadingView2 setBackgroundColor:_DarkBackgroundColor];
-                                }
-                                
-                                [self.view insertSubview:View belowSubview:_ReadingView2];
-                            }
-                            
-                            
-                        }
-                        
-                        _DataFlag = YES;
-                        _GetSlideInLabel = YES;
-                        
-                    }
-                } else {
-                    
-                    if (_DataFlag) {
-                        
-                        // Move the view above following gesture
-                        // View.frame = CGRectMake((UI_DEFAULT_PREVIOUS_ORIGIN_X + abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                        if (_CurrentView == VIEW1) {
-                            
-                            _ReadingView1.frame = CGRectMake((0 + abs(location.x - _TouchInit.x)), 0, View.frame.size.width, View.frame.size.height);
-                            
-                        } else {
-                            
-                            _ReadingView2.frame = CGRectMake((0 + abs(location.x - _TouchInit.x)), 0, View.frame.size.width, View.frame.size.height);
-                        }
-                        
-                    }
-                    
-                }
-                
-            } else if ((location.x - _TouchInit.x) < 0) {
-                
-                if ( _SlideDirection != SlideLabelRightToLegt ) {
-                    
-                    
-                    // Need to reinit new view and data
-                    _GetSlideInLabel = NO;
-                    _DataFlag = NO;
-                    _HeadAndTailFlag = NO;
-                    
-                }
-                
-                _SlideDirection = SlideLabelRightToLegt;
-                
-                if (!_GetSlideInLabel) {
-                    
-                    READING_VIEW_LOG(@"Drag to left, use the next poetry");
-                    // Get the previous data and save into temp _NewDataDic for once (check DataFlag)
-                    // Set Lable on the left of the screen and config it
-                    
-                    if (!_DataFlag) {
-                        
-                        if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
-                            
-                            // Check the Category
-                            NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
-                            if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                // To get the previous category list as temp.
-                                
-                                if (GUARD_READING == (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                    
-                                    READING_VIEW_LOG(@"Get Petry Reading list");
-                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
-                                    
-                                } else if (POETRYS == (POETRY_CATEGORY)[CategoryNum integerValue]) {
-                                    
-                                    READING_VIEW_LOG(@"Get Responsive list");
-                                    TempPoetryList = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
-                                    
-                                } else {
-                                    READING_VIEW_ERROR_LOG(@"Reading view has some error, plz check");
-                                }
-                                
-                                if (TempPoetryList != nil) {
-                                    
-                                    _CrossCategoryFlag = YES;
-                                    _NewDataDic = [TempPoetryList firstObject];
-                                    READING_VIEW_LOG(@"Get Poetry at cross category");
-                                    
-                                }
-                                
-                                
-                            } else {
-                                
-                                // Generate empty view to notify user
-                                [self.view addSubview:[self PlaceEmptyViewForSlideDirection:_SlideDirection]];
-                                READING_VIEW_LOG(@"NO DATA");
-                                _HeadAndTailFlag = YES;
-                                _NewDataDic = nil;
-                            }
-                            
-                        } else {
-                            
-                            _NewDataDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
-                            READING_VIEW_LOG(@"_NewDataDic index = %d", _CurrentIndex + 1);
-                        }
-                        
-                        
-                        if (_NewDataDic) {
-                            
-                            // Height of view will be set inside the method
-                            View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, UI_SCREEN_WIDTH, 0);
-                            View = [self DisplayHandlingWithData:_NewDataDic onView:View];
-                            //READING_VIEW_LOG(@"View Generate = %@", View);
-                            
-                            
-                            if (_DisplayTheme == THEME_LIGHT_DARK) {
-                                
-                                // Font color = Black, Background = White
-                                View.ContentTextLabel.textColor = [UIColor blackColor];
-                                [View setBackgroundColor:_LightBackgroundColor];
-                                //[self.view setBackgroundColor:[UIColor whiteColor]];
-                                
-                            } else {
-                                
-                                // Font color = Black, Background = White
-                                View.ContentTextLabel.textColor = [UIColor whiteColor];
-                                [View setBackgroundColor:_DarkBackgroundColor];
-                                //[self.view setBackgroundColor:[UIColor blackColor]];
-                                
-                            }
-                            
-                            [self.view addSubview:View];
-                            //[_Scroller addSubview:View];
-                            
-                        }
-                        
-                        
-                        _DataFlag = YES;
-                        _GetSlideInLabel = YES;
-                        
-                    }
-                } else {
-                    
-                    if (_DataFlag) {
-                        
-                        if (_HeadAndTailFlag) {
-                            
-                            _EmptyReadingView.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), _EmptyReadingView.frame.origin.y, _EmptyReadingView.frame.size.width, _EmptyReadingView.frame.size.height);
-                            
-                        } else {
-                            
-                            // Move the label follow gesture
-                            View.frame = CGRectMake((UI_DEFAULT_NEXT_ORIGIN_X - abs(location.x - _TouchInit.x)), View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                            
-                        }
-                        
-                        
-                    }
-                }
-            } else {
-                READING_VIEW_ERROR_LOG(@"(location.x - _TouchInit.x) !!!!!?");
-            }
-            break;
-            
-        case UIGestureRecognizerStateEnded:
-            if (_DataFlag) {
-                
-                if (_HeadAndTailFlag) {
-                    
-                    // View transtion not complete
-                    READING_VIEW_LOG(@"Head and tail flag!!!");
-                    [UIView animateWithDuration:0.2
-                                     animations:^{
-                                         if (_SlideDirection == SlideLabelLeftToRigth) {
-                                             
-                                             if (_CurrentView == VIEW1) {
-                                                 
-                                                 _ReadingView1.frame = CGRectMake(0, 0, _ReadingView1.frame.size.width, _ReadingView1.frame.size.height);
-                                                 
-                                             } else {
-                                                 
-                                                 _ReadingView2.frame = CGRectMake(0, 0, _ReadingView2.frame.size.width, _ReadingView2.frame.size.height);
-                                             }
-                                             
-                                             //View.frame = CGRectMake(0, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                                             
-                                         } else {
-                                             
-                                             View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                                         }
-                                         
-                                         
-                                     }
-                                     completion:^(BOOL finished){
-                                         
-                                         _GetSlideInLabel = NO;
-                                         _DataFlag = NO;
-                                         _CrossCategoryFlag = NO;
-                                         _HeadAndTailFlag = NO;
-                                         
-                                         [_EmptyReadingView removeFromSuperview];
-                                         
-                                     }];
-                    
-                } else {
-                    
-                    if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
-                        
-                        if (_SlideDirection == SlideLabelLeftToRigth) {
-                            if ((location.x - _TouchInit.x) > 0) {
-                                // Confirm to change view
-                                _ConfirmToSwitch = YES;
-                                
-                            } else {
-                                // Failed to change view
-                                _ConfirmToSwitch = NO;
-                                
-                            }
-                            
-                        } else {
-                            if ((location.x - _TouchInit.x) < 0) {
-                                // Confirm to change view
-                                _ConfirmToSwitch = YES;
-                            } else {
-                                // Failed to change view
-                                _ConfirmToSwitch = NO;
-                                
-                            }
-                            
-                        }
-                        
-                        if (_ConfirmToSwitch) {
-                            
-                            READING_VIEW_LOG(@"_ConfirmToSwitch !!!! ");
-                            // View transtion complete
-                            [UIView animateWithDuration:0.2
-                                             animations:^{
-                                                 
-                                                 if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                     
-                                                     // Move view out of the screen
-                                                     if (_CurrentView == VIEW1) {
-                                                         
-                                                         _ReadingView1.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
-                                                         
-                                                     } else {
-                                                         
-                                                         _ReadingView2.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, 0, View.frame.size.width, View.frame.size.height);
-                                                     }
-                                                     
-                                                 } else {
-                                                     
-                                                     
-                                                     // Set Label in the normal location
-                                                     View.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
-                                                     
-                                                     
-                                                 }
-                                                 
-                                             }
-                                             completion:^(BOOL finished) {
-                                                 
-                                                 if (_CrossCategoryFlag) {
-                                                     
-                                                     //[_NowReadingCategoryArray removeAllObjects];
-                                                     
-                                                     READING_VIEW_LOG(@"!!!!!!!! ASSIGN TempPoetryList to _NowReadingCategoryArray");
-                                                     _NowReadingCategoryArray = [NSMutableArray arrayWithArray:TempPoetryList];
-                                                     _CrossCategoryFlag = NO;
-                                                     
-                                                     if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                         _CurrentIndex = [_NowReadingCategoryArray count] - 1;
-                                                     } else {
-                                                         _CurrentIndex = 0;
-                                                     }
-                                                     
-                                                     
-                                                 } else {
-                                                     
-                                                     if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                         _CurrentIndex--;
-                                                     } else {
-                                                         _CurrentIndex++;
-                                                     }
-                                                     
-                                                 }
-                                                 
-                                                 if (_CurrentView == VIEW1) {
-                                                     
-                                                     READING_VIEW_LOG(@"move done remove label 1");
-                                                     
-                                                     [_ReadingView1 removeFromSuperview];
-                                                     //[View setBackgroundColor:[UIColor clearColor]];
-                                                     
-                                                     _CurrentView = VIEW2;
-                                                     _PoetryNowReading = _NewDataDic;
-                                                     
-                                                     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                     //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                                     
-                                                     _DataFlag = NO;
-                                                     _GetSlideInLabel = NO;
-                                                     
-                                                 } else {
-                                                     
-                                                     READING_VIEW_LOG(@"move done remove label 2");
-                                                     [_ReadingView2 removeFromSuperview];
-                                                     //[View setBackgroundColor:[UIColor clearColor]];
-                                                     
-                                                     _CurrentView = VIEW1;
-                                                     _PoetryNowReading = _NewDataDic;
-                                                     
-                                                     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                                     //[_Scroller scrollRectToVisible:CGRectMake(0, 0, 1, 1)  animated:YES];
-                                                     _DataFlag = NO;
-                                                     _GetSlideInLabel = NO;
-                                                     _ConfirmToSwitch = NO;
-                                                 }
-                                                 [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
-                                                 
-                                             }];
-                        } else {
-                            
-                            _GetSlideInLabel = NO;
-                            _DataFlag = NO;
-                            _CrossCategoryFlag = NO;
-                            _HeadAndTailFlag = NO;
-                            _ConfirmToSwitch = NO;
-                            
-                        }
-                        
-                        
-                    } else {
-                        
-                        // View transtion not complete
-                        READING_VIEW_LOG(@"back to out of screen!!!");
-                        [UIView animateWithDuration:0.2
-                                         animations:^{
-                                             if (_SlideDirection == SlideLabelLeftToRigth) {
-                                                 
-                                                 if (_CurrentView == VIEW1) {
-                                                     
-                                                     _ReadingView1.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
-                                                     
-                                                 } else {
-                                                     
-                                                     _ReadingView2.frame = CGRectMake(0, 0, View.frame.size.width, View.frame.size.height);
-                                                 }
-                                                 
-                                                 //View.frame = CGRectMake(0, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                                                 
-                                             } else {
-                                                 
-                                                 View.frame = CGRectMake(UI_DEFAULT_NEXT_ORIGIN_X, View.frame.origin.y, View.frame.size.width, View.frame.size.height);
-                                             }
-                                             
-                                             
-                                         }
-                                         completion:^(BOOL finished){
-                                             
-                                             _GetSlideInLabel = NO;
-                                             _DataFlag = NO;
-                                             _CrossCategoryFlag = NO;
-                                             _HeadAndTailFlag = NO;
-                                             _ConfirmToSwitch = NO;
-                                             
-                                             
-                                         }];
-                        
-                    }
-                }
-            }
-            break;
-        case UIGestureRecognizerStateCancelled:
-        {
-            READING_VIEW_LOG(@"!!!!UIGestureRecognizerStateCancelled");
-        }
-            
-            
-        default:
-            break;
-    }
-    return View;
-}
-
-#endif
 @end

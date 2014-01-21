@@ -144,6 +144,13 @@
 @property (nonatomic, strong)   UITableView             *TocTableView;
 @property (nonatomic, strong)   iPadNavTableHeader      *NavigationHeader;
 
+// 2014.01.20 [CASPER] Change reading view to table view
+@property (strong, nonatomic)   UITableView                 *TableView1;
+@property (strong, nonatomic)   UITableView                 *TableView2;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray1;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray2;
+// 2014.01.20 [CASPER] Change reading view to table view == 
+
 typedef enum {
     VIEW1 = 0x00,
     VIEW2,
