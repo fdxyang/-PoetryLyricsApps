@@ -53,6 +53,8 @@
     UIColor                 *_LightBackgroundColor;
     UIColor                 *_DarkBackgroundColor;
     UIColor                 *_FontThemeColor;
+    
+    UILabel                 *_NavigationTitleLab;
 }
 
 @end
@@ -105,9 +107,11 @@
     _HeadAndTailLab = [[UILabel alloc] init];
     [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
     
+    
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
-    _LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
+    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     _FontThemeColor = [[UIColor alloc] init];
 }
@@ -157,13 +161,6 @@
                                                                                      blue:(191/255.0f)
                                                                                     alpha:1]];
     
-    [self.tabBarController.tabBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
-                                                                         green:(159/255.0f)
-                                                                          blue:(191/255.0f)
-                                                                         alpha:1]];
-
-    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
-
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -194,9 +191,24 @@
     }
     
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
+    
+    
+    _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+    _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
 
+//    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    self.navigationItem.titleView = _NavigationTitleLab;
+    CGSize Size = CGSizeMake(280, 200);
+    Size = [_NavigationTitleLab sizeThatFits:Size];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    
 }
 
 #pragma mark - Table view data source
@@ -809,6 +821,7 @@
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
                                  self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                  [self SwitchCurrentView];
                                  
                              }];

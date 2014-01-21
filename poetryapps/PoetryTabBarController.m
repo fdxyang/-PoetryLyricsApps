@@ -39,6 +39,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    
+    
+//    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor yellowColor]];
+    //[self.tabBarController.tabBar set:[UIColor yellowColor]];
+
     [self assignTabColors];
 }
 
@@ -46,7 +52,8 @@
 - (void)assignTabColors
 {
     NSLog(@"assignTabColors");
-    self.tabBar.tintColor = [UIColor redColor];
+    self.tabBar.tintColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f)alpha:1];
+    //self.tabBar.barTintColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f)alpha:1];
     
 }
 
