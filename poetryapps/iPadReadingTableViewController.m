@@ -1,41 +1,14 @@
 //
-//  ReadingTableViewController.m
+//  iPadReadingTableViewController.m
 //  poetryapps
 //
-//  Created by GIGIGUN on 2014/1/13.
+//  Created by GIGIGUN on 2014/1/21.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
 
-#import "ReadingTableViewController.h"
-#import "PoetryCoreData.h"
-#import "PoetrySettingCoreData.h"
+#import "iPadReadingTableViewController.h"
 
-#define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-#define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-
-#define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
-                                                                        UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-
-#define UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH        CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
-                                                                        UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-
-#define UI_SMALL_FONT_SIZE_THRESHOLD         14
-#define UI_MEDIUM_FONT_SIZE_THRESHOLD        12
-#define UI_LARGE_FONT_SIZE_THRESHOLD         9
-
-#define UI_BOLD_SMALL_FONT_SIZE_THRESHOLD    11
-#define UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD   10
-#define UI_BOLD_LARGE_FONT_SIZE_THRESHOLD    8
-
-#define UI_BOLD_FONT_BIAS                    5
-#define SWITCH_VIEW_THRESHOLD                40
-
-@interface ReadingTableViewController () {
-    
+@interface iPadReadingTableViewController () {
     UInt16                  _CurrentIndex;
     UIFont                  *_Font;
     UIFont                  *_BoldFont;
@@ -49,7 +22,7 @@
     CGPoint                 _TouchInit;
     BOOL                    _CrossCategoryFlag;
     BOOL                    _HeadAndTailFlag;
-
+    
     UIColor                 *_LightBackgroundColor;
     UIColor                 *_DarkBackgroundColor;
     UIColor                 *_FontThemeColor;
@@ -59,7 +32,7 @@
 
 @end
 
-@implementation ReadingTableViewController
+@implementation iPadReadingTableViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,12 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect Frame;
-    if (IS_IPHONE5) {
-        Frame = UI_READING_TABLEVIEW_INIT_RECT_4_INCH;
-    } else {
-        Frame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
-    }
+    CGRect Frame  = UI_READING_TABLEVIEW_INIT_IPAD;
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handlePanFrom:)];
@@ -89,8 +57,8 @@
     
     _TableView1 = [[UITableView alloc]  initWithFrame:Frame];
     _TableView2 = [[UITableView alloc]  initWithFrame:Frame];
-    _TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //_TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //_TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_TableView1 setTag:1];
     [_TableView2 setTag:2];
     _TableView1.delegate = self;
@@ -119,6 +87,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -136,7 +105,7 @@
         [_TableView1 setBackgroundColor:_DarkBackgroundColor];
         [_TableView2 setBackgroundColor:_DarkBackgroundColor];
         _FontThemeColor = [UIColor whiteColor];
-
+        
     }
     
     
@@ -145,15 +114,11 @@
     [_CellHeightArray removeAllObjects];
     [_TableView1 setScrollsToTop:YES];
     [self GetNowReadingData];
-    if (IS_IPHONE5) {
-        [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_4_INCH];
-    } else {
-        [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH];
-    }
+    [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_IPAD];
     [_TableView1 reloadData];
     [self.view addSubview:_TableView1];
-    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
-    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
+    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + 15];
+    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 15 + UI_BOLD_FONT_BIAS];
     
     // 2014.01.21 [CASPER] color setting
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
@@ -169,7 +134,7 @@
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
-
+    
 }
 
 -(void) GetNowReadingData
@@ -195,7 +160,7 @@
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
-                                [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
+                           [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
     
     
     _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -204,8 +169,8 @@
     _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
     _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
     _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
-
-//    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    
+    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
     self.navigationItem.titleView = _NavigationTitleLab;
     CGSize Size = CGSizeMake(280, 200);
     Size = [_NavigationTitleLab sizeThatFits:Size];
@@ -214,6 +179,7 @@
 }
 
 #pragma mark - Table view data source
+/*
 //
 // Calculating line number for each cell in table view
 // accroding to the threshold for every kind of font size
@@ -247,7 +213,7 @@
                 if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
                     
-
+                    
                 }
                 break;
                 
@@ -260,7 +226,7 @@
             default:
                 break;
         }
-
+        
     } else {
         
         switch (_PoetrySetting.SettingFontSize) {
@@ -276,7 +242,7 @@
                 if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
                     
-                   
+                    
                 }
                 break;
                 
@@ -290,11 +256,11 @@
             default:
                 break;
         }
-
+        
     }
     return LineNumber;
 }
-
+*/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 1) {
@@ -322,16 +288,16 @@
     
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     if (tableView.tag == 1) {
         
         ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
-
+        
         if ([ContentStr hasPrefix:@"@@"]) {
-
+            
             ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
             cell.textLabel.font = _BoldFont;
-
+            
         } else {
             
             cell.textLabel.font = _Font;
@@ -341,10 +307,11 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
         cell.textLabel.textColor = _FontThemeColor;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
         
     } else {
         
-       ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
+        ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
         
         if ([ContentStr hasPrefix:@"@@"]) {
             
@@ -360,6 +327,7 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
         cell.textLabel.textColor = _FontThemeColor;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
     return cell;
@@ -367,7 +335,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat     Height = 0;
+    CGFloat     Height = 60;
+    // TODO: [CASPER] calculate line number is not neccesary in iPad version
+    /*
     NSString    *ContentStr;
     NSString    *Keyword = @"@@";
     UInt16      LineNumber;
@@ -381,7 +351,7 @@
     LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
     
     if ([ContentStr hasPrefix:Keyword]) {
-
+        
         Height = (_PoetrySetting.SettingFontSize + 20) * LineNumber;
         if (LineNumber > 1) {
             Height = Height - 10;
@@ -394,7 +364,7 @@
         }
         
     }
-    
+    */
     return Height;
 }
 
@@ -416,7 +386,7 @@
     if (NewPoetry != nil) {
         ContentStr = [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
     } else {
-
+        
     }
     
     
@@ -426,7 +396,7 @@
         _ReadingTableArray2 = [NSMutableArray arrayWithArray:
                                [ContentStr componentsSeparatedByString:@"\n"]];
         [_TableView2 reloadData];
-
+        
     } else {
         
         [_ReadingTableArray1 removeAllObjects];
@@ -434,7 +404,7 @@
                                [ContentStr componentsSeparatedByString:@"\n"]];
         [_TableView1 reloadData];
     }
-   
+    
 }
 
 -(void) GetNewPoetryByGestureDirection
@@ -443,7 +413,7 @@
     if (_SlideDirection == SlideLabelLeftToRigth) {
         // PREV
         NSLog(@"GetNewPoetryByGestureDirection - PREV");
-
+        
         if (_CurrentIndex == 0) {
             
             // This is the first poetry in this category
@@ -498,11 +468,11 @@
         
         // NEXT
         NSLog(@"GetNewPoetryByGestureDirection - NEXT");
-
+        
         if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
             
             [_TempPoetryList removeAllObjects];
-
+            
             // Check the Category
             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
             if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
@@ -545,7 +515,7 @@
             _NewPoetryDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
             NSLog(@"_NewDataDic index = %d", _CurrentIndex + 1);
         }
-
+        
     }
     
     if (!_HeadAndTailFlag) {
@@ -570,7 +540,7 @@
         [self HandleGestureByUsing:recognizer OnCurrentView:_TableView2 andTheOtherView:_TableView1];
         
     }
-
+    
 }
 
 -(void) HandleGestureByUsing : (UIPanGestureRecognizer *)recognizer
@@ -597,7 +567,7 @@
         default:
             break;
     }
-
+    
 }
 
 -(void) HandleGestureChangeStateWith : (CGPoint) location
@@ -608,25 +578,20 @@
     CGRect DefaultFrame;
     CGRect NextPoetryFrame;
     
-    if (IS_IPHONE5) {
-        DefaultFrame = UI_READING_TABLEVIEW_INIT_RECT_4_INCH;
-        NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH;
-    } else {
-        DefaultFrame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
-        NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
-    }
+    DefaultFrame = UI_READING_TABLEVIEW_INIT_IPAD;
+    NextPoetryFrame = UI_READING_TABLEVIEW_NEXT_IPAD;
     
     switch (_ViewMovementState) {
             
         case DirectionJudgement:
-
+            
             if ((location.x - _TouchInit.x) > 0) {
                 
                 // PREV
                 [TheOtherView setFrame:DefaultFrame];
                 [TheOtherView setScrollsToTop:YES];
                 _SlideDirection = SlideLabelLeftToRigth;
-
+                
                 [self GetNewPoetryByGestureDirection];
                 
                 if (_HeadAndTailFlag) {
@@ -647,7 +612,7 @@
                 // NEXT
                 [CurrentView setFrame:DefaultFrame];
                 _SlideDirection = SlideLabelRightToLegt;
-
+                
                 [self GetNewPoetryByGestureDirection];
                 
                 if (_HeadAndTailFlag) {
@@ -661,17 +626,17 @@
                     
                     [TheOtherView setFrame:NextPoetryFrame];
                     [TheOtherView setScrollsToTop:YES];
-
+                    
                     [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                     
                 }
                 
             }
-
+            
             _ViewMovementState = ViewMoving;
             
             break;
-        
+            
         case ViewMoving:
             
             if ((location.x - _TouchInit.x) > 0) {
@@ -688,7 +653,7 @@
                                                  DefaultFrame.origin.y,
                                                  CGRectGetWidth(DefaultFrame),
                                                  CGRectGetHeight(DefaultFrame))];
-
+                
             } else {
                 
                 // NEXT
@@ -712,7 +677,7 @@
                                                       NextPoetryFrame.origin.y,
                                                       CGRectGetWidth(NextPoetryFrame),
                                                       CGRectGetHeight(NextPoetryFrame))];
-
+                    
                 }
                 
             }
@@ -721,25 +686,20 @@
         default:
             break;
     }
-
+    
 }
 
 
 -(void) HandleGestureEndStateWith : (CGPoint) location
-                       OnCurrentView : (UITableView*) CurrentView
-                     andTheOtherView : (UITableView*) TheOtherView
+                    OnCurrentView : (UITableView*) CurrentView
+                  andTheOtherView : (UITableView*) TheOtherView
 {
     CGRect DefaultFrame;
     CGRect NextPoetryFrame;
     
-    if (IS_IPHONE5) {
-        DefaultFrame = UI_READING_TABLEVIEW_INIT_RECT_4_INCH;
-        NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH;
-    } else {
-        DefaultFrame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
-        NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
-    }
-
+    DefaultFrame = UI_READING_TABLEVIEW_INIT_IPAD;
+    NextPoetryFrame = UI_READING_TABLEVIEW_NEXT_IPAD;
+    
     if (_HeadAndTailFlag) {
         
         [UIView animateWithDuration:0.2
@@ -758,7 +718,7 @@
                              
                          }
                          completion:^(BOOL finished) {
-                           
+                             
                              _HeadAndTailFlag = NO;
                              [_HeadAndTailLab setHidden:YES];
                              
@@ -854,7 +814,7 @@
     
     
     _ViewMovementState = None;
-
+    
 }
 
 @end

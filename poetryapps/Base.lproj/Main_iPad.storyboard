@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-1047" y="-181"/>
         </scene>
-        <!--I Pad Poetry View Controller-->
+        <!--I Pad Reading Table View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="iPadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="iPadPoetryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="iPadReadingTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dqc-kP-m2f"/>
                         <viewControllerLayoutGuide type="bottom" id="PEt-EX-QVQ"/>

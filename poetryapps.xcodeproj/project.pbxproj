@@ -32,6 +32,7 @@
 		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
 		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		105C43BC188E7421002BAF6B /* BG-GreyNote_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */; };
+		105C43C2188E7A00002BAF6B /* iPadReadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43C1188E7A00002BAF6B /* iPadReadingTableViewController.m */; };
 		1060F921187FFE1F004AE154 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F911187FFE1F004AE154 /* Icon-60.png */; };
 		1060F922187FFE1F004AE154 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F912187FFE1F004AE154 /* Icon-60@2x.png */; };
 		1060F923187FFE1F004AE154 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F913187FFE1F004AE154 /* Icon-72.png */; };
@@ -881,6 +882,8 @@
 		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
 		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
 		105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BG-GreyNote_paper.png"; sourceTree = "<group>"; };
+		105C43C0188E7A00002BAF6B /* iPadReadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadReadingTableViewController.h; sourceTree = "<group>"; };
+		105C43C1188E7A00002BAF6B /* iPadReadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadReadingTableViewController.m; sourceTree = "<group>"; };
 		1060F911187FFE1F004AE154 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		1060F912187FFE1F004AE154 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		1060F913187FFE1F004AE154 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -1790,6 +1793,8 @@
 				10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */,
 				10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */,
 				10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */,
+				105C43C0188E7A00002BAF6B /* iPadReadingTableViewController.h */,
+				105C43C1188E7A00002BAF6B /* iPadReadingTableViewController.m */,
 			);
 			name = iPadView;
 			sourceTree = "<group>";
@@ -3651,6 +3656,7 @@
 				CB25FD191843972D00F3D980 /* main.m in Sources */,
 				105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */,
 				CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */,
+				105C43C2188E7A00002BAF6B /* iPadReadingTableViewController.m in Sources */,
 				CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */,
 				CB26ADFA184C786A00091BF1 /* GotoTableViewController.m in Sources */,
 				CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */,
