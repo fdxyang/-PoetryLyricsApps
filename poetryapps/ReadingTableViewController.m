@@ -107,9 +107,8 @@
     
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
-    
     _LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
-    
+    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     _FontThemeColor = [[UIColor alloc] init];
 }
 
@@ -135,7 +134,7 @@
         _FontThemeColor = [UIColor whiteColor];
 
     }
-
+    
     
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
@@ -151,6 +150,20 @@
     [self.view addSubview:_TableView1];
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
+    
+    // 2014.01.21 [CASPER] color setting
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:1]];
+    
+    [self.tabBarController.tabBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                         green:(159/255.0f)
+                                                                          blue:(191/255.0f)
+                                                                         alpha:1]];
+
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor whiteColor]];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated
