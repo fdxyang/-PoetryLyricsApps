@@ -22,193 +22,143 @@
     
 }
 
--(NSString *)parsePoetryContent:(NSString *)input
+-(NSString *)parsePoetryContentBySymbol:(NSString *)input
 {
-    
     NSString *fileContents;
     NSMutableString *poetryParserContent = [[NSMutableString alloc]init];
-    int lineCount = 0;
-    NSUInteger tmpcount2=0,arrCount=0;
-    NSUInteger index = 0;
+    NSMutableString *templine = [[NSMutableString alloc]init];
+    NSUInteger wordcount=0;
+    NSUInteger index = 0,lineattrcount=0;
     fileContents = input;
     
-    for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]])
+    NSArray *lineArr = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    
+    for (NSString *line in lineArr)
     {
-        // Do something
-        //NSLog(@"line = %@",line);
-        //NSLog(@"%d:%@,line length = %ld",lineCount,line,[line length]);
-        
-        // separate "，" because "，" is so many
-        NSArray *strArray = [line componentsSeparatedByString:@"，"];
-        //NSLog(@"array = %@,length = %ld",strArray,[strArray count]);
-        arrCount = [strArray count];
-        
-        for(int i=0;i<arrCount;i++)
+        lineattrcount = lineattrcount+1;
+        if(![line length])
         {
-            tmpcount2 = [[strArray objectAtIndex:i] length];
-            
-            //NSLog(@"index = %ld,tmpcount2=%ld,i=%d,arrCount = %ld",index,tmpcount2,i,arrCount);
-            
-            if(tmpcount2 == 0)
+            [poetryParserContent appendString:@"\n"];
+        }
+        else
+        {
+            for(int i=0;i<[line length];i++)
             {
-                index=0;
-                [poetryParserContent appendString:@"\n"];
-                continue;
-            }
-            
-            // start + string length + "，"
-            index = index+tmpcount2+1;
-            //NSLog(@"index = %ld",index);
-            if(index < 10)
-            {
-                if([[strArray objectAtIndex:i] hasPrefix:@"1."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"2."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"3."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"4."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"5."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"6."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"7."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"8."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"9."] |
-                   [[strArray objectAtIndex:i] hasPrefix:@"【"] )
+                //NSLog(@"%@",[line substringWithRange:NSMakeRange(i,1)]);
+                
+                if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"："] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"。"] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"；"] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"，"] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"！"] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"、"])
                 {
+                    //NSLog(@"debug 1");
+                    //NSLog(@"kk index = %ld,wordcount=%ld",index,wordcount);
+                    
+                    if(wordcount+1 < 10 && (index+wordcount+1) < 10)
+                    {
+                        [poetryParserContent appendString:templine];
+                        [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
+                        
+                        if(index+wordcount+1 < 10)
+                        {
+                            index = index+wordcount+1;
+                        }
+                        else
+                        {
+                            NSLog(@"debug 1 Error!!");
+                        }
+                    }
+                    else // too long, must have another line
+                    {
+                        if(wordcount+1 > 10 && (index+wordcount+1) >= 10)
+                        {
+                            [poetryParserContent appendString:@"\n"];
+                            [poetryParserContent appendString:templine];
+                            [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
+                            [poetryParserContent appendString:@"\n"];
+                            [templine setString:@""];
+                            wordcount=0;
+                            index=0;
+                            continue;
+                        }
+                        else
+                        {
+                            index = wordcount+1;
+                        }
+                        
+                        [poetryParserContent appendString:@"\n"];
+                        [poetryParserContent appendString:templine];
+                        [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
+                    }
+                    
+                    [templine setString:@""];
+                    wordcount = 0;
+                }
+                else if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"."])
+                {
+                    [poetryParserContent appendString:templine];
+                    [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
                     [poetryParserContent appendString:@"\n"];
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
-                    [poetryParserContent appendString:@"\n"];
+                    [templine setString:@""];
+                    wordcount = 0;
                     index=0;
                 }
-                else if([[strArray objectAtIndex:i] hasSuffix:@"。" ]|
-                        [[strArray objectAtIndex:i] hasSuffix:@"！" ]|
-                        [[strArray objectAtIndex:i] hasSuffix:@"、" ]|
-                        [[strArray objectAtIndex:i] hasSuffix:@"；" ]|
-                        [[strArray objectAtIndex:i] hasSuffix:@"「" ]|
-                        [[strArray objectAtIndex:i] hasSuffix:@"」"] |
-                        [[strArray objectAtIndex:i] hasSuffix:@"】"] |
-                        [[strArray objectAtIndex:i] hasSuffix:@"）"] |
-                        [[strArray objectAtIndex:i] hasSuffix:@"："] )
+                else if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"	"])
                 {
-                    [poetryParserContent appendString:@"\n"];
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
+                    wordcount = 0;
+                    index=0;
+                    continue;
                 }
                 else
                 {
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
-                    [poetryParserContent appendString:@"，"];
-                    //NSLog(@"kk content test1 = %@",poetryParserContent);
-                }
-            }
-            else
-            {
-                index = [[strArray objectAtIndex:i] length]+1;
-                if([[strArray objectAtIndex:i] hasSuffix:@"。" ]|
-                   [[strArray objectAtIndex:i] hasSuffix:@"！" ]|
-                   [[strArray objectAtIndex:i] hasSuffix:@"、" ]|
-                   [[strArray objectAtIndex:i] hasSuffix:@"；" ]|
-                   [[strArray objectAtIndex:i] hasSuffix:@"「" ]|
-                   [[strArray objectAtIndex:i] hasSuffix:@"」"] |
-                   [[strArray objectAtIndex:i] hasSuffix:@"】"] |
-                   [[strArray objectAtIndex:i] hasSuffix:@"）"] |
-                   [[strArray objectAtIndex:i] hasSuffix:@"："] )
-                {
-                    //[poetryParserContent appendString:@"\n"];
-                    //poetryParserContent = [self parseLineContent:[strArray objectAtIndex:i] Result:poetryParserContent];
-                    //[poetryParserContent appendString:@"\n"];
-                    if([[strArray objectAtIndex:i] length] < 10)
-                        [poetryParserContent appendString:@"\n"];
+                    if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"1"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"2"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"3"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"4"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"5"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"6"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"7"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"8"]||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"9"])
+                    {
+                        if(lineattrcount != [lineArr count])
+                            [poetryParserContent appendString:@"\n"];
+                    }
                     
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
-                }
-                else if([[strArray objectAtIndex:i] hasPrefix:@"1."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"2."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"3."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"4."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"5."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"6."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"7."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"8."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"9."] |
-                        [[strArray objectAtIndex:i] hasPrefix:@"【"] )
-                {
-                    //[poetryParserContent appendString:@"\n"];
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
-                    [poetryParserContent appendString:@"\n"];
-                }
-                else
-                {
-                    if([[strArray objectAtIndex:i] length] < 10)
+                    [templine appendString:[line substringWithRange:NSMakeRange(i,1)]];
+                    
+                    wordcount = wordcount+1;
+                    
+                    if(wordcount >= 9)
+                    {
+                        if(index+wordcount >= 9)
+                        {
+                            [poetryParserContent appendString:@"\n"];
+                        }
+
+                        [poetryParserContent appendString:templine];
                         [poetryParserContent appendString:@"\n"];
-                    [poetryParserContent appendString:[strArray objectAtIndex:i]];
-                    [poetryParserContent appendString:@"，"];
+                        [templine setString:@""];
+                        wordcount=0;
+                        index=0;
+                    }
+                    else if(lineattrcount == [lineArr count] && i == ([line length]-1))
+                    {
+                        [poetryParserContent appendString:@"\n\n"];
+                        [poetryParserContent appendString:templine];
+                    }
                 }
                 
-                //NSLog(@"kk content test2 = %@",poetryParserContent);
-            }
-            //NSLog(@"i = %d,tempcount2 = %ld",i,tmpcount2);
-        }
-        NSLog(@"kk content test = %@",poetryParserContent);
-        lineCount++;
-    }
-    NSLog(@"content = %@",fileContents);
-    
-    return poetryParserContent;
-}
-
--(NSMutableString*)parseLineContent:(NSString*)input Result:(NSMutableString*)output
-{
-    NSArray *symbolatr = [[NSArray alloc]initWithObjects:@"！",@"。",@"、",@"；", nil];
-    NSMutableDictionary *symbolcount = [[NSMutableDictionary alloc]init];
-    NSUInteger target=0,targetIndex=0;
-    
-    NSString *str;
-    for(int i=0; i<[symbolatr count];i++)
-    {
-        NSArray *strArray = [input componentsSeparatedByString:[symbolatr objectAtIndex:i]];
-        str = [NSString stringWithFormat:@"%d",i];
-        [symbolcount setObject:[[NSNumber alloc] initWithInt:(int)[strArray count]] forKey:str];
-        NSLog(@" kk number = %@",[symbolcount objectForKey:str]);
-
-        if([strArray count] > target)
-        {
-            target = [strArray count];
-            targetIndex = i;
-        }
-    }
-    
-    // no symbol can separate
-    if([[symbolcount objectForKey:@"0"] isEqual: @"1"] &&
-       [[symbolcount objectForKey:@"1"] isEqual: @"1"] &&
-       [[symbolcount objectForKey:@"2"] isEqual: @"1"] &&
-       [[symbolcount objectForKey:@"3"] isEqual: @"1"] )
-    {
-        [output appendString:input];
-    }
-    else
-    {
-        NSArray *strResultArray = [input componentsSeparatedByString:[symbolatr objectAtIndex:targetIndex]];
-        NSUInteger index = 0;
-        
-        for(int i=0;i<[strResultArray count];i++)
-        {
-            index = index+[[strResultArray objectAtIndex:i] length]+1;
-            
-            if([[strResultArray objectAtIndex:i] length] == 0)
-                continue;
-            
-            if(index < 10)
-            {
-                [output appendString:[strResultArray objectAtIndex:i]];
-                [output appendString:[symbolatr objectAtIndex:targetIndex]];
-            }
-            else
-            {
-                [output appendString:[strResultArray objectAtIndex:i]];
-                [output appendString:[symbolatr objectAtIndex:targetIndex]];
-                [output appendString:@"\n"];
+                //NSLog(@"index = %ld,wordcount=%ld,lineattr = %ld,lineattrcount=%ld",index,wordcount,[lineArr count],lineattrcount);
+                //NSLog(@"poetryParserContent = %@",poetryParserContent);
             }
         }
     }
     
-    return output;
+    return input;
+    
 }
 
 -(NSMutableString*)isOpenFileSuccessful:(NSString*)fileName
@@ -252,5 +202,22 @@
     
     return content;
 }
+
+/*
+ Example:
+ 
+ NSMutableString *poetryContent2 = [[NSMutableString alloc]init];
+ 
+ Poetryparser *parser = [[Poetryparser alloc]init];
+ poetryContent2 = [parser isOpenFileSuccessful:@"717.txt"];
+ if(poetryContent2 != nil)
+ {
+    NSLog(@"kk test output = %@",poetryContent2);
+    [parser parsePoetryContentBySymbol:poetryContent2];
+ }
+ else
+    NSLog(@"kk ng");
+ 
+*/
 
 @end

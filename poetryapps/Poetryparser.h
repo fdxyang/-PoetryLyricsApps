@@ -11,8 +11,7 @@
 @interface Poetryparser : NSObject
 
 -(Poetryparser *) init;
--(NSString *)parsePoetryContent:(NSString *)input;
 -(NSMutableString*)isOpenFileSuccessful:(NSString*)fileName;
--(NSMutableString*)parseLineContent:(NSMutableString*)input;
+-(NSString *)parsePoetryContentBySymbol:(NSString *)input;
 
 @end
