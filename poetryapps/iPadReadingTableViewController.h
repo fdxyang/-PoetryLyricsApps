@@ -124,10 +124,17 @@ typedef enum {
 @property (nonatomic, strong)   iPadNavTableHeader      *NavigationHeader;
 @property (nonatomic, strong)   UIButton                *NaviBtn;
 @property (nonatomic, strong)   UIButton                *SettingBtn;
+@property (nonatomic, strong)   UITableView             *SettingTableView;
+
+
+#pragma mark - Search function members
+
 @property (nonatomic, strong)   UISearchBar             *SearchBar;
 
-@property (nonatomic, strong)   UITableView             *SettingTableView;
+@property (nonatomic, strong)   NSMutableArray          *SearchHistoryData;
+@property (nonatomic, strong)   NSMutableArray          *SearchGuidedReading;
+@property (nonatomic, strong)   NSMutableArray          *SearchPoetryData;
+@property (nonatomic, strong)   NSMutableArray          *SearchRespose;
 @property (nonatomic, strong)   NSArray                 *SearchResultDisplayArray;
-
 
 @end

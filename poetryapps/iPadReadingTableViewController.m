@@ -280,6 +280,8 @@
     return LineNumber;
 }
 */
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 1) {
@@ -638,7 +640,129 @@
 }
 */
 
+#pragma mark - Search Handling Methods
+
+// return NO to not become first responder
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"searchBarShouldBeginEditing  set _isSearching YES");
+    
+    if (_isTocTableOn) {    //[CASPER] 2013.12.27
+        [self RemoveTocTableViewAnimation];
+    }
+    // TODO: Setup Table frame
+    if (_isSearching == NO) {
+        _isSearching = YES;     //[CASPER] 2013.12.24
+        
+        [_NavigationHeader.TitleLab setText:@"搜尋"];
+        [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH];
+        CGFloat TableHeight = (3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
+        _CategoryTableView.frame = CGRectMake(_CategoryTableView.frame.origin.x,
+                                      _CategoryTableView.frame.origin.y,
+                                      _CategoryTableView.frame.size.width,
+                                      TableHeight);
+        
+        [_CategoryTableView reloadData];
+        
+    }
+    return YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self filterContentForSearchText:searchText];
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText {
+    
+    _SearchHistoryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryNameInHistory:searchText]];
+    
+    _SearchGuidedReading = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:GUARD_READING]];
+    
+    _SearchPoetryData = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:POETRYS]];
+    
+    _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
+    
+    
+    
+    if ([searchText length] > 3 ) {
+        
+        [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
+        [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
+        
+    }
+    
+    
+    _SearchResultDisplayArray = [NSArray arrayWithObjects:
+                                 _SearchHistoryData,
+                                 _SearchGuidedReading,
+                                 _SearchPoetryData,
+                                 _SearchRespose,
+                                 nil];
+    
+    // Calculate height of table view
+    CGFloat TableHeight = ((UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchGuidedReading count]) +
+                           (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchPoetryData count]) +
+                           (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchRespose count]) +
+                           3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
+    
+    if (TableHeight > UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX) {
+        
+        TableHeight = UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_MAX;
+        _CategoryTableView.scrollEnabled = YES;
+        
+    } else {
+        
+        _CategoryTableView.scrollEnabled = NO;
+        
+    }
+    
+    _CategoryTableView.frame = CGRectMake(_CategoryTableView.frame.origin.x,
+                                  _CategoryTableView.frame.origin.y,
+                                  _CategoryTableView.frame.size.width,
+                                  TableHeight);
+    
+    [_CategoryTableView reloadData];
+    
+}
+
+
 #pragma mark - Gesture recognizer
+
+
+
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    
+    if (_CoverViewState > COVER_IDLE) {
+        
+        //if ([_SearchBar.text length] != 0) {
+        
+        if (_SearchBar.resignFirstResponder) {
+            
+            [self.view endEditing:YES];
+            
+        } else {
+            
+            _CoverViewState = COVER_IDLE;
+            [self CoverViewStateMachine];
+            
+        }
+        /*
+         } else {
+         
+         _CoverViewState = COVER_IDLE;
+         [self CoverViewStateMachine];
+         
+         }
+         */
+    }
+}
+
+
+
 
 -(void) SwitchCurrentView
 {
@@ -803,11 +927,26 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+    
+    if ((touch.view.tag == 1) || (touch.view.tag == 2)) {
+        
+        return YES;
+    } else if (touch.view.tag == TAG_NAVI_BTN) {
+        
+        return NO;
+    }
+    
+
     return YES;
 }
 
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
+    
+    if (_isNavTableOn) {
+        return;
+    }
+
     
     if (_CurrentView == VIEW1) {
         //NSLog(@"Current = Table 1 / TheOther = Tabel 2");
