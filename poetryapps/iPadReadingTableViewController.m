@@ -12,6 +12,7 @@
     UInt16                  _CurrentIndex;
     UIFont                  *_Font;
     UIFont                  *_BoldFont;
+    UIFont                  *_PoetryNameFont;
     NSMutableArray          *_CellHeightArray;
     CURRENT_VIEW            _CurrentView;
     SLIDE_DIRECTION         _SlideDirection;
@@ -57,8 +58,8 @@
     
     _TableView1 = [[UITableView alloc]  initWithFrame:Frame];
     _TableView2 = [[UITableView alloc]  initWithFrame:Frame];
-    //_TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //_TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _TableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _TableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_TableView1 setTag:1];
     [_TableView2 setTag:2];
     _TableView1.delegate = self;
@@ -113,19 +114,15 @@
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
     [_TableView1 setScrollsToTop:YES];
+    _TableView1.contentOffset = CGPointMake(0, 0 - _TableView1.contentInset.top);
+
     [self GetNowReadingData];
     [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_IPAD];
     [_TableView1 reloadData];
     [self.view addSubview:_TableView1];
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + 15];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 15 + UI_BOLD_FONT_BIAS];
-    
-    // 2014.01.21 [CASPER] color setting
-    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
-                                                                                    green:(159/255.0f)
-                                                                                     blue:(191/255.0f)
-                                                                                    alpha:1]];
-    
+    _PoetryNameFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -136,6 +133,12 @@
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
     
 }
+
+-(void) InsertPoetryNameIntoReadingArray : (NSMutableArray *) PoetryReadingTableArray withPoetryName : (NSString *) PoetryName
+{
+    [PoetryReadingTableArray replaceObjectAtIndex:READING_POETRY_NAME_INDEX withObject:PoetryName];
+}
+
 
 -(void) GetNowReadingData
 {
@@ -157,24 +160,11 @@
         
     }
     
-    self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    //self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                            [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
-    
-    
-    _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
-    _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
-    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
-    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
-    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
-    
-    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
-    self.navigationItem.titleView = _NavigationTitleLab;
-    CGSize Size = CGSizeMake(280, 200);
-    Size = [_NavigationTitleLab sizeThatFits:Size];
-    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    [self InsertPoetryNameIntoReadingArray : _ReadingTableArray1 withPoetryName:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]];
     
 }
 
@@ -279,7 +269,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     NSString    *ContentStr;
-    
+    NSString    *PoetryNameStr;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -291,18 +281,31 @@
     
     if (tableView.tag == 1) {
         
+        
+        PoetryNameStr = [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
         ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
         
-        if ([ContentStr hasPrefix:@"@@"]) {
+        if ([ContentStr isEqualToString:PoetryNameStr]) {
             
-            ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
-            cell.textLabel.font = _BoldFont;
+            NSLog(@"PoetryNameStr = %@", [_ReadingTableArray1 objectAtIndex:1]);
+            cell.textLabel.font = _PoetryNameFont;
+            ContentStr = @"";
             
         } else {
             
-            cell.textLabel.font = _Font;
-            
+            if ([ContentStr hasPrefix:@"@@"]) {
+                
+                ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+                cell.textLabel.font = _BoldFont;
+                
+            } else {
+                
+                cell.textLabel.font = _Font;
+                
+            }
+
         }
+        
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
@@ -311,16 +314,27 @@
         
     } else {
         
+        PoetryNameStr = [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
         ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
         
-        if ([ContentStr hasPrefix:@"@@"]) {
+        if ([ContentStr isEqualToString:PoetryNameStr]) {
             
-            ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
-            cell.textLabel.font = _BoldFont;
+            NSLog(@"PoetryNameStr = %@", [_ReadingTableArray2 objectAtIndex:1]);
+            cell.textLabel.font = _PoetryNameFont;
+            ContentStr = @"";
             
         } else {
             
-            cell.textLabel.font = _Font;
+            if ([ContentStr hasPrefix:@"@@"]) {
+                
+                ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+                cell.textLabel.font = _BoldFont;
+                
+            } else {
+                
+                cell.textLabel.font = _Font;
+                
+            }
             
         }
         
@@ -368,6 +382,50 @@
     return Height;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    CGFloat     Height = 120;
+    return Height;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.frame.size.width - 20, 80)];
+    [label setFont:_PoetryNameFont];
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    NSString *string;
+    
+    if (tableView.tag == 1) {
+        string = [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
+    } else {
+        string =  [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+    }
+
+    [label setText:string];
+    label.textColor = [UIColor whiteColor];
+    [view addSubview:label];
+    [view setBackgroundColor:_LightBackgroundColor];
+    [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                    green:(159/255.0f)
+                                                     blue:(191/255.0f)
+                                                    alpha:1]]; //your background color...
+    return view;
+}
+/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSLog(@"titleForHeaderInSection");
+    if (tableView.tag == 1) {
+        return [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
+    } else {
+        return [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+    }
+}
+*/
+
 #pragma mark - Gesture recognizer
 
 -(void) SwitchCurrentView
@@ -395,6 +453,10 @@
         [_ReadingTableArray2 removeAllObjects];
         _ReadingTableArray2 = [NSMutableArray arrayWithArray:
                                [ContentStr componentsSeparatedByString:@"\n"]];
+
+        // [CASPER] Add for iPad
+        [self InsertPoetryNameIntoReadingArray : _ReadingTableArray2 withPoetryName:[NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+
         [_TableView2 reloadData];
         
     } else {
@@ -402,6 +464,10 @@
         [_ReadingTableArray1 removeAllObjects];
         _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                [ContentStr componentsSeparatedByString:@"\n"]];
+        
+        // [CASPER] Add for iPad
+        [self InsertPoetryNameIntoReadingArray : _ReadingTableArray1 withPoetryName:[NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+
         [_TableView1 reloadData];
     }
     
@@ -590,6 +656,8 @@
                 // PREV
                 [TheOtherView setFrame:DefaultFrame];
                 [TheOtherView setScrollsToTop:YES];
+                TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
+
                 _SlideDirection = SlideLabelLeftToRigth;
                 
                 [self GetNewPoetryByGestureDirection];
@@ -626,7 +694,8 @@
                     
                     [TheOtherView setFrame:NextPoetryFrame];
                     [TheOtherView setScrollsToTop:YES];
-                    
+                    TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
+
                     [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                     
                 }

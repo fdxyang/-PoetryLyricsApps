@@ -16,7 +16,7 @@
 #define UI_READING_TABLEVIEW_NEXT_IPAD       CGRectMake(UI_IPAD_SCREEN_WIDTH, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)
 #define SWITCH_VIEW_THRESHOLD                40
 #define UI_BOLD_FONT_BIAS                    5
-
+#define READING_POETRY_NAME_INDEX            1
 
 
 @interface iPadReadingTableViewController : UIViewController <  UIGestureRecognizerDelegate,
