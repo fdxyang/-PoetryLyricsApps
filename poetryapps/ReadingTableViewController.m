@@ -143,7 +143,8 @@
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
-    [_TableView1 setScrollsToTop:YES];
+    //[_TableView1 setScrollsToTop:YES];
+    _TableView1.contentOffset = CGPointMake(0, 0 - _TableView1.contentInset.top);
     [self GetNowReadingData];
     if (IS_IPHONE5) {
         [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_4_INCH];
@@ -624,7 +625,8 @@
                 
                 // PREV
                 [TheOtherView setFrame:DefaultFrame];
-                [TheOtherView setScrollsToTop:YES];
+                //[TheOtherView setScrollsToTop:YES];
+                TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
                 _SlideDirection = SlideLabelLeftToRigth;
 
                 [self GetNewPoetryByGestureDirection];
@@ -660,7 +662,8 @@
                 } else {
                     
                     [TheOtherView setFrame:NextPoetryFrame];
-                    [TheOtherView setScrollsToTop:YES];
+                    //[TheOtherView setScrollsToTop:YES];
+                    TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
 
                     [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                     
