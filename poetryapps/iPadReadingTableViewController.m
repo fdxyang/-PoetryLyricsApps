@@ -29,6 +29,22 @@
     UIColor                 *_FontThemeColor;
     
     UILabel                 *_NavigationTitleLab;
+    UIImage                 *_NaviBtnImgWhiteNormal;
+    UIImage                 *_NaviBtnImgWhitePressed;
+    UIImage                 *_NaviBtnImgDarkNormal;
+    UIImage                 *_NaviBtnImgDarkPressed;
+    UIImage                 *_SettingBtnImg;
+    UIImage                 *_SearchingBtnImg;
+    COVER_VIEW_STATE        _CoverViewState;
+
+    
+    BOOL                    _isNavTableOn;
+    BOOL                    _isSettingTableOn;
+    BOOL                    _isSearchBarOn;
+    BOOL                    _isSearching;       //[CASPER] 2013.12.24
+    BOOL                    _isTocTableOn;      //[CASPER] 2013.12.27
+    BOOL                    _isHandlingTouchSwitch;     // NOT USED YET
+    
 }
 
 @end
@@ -82,6 +98,16 @@
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
+    
+    
+    _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
+    _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
+    //_NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
+    //_NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
+
+    _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
+    _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
+
     _FontThemeColor = [[UIColor alloc] init];
 }
 
@@ -123,6 +149,9 @@
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + 15];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 15 + UI_BOLD_FONT_BIAS];
     _PoetryNameFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40];
+    
+    [self InitCoverViewItems];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -255,13 +284,38 @@
 {
     if (tableView.tag == 1) {
         return [_ReadingTableArray1 count];
-    } else {
+    } else if (tableView.tag == 2) {
         return [_ReadingTableArray2 count];
+    } else if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+        
+        if (_isSearching) {
+            return [[_SearchResultDisplayArray objectAtIndex:section] count];
+        } else {
+            NSLog(@"[_TableData count] = %d", [_TableData count]);
+            return [_TableData count];
+        }
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        return [_TocTableData count];
     }
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+        
+        if (_isSearching) {
+            // Search table
+            return 4;
+        }
+        return 1;
+        
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        // Setting table
+        return 4;
+    }
+
     return 1;
 }
 
@@ -279,6 +333,7 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    NSLog(@"tag = %d", tableView.tag);
     if (tableView.tag == 1) {
         
         
@@ -306,13 +361,12 @@
 
         }
         
-        
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
         cell.textLabel.textColor = _FontThemeColor;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         
-    } else {
+    } else if (tableView.tag == 2) {
         
         PoetryNameStr = [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
         ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
@@ -342,6 +396,16 @@
         cell.textLabel.text = ContentStr;
         cell.textLabel.textColor = _FontThemeColor;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+    } else if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+        
+        NSLog(@"!! %@", [_TableData objectAtIndex:indexPath.row]);
+        cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+        
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.textLabel.text = [[_TocTableData objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     
     return cell;
@@ -350,70 +414,218 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat     Height = 60;
-    // TODO: [CASPER] calculate line number is not neccesary in iPad version
-    /*
-    NSString    *ContentStr;
-    NSString    *Keyword = @"@@";
-    UInt16      LineNumber;
-    
-    if (tableView.tag == 1) {
-        ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
-    } else {
-        ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
+
+    if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
+        (tableView.tag == TAG_TOC_TABLE_VIEW)) {
+        Height = UI_IPAD_COVER_TABLE_CELL_HEIGHT;
     }
     
-    LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
-    
-    if ([ContentStr hasPrefix:Keyword]) {
-        
-        Height = (_PoetrySetting.SettingFontSize + 20) * LineNumber;
-        if (LineNumber > 1) {
-            Height = Height - 10;
-        }
-        
-    } else {
-        Height = (_PoetrySetting.SettingFontSize + 10) * LineNumber;
-        if (LineNumber > 1) {
-            Height = Height - 5;
-        }
-        
-    }
-    */
     return Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    
     CGFloat     Height = 120;
+    
+    if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
+        (tableView.tag == TAG_TOC_TABLE_VIEW) ||
+        (tableView.tag == TAG_SETTING_TABLE_VIEW)) {
+        Height = 0;
+    }
+
     return Height;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
-    /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.frame.size.width - 20, 80)];
-    [label setFont:_PoetryNameFont];
-    label.textAlignment = NSTextAlignmentCenter;
     
-    NSString *string;
+    UIView *view;
     
-    if (tableView.tag == 1) {
-        string = [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
-    } else {
-        string =  [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+    if ((tableView.tag == 1) || (tableView.tag == 2)) {
+        
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
+        /* Create custom view to display section header... */
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.frame.size.width - 20, 80)];
+        [label setFont:_PoetryNameFont];
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        NSString *string;
+        
+        if (tableView.tag == 1) {
+            string = [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
+        } else {
+            string =  [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+        }
+        
+        [label setText:string];
+        label.textColor = [UIColor whiteColor];
+        [view addSubview:label];
+        //[view setBackgroundColor:_LightBackgroundColor];
+        [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                        green:(159/255.0f)
+                                                         blue:(191/255.0f)
+                                                        alpha:1]];
+        [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                         green:(159/255.0f)
+                                                          blue:(191/255.0f)
+                                                         alpha:1]]; //your background color...
     }
-
-    [label setText:string];
-    label.textColor = [UIColor whiteColor];
-    [view addSubview:label];
-    [view setBackgroundColor:_LightBackgroundColor];
-    [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
-                                                    green:(159/255.0f)
-                                                     blue:(191/255.0f)
-                                                    alpha:1]]; //your background color...
+    
     return view;
 }
+
+
+-(void) GenerateNewReadingViewFollowSelectedBy:(NSDictionary *) NewReadingData andSaveIntoHistory : (BOOL) SaveIntoHistory
+{
+    
+    // Update reading array
+    _PoetryNowReading = NewReadingData;
+    
+    // Save into Coredata
+    if (SaveIntoHistory) {
+        [_PoetryDatabase PoetryCoreDataSaveIntoHistory:_PoetryNowReading];
+    }
+    [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+    
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+    _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
+    _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
+    
+    // To get idle view
+    if (_CurrentView == VIEW1) {
+        
+        //_ReadingView2 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView2 ViewExist:NO];
+        
+    } else {
+        
+        //_ReadingView1 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView1 ViewExist:NO];
+        
+    }
+    
+}
+
+
+// TODO: Handle selected on the table
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+        if (_isSearching) {
+            // For Searching
+            if ([_SearchBar.text length] != 0) {
+                if (indexPath.section == 0) {
+                    // HISTORY, Ignore
+                } else if (indexPath.section == 1) {
+                    
+                    // Guard reading
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    
+                    
+                } else if (indexPath.section == 2) {
+                    
+                    // Poetry
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    
+                } else if (indexPath.section == 3) {
+                    
+                    // responsive
+                    _CoverViewState = COVER_IDLE;
+                    [self CoverViewStateMachine];
+                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    
+                }
+            }
+            
+        } else {
+            
+            switch (indexPath.row) {
+                    
+                case 0:
+                    
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING];
+                    _NavigationHeader.TitleLab.text = @"導讀";
+                    _TocTableView.scrollEnabled = NO;
+                    [self ExecuteTocTableViewAnimation];
+                    
+                    break;
+                    
+                case 1:
+                    
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_POETRY];
+                    _NavigationHeader.TitleLab.text = @"聖詩";
+                    _TocTableView.scrollEnabled = YES;
+                    [self ExecuteTocTableViewAnimation];
+                    
+                    break;
+                    
+                case 2:
+                    
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:RESPONSIVE_PRAYER];
+                    [_TocTableView reloadData];
+                    [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_RESPONSIVE];
+                    _NavigationHeader.TitleLab.text = @"啟應文";
+                    _TocTableView.scrollEnabled = YES;
+                    [self ExecuteTocTableViewAnimation];
+                    
+                    break;
+                    
+                case 3:
+                    
+                    [_TocTableData removeAllObjects];
+                    _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
+                    UInt16 TableHeight = [_TocTableData count] * UI_IPAD_COVER_TABLE_CELL_HEIGHT;
+                    [_TocTableView reloadData];
+                    
+                    if (TableHeight == 0) {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"還沒有";
+                        
+                    } else {
+                        
+                        [_TocTableView setFrame:CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, TableHeight)];
+                        _NavigationHeader.TitleLab.text = @"閱讀歷史";
+                        _TocTableView.scrollEnabled = YES;
+                        
+                    }
+                    
+                    [self ExecuteTocTableViewAnimation];
+                    
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
+        
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
+        if ([_NavigationHeader.TitleLab.text isEqualToString:@"閱讀歷史"]) {
+            
+            //[self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:NO];
+            
+        } else {
+            
+            //[self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+            
+        }
+        
+        
+    }
+}
+
 /*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -795,7 +1007,6 @@
         
     } else {
         
-        NSLog(@"HERE");
         if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
             
             [UIView animateWithDuration:0.2
@@ -883,6 +1094,393 @@
     
     
     _ViewMovementState = None;
+    
+}
+
+#pragma mark - Menu Cover
+
+/*
+-(void)ReloadReadingView
+{
+    
+    _font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    _DisplayTheme = _PoetrySetting.SettingTheme;
+    if (_CurrentView == VIEW1) {
+        
+        [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView1 ViewExist:YES];
+        
+    } else {
+        
+        [self DisplayHandlingWithData:_PoetryNowReading onView:_ReadingView2 ViewExist:YES];
+    }
+}
+*/
+
+-(void) setNaviBtnImage
+{
+    if (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
+        
+        [_NaviBtn setBackgroundImage:_NaviBtnImgDarkNormal forState:UIControlStateNormal];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+        
+    }
+}
+
+-(void) InitCoverViewItems
+{
+    
+    if (_NaviBtn == nil) {
+        _NaviBtn = [[UIButton alloc] initWithFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+    }
+    //[_NaviBtn setTitle:@"GOTO" forState:UIControlStateNormal];
+    [_CoverView setTag:TAG_NAVI_BTN];
+    
+    [self setNaviBtnImage];
+    
+    //_NaviBtn.backgroundColor = [UIColor colorWithRed:(160/255.0f) green:(185/255.0f) blue:(211/255.0f) alpha:0.5];
+    _NaviBtn.opaque = YES;
+    [_NaviBtn addTarget:self action:@selector(NavigationBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_NaviBtn];
+    
+    
+    if (_SettingBtn == nil) {
+        _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+    }
+    
+    //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    //_SettingBtn.backgroundColor = [UIColor grayColor];
+    
+    [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
+    [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (_CoverView == nil) {
+        
+        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        
+    }
+    [_CoverView setTag:TAG_COVER_VIEW];
+    
+    if (_SearchBar == nil) {
+        _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+        _SearchBar.delegate = self;
+    }
+    
+    if (_CategoryTableView == nil) {
+        _CategoryTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    }
+    _TableData = [NSMutableArray arrayWithObjects:@"導讀", @"聖詩", @"啟應文", @"閱讀歷史", nil];
+    _CategoryTableView.delegate = self;
+    _CategoryTableView.dataSource = self;
+    _CategoryTableView.scrollEnabled = NO;
+    [_CategoryTableView setTag:TAG_CATEGORY_TABLE_VIEW];
+    NSLog(@"%@ \n %@", _CategoryTableView , _TableData);
+    [_CategoryTableView reloadData];
+    
+    _TocTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+    _TocTableView.delegate = self;
+    _TocTableView.dataSource = self;
+    _TocTableView.scrollEnabled = YES;
+    [_TocTableView setTag:TAG_TOC_TABLE_VIEW];
+    
+    [self InitNavigationHeader];
+    
+    if (_SettingTableView == nil) {
+        _SettingTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT style:UITableViewStyleGrouped];
+    }
+    _SettingTableView.delegate = self;
+    _SettingTableView.dataSource = self;
+    [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
+    
+    _CoverViewState = COVER_IDLE;
+    
+}
+
+
+-(void) PlaceCoverView
+{
+    
+    [self.view insertSubview:_CoverView belowSubview:_NaviBtn];
+    
+    // And init all item on the init location
+    [_CoverView addSubview:_CategoryTableView];
+    [_CoverView insertSubview:_TocTableView belowSubview:_CategoryTableView];
+    [_CoverView insertSubview:_NavigationHeader aboveSubview:_CategoryTableView];
+    [_CoverView addSubview:_SettingBtn];
+    [_CoverView addSubview:_SettingTableView];
+    [_CoverView addSubview:_SearchBar];
+    
+    NSString *ShadowType = @"Customized";
+    [Animations frameAndShadow:_CategoryTableView];
+    [Animations frameAndShadow:_TocTableView];
+    
+    
+    //[Animations shadowOnView:_TableView andShadowType:ShadowType];
+    //[Animations shadowOnView:_TocTableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingBtn andShadowType:ShadowType];
+    [Animations shadowOnView:_SettingTableView andShadowType:ShadowType];
+    [Animations shadowOnView:_SearchBar andShadowType:ShadowType];
+    //    [Animations shadowOnView:_NavigationHeader andShadowType:ShadowType];
+    [Animations frameAndShadow:_NavigationHeader];
+    
+    _SearchBar.text = @"";
+    
+}
+
+
+
+-(void)RemoveCoverViewAnimation
+{
+    
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         
+                         [_CategoryTableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+                         [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+                         [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                         [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         [_NaviBtn setFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         [_CoverView removeFromSuperview];
+                         [_CategoryTableView removeFromSuperview];
+                         [_SettingTableView removeFromSuperview];
+                         [_SearchBar removeFromSuperview];
+                         [_TocTableView removeFromSuperview];
+                         [_NavigationHeader removeFromSuperview];
+                         _SearchBar.text = @"";
+                         _SearchResultDisplayArray = nil;
+                         
+                         //TODO: Force Update Reading View followed Setting
+                         //[self ReloadReadingView];
+                     }];
+    
+}
+
+// All element on cover view should use this SM to control
+-(void) CoverViewStateMachine
+{
+    switch (_CoverViewState) {
+        case COVER_IDLE:
+            _isNavTableOn = NO;
+            _isSearchBarOn = NO;
+            _isSettingTableOn = NO;
+            _isSearching = NO;  //[CASPER] 2013.12.24
+            _isTocTableOn = NO; //[CASPER] 2013.12.27
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
+            [self RemoveCoverViewAnimation];
+            break;
+            
+        case COVER_INIT:
+            _isNavTableOn = YES;
+            _isSearchBarOn = YES;
+            _isSettingTableOn = NO;
+            _isSearching = NO; //[CASPER] 2013.12.24
+            
+            
+            [self PlaceCoverView];
+            [self ExecuteTableViewAnnimation];
+            break;
+            
+        case COVER_SEARCH:
+            _isNavTableOn = YES;
+            _isSearchBarOn = YES;
+            _isSettingTableOn = NO;
+            //_SettingBtn.titleLabel.text = @"SETTING";
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
+            
+            [self RemoveSettingTableViewAnnimation];
+            [self ExecuteSearchBarAnnimation];
+            break;
+            
+        case COVER_SETTING:
+            
+            _isNavTableOn = YES;
+            _isSearchBarOn = NO;
+            _isSettingTableOn = YES;
+            _isSearching = NO;
+            //_SettingBtn.titleLabel.text = @"SEARCH";
+            //[_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SearchingBtnImg forState:UIControlStateNormal];
+            
+            [_SettingTableView reloadData];
+            
+            [self RemoveSearchbarAnimation];
+            [self ExecuteSettingTableViewAnnimation];
+            
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) InitNavigationHeader
+{
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"iPadNavTableHeader" owner:self options:nil];
+    _NavigationHeader = (iPadNavTableHeader *)[subviewArray objectAtIndex:0];
+    [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+    [_NavigationHeader.BackBtn addTarget:self action:@selector(RemoveTocTableViewAnimation) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) ExecuteTableViewAnnimation
+{
+    
+    [_CategoryTableView reloadData];
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         
+                         [_CategoryTableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                         [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER];
+                         [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER];
+                         [_NaviBtn setFrame:UI_IPAD_NAVI_BTN_RECT_HIDE];
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+    
+}
+
+
+
+
+-(void) ExecuteSearchBarAnnimation
+{
+    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+    [_CoverView addSubview:_SearchBar];
+    
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:20.0];
+    [Animations moveRight:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:12.0];
+    
+}
+-(void) RemoveSearchbarAnimation
+{
+    [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [_SearchBar removeFromSuperview];
+}
+
+-(void) ExecuteSettingTableViewAnnimation
+{
+    [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+    [_CoverView addSubview:_SettingTableView];
+    
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:20.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:20.0];
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    [Animations moveLeft:_SettingTableView andAnimationDuration:0.1 andWait:YES andLength:12.0];
+    
+}
+
+
+-(void)RemoveSettingTableViewAnnimation
+{
+    [Animations moveRight:_SettingTableView andAnimationDuration:0.2 andWait:YES andLength:350.0];
+    [_SettingTableView removeFromSuperview];
+}
+
+
+
+-(void) ReinitSearchBar
+{
+    _SearchBar.text = @"";
+    [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+}
+
+
+-(void)NavigationBtnHandler
+{
+    if (_isNavTableOn == NO) {
+        
+        _CoverViewState = COVER_INIT;
+        [self CoverViewStateMachine];
+        
+    } else {
+        
+        _CoverViewState = COVER_IDLE;
+        [self CoverViewStateMachine];
+        
+    }
+    
+}
+
+-(void)SettingBtnHandler
+{
+    
+    if (_isSettingTableOn == NO) {
+        
+        _CoverViewState = COVER_SETTING;
+        [self CoverViewStateMachine];
+        
+    } else {
+        
+        _CoverViewState = COVER_SEARCH;
+        [self CoverViewStateMachine];
+        
+    }
+    
+}
+
+- (void) ExecuteTocTableViewAnimation
+{
+    _isTocTableOn = YES; //[CASPER] 2013.12.27
+    [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveRight:_TocTableView andAnimationDuration:0.3 andWait:YES andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH + UI_IPAD_TABLEVIEW_WIDTH];
+    
+    [Animations moveLeft:_TocTableView andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveLeft:_NavigationHeader andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    [Animations moveLeft:_CategoryTableView andAnimationDuration:0.2 andWait:NO andLength:UI_IPAD_TABLEVIEW_WIDTH];
+    
+}
+
+
+-(void) RemoveTocTableViewAnimation
+{
+    if (_isSearching) {
+        _isSearching = NO;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         }
+                         completion:^(BOOL finished) {
+                             [self.view endEditing:YES];
+                             _SearchResultDisplayArray = nil;
+                             [_SearchBar setText:@""];
+                             [_CategoryTableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                             [_CategoryTableView reloadData];
+                         }];
+        
+        
+        
+    } else {
+        _isTocTableOn = NO;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             
+                             [_CategoryTableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER];
+                             [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                             [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                         }
+                         completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
     
 }
 
