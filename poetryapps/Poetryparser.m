@@ -157,7 +157,7 @@
         }
     }
     
-    return input;
+    return poetryParserContent;
     
 }
 
