@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A4860191891DB5A00982F48 /* teamlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4860181891DB5A00982F48 /* teamlogo.png */; };
 		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
 		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
 		1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C4187CFACD00718741 /* BarBtn_Search.png */; };
@@ -850,6 +851,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A4860181891DB5A00982F48 /* teamlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teamlogo.png; sourceTree = "<group>"; };
 		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
 		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
 		1004E8C4187CFACD00718741 /* BarBtn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Search.png; sourceTree = "<group>"; };
@@ -1739,6 +1741,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A4860171891DB5A00982F48 /* teamlogo */ = {
+			isa = PBXGroup;
+			children = (
+				0A4860181891DB5A00982F48 /* teamlogo.png */,
+			);
+			path = teamlogo;
+			sourceTree = "<group>";
+		};
 		1060F910187FFE1F004AE154 /* ICON */ = {
 			isa = PBXGroup;
 			children = (
@@ -2745,6 +2755,7 @@
 		CBA286CD184DCF4A00010125 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0A4860171891DB5A00982F48 /* teamlogo */,
 				1060F910187FFE1F004AE154 /* ICON */,
 				CB54FA7018695CC200CED47E /* image */,
 				CB54FA7218695CC200CED47E /* poetry */,
@@ -3082,6 +3093,7 @@
 				CB54FE8C18695CCE00CED47E /* 394.txt in Resources */,
 				CB54FEA718695CCE00CED47E /* 418.txt in Resources */,
 				CB54FEA518695CCE00CED47E /* 416.txt in Resources */,
+				0A4860191891DB5A00982F48 /* teamlogo.png in Resources */,
 				CB54FD9C18695CCE00CED47E /* 178.txt in Resources */,
 				CB54FF9C18695CCE00CED47E /* 639.txt in Resources */,
 				CB54FDD618695CCE00CED47E /* 23.txt in Resources */,
