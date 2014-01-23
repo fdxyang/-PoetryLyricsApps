@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PoetrySettingCoreData.h"
 
 @interface Poetryparser : NSObject
 
 -(Poetryparser *) init;
 -(NSMutableString*)isOpenFileSuccessful:(NSString*)fileName;
 -(NSString *)parsePoetryContentBySymbol:(NSString *)input;
+-(NSString *)parsePoetryContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
 
 @end
