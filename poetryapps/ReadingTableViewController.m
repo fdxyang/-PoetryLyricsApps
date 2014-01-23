@@ -204,15 +204,20 @@
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     
     // 20140123 [CASPER] Add poetry parser
+    /*
     if (Category != RESPONSIVE_PRAYER) {
-        
-        PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbol:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+        //NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
+
+        //NSLog(@"%@", PoetryContentString);
     } else {
         
         PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
         
     }
-    
+     */
+    PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+
     // 20140123 [CASPER] Add poetry parser ==
 
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
@@ -235,6 +240,79 @@
 }
 
 #pragma mark - Table view data source
+/*
+-(NSString*) JudgeTheFinalMarkShouldBeRemoved : (NSString*) ContentStrInCell
+{
+    NSString *ContentStr;
+    NSUInteger Threshold = 0;
+    
+    UInt16      TextLength;
+    BOOL        isAttrCell = NO;
+    
+    TextLength = [ContentStr length];
+    
+    if ([ContentStr hasPrefix:@"@@"]) {
+        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+        TextLength = TextLength - [@"@@" length];
+        isAttrCell = YES;
+    }
+    
+    if (isAttrCell) {
+        
+        switch (_PoetrySetting.SettingFontSize) {
+            case POETRY_SETIING_FONT_SIZE_SMALL:
+                if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_MEDIUM:
+                if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                    
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_LARGE:
+                if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
+    } else {
+        
+        switch (_PoetrySetting.SettingFontSize) {
+            case POETRY_SETIING_FONT_SIZE_SMALL:
+                if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_MEDIUM:
+                if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+
+                }
+                break;
+                
+            case POETRY_SETIING_FONT_SIZE_LARGE:
+                if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+    
+    
+    return ContentStr;
+}
+*/
 //
 // Calculating line number for each cell in table view
 // accroding to the threshold for every kind of font size
@@ -258,23 +336,41 @@
         
         switch (_PoetrySetting.SettingFontSize) {
             case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                    if ((TextLength % UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                    }
+                    
                     
                 }
                 break;
                 
             case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                    if ((TextLength % UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                    }
+                    
                     
 
                 }
                 break;
                 
             case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                    if ((TextLength % UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                    }
+                    
                 }
                 break;
                 
@@ -286,24 +382,38 @@
         
         switch (_PoetrySetting.SettingFontSize) {
             case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     
+                    if ((TextLength % UI_SMALL_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_SMALL_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
+                    }
                     
                 }
                 break;
                 
             case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
                     
-                   
+                    if ((TextLength % UI_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+                    }
+                    
                 }
                 break;
                 
             case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                if (( TextLength > UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+                    
+                    if ((TextLength % UI_LARGE_FONT_SIZE_THRESHOLD) == 0) {
+                        LineNumber = (TextLength / UI_LARGE_FONT_SIZE_THRESHOLD);
+                    } else {
+                        LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
+                    }
+                    
                     
                 }
                 break;
@@ -359,6 +469,10 @@
             
         }
         
+        // 20140123 [CASPER]
+        NSLog(@"%@", ContentStr);
+        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
         cell.textLabel.textColor = _FontThemeColor;
@@ -377,6 +491,11 @@
             cell.textLabel.font = _Font;
             
         }
+        
+        // 20140123 [CASPER]
+        NSLog(@"%@", ContentStr);
+        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = ContentStr;
@@ -433,7 +552,7 @@
 -(void) UpdateNewTableViewContentWithNewPoetry : (NSDictionary*) NewPoetry
 {
     NSString *ContentStr;
-    POETRY_CATEGORY Category;
+    //POETRY_CATEGORY Category;
 
     
     if (NewPoetry != nil) {
@@ -441,11 +560,14 @@
     }
     
     // 20140123 [CASPER] Add poetry parser
+    /*
     Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
 
     if (Category != RESPONSIVE_PRAYER) {
-        ContentStr = [_PoetryContentParser parsePoetryContentBySymbol:ContentStr];
+        ContentStr = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
+
     }
+     */
     // 20140123 [CASPER] Add poetry parser ==
 
     
