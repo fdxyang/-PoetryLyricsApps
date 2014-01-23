@@ -205,7 +205,6 @@
     
     // 20140123 [CASPER] Add poetry parser
     if (Category != RESPONSIVE_PRAYER) {
-        NSLog(@"CASPER TEST  - %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         
         PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbol:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
     } else {
@@ -215,7 +214,6 @@
     }
     
     // 20140123 [CASPER] Add poetry parser ==
-    NSLog(@"CASPER TEST 2 - %@", PoetryContentString);
 
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [PoetryContentString componentsSeparatedByString:@"\n"]];
