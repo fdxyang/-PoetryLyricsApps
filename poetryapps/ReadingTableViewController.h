@@ -10,7 +10,7 @@
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
 #import "PoetryReadingView.h"
-
+#import "Poetryparser.h"
 
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
@@ -36,6 +36,8 @@
 @property (nonatomic, strong)   NSDictionary                *PoetryNowReading;
 @property (nonatomic, strong)   NSMutableArray              *NowReadingCategoryArray;
 @property (nonatomic, strong)   UILabel                     *HeadAndTailLab;
+
+@property (nonatomic, strong)   Poetryparser                *PoetryContentParser;
 
 typedef enum {
     VIEW1 = 0x00,

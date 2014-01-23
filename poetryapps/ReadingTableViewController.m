@@ -5,6 +5,8 @@
 //  Created by GIGIGUN on 2014/1/13.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
+// 20140123 [CASPER] Add poetry parser
+
 
 #import "ReadingTableViewController.h"
 #import "PoetryCoreData.h"
@@ -104,6 +106,8 @@
     _ReadingTableArray2 = [[NSMutableArray alloc] init];
     _CellHeightArray = [[NSMutableArray alloc] init];
     
+    _PoetryContentParser = [[Poetryparser alloc] init];
+    
     _HeadAndTailLab = [[UILabel alloc] init];
     [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
     
@@ -160,7 +164,7 @@
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
-                                                                                    alpha:1]];
+                                                                                    alpha:0.8]];
     
 }
 
@@ -175,10 +179,14 @@
 
 -(void) GetNowReadingData
 {
+    
+    NSString *PoetryContentString;
+    POETRY_CATEGORY Category;
+    
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
-        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
         
@@ -187,7 +195,7 @@
         NSLog(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
         
-        POETRY_CATEGORY Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+        Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = 0;
         
@@ -195,8 +203,22 @@
     
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     
+    // 20140123 [CASPER] Add poetry parser
+    if (Category != RESPONSIVE_PRAYER) {
+        NSLog(@"CASPER TEST  - %@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        
+        PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbol:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]];
+    } else {
+        
+        PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+        
+    }
+    
+    // 20140123 [CASPER] Add poetry parser ==
+    NSLog(@"CASPER TEST 2 - %@", PoetryContentString);
+
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
-                                [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
+                                [PoetryContentString componentsSeparatedByString:@"\n"]];
     
     
     _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -413,13 +435,21 @@
 -(void) UpdateNewTableViewContentWithNewPoetry : (NSDictionary*) NewPoetry
 {
     NSString *ContentStr;
+    POETRY_CATEGORY Category;
+
     
     if (NewPoetry != nil) {
         ContentStr = [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
-    } else {
-
     }
     
+    // 20140123 [CASPER] Add poetry parser
+    Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+
+    if (Category != RESPONSIVE_PRAYER) {
+        ContentStr = [_PoetryContentParser parsePoetryContentBySymbol:ContentStr];
+    }
+    // 20140123 [CASPER] Add poetry parser ==
+
     
     if (_CurrentView == VIEW1) {
         
