@@ -34,7 +34,7 @@
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     
-    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [tempImageView setFrame:_detailTableView.frame];
     _detailTableView.backgroundView = tempImageView;
     
@@ -72,6 +72,12 @@
         }
         //NSLog(@"responseAttr count = %d",[responseAttr count]);
     }
+    
+    // Kevin 20140124 set title background color 
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
 }
 
 - (void)didReceiveMemoryWarning

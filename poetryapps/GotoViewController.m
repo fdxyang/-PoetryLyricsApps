@@ -62,7 +62,7 @@
     
     self.navigationItem.title = @"快速查詢";
     
-    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
     
     uiOffset = 0.0;
@@ -80,6 +80,12 @@
         //NSLog(@"this is 3.5 inch");
         uiOffset = 108.0;
     }
+    
+    // Kevin 20140124 set title background color
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -177,7 +183,7 @@
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
             _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
             [tempImageView setFrame:_TableView.frame];
             _TableView.backgroundView = tempImageView;
             [_TableView reloadData];
