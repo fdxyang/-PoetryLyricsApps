@@ -86,6 +86,12 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
+    
+    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
+    
+    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
 }
 
 - (void)viewWillAppear:(BOOL)animated
