@@ -37,15 +37,15 @@
     
     //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
     self.navigationItem.titleView = _NavigationTitleLab;
-    CGSize Size = CGSizeMake(280, 200);
+    CGSize Size = CGSizeMake(180, 200);
     Size = [_NavigationTitleLab sizeThatFits:Size];
-    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 180, Size.height)];
     
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
-
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
