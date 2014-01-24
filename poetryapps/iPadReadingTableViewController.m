@@ -146,8 +146,8 @@
     [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_IPAD];
     [_TableView1 reloadData];
     [self.view addSubview:_TableView1];
-    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + 15];
-    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + 15 + UI_BOLD_FONT_BIAS];
+    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + UI_FONT_SIZE_AMP];
+    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_FONT_SIZE_AMP + UI_BOLD_FONT_BIAS];
     _PoetryNameFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40];
     
     [self InitCoverViewItems];
@@ -293,7 +293,6 @@
         if (_isSearching) {
             return [[_SearchResultDisplayArray objectAtIndex:section] count];
         } else {
-            NSLog(@"[_TableData count] = %d", [_TableData count]);
             return [_TableData count];
         }
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
@@ -306,11 +305,14 @@
 {
     if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
         
+        
         if (_isSearching) {
             // Search table
             return 4;
+        } else {
+            return 1;
         }
-        return 1;
+        
         
     } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
         
@@ -335,7 +337,6 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSLog(@"tag = %d", tableView.tag);
     if (tableView.tag == 1) {
         
         
@@ -401,9 +402,17 @@
         
     } else if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
         
-        NSLog(@"!! %@", [_TableData objectAtIndex:indexPath.row]);
-        cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
-        
+        if (_isSearching) {
+            
+            // Search result handling
+            cell.textLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_NAME_KEY];
+            cell.detailTextLabel.text = [[[_SearchResultDisplayArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+            
+        } else {
+            
+            cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
+        }
+
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
 
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -415,7 +424,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat     Height = 60;
+    CGFloat     Height = _PoetrySetting.SettingFontSize + UI_READING_TABLE_AMP;
 
     if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
         (tableView.tag == TAG_TOC_TABLE_VIEW)) {
@@ -433,9 +442,20 @@
     if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
         (tableView.tag == TAG_TOC_TABLE_VIEW) ||
         (tableView.tag == TAG_SETTING_TABLE_VIEW)) {
-        Height = 0;
+        
+        if (_isSearching) {
+            if (section == 0) {
+                Height = 0;
+            } else {
+                Height = UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT;
+            }
+            
+        } else {
+            Height = 0;
+        }
+        
     }
-
+    //NSLog(@"tag = %d Height = %f", tableView.tag , Height);
     return Height;
 }
 
@@ -497,10 +517,22 @@
     // To get idle view
     if (_CurrentView == VIEW1) {
         
+        _ReadingTableArray1 = [NSMutableArray arrayWithArray:
+                               [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
+        [self InsertPoetryNameIntoReadingArray : _ReadingTableArray1 withPoetryName:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+        [_TableView1 reloadData];
+        _TableView1.contentOffset = CGPointMake(0, 0 - _TableView1.contentInset.top);
+
         //_ReadingView2 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView2 ViewExist:NO];
         
     } else {
         
+        _ReadingTableArray2 = [NSMutableArray arrayWithArray:
+                               [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] componentsSeparatedByString:@"\n"]];
+        [self InsertPoetryNameIntoReadingArray : _ReadingTableArray2 withPoetryName:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+        [_TableView2 reloadData];
+        _TableView2.contentOffset = CGPointMake(0, 0 - _TableView2.contentInset.top);
+
         //_ReadingView1 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView1 ViewExist:NO];
         
     }
@@ -522,7 +554,7 @@
                     // Guard reading
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchGuidedReading objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                     
                 } else if (indexPath.section == 2) {
@@ -530,14 +562,14 @@
                     // Poetry
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchPoetryData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 } else if (indexPath.section == 3) {
                     
                     // responsive
                     _CoverViewState = COVER_IDLE;
                     [self CoverViewStateMachine];
-                    //[self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+                    [self GenerateNewReadingViewFollowSelectedBy:[_SearchRespose objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
                     
                 }
             }
@@ -616,11 +648,11 @@
         [self CoverViewStateMachine];
         if ([_NavigationHeader.TitleLab.text isEqualToString:@"閱讀歷史"]) {
             
-            //[self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:NO];
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:NO];
             
         } else {
             
-            //[self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
+            [self GenerateNewReadingViewFollowSelectedBy:[_TocTableData objectAtIndex:indexPath.row] andSaveIntoHistory:YES];
             
         }
         
@@ -628,17 +660,72 @@
     }
 }
 
-/*
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSLog(@"titleForHeaderInSection");
-    if (tableView.tag == 1) {
-        return [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
+    
+    NSString *sectionStr = [[NSString alloc] init];
+    
+    if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        
+        switch (section) {
+            case 0:
+                sectionStr = @"字體大小";
+                break;
+                
+            case 1:
+                sectionStr = @"顯示主題";
+                break;
+                
+            case 2:
+                sectionStr = @"預覽";
+                break;
+                
+            case 3:
+                sectionStr = @"關於我";
+                break;
+            default:
+                break;
+        }
+        
     } else {
-        return [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+        
+        if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+            
+            if (_isSearching) {
+                switch (section) {
+                    case 0:
+                        sectionStr = nil;
+                        break;
+                        
+                    case 1:
+                        sectionStr = @"基督基石";
+                        break;
+                        
+                    case 2:
+                        sectionStr = @"聖詩";
+                        break;
+                        
+                    case 3:
+                        sectionStr = @"啟應文";
+                        break;
+                    default:
+                        break;
+                }
+                
+            } else {
+                
+                sectionStr = nil;
+                
+            }
+        }
     }
+    
+    return sectionStr;
 }
-*/
+
+
 
 #pragma mark - Search Handling Methods
 
@@ -656,6 +743,7 @@
         
         [_NavigationHeader.TitleLab setText:@"搜尋"];
         [Animations moveRight:_NavigationHeader andAnimationDuration:0.3 andWait:NO andLength:UI_IPAD_TOC_TABLEVIEW_WIDTH];
+        
         CGFloat TableHeight = (3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
         _CategoryTableView.frame = CGRectMake(_CategoryTableView.frame.origin.x,
                                       _CategoryTableView.frame.origin.y,
