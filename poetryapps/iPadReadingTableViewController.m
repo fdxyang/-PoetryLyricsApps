@@ -413,6 +413,36 @@
             cell.textLabel.text = [_TableData objectAtIndex:indexPath.row];
         }
 
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.section == 0) {
+            
+            [self Setting_InitFontSizeViewBtns];
+            [cell addSubview:_FontSizeSettingView];
+            
+        } else if (indexPath.section == 1) {
+            
+            [self Setting_InitThemeSettingView];
+            [cell addSubview:_ThemeSettingView];
+            
+            
+        } else if (indexPath.section == 2) {
+            
+            [self InitPreviewLab];
+            [self Setting_InitThemeView];
+            [cell addSubview:_ThemePreViewLab];
+            
+        } else if (indexPath.section == 3) {
+            cell.textLabel.text = @"關於我";
+        }
+        
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
 
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -429,7 +459,23 @@
     if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
         (tableView.tag == TAG_TOC_TABLE_VIEW)) {
         Height = UI_IPAD_COVER_TABLE_CELL_HEIGHT;
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        if (indexPath.section <= 1) {
+            
+            return 50;
+            
+        } else if (indexPath.section == 2) {
+            
+            return 100;
+            
+        } else {
+            
+            return 45;
+        }
+        
     }
+
     
     return Height;
 }
@@ -440,8 +486,7 @@
     CGFloat     Height = 120;
     
     if ((tableView.tag == TAG_CATEGORY_TABLE_VIEW) ||
-        (tableView.tag == TAG_TOC_TABLE_VIEW) ||
-        (tableView.tag == TAG_SETTING_TABLE_VIEW)) {
+        (tableView.tag == TAG_TOC_TABLE_VIEW)) {
         
         if (_isSearching) {
             if (section == 0) {
@@ -454,6 +499,8 @@
             Height = 0;
         }
         
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        Height = 44;
     }
     //NSLog(@"tag = %d Height = %f", tableView.tag , Height);
     return Height;
@@ -540,7 +587,6 @@
 }
 
 
-// TODO: Handle selected on the table
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
@@ -1424,6 +1470,7 @@
     _SettingTableView.delegate = self;
     _SettingTableView.dataSource = self;
     [_SettingTableView setTag:TAG_SETTING_TABLE_VIEW];
+    [_SettingTableView setScrollEnabled:NO];
     
     _CoverViewState = COVER_IDLE;
     
@@ -1487,6 +1534,21 @@
                          [_NavigationHeader removeFromSuperview];
                          _SearchBar.text = @"";
                          _SearchResultDisplayArray = nil;
+                         
+                         _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize + UI_FONT_SIZE_AMP];
+                         _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_FONT_SIZE_AMP + UI_BOLD_FONT_BIAS];
+                         
+                         if (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
+                            [self.view setBackgroundColor:_LightBackgroundColor];
+                         } else {
+                             [self.view setBackgroundColor:_DarkBackgroundColor];
+                         }
+                         
+                         if (_CurrentView == VIEW1) {
+                             [_TableView1 reloadData];
+                         } else {
+                             [_TableView2 reloadData];
+                         }
                          
                          //TODO: Force Update Reading View followed Setting
                          //[self ReloadReadingView];
@@ -1710,5 +1772,189 @@
     }
     
 }
+
+
+
+#pragma mark - Font Setting
+-(void) Setting_InitFontSizeViewBtns
+{
+    
+    //cell.textLabel.text = @"FONT SIZE";
+    if (_FontSizeSettingView == nil) {
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FontSizeSetting" owner:self options:nil];
+        _FontSizeSettingView = (FontSizeSetting *)[subviewArray objectAtIndex:0];
+        _FontSizeSettingView.frame = CGRectMake(0, 0, _FontSizeSettingView.frame.size.width, _FontSizeSettingView.frame.size.height);
+        
+        [_FontSizeSettingView.SmallSizeBtn addTarget:self action:@selector(SmallSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.MidiumSizeBtn addTarget:self action:@selector(MediumSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_FontSizeSettingView.LargeSizeBtn addTarget:self action:@selector(LargeSizeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:_PoetrySetting.SettingFontSize andSave:NO];
+    
+}
+
+-(void) Setting_SetupBtnsInFontSizeViewWithSetting : (FONT_SIZE_SETTING) FontSizeSetting andSave:(BOOL) Save
+{
+    UIColor *DefaultTintColor_iOS7 = [UIColor colorWithRed:0.0f green:(108.f/255.f) blue:(255.f/255.f) alpha:1.0f];
+    
+    if (Save) {
+        [_PoetrySetting PoetrySetting_SetFontSize:FontSizeSetting];
+    }
+
+    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:FontSizeSetting+ UI_FONT_SIZE_AMP];
+    
+    switch (FontSizeSetting) {
+            
+        case FONT_SIZE_SMALL:
+            
+            NSLog(@"FONT  = SMALL SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:DefaultTintColor_iOS7];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
+            
+            
+            break;
+            
+        case FONT_SIZE_MEDIUM:
+            
+            NSLog(@"FONT  = MEDIUM SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:DefaultTintColor_iOS7];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:[UIColor grayColor]];
+            
+            break;
+            
+        case FONT_SIZE_LARGE:
+            
+            NSLog(@"FONT  = LARGE SIZE ");
+            [_FontSizeSettingView.SmallSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.MidiumSizeBtn setTintColor:[UIColor grayColor]];
+            [_FontSizeSettingView.LargeSizeBtn setTintColor:DefaultTintColor_iOS7];
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void) SmallSizeBtnClicked
+{
+    NSLog(@"small");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_SMALL andSave:YES];
+}
+
+-(void) MediumSizeBtnClicked
+{
+    NSLog(@"medium");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_MEDIUM andSave:YES];
+}
+
+-(void) LargeSizeBtnClicked
+{
+    NSLog(@"large");
+    [self Setting_SetupBtnsInFontSizeViewWithSetting:FONT_SIZE_LARGE andSave:YES];
+}
+
+
+#pragma mark - Theme Setting
+
+-(void) InitPreviewLab
+{
+    
+    if (_ThemePreViewLab == nil) {
+        _ThemePreViewLab = [[UILabel alloc] init];
+    }
+    
+    _ThemePreViewLab.frame = CGRectMake(0, 0, 320.f, 100.f);
+    _ThemePreViewLab.textAlignment = NSTextAlignmentCenter;
+    _ThemePreViewLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    
+    
+}
+
+-(void) Setting_InitThemeSettingView
+{
+    NSArray *subviewArray2 = [[NSBundle mainBundle] loadNibNamed:@"ThemeSetting" owner:self options:nil];
+    _ThemeSettingView = (ThemeSetting *)[subviewArray2 objectAtIndex:0];
+    _ThemeSettingView.frame = CGRectMake(0, 0, _ThemeSettingView.frame.size.width, _ThemeSettingView.frame.size.height);
+    
+    [_ThemeSettingView.LightDarkBtn setTitle:@"淺色主題" forState:UIControlStateNormal];
+    [_ThemeSettingView.DarkLightBtn setTitle:@"深色主題" forState:UIControlStateNormal];
+    
+    [_ThemeSettingView.LightDarkBtn addTarget:self action:@selector(LightDarkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_ThemeSettingView.DarkLightBtn addTarget:self action:@selector(DarkLightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_ThemeSettingView.LightDarkBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [_ThemeSettingView.DarkLightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    
+    
+    if (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
+        [_ThemeSettingView.LightDarkBtn setEnabled:NO];
+    } else {
+        [_ThemeSettingView.DarkLightBtn setEnabled:NO];
+    }
+    
+    
+}
+
+-(void) Setting_InitThemeView
+{
+    [self Setting_SetupThemeSettingView : _PoetrySetting.SettingTheme andSave:NO];
+}
+
+-(void) Setting_SetupThemeSettingView : (THEME_SETTING) ThemeSetting andSave : (BOOL) Save
+{
+    
+    if (Save) {
+        [_PoetrySetting PoetrySetting_SetTheme:ThemeSetting];
+    }
+    
+    [self setNaviBtnImage];
+    
+    // [CASPER] Add for iPad Ver
+    _NowReadingText = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    
+    switch (ThemeSetting) {
+            
+        case THEME_LIGHT_DARK:
+            NSLog(@"THEME_LIGHT_DARK");
+            //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
+            _ThemePreViewLab.backgroundColor = _LightBackgroundColor;
+            _ThemePreViewLab.textColor = [UIColor blackColor];
+            _ThemePreViewLab.text = _NowReadingText;
+            break;
+            
+        case THEME_DARK_LIGHT:
+            NSLog(@"THEME_DARK_LIGHT");
+            
+            //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
+            _ThemePreViewLab.backgroundColor = _DarkBackgroundColor;
+            _ThemePreViewLab.textColor = [UIColor whiteColor];
+            _ThemePreViewLab.text = _NowReadingText;
+            
+            break;
+            
+    }
+}
+
+
+
+-(void) LightDarkBtnClicked
+{
+    [_ThemeSettingView.DarkLightBtn setEnabled:YES];
+    [self Setting_SetupThemeSettingView:THEME_LIGHT_DARK andSave:YES];
+    [_ThemeSettingView.LightDarkBtn setEnabled:NO];
+}
+
+-(void) DarkLightBtnClicked
+{
+    [_ThemeSettingView.LightDarkBtn setEnabled:YES];
+    [self Setting_SetupThemeSettingView:THEME_DARK_LIGHT andSave:YES];
+    [_ThemeSettingView.DarkLightBtn setEnabled:NO];
+}
+
 
 @end

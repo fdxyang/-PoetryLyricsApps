@@ -59,8 +59,6 @@
                                                        green:(159/255.0f)
                                                         blue:(191/255.0f)
                                                        alpha:1]];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void) viewDidAppear:(BOOL)animated

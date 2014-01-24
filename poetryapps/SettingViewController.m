@@ -75,7 +75,8 @@
         
         // [CASPER] 2013.12.23 Set text in preview as poetry name
         _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_NAME_KEY];
-        // [CASPER] 2013.12.23 == 
+        // [CASPER] 2013.12.23 ==
+        
         if ([_NowReadingText length] == 0) {
             
             _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY];

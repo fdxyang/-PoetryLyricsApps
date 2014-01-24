@@ -12,6 +12,7 @@
 #import "PoetrySettingCoreData.h"
 #import "Animations.h"
 #import "iPadNavTableHeader.h"
+#import "SettingViewController.h"
 
 
 
@@ -138,5 +139,13 @@ typedef enum {
 @property (nonatomic, strong)   NSMutableArray          *SearchPoetryData;
 @property (nonatomic, strong)   NSMutableArray          *SearchRespose;
 @property (nonatomic, strong)   NSArray                 *SearchResultDisplayArray;
+
+#pragma mark - Setting function members
+@property (nonatomic, strong)   FontSizeSetting         *FontSizeSettingView;
+@property (nonatomic, strong)   ThemeSetting            *ThemeSettingView;
+@property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
+@property (nonatomic, strong)   UILabel                 *FontSizeLab;
+@property (nonatomic, strong)   NSString                *NowReadingText;
+
 
 @end
