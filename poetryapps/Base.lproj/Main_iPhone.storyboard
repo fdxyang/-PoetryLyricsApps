@@ -331,11 +331,11 @@
             </objects>
             <point key="canvasLocation" x="1424" y="2025"/>
         </scene>
-        <!--Navigation Controller - 導讀-->
+        <!--Navigation Controller - 聖詩內容-->
         <scene sceneID="BAA-EL-heM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SFn-Ti-d2S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="導讀" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
+                    <tabBarItem key="tabBarItem" title="聖詩內容" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtE-LW-hAQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
