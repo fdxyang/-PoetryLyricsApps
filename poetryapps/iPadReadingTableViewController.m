@@ -1544,12 +1544,27 @@
                              [self.view setBackgroundColor:_DarkBackgroundColor];
                          }
                          
+                        
+                         
+                         if  (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
+                             
+                             [_TableView1 setBackgroundColor:_LightBackgroundColor];
+                             [_TableView2 setBackgroundColor:_LightBackgroundColor];
+                             _FontThemeColor = [UIColor blackColor];
+                             
+                         } else {
+                             
+                             [_TableView1 setBackgroundColor:_DarkBackgroundColor];
+                             [_TableView2 setBackgroundColor:_DarkBackgroundColor];
+                             _FontThemeColor = [UIColor whiteColor];
+                             
+                         }
+
                          if (_CurrentView == VIEW1) {
                              [_TableView1 reloadData];
                          } else {
                              [_TableView2 reloadData];
                          }
-                         
                          //TODO: Force Update Reading View followed Setting
                          //[self ReloadReadingView];
                      }];
