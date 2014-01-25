@@ -14,10 +14,14 @@
 
 // 2014.01.06 [CASPER]
 #define MAIN_PAGE_LOADING_TIME  2
+#define UI_ACTIVITY_INDICATOR_WIDTH_HEIGHT      50
+#define UI_ACTIVITY_INDICATOR_4_INCH_RECT       CGRectMake(UI_SCREEN_WIDTH / 2 - UI_ACTIVITY_INDICATOR_WIDTH_HEIGHT /2, UI_SCREEN_4_INCH_HEIGHT - 200 , 50, 50)
+#define UI_ACTIVITY_INDICATOR_3_5_INCH_RECT       CGRectMake(UI_SCREEN_WIDTH / 2 - UI_ACTIVITY_INDICATOR_WIDTH_HEIGHT /2, UI_SCREEN_3_5_INCH_HEIGHT - 180 , 50, 50)
 
 @interface PoetryViewController () {
-    NSTimer     *_Timer;
-    UInt16      _TimerCount;
+    NSTimer                     *_Timer;
+    UInt16                      _TimerCount;
+    UIActivityIndicatorView     *_Loading;
 }
 
 @end
@@ -35,6 +39,12 @@
                                             userInfo: nil
                                              repeats: YES];
 
+    if (IS_IPHONE5) {
+        _Loading = [[UIActivityIndicatorView alloc] initWithFrame:UI_ACTIVITY_INDICATOR_4_INCH_RECT];
+    } else {
+        _Loading = [[UIActivityIndicatorView alloc] initWithFrame:UI_ACTIVITY_INDICATOR_3_5_INCH_RECT];
+    }
+    
     UIColor *Background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"welcome_page.png"]];
 
     [self.view setBackgroundColor:Background];
@@ -61,6 +71,10 @@
     long int d3 = date2 - date1;
     NSLog(@"handle core data time difference :%lu", d3);
     // Kevin add timer for test
+    [self.view addSubview:_Loading];
+    [_Loading startAnimating];
+    
+
     
 }
 
@@ -82,6 +96,8 @@
         
         [self presentViewController:View animated:YES completion:^{
             [_Timer invalidate];
+            [_Loading stopAnimating];
+            
         }];
     } else {
         

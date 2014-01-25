@@ -102,8 +102,6 @@
     
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
     _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
-    //_NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
-    //_NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
 
     _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
     _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
