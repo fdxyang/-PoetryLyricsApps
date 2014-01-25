@@ -49,6 +49,7 @@
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
         [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
         [NewPoetry setValue: [NSNumber numberWithInt:0] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_TUTORIAL];
 
         
     } else {
@@ -103,6 +104,8 @@
         [NewPoetry setValue: [NSNumber numberWithInt:POETRY_SETTING_THEME_DEFAULT] forKey:POETRY_CORE_DATA_SETTING_THEME];
         [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
         [NewPoetry setValue: [NSNumber numberWithInt:0] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED_INDEX];
+        [NewPoetry setValue: [NSNumber numberWithBool:NO] forKey:POETRY_CORE_DATA_SETTING_TUTORIAL];
+
 
     } else {
         
@@ -155,6 +158,63 @@
     NSNumber *Saved = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
     BOOL DataSaved = [Saved boolValue];
     return DataSaved;
+}
+
+
+#pragma mark - TutorialFlag
+-(BOOL) PoetrySetting_SetTutorialViewShowed : (BOOL) Showed
+{
+    NSString *PoetryCoreDataEntityName = POETRY_CORE_DATA_SETTING_ENTITY;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
+    
+    NSError *err;
+    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
+    NSUInteger count = [FetchResult count];
+    
+    if (count == 1) {
+        
+        // Setting is exist, update to default value
+        NSLog(@"Set to data saved as %d", Showed);
+        
+        NSManagedObject *Setting = [FetchResult objectAtIndex:0];
+        
+        [Setting setValue: [NSNumber numberWithBool:Showed] forKey:POETRY_CORE_DATA_SETTING_TUTORIAL];
+        
+    } else if (count == 0) {
+        
+        // Setting not exist, create one
+        NSLog(@"UPDATE- Normally it should not be here!!!");
+        
+        NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+        
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingFontSize] forKey:POETRY_CORE_DATA_SETTING_FONT_SIZE];
+        [NewPoetry setValue: [NSNumber numberWithInt:_SettingTheme] forKey:POETRY_CORE_DATA_SETTING_THEME];
+        [NewPoetry setValue: [NSNumber numberWithBool:Showed] forKey:POETRY_CORE_DATA_SETTING_DATA_SAVED];
+        
+    } else {
+        
+        NSLog(@"ERROR!!! Multiple Setting");
+        
+    }
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+    
+    
+    return YES;
+}
+
+-(BOOL) PoetrySetting_GetTutorialShowedFlag
+{
+    NSDictionary *SettingDic = [self PoetrySetting_ReadSetting];
+    NSNumber *Showed = [SettingDic valueForKey:POETRY_CORE_DATA_SETTING_TUTORIAL];
+    BOOL AlreadyShowed = [Showed boolValue];
+    return AlreadyShowed;
 }
 
 
