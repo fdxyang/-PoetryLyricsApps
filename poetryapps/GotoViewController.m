@@ -58,6 +58,11 @@
     [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
     
+    [poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [poetryBtn setEnabled:YES];
+    [responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [responseBtn setEnabled:YES];
+    
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     self.navigationItem.title = @"快速查詢";
