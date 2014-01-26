@@ -11,10 +11,12 @@
 #import "ReadingTableViewController.h"
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
-#import "ReadingTutorialView.h"
+#import "ILTranslucentView.h"
 
 #define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
@@ -63,7 +65,7 @@
     UIColor                 *_FontThemeColor;
     
     UILabel                 *_NavigationTitleLab;
-    UIView                  *_TutorialView;
+    ILTranslucentView       *_TutorialView;
 
 }
 
@@ -180,22 +182,32 @@
                                                                                     alpha:0.8]];
     // 2014.01.25 [CASPER] Add Turorial view
     if (_PoetrySetting.TutorialShowed == NO) {
+        
+        UIImageView *TutorImg = [[UIImageView alloc] initWithFrame:UI_READING_TUTORIAL_IMG_RECT];
+        [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
+
         if (IS_IPHONE5) {
-            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
+            _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2)];
         } else {
-            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
+            _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2)];
         }
         
-        [_TutorialView setBackgroundColor:[[UIColor alloc] initWithRed:(41/255.0f)
-                                                                green:(41/255.0f)
-                                                                 blue:(53/255.0f)
-                                                                alpha:0.6]];
-        
-        
-        [self.navigationController.view addSubview:_TutorialView];
-        //[self.navigationController presentModalViewController:TutorialView animated:YES];
 
         
+        _TutorialView.translucentAlpha = 0.9;
+        _TutorialView.translucentStyle = UIBarStyleBlack;
+        _TutorialView.translucentTintColor = [UIColor clearColor];
+        _TutorialView.backgroundColor = [UIColor clearColor];
+        
+        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
+          
+        [_TutorialView addSubview:TutorImg];
+        [self.navigationController.view addSubview:_TutorialView];
+        NSLog(@"%@", _TutorialView);
+        //[self.navigationController presentModalViewController:TutorialView animated:YES];
+
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
     
@@ -218,6 +230,13 @@
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }
+
+
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"TEST TOUCH");
+}
+
 
 -(void) GetNowReadingData
 {
@@ -248,13 +267,13 @@
     // 20140123 [CASPER] Add poetry parser
     
     if (Category != RESPONSIVE_PRAYER) {
-        NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        //NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         //PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
         //-(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
         PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
 
 
-        NSLog(@"%@", PoetryContentString);
+        //NSLog(@"%@", PoetryContentString);
     } else {
         
         PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
@@ -537,7 +556,7 @@
         }
         
         // 20140123 [CASPER]
-        NSLog(@"%@", ContentStr);
+        //NSLog(@"%@", ContentStr);
         ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
         

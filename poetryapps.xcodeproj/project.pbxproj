@@ -55,8 +55,10 @@
 		10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10732AEF1880D32300304DA4 /* AboutMeViewController.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
-		1099C1BB18942A03004FD68C /* ReadingTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1BA18942A03004FD68C /* ReadingTutorialView.m */; };
 		1099C1BD189541AA004FD68C /* BG-GreyNote_paper_Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */; };
+		1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1C018956A64004FD68C /* ILTranslucentView.m */; };
+		1099C1C418956C3D004FD68C /* Tutor_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1C218956C3D004FD68C /* Tutor_Black.png */; };
+		1099C1C518956C3D004FD68C /* Tutor_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1C318956C3D004FD68C /* Tutor_White.png */; };
 		10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */; };
 		10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */; };
 		10A5EFA0187C3C3000ECAD99 /* welcome_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9E187C3C3000ECAD99 /* welcome_page.png */; };
@@ -911,9 +913,11 @@
 		10771DC11849D0B600A3B342 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		108D2276184987ED005E6893 /* PoetrySettingCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySettingCoreData.h; sourceTree = "<group>"; };
 		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
-		1099C1B918942A03004FD68C /* ReadingTutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTutorialView.h; sourceTree = "<group>"; };
-		1099C1BA18942A03004FD68C /* ReadingTutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTutorialView.m; sourceTree = "<group>"; };
 		1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BG-GreyNote_paper_Dark.png"; sourceTree = "<group>"; };
+		1099C1BF18956A64004FD68C /* ILTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTranslucentView.h; sourceTree = "<group>"; };
+		1099C1C018956A64004FD68C /* ILTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTranslucentView.m; sourceTree = "<group>"; };
+		1099C1C218956C3D004FD68C /* Tutor_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_Black.png; sourceTree = "<group>"; };
+		1099C1C318956C3D004FD68C /* Tutor_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_White.png; sourceTree = "<group>"; };
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
 		10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPhone@2x.png"; sourceTree = "<group>"; };
 		10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPhone.png; sourceTree = "<group>"; };
@@ -1794,6 +1798,17 @@
 			name = SettingView;
 			sourceTree = "<group>";
 		};
+		1099C1BE18956A53004FD68C /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				10AF12701862EC7F002F6DB9 /* Animations.m */,
+				10AF12711862EC7F002F6DB9 /* Animations.h */,
+				1099C1BF18956A64004FD68C /* ILTranslucentView.h */,
+				1099C1C018956A64004FD68C /* ILTranslucentView.m */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
 		109EF70E1863E8EA00A4B9E1 /* iPadView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1865,6 +1880,7 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
+				1099C1BE18956A53004FD68C /* ThirdParty */,
 				109EF70E1863E8EA00A4B9E1 /* iPadView */,
 				CB86F0311862E0CC006F8500 /* Model */,
 				CBA286CD184DCF4A00010125 /* Resource */,
@@ -1956,8 +1972,6 @@
 				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
 				107201751883DF0700EC638D /* ReadingTableViewController.h */,
 				107201761883DF0700EC638D /* ReadingTableViewController.m */,
-				1099C1B918942A03004FD68C /* ReadingTutorialView.h */,
-				1099C1BA18942A03004FD68C /* ReadingTutorialView.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -1965,6 +1979,8 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				1099C1C218956C3D004FD68C /* Tutor_Black.png */,
+				1099C1C318956C3D004FD68C /* Tutor_White.png */,
 				CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */,
 				CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */,
 				CB6126E6187FA52F00AF7A1C /* gotobtn1.png */,
@@ -2750,8 +2766,6 @@
 		CB86F0311862E0CC006F8500 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				10AF12701862EC7F002F6DB9 /* Animations.m */,
-				10AF12711862EC7F002F6DB9 /* Animations.h */,
 				CB4AC391188D07040067E94E /* Poetryparser.h */,
 				CB4AC392188D07040067E94E /* Poetryparser.m */,
 				CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */,
@@ -2940,6 +2954,7 @@
 				CB54FF8418695CCE00CED47E /* 617.txt in Resources */,
 				CB54FF8718695CCE00CED47E /* 62.txt in Resources */,
 				CB54FEFE18695CCE00CED47E /* 497.txt in Resources */,
+				1099C1C518956C3D004FD68C /* Tutor_White.png in Resources */,
 				CB54FDAE18695CCE00CED47E /* 194.txt in Resources */,
 				CB54FED418695CCE00CED47E /* 459.txt in Resources */,
 				CB54FFB218695CCE00CED47E /* 659.txt in Resources */,
@@ -3590,6 +3605,7 @@
 				CB54FDEE18695CCE00CED47E /* 251.txt in Resources */,
 				CB54FFA518695CCE00CED47E /* 647.txt in Resources */,
 				CB54FED618695CCE00CED47E /* 460.txt in Resources */,
+				1099C1C418956C3D004FD68C /* Tutor_Black.png in Resources */,
 				CB54001318695CCE00CED47E /* 97.txt in Resources */,
 				CB54FE2F18695CCE00CED47E /* 31.txt in Resources */,
 				CB54FF4418695CCE00CED47E /* 56.txt in Resources */,
@@ -3683,7 +3699,7 @@
 				10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
-				1099C1BB18942A03004FD68C /* ReadingTutorialView.m in Sources */,
+				1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */,
 				CB25FD261843972D00F3D980 /* PoetryViewController.m in Sources */,
