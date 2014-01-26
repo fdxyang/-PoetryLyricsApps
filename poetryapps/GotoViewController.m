@@ -58,9 +58,11 @@
     [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
     
-    [poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
     
     PoetryDataBase = [[PoetryCoreData alloc] init];
@@ -130,9 +132,11 @@
     
     [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
-    [poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
 
@@ -149,11 +153,13 @@
     [self.view bringSubviewToFront:_poetryView];
     [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
     [poetryBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [poetryBtn setEnabled:NO];
-    [responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
 
@@ -170,9 +176,11 @@
     [self.view bringSubviewToFront:_responseView];
     [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
-    [poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
     [responseBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [responseBtn setEnabled:NO];
