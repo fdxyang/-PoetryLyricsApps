@@ -25,6 +25,11 @@
                                                                         UI_SCREEN_WIDTH, \
                                                                         UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
+// 2014.01.25 [CASPER] Add Turorial view
+#define UI_TUTORIAL_VIEW_RECT_4_INCH                    CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT)
+#define UI_TUTORIAL_VIEW_RECT_3_5_INCH                    CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT)
+// 2014.01.25 [CASPER] Add Turorial view ==
+
 #define UI_SMALL_FONT_SIZE_THRESHOLD         14
 #define UI_MEDIUM_FONT_SIZE_THRESHOLD        12
 #define UI_LARGE_FONT_SIZE_THRESHOLD         9
@@ -57,6 +62,8 @@
     UIColor                 *_FontThemeColor;
     
     UILabel                 *_NavigationTitleLab;
+    UIView                  *_TutorialView;
+
 }
 
 @end
@@ -165,6 +172,26 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
+    // 2014.01.25 [CASPER] Add Turorial view
+    if (_PoetrySetting.TutorialShowed == NO) {
+        if (IS_IPHONE5) {
+            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
+        } else {
+            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
+        }
+        
+        [_TutorialView setBackgroundColor:[[UIColor alloc] initWithRed:(41/255.0f)
+                                                                green:(41/255.0f)
+                                                                 blue:(53/255.0f)
+                                                                alpha:0.6]];
+        
+        
+        [self.navigationController.view addSubview:_TutorialView];
+        //[self.navigationController presentModalViewController:TutorialView animated:YES];
+
+        
+    }
+    // 2014.01.25 [CASPER] Add Turorial view ==
     
 }
 
@@ -173,6 +200,15 @@
     [super viewDidDisappear:animated];
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
+    
+    // 2014.01.25 [CASPER] Add Turorial view
+    if (_PoetrySetting.TutorialShowed == NO) {
+        [_TutorialView removeFromSuperview];
+        [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
+    }
+    // 2014.01.25 [CASPER] Add Turorial view ==
+
+    
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }

@@ -15,5 +15,6 @@
 -(NSMutableString*)isOpenFileSuccessful:(NSString*)fileName;
 -(NSString *)parsePoetryContentBySymbol:(NSString *)input;
 -(NSString *)parsePoetryContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
+-(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
 
 @end

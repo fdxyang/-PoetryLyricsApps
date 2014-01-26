@@ -3928,7 +3928,7 @@
 				109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */,
 				10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */,
 			);
-			currentVersion = 10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */;
+			currentVersion = 109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */;
 			name = Poetry.xcdatamodeld;
 			path = CoreData/Poetry.xcdatamodeld;
 			sourceTree = "<group>";

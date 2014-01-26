@@ -12,6 +12,7 @@
 #import "PoetrySettingCoreData.h"
 #import "Animations.h"
 #import "iPadNavTableHeader.h"
+#import "SettingViewController.h"
 
 
 
@@ -41,10 +42,10 @@
 #define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 140, 70, 70)
 #define UI_IPAD_NAVI_BTN_RECT_HIDE                  CGRectMake(-10, 0, 0, 0)
 #define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(UI_IPAD_SCREEN_WIDTH , 40, 0, 0)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 90, 70, 70)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 140, 70, 70)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 350, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(574, 300, 350, 50)
-#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 200, 320, 550)
+#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 250, 320, 550)
 
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER                 CGRectMake(-300, 95, UI_IPAD_TOC_TABLEVIEW_WIDTH, 50)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING      CGRectMake(-300, 150, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD)
@@ -56,11 +57,7 @@
 #define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(UI_IPAD_SCREEN_WIDTH , 40, 0, 0)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 90, 70, 70)
-#define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 350, 50)
-#define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(574, 300, 350, 50)
-#define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 200, 320, 550)
+
 
 
 
@@ -138,5 +135,13 @@ typedef enum {
 @property (nonatomic, strong)   NSMutableArray          *SearchPoetryData;
 @property (nonatomic, strong)   NSMutableArray          *SearchRespose;
 @property (nonatomic, strong)   NSArray                 *SearchResultDisplayArray;
+
+#pragma mark - Setting function members
+@property (nonatomic, strong)   FontSizeSetting         *FontSizeSettingView;
+@property (nonatomic, strong)   ThemeSetting            *ThemeSettingView;
+@property (nonatomic, strong)   UILabel                 *ThemePreViewLab;
+@property (nonatomic, strong)   UILabel                 *FontSizeLab;
+@property (nonatomic, strong)   NSString                *NowReadingText;
+
 
 @end

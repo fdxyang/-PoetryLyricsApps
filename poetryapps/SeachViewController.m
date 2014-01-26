@@ -27,15 +27,38 @@
 {
     [super viewDidLoad];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
-    self.navigationItem.title = @"搜尋";
+    //self.navigationItem.title = @"搜尋";
     //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchDataInHistory];
     //_HistoryData = [_PoetryDatabase Poetry_CoreDataFetchData];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = YES;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+    _NavigationTitleLab.text = @"搜尋";
+    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
+    
+    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    self.navigationItem.titleView = _NavigationTitleLab;
+    CGSize Size = CGSizeMake(280, 200);
+    Size = [_NavigationTitleLab sizeThatFits:Size];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
+    [_SearchBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                          green:(159/255.0f)
+                                                           blue:(191/255.0f)
+                                                          alpha:1]];
+    [_SearchBar setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                       green:(159/255.0f)
+                                                        blue:(191/255.0f)
+                                                       alpha:1]];
 }
 
 -(void) viewDidAppear:(BOOL)animated

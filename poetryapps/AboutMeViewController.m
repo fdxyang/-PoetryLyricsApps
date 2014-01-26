@@ -27,20 +27,39 @@
 {
     [super viewDidLoad];
     _Scroller = [[UIScrollView alloc] init];
+    
+    UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+    _NavigationTitleLab.text = @"關於我";
+    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
+    
+    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    self.navigationItem.titleView = _NavigationTitleLab;
+    CGSize Size = CGSizeMake(180, 200);
+    Size = [_NavigationTitleLab sizeThatFits:Size];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 180, Size.height)];
+    
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.navigationItem.title = @"關於我";
+    //self.navigationItem.title = @"關於我";
     
     NSUInteger contactPos=0;
     
     CGRect Frame;
     if (IS_IPHONE5) {
-        Frame = CGRectMake(0, 65, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
+        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
         contactPos = UI_SCREEN_4_INCH_HEIGHT-115-100;
     } else {
-        Frame = CGRectMake(0, 65, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
+        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
         contactPos = UI_SCREEN_3_5_INCH_HEIGHT-115-60;
     }
     [_Scroller setFrame:Frame];
@@ -76,7 +95,7 @@
     [_Scroller addSubview:teamYear];
     
     
-    UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, contactPos, 320, 40)];
+    UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 40)];
     [teamContact setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]];
     teamContact.backgroundColor = [UIColor grayColor];
     teamContact.textColor = [UIColor whiteColor];
