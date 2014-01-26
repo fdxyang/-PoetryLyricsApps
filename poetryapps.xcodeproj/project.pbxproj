@@ -56,6 +56,7 @@
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
 		108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108D2277184987ED005E6893 /* PoetrySettingCoreData.m */; };
 		1099C1BB18942A03004FD68C /* ReadingTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1BA18942A03004FD68C /* ReadingTutorialView.m */; };
+		1099C1BD189541AA004FD68C /* BG-GreyNote_paper_Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */; };
 		10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */; };
 		10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */; };
 		10A5EFA0187C3C3000ECAD99 /* welcome_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9E187C3C3000ECAD99 /* welcome_page.png */; };
@@ -912,6 +913,7 @@
 		108D2277184987ED005E6893 /* PoetrySettingCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySettingCoreData.m; sourceTree = "<group>"; };
 		1099C1B918942A03004FD68C /* ReadingTutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTutorialView.h; sourceTree = "<group>"; };
 		1099C1BA18942A03004FD68C /* ReadingTutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTutorialView.m; sourceTree = "<group>"; };
+		1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BG-GreyNote_paper_Dark.png"; sourceTree = "<group>"; };
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
 		10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPhone@2x.png"; sourceTree = "<group>"; };
 		10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPhone.png; sourceTree = "<group>"; };
@@ -2009,6 +2011,7 @@
 				10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */,
 				10AC47761876B9B500BADD8C /* Light_bgiPhone.png */,
 				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
+				1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */,
 				105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */,
 			);
 			name = image;
@@ -3341,6 +3344,7 @@
 				CB54FD9618695CCE00CED47E /* 172.txt in Resources */,
 				CB54FDE418695CCE00CED47E /* 242.txt in Resources */,
 				CB54FE1618695CCE00CED47E /* 288.txt in Resources */,
+				1099C1BD189541AA004FD68C /* BG-GreyNote_paper_Dark.png in Resources */,
 				CB0AB8AF187E748300C60DFF /* 24_24buttondown@2x.png in Resources */,
 				CB54FEA918695CCE00CED47E /* 42.txt in Resources */,
 				CB54FD8C18695CCE00CED47E /* 163.txt in Resources */,

@@ -37,9 +37,15 @@
     _Setting = [[PoetrySettingCoreData alloc] init];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     self.navigationItem.title = @"設定";
-    
+   
+    // 20140126 Change preview label background
+    /*
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+    */
+    
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     
     UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
     _NavigationTitleLab.text = @"設定";

@@ -51,9 +51,9 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
-    [_SearchBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
-                                                          green:(159/255.0f)
-                                                           blue:(191/255.0f)
+    [_SearchBar setBarTintColor:[[UIColor alloc] initWithRed:(147/255.0f)
+                                                          green:(208/255.0f)
+                                                           blue:(202/255.0f)
                                                           alpha:1]];
     [_SearchBar setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                        green:(159/255.0f)
