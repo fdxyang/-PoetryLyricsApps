@@ -11,9 +11,12 @@
 #import "ReadingTableViewController.h"
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
+#import "ILTranslucentView.h"
 
 #define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
@@ -62,7 +65,7 @@
     UIColor                 *_FontThemeColor;
     
     UILabel                 *_NavigationTitleLab;
-    UIView                  *_TutorialView;
+    ILTranslucentView       *_TutorialView;
 
 }
 
@@ -116,12 +119,17 @@
     _PoetryContentParser = [[Poetryparser alloc] init];
     
     _HeadAndTailLab = [[UILabel alloc] init];
-    [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
+    //[_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
+    [_HeadAndTailLab setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                               green:(159/255.0f)
+                                                                blue:(191/255.0f)
+                                                               alpha:0.8]];
+
     
     
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     _FontThemeColor = [[UIColor alloc] init];
@@ -174,22 +182,32 @@
                                                                                     alpha:0.8]];
     // 2014.01.25 [CASPER] Add Turorial view
     if (_PoetrySetting.TutorialShowed == NO) {
+        
+        UIImageView *TutorImg = [[UIImageView alloc] initWithFrame:UI_READING_TUTORIAL_IMG_RECT];
+        [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
+
         if (IS_IPHONE5) {
-            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
+            _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2)];
         } else {
-            _TutorialView = [[UIView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
+            _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2)];
         }
         
-        [_TutorialView setBackgroundColor:[[UIColor alloc] initWithRed:(41/255.0f)
-                                                                green:(41/255.0f)
-                                                                 blue:(53/255.0f)
-                                                                alpha:0.6]];
-        
-        
-        [self.navigationController.view addSubview:_TutorialView];
-        //[self.navigationController presentModalViewController:TutorialView animated:YES];
 
         
+        _TutorialView.translucentAlpha = 0.9;
+        _TutorialView.translucentStyle = UIBarStyleBlack;
+        _TutorialView.translucentTintColor = [UIColor clearColor];
+        _TutorialView.backgroundColor = [UIColor clearColor];
+        
+        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
+          
+        [_TutorialView addSubview:TutorImg];
+        [self.navigationController.view addSubview:_TutorialView];
+        NSLog(@"%@", _TutorialView);
+        //[self.navigationController presentModalViewController:TutorialView animated:YES];
+
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
     
@@ -212,6 +230,13 @@
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
 }
+
+
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"TEST TOUCH");
+}
+
 
 -(void) GetNowReadingData
 {
@@ -240,10 +265,13 @@
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     
     // 20140123 [CASPER] Add poetry parser
-    /*
+    
     if (Category != RESPONSIVE_PRAYER) {
         //NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-        PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
+        //PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
+        //-(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
+        PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
+
 
         //NSLog(@"%@", PoetryContentString);
     } else {
@@ -251,8 +279,7 @@
         PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
         
     }
-     */
-    PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+     
 
     // 20140123 [CASPER] Add poetry parser ==
 
@@ -506,7 +533,7 @@
         }
         
         // 20140123 [CASPER]
-        NSLog(@"%@", ContentStr);
+        //NSLog(@"%@", ContentStr);
         ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
         cell.textLabel.numberOfLines = 0;
@@ -529,7 +556,7 @@
         }
         
         // 20140123 [CASPER]
-        NSLog(@"%@", ContentStr);
+        //NSLog(@"%@", ContentStr);
         ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
         
@@ -588,7 +615,7 @@
 -(void) UpdateNewTableViewContentWithNewPoetry : (NSDictionary*) NewPoetry
 {
     NSString *ContentStr;
-    //POETRY_CATEGORY Category;
+    POETRY_CATEGORY Category;
 
     
     if (NewPoetry != nil) {
@@ -596,14 +623,15 @@
     }
     
     // 20140123 [CASPER] Add poetry parser
-    /*
+    
     Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
 
     if (Category != RESPONSIVE_PRAYER) {
-        ContentStr = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
+        //ContentStr = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
+        ContentStr = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
 
     }
-     */
+    
     // 20140123 [CASPER] Add poetry parser ==
 
     
@@ -822,6 +850,9 @@
                     [_HeadAndTailLab setHidden:NO];
                     [_HeadAndTailLab setText:@"MOST PREV"];
                     [_HeadAndTailLab setFrame:DefaultFrame];
+                    [_HeadAndTailLab setFont:_Font];
+                    [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
+                    [_HeadAndTailLab setShadowColor:[UIColor lightGrayColor]];
                     [self.view insertSubview:_HeadAndTailLab belowSubview:CurrentView];
                     
                 } else {
