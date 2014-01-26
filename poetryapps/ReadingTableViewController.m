@@ -11,6 +11,7 @@
 #import "ReadingTableViewController.h"
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
+#import "ReadingTutorialView.h"
 
 #define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
@@ -116,7 +117,12 @@
     _PoetryContentParser = [[Poetryparser alloc] init];
     
     _HeadAndTailLab = [[UILabel alloc] init];
-    [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
+    //[_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
+    [_HeadAndTailLab setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                               green:(159/255.0f)
+                                                                blue:(191/255.0f)
+                                                               alpha:0.8]];
+
     
     
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
@@ -822,6 +828,9 @@
                     [_HeadAndTailLab setHidden:NO];
                     [_HeadAndTailLab setText:@"MOST PREV"];
                     [_HeadAndTailLab setFrame:DefaultFrame];
+                    [_HeadAndTailLab setFont:_Font];
+                    [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
+                    [_HeadAndTailLab setShadowColor:[UIColor lightGrayColor]];
                     [self.view insertSubview:_HeadAndTailLab belowSubview:CurrentView];
                     
                 } else {
