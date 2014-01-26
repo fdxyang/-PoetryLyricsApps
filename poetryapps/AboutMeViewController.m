@@ -81,7 +81,7 @@
     teamContact.backgroundColor = [UIColor grayColor];
     teamContact.textColor = [UIColor whiteColor];
     teamContact.textAlignment = NSTextAlignmentCenter;
-    [teamContact setText:@"聯絡我們：hipposcolor@gmail.com"];
+    [teamContact setText:@"聯絡我們：hippocolors@gmail.com"];
     [_Scroller addSubview:teamContact];
 }
 
