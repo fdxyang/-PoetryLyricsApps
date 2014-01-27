@@ -330,7 +330,7 @@
     BOOL isAreadyAddSymbol = FALSE;
     fileContents = input;
     
-    NSLog(@"kk input = %@",input);
+    //NSLog(@"kk input = %@",input);
     
     switch (size) {
         case POETRY_SETIING_FONT_SIZE_DEFAULT:
@@ -354,7 +354,7 @@
     
     for (NSString *line in lineArr)
     {
-        NSLog(@"line : %@",line);
+        //NSLog(@"line : %@",line);
         lineattrcount = lineattrcount+1;
         if(![line length])
         {
