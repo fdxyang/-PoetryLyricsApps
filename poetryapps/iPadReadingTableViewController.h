@@ -13,7 +13,7 @@
 #import "Animations.h"
 #import "iPadNavTableHeader.h"
 #import "SettingViewController.h"
-
+#import "ILTranslucentView.h"
 
 
 #define UI_READING_TABLEVIEW_INIT_IPAD       CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)
@@ -114,7 +114,7 @@ typedef enum {
 } COVER_VIEW_STATE;
 
 
-@property (nonatomic, strong)   UIView                  *CoverView;
+@property (nonatomic, strong)   ILTranslucentView       *CoverView;
 @property (nonatomic, strong)   UITableView             *CategoryTableView;
 
 @property (nonatomic, strong)   NSMutableArray          *TableData;

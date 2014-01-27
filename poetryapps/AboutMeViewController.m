@@ -45,6 +45,8 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
+    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"ARROW_Left.png"]];
+    self.navigationController.navigationBar.topItem.title = @"";
     
 }
 

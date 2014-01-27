@@ -1432,8 +1432,13 @@
     
     if (_CoverView == nil) {
         
-        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        _CoverView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        //_CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        
+        _CoverView.translucentAlpha = 0.9;
+        _CoverView.translucentStyle = UIBarStyleBlack;
+        _CoverView.translucentTintColor = [UIColor clearColor];
+        _CoverView.backgroundColor = [UIColor clearColor];
         
     }
     [_CoverView setTag:TAG_COVER_VIEW];

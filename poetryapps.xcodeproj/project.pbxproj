@@ -59,6 +59,8 @@
 		1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1C018956A64004FD68C /* ILTranslucentView.m */; };
 		1099C1C418956C3D004FD68C /* Tutor_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1C218956C3D004FD68C /* Tutor_Black.png */; };
 		1099C1C518956C3D004FD68C /* Tutor_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 1099C1C318956C3D004FD68C /* Tutor_White.png */; };
+		10A3067318960F4800BA3B9D /* ARROW_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067218960F4800BA3B9D /* ARROW_Right.png */; };
+		10A3067518960F4F00BA3B9D /* ARROW_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067418960F4F00BA3B9D /* ARROW_Left.png */; };
 		10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */; };
 		10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */; };
 		10A5EFA0187C3C3000ECAD99 /* welcome_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9E187C3C3000ECAD99 /* welcome_page.png */; };
@@ -919,6 +921,8 @@
 		1099C1C218956C3D004FD68C /* Tutor_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_Black.png; sourceTree = "<group>"; };
 		1099C1C318956C3D004FD68C /* Tutor_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_White.png; sourceTree = "<group>"; };
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
+		10A3067218960F4800BA3B9D /* ARROW_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Right.png; sourceTree = "<group>"; };
+		10A3067418960F4F00BA3B9D /* ARROW_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Left.png; sourceTree = "<group>"; };
 		10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPhone@2x.png"; sourceTree = "<group>"; };
 		10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPhone.png; sourceTree = "<group>"; };
 		10A5EF9E187C3C3000ECAD99 /* welcome_page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page.png; sourceTree = "<group>"; };
@@ -2029,6 +2033,8 @@
 				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
 				1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */,
 				105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */,
+				10A3067218960F4800BA3B9D /* ARROW_Right.png */,
+				10A3067418960F4F00BA3B9D /* ARROW_Left.png */,
 			);
 			name = image;
 			path = poetryapps/Resource/image;
@@ -2944,6 +2950,7 @@
 				CB54FFE818695CCE00CED47E /* 707.txt in Resources */,
 				CB54FE2418695CCE00CED47E /* 30.txt in Resources */,
 				CB54FF7518695CCE00CED47E /* 603.txt in Resources */,
+				10A3067518960F4F00BA3B9D /* ARROW_Left.png in Resources */,
 				CB54FE5B18695CCE00CED47E /* 35.txt in Resources */,
 				CB54FE1B18695CCE00CED47E /* 292.txt in Resources */,
 				CB54FE2D18695CCE00CED47E /* 308.txt in Resources */,
@@ -3113,6 +3120,7 @@
 				CB54FF7D18695CCE00CED47E /* 610.txt in Resources */,
 				CB54FE0818695CCE00CED47E /* 275.txt in Resources */,
 				CB54FDBF18695CCE00CED47E /* 209.txt in Resources */,
+				10A3067318960F4800BA3B9D /* ARROW_Right.png in Resources */,
 				CB54FE8C18695CCE00CED47E /* 394.txt in Resources */,
 				CB54FEA718695CCE00CED47E /* 418.txt in Resources */,
 				CB54FEA518695CCE00CED47E /* 416.txt in Resources */,
