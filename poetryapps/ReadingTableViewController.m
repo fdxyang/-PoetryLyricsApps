@@ -638,7 +638,7 @@
         
     }
      */
-    NSLog(@"Height = %f", Height);
+    // NSLog(@"Height = %f", Height);
     return Height;
 }
 
