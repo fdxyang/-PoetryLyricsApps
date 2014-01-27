@@ -55,7 +55,8 @@
     [poetryBtn setTitle:@"詩歌" forState:UIControlStateNormal];
     [responseBtn setTitle:@"啟應文" forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
     
     //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
@@ -130,7 +131,8 @@
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
     //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -156,7 +158,8 @@
     //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
-    [poetryBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [poetryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [poetryBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn2_selected.png"] forState:UIControlStateDisabled];
     [poetryBtn setEnabled:NO];
     //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -182,7 +185,8 @@
     //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [responseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [responseBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn3_selected.png"] forState:UIControlStateDisabled];
     [responseBtn setEnabled:NO];
 }
 
