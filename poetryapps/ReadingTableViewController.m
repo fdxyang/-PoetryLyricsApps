@@ -17,6 +17,7 @@
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
+#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
@@ -65,8 +66,9 @@
     UIColor                 *_FontThemeColor;
     
     UILabel                 *_NavigationTitleLab;
-    ILTranslucentView       *_TutorialView;
 
+    ILTranslucentView       *_TutorialView;
+    BOOL                    isTutorialShowed;
 }
 
 @end
@@ -124,14 +126,9 @@
                                                                green:(159/255.0f)
                                                                 blue:(191/255.0f)
                                                                alpha:0.8]];
-
     
-    
-    //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
-    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
-    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     _FontThemeColor = [[UIColor alloc] init];
 }
 
@@ -160,7 +157,7 @@
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
     
-    
+
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
@@ -181,31 +178,55 @@
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
     // 2014.01.25 [CASPER] Add Turorial view
+    isTutorialShowed = NO;
     if (_PoetrySetting.TutorialShowed == NO) {
-        
+        isTutorialShowed = YES;
+
+        //UIButton    *OkayBtn = [[UIButton alloc] initWithFrame:UI_READING_TUORIAL_OK_BTN_RECT];
         UIImageView *TutorImg = [[UIImageView alloc] initWithFrame:UI_READING_TUTORIAL_IMG_RECT];
+        
         [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
 
         if (IS_IPHONE5) {
+            //_TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
             _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
-            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2)];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2 + 30)];
+            //[OkayBtn setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, TutorImg.frame.origin.y - 35)];
         } else {
             _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
-            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2)];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2 + 20)];
+            //[OkayBtn setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, TutorImg.frame.origin.y - 30)];
         }
         
-
+        _TutorialView.tag = TAG_TUTORIAL_VIEW;
         
+        /*
+        OkayBtn.layer.cornerRadius = 5;
+        OkayBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        OkayBtn.layer.borderWidth = 1.0f;
+        [OkayBtn.titleLabel setFrame:CGRectMake(0, 0, OkayBtn.frame.size.width, OkayBtn.frame.size.height)];
+        [OkayBtn.titleLabel setText:@"我知道了"];
+        OkayBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [OkayBtn.titleLabel setTextColor:[UIColor whiteColor]];
+        [OkayBtn.titleLabel setHidden:NO];
+         
+        NSLog(@"%@", OkayBtn.titleLabel);
+         */
+        
+        _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
+        _TutorialView.exclusiveTouch = NO;
         _TutorialView.translucentAlpha = 0.9;
         _TutorialView.translucentStyle = UIBarStyleBlack;
         _TutorialView.translucentTintColor = [UIColor clearColor];
         _TutorialView.backgroundColor = [UIColor clearColor];
-        
+        NSLog(@"%d", _TutorialView.isExclusiveTouch);
+
         //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
-          
+        
+        //[_TutorialView addSubview:OkayBtn];
         [_TutorialView addSubview:TutorImg];
         [self.navigationController.view addSubview:_TutorialView];
-        NSLog(@"%@", _TutorialView);
+        //NSLog(@"%@", _TutorialView);
         //[self.navigationController presentModalViewController:TutorialView animated:YES];
 
     }
@@ -220,7 +241,8 @@
     [_TableView2 removeFromSuperview];
     
     // 2014.01.25 [CASPER] Add Turorial view
-    if (_PoetrySetting.TutorialShowed == NO) {
+    if (isTutorialShowed == YES) {
+        isTutorialShowed = NO;
         [_TutorialView removeFromSuperview];
         [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
     }
@@ -232,8 +254,19 @@
 }
 
 
+-(void) touchesBegan:(NSSet *)touches withEvents:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+
+    NSLog(@"touchesBegan");
+}
+
+
+
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super touchesEnded:touches withEvent:event];
+
     NSLog(@"TEST TOUCH");
 }
 
@@ -378,6 +411,7 @@
 // Calculating line number for each cell in table view
 // accroding to the threshold for every kind of font size
 //
+/*
 - (NSInteger) CalculateLineNumberWithContentString : (NSString *) ContentStr
 {
     NSInteger   LineNumber = 1;
@@ -486,6 +520,7 @@
     }
     return LineNumber;
 }
+*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -495,6 +530,7 @@
         return [_ReadingTableArray2 count];
     }
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -571,7 +607,7 @@
     CGFloat     Height = 0;
     NSString    *ContentStr;
     NSString    *Keyword = @"@@";
-    UInt16      LineNumber;
+//    UInt16      LineNumber;
 
     
     
@@ -810,6 +846,13 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+    NSLog(@"TOUCH!! %d", touch.view.tag);
+    if (isTutorialShowed) {
+        [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
+        [_TutorialView removeFromSuperview];
+        isTutorialShowed = NO;
+        return NO;
+    }
     return YES;
 }
 
@@ -825,7 +868,7 @@
         [self HandleGestureByUsing:recognizer OnCurrentView:_TableView2 andTheOtherView:_TableView1];
         
     }
-
+    
 }
 
 -(void) HandleGestureByUsing : (UIPanGestureRecognizer *)recognizer

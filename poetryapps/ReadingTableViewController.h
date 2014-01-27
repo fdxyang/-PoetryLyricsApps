@@ -21,6 +21,7 @@
 
 #define READING_VIEW_ERROR_LOG(fmt, ...) NSLog((@"ERROR !! %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
+#define TAG_TUTORIAL_VIEW 1
 
 @interface ReadingTableViewController : UIViewController <UIGestureRecognizerDelegate,
                                                             UITableViewDataSource,
