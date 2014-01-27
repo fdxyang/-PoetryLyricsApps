@@ -192,6 +192,7 @@
     
     NSArray *lineArr = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
+    //NSLog(@"linearr = %@",lineArr);
     for (NSString *line in lineArr)
     {
         lineattrcount = lineattrcount+1;
@@ -351,6 +352,7 @@
     
     NSArray *lineArr = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
+    //NSLog(@"linearr = %@",lineArr);
     
     for (NSString *line in lineArr)
     {
@@ -359,7 +361,10 @@
         if(![line length])
         {
             if(lineattrcount == 1 || lineattrcount > 3)
+            {
+                //NSLog(@"debug1");
                 [poetryParserContent appendString:@"\n"];
+            }
         }
         else
         {
@@ -372,24 +377,28 @@
                    [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"；"] ||
                    [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"，"] ||
                    [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"！"] ||
-                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"、"])
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"、"] ||
+                   [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"？"])
                 {
                     //NSLog(@"debug 1");
                     //NSLog(@"kk index = %ld,wordcount=%ld",index,wordcount);
                     
                     if(isAreadyAddSymbol)
                     {
+                        //NSLog(@"debug2");
                         isAreadyAddSymbol = FALSE;
                         continue;
                     }
                     
                     if(wordcount+1 < lineNum+1 && (index+wordcount+1) < lineNum+1)
                     {
+                        //NSLog(@"debug3");
                         [poetryParserContent appendString:templine];
                         [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
                         
                         if(index+wordcount+1 < lineNum+1)
                         {
+                            //NSLog(@"debug4");
                             index = index+wordcount+1;
                         }
                         else
@@ -401,6 +410,7 @@
                     {
                         if(wordcount+1 > lineNum+1 && (index+wordcount+1) >= lineNum+1)
                         {
+                            //NSLog(@"debug5");
                             [poetryParserContent appendString:@"\n"];
                             [poetryParserContent appendString:templine];
                             [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
@@ -412,6 +422,7 @@
                         }
                         else
                         {
+                            //NSLog(@"debug6");
                             index = wordcount+1;
                         }
                         
@@ -425,7 +436,7 @@
                 }
                 else if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"."])
                 {
-                    //NSLog(@"debug 2");
+                    //NSLog(@"debug7");
                     [poetryParserContent appendString:templine];
                     [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i,1)]];
                     [poetryParserContent appendString:@"\n"];
@@ -435,14 +446,14 @@
                 }
                 else if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"	"])
                 {
-                    //NSLog(@"debug 3");
+                    //NSLog(@"debug8");
                     wordcount = 0;
                     index=0;
                     continue;
                 }
                 else
                 {
-                    //NSLog(@"debug 4");
+                    //NSLog(@"debug9");
                     if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"1"]||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"2"]||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"3"]||
@@ -453,8 +464,11 @@
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"8"]||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"9"])
                     {
-                        if(lineattrcount != [lineArr count])
+                        if(lineattrcount != [lineArr count] && lineattrcount > 3)
+                        {
+                            //NSLog(@"debug10");
                             [poetryParserContent appendString:@"\n"];
+                        }
                     }
                     
                     [templine appendString:[line substringWithRange:NSMakeRange(i,1)]];
@@ -463,37 +477,37 @@
                     
                     if(wordcount >= lineNum)
                     {
-                        //NSLog(@"debug 5");
                         if(index+wordcount >= lineNum)
                         {
-                            //NSLog(@"debug 6");
                             if(index+wordcount == lineNum && i+1 < [line length])
                             {
-                                //NSLog(@"debug 7");
                                 if([[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"："] ||
                                    [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"。"] ||
                                    [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"；"] ||
                                    [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"，"] ||
                                    [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"！"] ||
-                                   [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"、"])
+                                   [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"、"] ||
+                                   [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"？"])
                                 {
-                                    //NSLog(@"debug 8");
+                                    //NSLog(@"debug11");
                                     [poetryParserContent appendString:templine];
                                     [poetryParserContent appendString:[line substringWithRange:NSMakeRange(i+1,1)]];
                                     isAreadyAddSymbol = TRUE;
                                 }
+                                //NSLog(@"debug12");
                             }
-                            [poetryParserContent appendString:@"\n"];
+                            //NSLog(@"debug13");
+                            if(index > 1)
+                                [poetryParserContent appendString:@"\n"];
                         }
                         
                         if(!isAreadyAddSymbol)
                         {
-                            //NSLog(@"debug 10");
+                            //NSLog(@"debug14");
                             [poetryParserContent appendString:templine];
                             [poetryParserContent appendString:@"\n"];
                         }
-                        
-                        //NSLog(@"debug 11");
+                        //NSLog(@"debug15");
                         [templine setString:@""];
                         wordcount=0;
                         index=0;
