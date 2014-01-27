@@ -266,10 +266,8 @@
     
     // 20140123 [CASPER] Add poetry parser
     
-    if (Category != RESPONSIVE_PRAYER) {
-        //NSLog(@"%@", [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-        //PoetryContentString = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
-        //-(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size;
+    if (Category == POETRYS) {
+
         PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
 
 
@@ -626,8 +624,7 @@
     
     Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
 
-    if (Category != RESPONSIVE_PRAYER) {
-        //ContentStr = [_PoetryContentParser parsePoetryContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
+    if (Category == POETRYS) {
         ContentStr = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
 
     }
