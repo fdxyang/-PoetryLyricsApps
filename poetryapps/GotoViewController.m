@@ -68,8 +68,6 @@
     
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
-    self.navigationItem.title = @"快速查詢";
-    
     _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
     
@@ -95,6 +93,8 @@
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
     
+    self.navigationItem.title = @"快速查詢";
+    
     NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [UIColor whiteColor],NSForegroundColorAttributeName,
                                     [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
@@ -108,6 +108,8 @@
 
     _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
     [_TableView reloadData];
+    
+    self.navigationItem.title = @"快速查詢";
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,6 +33,7 @@
     responseAttr = [[NSMutableArray alloc] init];
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
+    NSString *title;
     
     UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [tempImageView setFrame:_detailTableView.frame];
@@ -48,6 +49,8 @@
             GOTO_VIEW_LOG(@"guideAttr Content = %@", [[guideAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         
+        title = @"基督基石";
+        
         //NSLog(@"guide count = %d",[guideAttr count]);
     }
     else if(_tableViewType == 1) //poetry
@@ -60,6 +63,7 @@
             GOTO_VIEW_LOG(@"Poetry Content = %@", [[poetryAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         GOTO_VIEW_LOG(@"poetryAttr count = %d",[poetryAttr count]);
+        title = @"詩歌";
     }
     else if(_tableViewType == 2) //response
     {
@@ -71,6 +75,7 @@
             GOTO_VIEW_LOG(@"responseAttr Content = %@", [[responseAttr firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         }
         //NSLog(@"responseAttr count = %d",[responseAttr count]);
+        title = @"啟應文";
     }
     
     // Kevin 20140124 set title background color 
@@ -78,6 +83,21 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
+    
+    UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+    _NavigationTitleLab.text = title;
+    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+    _NavigationTitleLab.textColor = [UIColor whiteColor];
+    
+    self.navigationItem.titleView = _NavigationTitleLab;
+    CGSize Size = CGSizeMake(180, 200);
+    Size = [_NavigationTitleLab sizeThatFits:Size];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 180, Size.height)];
+    
+    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"ARROW_Left.png"]];
+    self.navigationController.navigationBar.topItem.title = @"";
 }
 
 - (void)didReceiveMemoryWarning
