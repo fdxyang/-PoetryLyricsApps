@@ -125,7 +125,7 @@
     [_HeadAndTailLab setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                green:(159/255.0f)
                                                                 blue:(191/255.0f)
-                                                               alpha:0.8]];
+                                                               alpha:1]];
     
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
@@ -931,7 +931,7 @@
                 if (_HeadAndTailFlag) {
                     
                     [_HeadAndTailLab setHidden:NO];
-                    [_HeadAndTailLab setText:@"MOST PREV"];
+                    [_HeadAndTailLab setText:@" 最前一頁"];
                     [_HeadAndTailLab setFrame:DefaultFrame];
                     [_HeadAndTailLab setFont:_Font];
                     [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
@@ -955,8 +955,11 @@
                 if (_HeadAndTailFlag) {
                     
                     [_HeadAndTailLab setHidden:NO];
-                    [_HeadAndTailLab setText:@"LATEST"];
+                    [_HeadAndTailLab setText:@" 最後一頁"];
                     [_HeadAndTailLab setFrame:NextPoetryFrame];
+                    [_HeadAndTailLab setFont:_Font];
+                    [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
+                    [_HeadAndTailLab setShadowColor:[UIColor lightGrayColor]];
                     [self.view insertSubview:_HeadAndTailLab aboveSubview:CurrentView];
                     
                 } else {
