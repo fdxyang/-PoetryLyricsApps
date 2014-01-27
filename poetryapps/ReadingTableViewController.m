@@ -157,6 +157,8 @@
         _FontThemeColor = [UIColor whiteColor];
 
     }
+    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
+    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
     
     
     _HeadAndTailFlag = NO;
@@ -172,9 +174,7 @@
     }
     [_TableView1 reloadData];
     [self.view addSubview:_TableView1];
-    _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
-    _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
-    
+
     // 2014.01.21 [CASPER] color setting
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                                     green:(159/255.0f)
@@ -572,6 +572,11 @@
     NSString    *ContentStr;
     NSString    *Keyword = @"@@";
     UInt16      LineNumber;
+
+    
+    
+    UILabel *TempLabel = [[UILabel alloc] init];
+    CGSize Size = CGSizeMake(280, 2000);
     
     if (tableView.tag == 1) {
         ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
@@ -579,6 +584,42 @@
         ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
     }
     
+    if ([ContentStr hasPrefix:Keyword]) {
+        
+        
+        
+        [TempLabel setFont:_BoldFont];
+        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:Keyword withString:@""];
+        TempLabel.text = ContentStr;
+        TempLabel.numberOfLines = 0;
+        Size = [TempLabel sizeThatFits:Size];
+        //NSLog(@"%@",_Font);
+        //NSLog(@"text length = %d Index path = %d Size height = %f", [ContentStr length], indexPath.row, Size.height);
+        
+        if (Size.height == 0) {
+            Height = (_PoetrySetting.SettingFontSize + 10);
+        } else {
+            Height = Size.height + 10;
+        }
+
+    } else {
+        
+        
+        [TempLabel setFont:_Font];
+        TempLabel.text = ContentStr;
+        TempLabel.numberOfLines = 0;
+        Size = [TempLabel sizeThatFits:Size];
+        //NSLog(@"%@",_Font);
+        //NSLog(@"text length = %d Index path = %d Size height = %f", [ContentStr length], indexPath.row, Size.height);
+        
+        if (Size.height == 0) {
+            Height = (_PoetrySetting.SettingFontSize + 10);
+        } else {
+            Height = Size.height + 10;
+        }
+
+    }
+        /*
     LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
     
     if ([ContentStr hasPrefix:Keyword]) {
@@ -589,13 +630,15 @@
         }
         
     } else {
+        
         Height = (_PoetrySetting.SettingFontSize + 10) * LineNumber;
         if (LineNumber > 1) {
             Height = Height - 5;
         }
         
     }
-    
+     */
+    NSLog(@"Height = %f", Height);
     return Height;
 }
 
