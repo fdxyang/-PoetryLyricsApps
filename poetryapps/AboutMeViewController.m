@@ -84,7 +84,7 @@
     
     UILabel *teamName = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height,320, 50)]; // (0,180,320,50)
     [teamName setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:30.0]];
-    [teamName setText:@"Hippos Color"];
+    [teamName setText:@"Hippo Colors"];
     teamName.textAlignment = NSTextAlignmentCenter;
     [_Scroller addSubview:teamName];
     
