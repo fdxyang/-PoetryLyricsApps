@@ -190,11 +190,13 @@
         if (IS_IPHONE5) {
             //_TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
             _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
-            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2 + 30)];
+
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2 )];
             //[OkayBtn setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, TutorImg.frame.origin.y - 35)];
         } else {
             _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_3_5_INCH];
-            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2 + 20)];
+            [TutorImg setFrame:CGRectMake(0, 0, UI_READING_TUTORIAL_IMG_RECT.size.width - 40, UI_READING_TUTORIAL_IMG_RECT.size.height - 40)];
+            [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_3_5_INCH_HEIGHT / 2)];
             //[OkayBtn setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, TutorImg.frame.origin.y - 30)];
         }
         

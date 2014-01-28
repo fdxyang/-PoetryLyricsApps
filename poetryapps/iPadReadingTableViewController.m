@@ -523,7 +523,7 @@
         if (tableView.tag == 1) {
             string = [_ReadingTableArray1 objectAtIndex:READING_POETRY_NAME_INDEX];
         } else {
-            string =  [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
+            string = [_ReadingTableArray2 objectAtIndex:READING_POETRY_NAME_INDEX];
         }
         
         [label setText:string];
