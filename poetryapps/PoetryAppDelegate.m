@@ -7,6 +7,13 @@
 //
 
 #import "PoetryAppDelegate.h"
+
+// 2014.01.28 [CASPER] remove welcome view and move the init process to app delegate
+#import "PoetryCoreData.h"
+#import "PoetrySettingCoreData.h"
+#import "PoetrySaveIntoCoreData.h"
+// 2014.01.28 [CASPER] remove welcome view and move the init process to app delegate ==
+
 @implementation PoetryAppDelegate
 
 // 2013.11.26 [CASPER] Core Data
@@ -18,6 +25,14 @@
 {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    NSLog(@"TEST in delegate");
+    PoetrySaveIntoCoreData *saveIntoCoreData = [[PoetrySaveIntoCoreData alloc]init];
+    BOOL isSuccessful = [saveIntoCoreData isCoreDataSave];
+    if(!isSuccessful)
+        NSLog(@"Save into core data Error!!!!!!!!!!");
+    
+
     return YES;
 }
 							
