@@ -543,7 +543,7 @@
     switch (size) {
         case POETRY_SETIING_FONT_SIZE_DEFAULT:
             lineNum = 12;
-            isChangeDisplay = FALSE;
+            isChangeDisplay = TRUE;
             break;
             
         case POETRY_SETIING_FONT_SIZE_SMALL:
@@ -553,7 +553,7 @@
             
         case POETRY_SETIING_FONT_SIZE_LARGE:
             lineNum = 9;
-            isChangeDisplay = FALSE;
+            isChangeDisplay = TRUE;
             break;
             
         default:
@@ -624,7 +624,7 @@
                         //NSLog(@"debug6");
                         
                         [templine appendString:[line substringWithRange:NSMakeRange(i,1)]];
-                        if([templine length] == 14)
+                        if([templine length] == lineNum)
                         {
                             //NSLog(@"debug7");
                             [templine appendString:@"\n"];
