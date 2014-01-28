@@ -303,7 +303,7 @@
     
     if (Category == POETRYS) {
 
-        PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
+        PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize2:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
 
 
         //NSLog(@"%@", PoetryContentString);
@@ -706,7 +706,7 @@
     Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
 
     if (Category == POETRYS) {
-        ContentStr = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
+        ContentStr = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize2:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
 
     }
     
