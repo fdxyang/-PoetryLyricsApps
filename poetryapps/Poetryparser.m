@@ -538,7 +538,7 @@
     BOOL isChangeDisplay = FALSE;
     fileContents = input;
     
-    NSLog(@"kk input = %@",input);
+    //NSLog(@"kk input = %@",input);
     
     switch (size) {
         case POETRY_SETIING_FONT_SIZE_DEFAULT:
