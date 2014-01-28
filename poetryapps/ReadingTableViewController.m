@@ -1074,10 +1074,9 @@
         
     } else {
         
-        NSLog(@"HERE");
         if (abs(location.x - _TouchInit.x) > SWITCH_VIEW_THRESHOLD) {
             
-            [UIView animateWithDuration:0.2
+            [UIView animateWithDuration:0.1
                              animations:^{
                                  
                                  if (_SlideDirection == SlideLabelLeftToRigth) {
@@ -1137,7 +1136,7 @@
                              }];
         } else {
             
-            [UIView animateWithDuration:0.2
+            [UIView animateWithDuration:0.1
                              animations:^{
                                  
                                  if (_SlideDirection == SlideLabelLeftToRigth) {
