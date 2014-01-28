@@ -100,9 +100,10 @@
     //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
     
     
-    _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
-    _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
-
+    _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
+    //_NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
+    _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
+    
     _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
     _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
 
@@ -1392,12 +1393,17 @@
     if (_PoetrySetting.SettingTheme == THEME_LIGHT_DARK) {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgDarkNormal forState:UIControlStateNormal];
+        NSLog(@"SET");
         //[_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+
+
         
     } else {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
-        //[_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+        [_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateSelected];
         
     }
 }
@@ -1429,16 +1435,19 @@
     [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
     [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
     
-    
+        
     if (_CoverView == nil) {
         
         //_CoverView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
+        _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
         _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
-        
+        //_CoverView.backgroundColor = [UIColor colorWithRed:(145/255.0f) green:(145/255.0f) blue:(145/255.0f) alpha:0.7 ];
+        /*
         _CoverView.translucentAlpha = 0.9;
         _CoverView.translucentStyle = UIBarStyleBlack;
         _CoverView.translucentTintColor = [UIColor clearColor];
         _CoverView.backgroundColor = [UIColor clearColor];
+         */
         
     }
     [_CoverView setTag:TAG_COVER_VIEW];

@@ -114,7 +114,7 @@ typedef enum {
 } COVER_VIEW_STATE;
 
 
-@property (nonatomic, strong)   ILTranslucentView       *CoverView;
+@property (nonatomic, strong)   UIView                  *CoverView;
 @property (nonatomic, strong)   UITableView             *CategoryTableView;
 
 @property (nonatomic, strong)   NSMutableArray          *TableData;
