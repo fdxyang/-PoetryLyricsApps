@@ -45,6 +45,10 @@
     BOOL                    _isTocTableOn;      //[CASPER] 2013.12.27
     BOOL                    _isHandlingTouchSwitch;     // NOT USED YET
     
+    
+    ILTranslucentView       *_TutorialView;
+    BOOL                    isTutorialShowed;
+
 }
 
 @end
@@ -136,7 +140,6 @@
         
     }
     
-    
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
@@ -152,6 +155,36 @@
     _PoetryNameFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40];
     
     [self InitCoverViewItems];
+    
+    // 2014.01.25 [CASPER] Add Turorial view
+    isTutorialShowed = NO;
+    if (_PoetrySetting.TutorialShowed == NO) {
+        isTutorialShowed = YES;
+        
+        //UIButton    *OkayBtn = [[UIButton alloc] initWithFrame:UI_READING_TUORIAL_OK_BTN_RECT];
+        UIImageView   *TutorImg = [[UIImageView alloc] initWithFrame:UI_IPAD_READING_TUTORIAL_IMG_RECT];
+        _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_READING_TABLEVIEW_INIT_IPAD];
+
+        [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
+        [TutorImg setCenter:CGPointMake(UI_IPAD_SCREEN_WIDTH / 2, UI_IPAD_SCREEN_HEIGHT / 2 )];
+
+        [_TutorialView setTag:TAG_TUTORIAL_VIEW];
+        
+        _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
+        _TutorialView.exclusiveTouch = NO;
+        _TutorialView.translucentAlpha = 0.9;
+        _TutorialView.translucentStyle = UIBarStyleBlack;
+        _TutorialView.translucentTintColor = [UIColor clearColor];
+        _TutorialView.backgroundColor = [UIColor clearColor];
+        
+        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
+        
+        //[_TutorialView addSubview:OkayBtn];
+        [_TutorialView addSubview:TutorImg];
+        [self.view addSubview:_TutorialView];
+        NSLog(@"%@", _TutorialView);
+    }
+    // 2014.01.25 [CASPER] Add Turorial view ==
 
 }
 
@@ -160,6 +193,16 @@
     [super viewDidDisappear:animated];
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
+    
+    // 2014.01.25 [CASPER] Add Turorial view
+    if (isTutorialShowed == YES) {
+        isTutorialShowed = NO;
+        [_TutorialView removeFromSuperview];
+        [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
+    }
+    // 2014.01.25 [CASPER] Add Turorial view ==
+    
+
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
     
 }
@@ -929,14 +972,7 @@
             [self CoverViewStateMachine];
             
         }
-        /*
-         } else {
-         
-         _CoverViewState = COVER_IDLE;
-         [self CoverViewStateMachine];
-         
-         }
-         */
+        
     }
 }
 
@@ -1107,6 +1143,13 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     
+    if (isTutorialShowed) {
+        [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
+        [_TutorialView removeFromSuperview];
+        isTutorialShowed = NO;
+        return NO;
+    }
+    
     if ((touch.view.tag == 1) || (touch.view.tag == 2)) {
         
         return YES;
@@ -1115,7 +1158,6 @@
         return NO;
     }
     
-
     return YES;
 }
 

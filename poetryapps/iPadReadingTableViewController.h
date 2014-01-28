@@ -59,13 +59,14 @@
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 
 
-
+#define UI_IPAD_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_IPAD_SCREEN_HEIGHT * 0.66, UI_IPAD_SCREEN_HEIGHT * 0.66)
 
 #define TAG_COVER_VIEW                  3
 #define TAG_NAVI_BTN                    6
 #define TAG_CATEGORY_TABLE_VIEW         4
 #define TAG_TOC_TABLE_VIEW              7
 #define TAG_SETTING_TABLE_VIEW          5
+#define TAG_TUTORIAL_VIEW               10
 
 
 @interface iPadReadingTableViewController : UIViewController <  UIGestureRecognizerDelegate,

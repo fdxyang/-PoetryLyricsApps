@@ -17,7 +17,7 @@
 #define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
-#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
+//#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
                                                                         UI_IOS7_NAV_BAR_HEIGHT, \
@@ -848,7 +848,6 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    NSLog(@"TOUCH!! %d", touch.view.tag);
     if (isTutorialShowed) {
         [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
         [_TutorialView removeFromSuperview];
