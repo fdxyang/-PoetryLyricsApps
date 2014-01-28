@@ -327,6 +327,37 @@
     return sectionStr;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView *view;
+    
+    if (section == 1)
+    {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width,30)];
+        /* Create custom view to display section header... */
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, tableView.frame.size.width-10,30)];
+        [label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15]];
+        label.textAlignment = NSTextAlignmentLeft;
+        
+        NSString *string = @"歷史記錄";
+        
+        [label setText:string];
+        label.textColor = [UIColor whiteColor];
+        [view addSubview:label];
+        [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                        green:(159/255.0f)
+                                                         blue:(191/255.0f)
+                                                        alpha:1]];
+        [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                         green:(159/255.0f)
+                                                          blue:(191/255.0f)
+                                                         alpha:1]]; //your background color...
+    }
+    
+    return view;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -334,7 +365,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
