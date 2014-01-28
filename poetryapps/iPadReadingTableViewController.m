@@ -99,15 +99,10 @@
                                                                 blue:(191/255.0f)
                                                                alpha:1]];
     
-    //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
-    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1];
-    //_LightBackgroundColor = [[UIColor alloc] initWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:1];
-    
     
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
-    //_NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
     _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
     
     _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
@@ -167,7 +162,6 @@
 
         [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
         [TutorImg setCenter:CGPointMake(UI_IPAD_SCREEN_WIDTH / 2, UI_IPAD_SCREEN_HEIGHT / 2 )];
-
         [_TutorialView setTag:TAG_TUTORIAL_VIEW];
         
         _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
@@ -176,13 +170,8 @@
         _TutorialView.translucentStyle = UIBarStyleBlack;
         _TutorialView.translucentTintColor = [UIColor clearColor];
         _TutorialView.backgroundColor = [UIColor clearColor];
-        
-        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
-        
-        //[_TutorialView addSubview:OkayBtn];
         [_TutorialView addSubview:TutorImg];
         [self.view addSubview:_TutorialView];
-        NSLog(@"%@", _TutorialView);
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
 
@@ -420,7 +409,6 @@
         
         if ([ContentStr isEqualToString:PoetryNameStr]) {
             
-            NSLog(@"PoetryNameStr = %@", [_ReadingTableArray2 objectAtIndex:1]);
             cell.textLabel.font = _PoetryNameFont;
             ContentStr = @"";
             
@@ -546,7 +534,7 @@
     } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
         Height = 44;
     }
-    //NSLog(@"tag = %d Height = %f", tableView.tag , Height);
+
     return Height;
 }
 
@@ -666,8 +654,6 @@
         [self InsertPoetryNameIntoReadingArray : _ReadingTableArray2 withPoetryName:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY]];
         [_TableView2 reloadData];
         _TableView2.contentOffset = CGPointMake(0, 0 - _TableView2.contentInset.top);
-
-        //_ReadingView1 = [self DisplayHandlingWithData:NewReadingData onView:_ReadingView1 ViewExist:NO];
         
     }
     
