@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    /*
     _TimerCount = 0;
     _Timer = [NSTimer scheduledTimerWithTimeInterval: 1
                                               target: self
@@ -74,7 +74,7 @@
     [self.view addSubview:_Loading];
     [_Loading startAnimating];
     
-
+*/
     
 }
 
