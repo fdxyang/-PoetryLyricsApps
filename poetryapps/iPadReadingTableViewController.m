@@ -90,8 +90,10 @@
     _CellHeightArray = [[NSMutableArray alloc] init];
     
     _HeadAndTailLab = [[UILabel alloc] init];
-    [_HeadAndTailLab setBackgroundColor:[UIColor lightGrayColor]];
-    
+    [_HeadAndTailLab setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                               green:(159/255.0f)
+                                                                blue:(191/255.0f)
+                                                               alpha:1]];
     
     //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
@@ -533,11 +535,54 @@
         [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                         green:(159/255.0f)
                                                          blue:(191/255.0f)
-                                                        alpha:1]];
-        [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
-                                                         green:(159/255.0f)
-                                                          blue:(191/255.0f)
-                                                         alpha:1]]; //your background color...
+                                                        alpha:0.8]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        
+    } else if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
+        
+        if (_isSearching) {
+            
+            UIFont *Font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+            //UIFont *Font = [UIFont systemFontOfSize:16];
+
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT)];
+            /* Create custom view to display section header... */
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width - 20, UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT)];
+            [label setFont:Font];
+            label.textAlignment = NSTextAlignmentLeft;
+            NSString *string;
+            
+            switch (section) {
+                case 0:
+                    string = nil;
+                    break;
+                    
+                case 1:
+                    string = @"基督基石";
+                    break;
+                    
+                case 2:
+                    string = @"聖詩";
+                    break;
+                    
+                case 3:
+                    string = @"啟應文";
+                    break;
+                default:
+                    break;
+            }
+
+            [label setText:string];
+            label.textColor = [UIColor whiteColor];
+            [view addSubview:label];
+            //[view setBackgroundColor:_LightBackgroundColor];
+            [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                            green:(159/255.0f)
+                                                             blue:(191/255.0f)
+                                                            alpha:0.8]];
+            [label setBackgroundColor:[UIColor clearColor]];
+
+        }
     }
     
     return view;
@@ -835,7 +880,8 @@
                                  nil];
     
     // Calculate height of table view
-    CGFloat TableHeight = ((UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchGuidedReading count]) +
+    CGFloat TableHeight = ((UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchHistoryData count]) +
+                           (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchGuidedReading count]) +
                            (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchPoetryData count]) +
                            (UI_IPAD_COVER_TABLE_CELL_HEIGHT * [_SearchRespose count]) +
                            3 * UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT);
@@ -855,7 +901,7 @@
                                   _CategoryTableView.frame.origin.y,
                                   _CategoryTableView.frame.size.width,
                                   TableHeight);
-    
+    NSLog(@"Table height = %f", TableHeight);
     [_CategoryTableView reloadData];
     
 }
@@ -1148,9 +1194,13 @@
                 
                 if (_HeadAndTailFlag) {
                     
+                    
                     [_HeadAndTailLab setHidden:NO];
-                    [_HeadAndTailLab setText:@"MOST PREV"];
+                    [_HeadAndTailLab setText:@" 最前一頁"];
                     [_HeadAndTailLab setFrame:DefaultFrame];
+                    [_HeadAndTailLab setFont:_Font];
+                    [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
+                    [_HeadAndTailLab setShadowColor:[UIColor lightGrayColor]];
                     [self.view insertSubview:_HeadAndTailLab belowSubview:CurrentView];
                     
                 } else {
@@ -1170,8 +1220,11 @@
                 if (_HeadAndTailFlag) {
                     
                     [_HeadAndTailLab setHidden:NO];
-                    [_HeadAndTailLab setText:@"LATEST"];
+                    [_HeadAndTailLab setText:@" 最後一頁"];
                     [_HeadAndTailLab setFrame:NextPoetryFrame];
+                    [_HeadAndTailLab setFont:_Font];
+                    [_HeadAndTailLab setTextColor:[UIColor whiteColor]];
+                    [_HeadAndTailLab setShadowColor:[UIColor lightGrayColor]];
                     [self.view insertSubview:_HeadAndTailLab aboveSubview:CurrentView];
                     
                 } else {
@@ -1454,7 +1507,17 @@
     
     if (_SearchBar == nil) {
         _SearchBar = [[UISearchBar alloc] initWithFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+        
         _SearchBar.delegate = self;
+        [_SearchBar setBarTintColor:[[UIColor alloc] initWithRed:(147/255.0f)
+                                                           green:(208/255.0f)
+                                                            blue:(202/255.0f)
+                                                           alpha:1]];
+        [_SearchBar setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                              green:(159/255.0f)
+                                                               blue:(191/255.0f)
+                                                              alpha:1]];
+
     }
     
     if (_CategoryTableView == nil) {
@@ -1648,6 +1711,11 @@
     _NavigationHeader = (iPadNavTableHeader *)[subviewArray objectAtIndex:0];
     [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
     [_NavigationHeader.BackBtn addTarget:self action:@selector(RemoveTocTableViewAnimation) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_NavigationHeader setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                 green:(159/255.0f)
+                                                                  blue:(191/255.0f)
+                                                                alpha:0.8]];
 }
 
 -(void) ExecuteTableViewAnnimation
@@ -1677,7 +1745,7 @@
     [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
     [_CoverView addSubview:_SearchBar];
     
-    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:450.0];
+    [Animations moveLeft:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:350.0 + 10];
     [Animations moveRight:_SearchBar andAnimationDuration:0.2 andWait:YES andLength:20.0];
     [Animations moveLeft:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:20.0];
     [Animations moveRight:_SearchBar andAnimationDuration:0.05 andWait:YES andLength:12.0];
