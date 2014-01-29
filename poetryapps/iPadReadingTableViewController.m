@@ -100,7 +100,7 @@
                                                                alpha:1]];
     
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
     _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
