@@ -320,7 +320,7 @@
     return poetryParserContent;
 }
 
--(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size
+-(NSString *)parseContentBySymbolAndAdjustFontSize2:(NSString *)input Fontsize:(NSUInteger)size
 {
     NSString *fileContents;
     NSMutableString *poetryParserContent = [[NSMutableString alloc]init];
@@ -528,7 +528,7 @@
     return poetryParserContent;
 }
 
--(NSString *)parseContentBySymbolAndAdjustFontSize2:(NSString *)input Fontsize:(NSUInteger)size
+-(NSString *)parseContentBySymbolAndAdjustFontSize:(NSString *)input Fontsize:(NSUInteger)size
 {
     NSString *fileContents;
     NSMutableString *poetryParserContent = [[NSMutableString alloc]init];

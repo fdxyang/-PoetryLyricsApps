@@ -129,4 +129,77 @@
     }
     return TRUE;
 }
+
+- (NSArray*) getPlistContent
+{
+    NSMutableArray *plistFileList = [[NSMutableArray alloc]init];
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    NSString *str;
+    for(int i = 0 ;i < 721 ; i++)
+    {
+        str = [NSString stringWithFormat:@"file_%d",i];
+        
+        if([plistData objectForKey:str])
+        {
+            NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
+            [plistFileList addObject:str];
+        }
+        else
+            break;
+    }
+    
+    return plistFileList;
+}
+
+- (BOOL)isCheckPlistFileExist
+{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    
+    NSString *str;
+    for(int i = 0 ;i < 721 ; i++)
+    {
+        str = [NSString stringWithFormat:@"file_%d",i+1];
+        
+        if([plistData objectForKey:str])
+        {
+            NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
+            return TRUE;
+        }
+        else
+            break;
+    }
+    
+    return FALSE;
+}
+
+- (BOOL)isUpdatePlistFile
+{
+    //NSDictionary *poetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
+    return FALSE;
+}
+
+/*
+ Core data update poetry API
+ Input :
+ (NSDictionary *) OldPoetry, (NSDictionary *) NewPoetry
+ 
+ Output :
+ Success or not
+ 
+ Use case :
+ 1. Get the poetry dictionary by the usual way.
+ 2. Package the new poetry
+ 3. Put the new poetry dictionary in "NewPoetry" argument
+ 
+ Following is the example FYR :
+ 
+ NSLog(@"CASPER TEST !!!");
+ NSDictionary *Dic = _PoetryNowReading;
+ [Dic setValue:@"CASPER TEST" forKey:POETRY_CORE_DATA_CONTENT_KEY];
+ NSLog(@"Return = %d", [_PoetryDatabase Poetry_CoreDataUpdatePoetryInCoreData:_PoetryNowReading ByNewPoetry:Dic]);
+ */
 @end

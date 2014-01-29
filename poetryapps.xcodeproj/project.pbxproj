@@ -840,6 +840,7 @@
 		CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E6187FA52F00AF7A1C /* gotobtn1.png */; };
 		CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E7187FA52F00AF7A1C /* gotobtn2.png */; };
 		CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E8187FA52F00AF7A1C /* gotobtn3.png */; };
+		CB82809F1898F85500661A94 /* addNewFileList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB82809E1898F85500661A94 /* addNewFileList.plist */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
@@ -1722,6 +1723,7 @@
 		CB6126E6187FA52F00AF7A1C /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
 		CB6126E7187FA52F00AF7A1C /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
 		CB6126E8187FA52F00AF7A1C /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
+		CB82809E1898F85500661A94 /* addNewFileList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = addNewFileList.plist; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
@@ -1943,6 +1945,7 @@
 				CB25FD131843972D00F3D980 /* Supporting Files */,
 				105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */,
 				105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */,
+				CB82809E1898F85500661A94 /* addNewFileList.plist */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -3092,6 +3095,7 @@
 				CB54FD9418695CCE00CED47E /* 170.txt in Resources */,
 				CB54FD5118695CCE00CED47E /* 11.txt in Resources */,
 				CB54FF9218695CCE00CED47E /* 63.txt in Resources */,
+				CB82809F1898F85500661A94 /* addNewFileList.plist in Resources */,
 				CB54FD9018695CCE00CED47E /* 167.txt in Resources */,
 				CB54FE1518695CCE00CED47E /* 287.txt in Resources */,
 				CB54FDFB18695CCE00CED47E /* 263.txt in Resources */,
