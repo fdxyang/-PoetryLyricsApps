@@ -102,6 +102,8 @@
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     
+    [self.view setBackgroundColor:_DarkBackgroundColor];
+    
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
     _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
     
@@ -541,11 +543,20 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-    UIView *view;
-    
+    ILTranslucentView *view;
+    // TODO: Blur effect
     if ((tableView.tag == 1) || (tableView.tag == 2)) {
         
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
+        view = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
+        
+        view.translucentAlpha = 0.9;
+        view.translucentStyle = UIBarStyleDefault;
+        view.translucentTintColor = [[UIColor alloc] initWithRed:(32/255.0f)
+                                                           green:(159/255.0f)
+                                                            blue:(191/255.0f)
+                                                           alpha:1];
+        view.backgroundColor = [UIColor clearColor];
+
         /* Create custom view to display section header... */
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.frame.size.width - 20, 80)];
         [label setFont:_PoetryNameFont];
@@ -563,10 +574,11 @@
         label.textColor = [UIColor whiteColor];
         [view addSubview:label];
         //[view setBackgroundColor:_LightBackgroundColor];
-        [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+        /*[view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                         green:(159/255.0f)
                                                          blue:(191/255.0f)
-                                                        alpha:0.8]];
+                                                        alpha:1]];
+         */
         [label setBackgroundColor:[UIColor clearColor]];
         
     } else if (tableView.tag == TAG_CATEGORY_TABLE_VIEW) {
@@ -576,7 +588,7 @@
             UIFont *Font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
             //UIFont *Font = [UIFont systemFontOfSize:16];
 
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT)];
+            view = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT)];
             /* Create custom view to display section header... */
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.frame.size.width - 20, UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT)];
             [label setFont:Font];
