@@ -48,6 +48,9 @@
     [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"ARROW_Left.png"]];
     self.navigationController.navigationBar.topItem.title = @"";
     
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+    //self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -72,16 +75,16 @@
     
     [_Scroller setContentSize:Size];
     
-    float teamlogo_x = 70.0;
+    float teamlogo_x = 0.0;
     float teamlogo_y = 0.0;
-    float teamlogo_width = 180.0;
-    float teamlogo_height = 180.0;
+    float teamlogo_width = 320.0;
+    float teamlogo_height = 320.0;
 
     //logo
     UIImageView *teamLogo = [[UIImageView alloc] initWithFrame:CGRectMake(teamlogo_x, teamlogo_y, teamlogo_width, teamlogo_height)];
     [teamLogo setImage:[UIImage imageNamed:@"teamlogo.png"]];
     [_Scroller addSubview:teamLogo];
-    
+    /*
     UILabel *teamName = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height,320, 50)]; // (0,180,320,50)
     [teamName setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:30.0]];
     [teamName setText:@"Hippo Colors"];
@@ -95,7 +98,7 @@
     [teamYear setText:@"Since 2014"];
     teamYear.textAlignment = NSTextAlignmentCenter;
     [_Scroller addSubview:teamYear];
-    
+    */
     
     UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 40)];
     [teamContact setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]];
