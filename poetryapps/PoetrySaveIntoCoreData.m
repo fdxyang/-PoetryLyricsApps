@@ -29,12 +29,19 @@
     
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     
+    //NSFileManager *fileManager2 = [NSFileManager defaultManager];
+    //NSString *FilePath2 = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    
+    //NSArray *directoryContent2 = NSSearchPathForDirectoriesInDomains (NSLibraryDirectory, NSUserDomainMask, YES);
+    //NSString *path = [[directoryContent2 objectAtIndex:0] stringByAppendingString:@"/Preferences/"];
+    
+    //NSLog(@"file manager = %@, filepath = %@,dic = %@,path = %@",fileManager2,FilePath2,[directoryContent2 objectAtIndex:0],path);
+    
     if(!setting.DataSaved)
     {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
-        //NSLog(@"file path = %@",FilePath);
         NSString *title, *filePath2,*content;
         NSString *fileContents;
         NSMutableString *poetryContent = [[NSMutableString alloc]init];
@@ -47,8 +54,6 @@
             //NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
             title = [NSString stringWithFormat:@"/%d.txt",count+1];
             filePath2 = [FilePath stringByAppendingString:title];
-            
-            //NSLog(@"filePath2 = %@",filePath2);
             
             if ([fileManager fileExistsAtPath:filePath2] == YES)
             {
@@ -137,14 +142,14 @@
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     
     NSString *str;
-    for(int i = 0 ;i < 721 ; i++)
+    for(int i = 0 ;i < 1000 ; i++)
     {
         str = [NSString stringWithFormat:@"file_%d",i];
         
         if([plistData objectForKey:str])
         {
             NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
-            [plistFileList addObject:str];
+            [plistFileList addObject:[plistData objectForKey:str]];
         }
         else
             break;
@@ -179,6 +184,35 @@
 - (BOOL)isUpdatePlistFile
 {
     //NSDictionary *poetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
+    NSArray *getPlist = [[NSArray alloc] initWithArray:[self getPlistContent]];
+    NSLog(@"PLIST = %@",getPlist);
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
+    
+    NSString *file;
+    
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    
+    for (int i =0;i<[getPlist count];i++)
+    {
+        file = [FilePath stringByAppendingString:[getPlist objectAtIndex:i]];
+        if ([fileManager fileExistsAtPath:file] == YES)
+        {
+            /*
+            NSDictionary *Dic = _PoetryNowReading;
+            NSString *content = [[NSString  alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
+            [Dic setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
+            NSLog(@"Return = %d", [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:_PoetryNowReading ByNewPoetry:Dic]);
+             */
+        }
+        else //not exist file
+        {
+            
+        }
+    }
+    
     return FALSE;
 }
 
