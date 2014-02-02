@@ -58,11 +58,8 @@
     [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
-    
-    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
     
@@ -74,17 +71,18 @@
     uiOffset = 0.0;
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    //NSLog(@"height = %f",screenRect.size.height);
     
     if(screenRect.size.height == 568)
     {
         //NSLog(@"this is 4 inch");
         uiOffset = 21.0;
+        readingBtnOffset = 0;
     }
     else if(screenRect.size.height == 480)
     {
         //NSLog(@"this is 3.5 inch");
         uiOffset = 108.0;
+        readingBtnOffset = 25;
     }
     
     // Kevin 20140124 set title background color
@@ -110,6 +108,8 @@
     [_TableView reloadData];
     
     self.navigationItem.title = @"快速查詢";
+    
+    //[gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,10 +136,8 @@
     [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
-    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
@@ -157,13 +155,11 @@
     [self.view bringSubviewToFront:_poetryView];
     [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
     
-    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
     [poetryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [poetryBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn2_selected.png"] forState:UIControlStateDisabled];
     [poetryBtn setEnabled:NO];
-    //[responseBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
     [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
@@ -204,7 +200,6 @@
             NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
             
             _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-            //NSLog(@"kk height = %f",_TableView.frame.size.height);
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
             _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];

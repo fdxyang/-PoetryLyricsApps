@@ -24,6 +24,7 @@ typedef enum {
     NSInteger gotoType;
     PoetryCoreData *PoetryDataBase;
     float uiOffset;
+    float readingBtnOffset;
 }
 
 @property (nonatomic,strong) NSMutableArray *historyArr;
