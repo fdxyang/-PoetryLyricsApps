@@ -33,6 +33,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    uiOffset = 0.0;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    if(screenRect.size.height == 568)
+    {
+        //NSLog(@"this is 4 inch");
+        uiOffset = 21.0;
+        readingBtnOffset = 0;
+    }
+    else if(screenRect.size.height == 480)
+    {
+        //NSLog(@"this is 3.5 inch");
+        uiOffset = 108.0;
+        readingBtnOffset = 25;
+    }
 
     _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
     _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
@@ -49,7 +66,6 @@
     [self.view addSubview:_responseView];
     
     [self.view bringSubviewToFront:_guideView];
-    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
     [guideBtn setTitle:@"基督基石" forState:UIControlStateNormal];
     [poetryBtn setTitle:@"詩歌" forState:UIControlStateNormal];
@@ -68,23 +84,6 @@
     _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
     
-    uiOffset = 0.0;
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    
-    if(screenRect.size.height == 568)
-    {
-        //NSLog(@"this is 4 inch");
-        uiOffset = 21.0;
-        readingBtnOffset = 0;
-    }
-    else if(screenRect.size.height == 480)
-    {
-        //NSLog(@"this is 3.5 inch");
-        uiOffset = 108.0;
-        readingBtnOffset = 25;
-    }
-    
     // Kevin 20140124 set title background color
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                                     green:(159/255.0f)
@@ -98,6 +97,9 @@
                                     [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
     
     self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+    
+    [gotoReading setFrame:CGRectMake(20,378-readingBtnOffset,280, 50)];
+    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,7 +111,7 @@
     
     self.navigationItem.title = @"快速查詢";
     
-    //[gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
+    [gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
 }
 
 - (void)didReceiveMemoryWarning

@@ -62,10 +62,10 @@
     CGRect Frame;
     if (IS_IPHONE5) {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
-        contactPos = UI_SCREEN_4_INCH_HEIGHT-115-100;
+        contactPos = 90;
     } else {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
-        contactPos = UI_SCREEN_3_5_INCH_HEIGHT-115-60;
+        contactPos = 50;
     }
     [_Scroller setFrame:Frame];
     [self.view addSubview:_Scroller];
@@ -77,30 +77,15 @@
     
     float teamlogo_x = 0.0;
     float teamlogo_y = 0.0;
-    float teamlogo_width = 320.0;
-    float teamlogo_height = 320.0;
+    float teamlogo_width = 200.0;
+    float teamlogo_height = 200.0;
 
     //logo
-    UIImageView *teamLogo = [[UIImageView alloc] initWithFrame:CGRectMake(teamlogo_x, teamlogo_y, teamlogo_width, teamlogo_height)];
+    UIImageView *teamLogo = [[UIImageView alloc] initWithFrame:CGRectMake(teamlogo_x+60, teamlogo_y, teamlogo_width, teamlogo_height)];
     [teamLogo setImage:[UIImage imageNamed:@"teamlogo.png"]];
     [_Scroller addSubview:teamLogo];
-    /*
-    UILabel *teamName = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height,320, 50)]; // (0,180,320,50)
-    [teamName setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:30.0]];
-    [teamName setText:@"Hippo Colors"];
-    teamName.textAlignment = NSTextAlignmentCenter;
-    [_Scroller addSubview:teamName];
     
-    
-    UILabel *teamYear = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height+50, 320, 30)]; // (0,230,320,30)
-    [teamYear setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0]];
-    teamYear.textColor = [UIColor grayColor];
-    [teamYear setText:@"Since 2014"];
-    teamYear.textAlignment = NSTextAlignmentCenter;
-    [_Scroller addSubview:teamYear];
-    */
-    
-    UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 320, 320, 40)];
+    UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height+contactPos, 320, 40)];
     [teamContact setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]];
     teamContact.backgroundColor = [UIColor grayColor];
     teamContact.textColor = [UIColor whiteColor];
