@@ -188,20 +188,10 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
-    //NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
-    NSUInteger poetryIndex = 0;
+    NSUInteger poetryIndex = 0,categoryIndex = 0;
     POETRY_CATEGORY category = GUARD_READING;
-    
-    //NSLog(@"directoryContent = %@",directoryContent);
     NSString *file,*filename;
-    
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
-    NSMutableArray *poetryContent;
-    
-    // Point to Library directory
-    //NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Library"];
-    //NSLog(@"documentsDirectory = %@",documentsDirectory);
-    
     BOOL isUpdate = TRUE;
     
     for(int i=0;i<[getPlist count];i++)
@@ -210,34 +200,39 @@
         
         if(poetryIndex <= 650 && poetryIndex >= 1)
         {
-            category = GUARD_READING;
+            category = POETRYS;
+            categoryIndex = poetryIndex-1;
         }
         else if(poetryIndex >650 && poetryIndex <= 716)
         {
-            category = POETRYS;
+            category = GUARD_READING;
+            categoryIndex = poetryIndex - 651;
         }
         else if(poetryIndex > 716 && poetryIndex <= 721)
         {
             category = RESPONSIVE_PRAYER;
+            categoryIndex = poetryIndex - 717;
         }
         else
         {
-            category = GUARD_READING;
+            category = POETRYS;
         }
         
-        poetryContent = [PoetryDataBase Poetry_CoreDataFetchDataInCategory:category];
+        //NSLog(@"index = %d,category = %d",categoryIndex,category);
+        NSDictionary *originalPoetry = (NSDictionary*)[[PoetryDataBase Poetry_CoreDataFetchDataInCategory:category] objectAtIndex:categoryIndex];
         
+        NSLog(@"poetry content = %@",[originalPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
         filename = [NSString stringWithFormat:@"/%@.txt",[getPlist objectAtIndex:i]];
         file = [FilePath stringByAppendingString:filename];
         
         if ([fileManager fileExistsAtPath:file] == YES)
         {
-            NSDictionary *Dic;
+            NSDictionary *Dic;// = [poetryContent objectAtIndex:[[getPlist objectAtIndex:i] integerValue]];
             NSString *content = [[NSString  alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
             NSLog(@"content = %@",content);
             [Dic setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
             
-            isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:nil ByNewPoetry:Dic];
+            isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:Dic];
             
             if (!isUpdate)
             {
