@@ -622,36 +622,72 @@
     
 }
 
+
 // 2014.01.25 [CASPER] Add update poetry API
 -(BOOL) Poetry_CoreDataUpdatePoetryInCoreData : (NSDictionary *) OldPoetry ByNewPoetry : (NSDictionary *) NewPoetry
 {
-    NSString *PoetryCoreDataEntityName = POETRY_NOW_READING_CORE_DATA_ENTITY;
+    NSArray *TempArray;
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:PoetryCoreDataEntityName inManagedObjectContext:_context]];
-    
-    NSError *err;
-    NSArray *FetchResult = [_context executeFetchRequest:request error:&err];
-    NSUInteger count = [FetchResult count];
-    
-    if (count == 1) {
-        
-        NSManagedObject *PoetryInCoreData = [FetchResult objectAtIndex:0];
-        
-        [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-        [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-        [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-        [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-        
-    } else {
+    if (OldPoetry == nil) {
         return NO;
+    }
+    
+    for (int i = 0; i < CATEGORY_MAX; i++) {
+        
+        switch (i) {
+            case 0:
+                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:GUARD_READING];
+                if ([TempArray count] == 1) {
+                    
+                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
+                    
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+                    
+                };
+                
+                
+                break;
+                
+            case 1:
+                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:POETRYS];
+                if ([TempArray count] == 1) {
+                    
+                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
+                    
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+                    
+                };
+                break;
+                
+            case 2:
+                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:RESPONSIVE_PRAYER];
+                if ([TempArray count] == 1) {
+                    
+                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
+                    
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+                    
+                };
+                break;
+            default:
+                return NO;
+                break;
+        }
     }
     
     
     NSError *error = nil;
     if (![_context save:&error]) {
         CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-        
         return NO;
     }
     
