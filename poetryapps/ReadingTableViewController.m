@@ -1177,26 +1177,52 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    specialTableView = [[UIView alloc] initWithFrame:CGRectMake(0,65,screenWidth,screenHeight-65-50)];
+    specialTableView = [[UIView alloc] initWithFrame:CGRectMake(0,65,screenWidth,screenHeight-65-45)];
     [specialTableView setBackgroundColor:[UIColor grayColor]];
     //[specialTableScrollView addSubview:specialTableView];
     
-    UIImageView * imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(10,5,50,50)];
-    UILabel     * imageLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(65,5,150,50)];
-    UIImageView * imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(10,55,50,50)];
-    UILabel     * imageLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(65,55,150,50)];
-    UIImageView * imageView3 = [[UIImageView alloc]initWithFrame:CGRectMake(10,105,50,50)];
-    UILabel     * imageLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(65,105,150,50)];
-    UIImageView * imageView4 = [[UIImageView alloc]initWithFrame:CGRectMake(10,155,50,50)];
-    UILabel     * imageLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(65,155,150,50)];
-    UIImageView * imageView5 = [[UIImageView alloc]initWithFrame:CGRectMake(10,205,50,50)];
-    UILabel     * imageLabel5 = [[UILabel alloc]initWithFrame:CGRectMake(65,205,150,50)];
-    UIImageView * imageView6 = [[UIImageView alloc]initWithFrame:CGRectMake(10,255,50,50)];
-    UILabel     * imageLabel6 = [[UILabel alloc]initWithFrame:CGRectMake(65,255,150,50)];
-    UIImageView * imageView7 = [[UIImageView alloc]initWithFrame:CGRectMake(10,305,50,50)];
-    UILabel     * imageLabel7 = [[UILabel alloc]initWithFrame:CGRectMake(65,305,150,50)];
-    UIImageView * imageView8 = [[UIImageView alloc]initWithFrame:CGRectMake(10,355,50,50)];
-    UILabel     * imageLabel8 = [[UILabel alloc]initWithFrame:CGRectMake(65,355,150,50)];
+    CGFloat start_x = 70;
+    //CGFloat start_y = 65;
+    CGFloat offset = 5;
+    NSUInteger index = 0;
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, index*50, 320,50)];
+    [title setText:@"特殊字對照表"];
+    title.textAlignment = UIBaselineAdjustmentAlignCenters;
+    [title setFont:[UIFont fontWithName:@"HelveticaNeue" size:28]];
+    
+    index = index+1;
+    UIImageView * imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView3 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView4 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView5 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel5 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView6 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel6 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView7 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel7 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
+    
+    UIImageView * imageView8 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+    UILabel     * imageLabel8 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+    index = index+1;
     
     [imageLabel1 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
     [imageLabel2 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
@@ -1215,14 +1241,14 @@
     [imageView6 setImage:[UIImage imageNamed:@"sc6.png"]];
     [imageView7 setImage:[UIImage imageNamed:@"sc7.png"]];
     [imageView8 setImage:[UIImage imageNamed:@"sc9.png"]];
-    [imageLabel1 setText:@"= 䅼"];
-    [imageLabel2 setText:@"= 因"];
-    [imageLabel3 setText:@"= 般"];
-    [imageLabel4 setText:@"= 奧"];
-    [imageLabel5 setText:@"= 道"];
-    [imageLabel6 setText:@"= 敖"];
-    [imageLabel7 setText:@"= 吐"];
-    [imageLabel8 setText:@"= 惦"];
+    [imageLabel1 setText:@" = 䅼"];
+    [imageLabel2 setText:@" = 因"];
+    [imageLabel3 setText:@" = 般"];
+    [imageLabel4 setText:@" = 奧"];
+    [imageLabel5 setText:@" = 道"];
+    [imageLabel6 setText:@" = 敖"];
+    [imageLabel7 setText:@" = 吐"];
+    [imageLabel8 setText:@" = 惦"];
     
     
     [specialTableView addSubview:imageView1];
@@ -1242,6 +1268,8 @@
     [specialTableView addSubview:imageLabel6];
     [specialTableView addSubview:imageLabel7];
     [specialTableView addSubview:imageLabel8];
+    
+    [specialTableView addSubview:title];
 }
 
 - (IBAction)showSpecialTable:(id)sender
@@ -1249,6 +1277,7 @@
     if (!isShowSpecialTable)
     {
         isShowSpecialTable = TRUE;
+        
         [self.view addSubview:specialTableView];
     }
     else
