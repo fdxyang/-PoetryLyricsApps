@@ -11,6 +11,7 @@
 #import "PoetrySettingCoreData.h"
 #import "PoetryReadingView.h"
 #import "Poetryparser.h"
+#import "specialWordTable.h"
 
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
@@ -25,7 +26,8 @@
 
 @interface ReadingTableViewController : UIViewController <UIGestureRecognizerDelegate,
                                                             UITableViewDataSource,
-                                                            UITableViewDelegate>
+                                                            UITableViewDelegate,
+                                                            UIScrollViewDelegate>
 
 @property (strong, nonatomic)   UITableView                 *TableView1;
 @property (strong, nonatomic)   UITableView                 *TableView2;
@@ -39,6 +41,9 @@
 @property (nonatomic, strong)   UILabel                     *HeadAndTailLab;
 
 @property (nonatomic, strong)   Poetryparser                *PoetryContentParser;
+
+- (IBAction)showSpecialTable:(id)sender;
+- (void) createSpecialTableView;
 
 typedef enum {
     VIEW1 = 0x00,

@@ -69,6 +69,10 @@
 
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
+    BOOL                    isShowSpecialTable;
+    specialWordTable        *specialTable;
+    UIView                  *specialTableView;
+    UIScrollView            *specialTableScrollView;
 }
 
 @end
@@ -130,6 +134,9 @@
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     _FontThemeColor = [[UIColor alloc] init];
+    
+    isShowSpecialTable = FALSE;
+    //[self createSpecialTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -1163,4 +1170,92 @@
 
 }
 
+- (void) createSpecialTableView
+{
+    //specialTableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320,700)];
+    //specialTableScrollView.contentSize = CGSizeMake(320, 700);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    specialTableView = [[UIView alloc] initWithFrame:CGRectMake(0,65,screenWidth,screenHeight-65-50)];
+    [specialTableView setBackgroundColor:[UIColor grayColor]];
+    //[specialTableScrollView addSubview:specialTableView];
+    
+    UIImageView * imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(10,5,50,50)];
+    UILabel     * imageLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(65,5,150,50)];
+    UIImageView * imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(10,55,50,50)];
+    UILabel     * imageLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(65,55,150,50)];
+    UIImageView * imageView3 = [[UIImageView alloc]initWithFrame:CGRectMake(10,105,50,50)];
+    UILabel     * imageLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(65,105,150,50)];
+    UIImageView * imageView4 = [[UIImageView alloc]initWithFrame:CGRectMake(10,155,50,50)];
+    UILabel     * imageLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(65,155,150,50)];
+    UIImageView * imageView5 = [[UIImageView alloc]initWithFrame:CGRectMake(10,205,50,50)];
+    UILabel     * imageLabel5 = [[UILabel alloc]initWithFrame:CGRectMake(65,205,150,50)];
+    UIImageView * imageView6 = [[UIImageView alloc]initWithFrame:CGRectMake(10,255,50,50)];
+    UILabel     * imageLabel6 = [[UILabel alloc]initWithFrame:CGRectMake(65,255,150,50)];
+    UIImageView * imageView7 = [[UIImageView alloc]initWithFrame:CGRectMake(10,305,50,50)];
+    UILabel     * imageLabel7 = [[UILabel alloc]initWithFrame:CGRectMake(65,305,150,50)];
+    UIImageView * imageView8 = [[UIImageView alloc]initWithFrame:CGRectMake(10,355,50,50)];
+    UILabel     * imageLabel8 = [[UILabel alloc]initWithFrame:CGRectMake(65,355,150,50)];
+    
+    [imageLabel1 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel2 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel3 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel4 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel5 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel6 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel7 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    [imageLabel8 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+    
+    [imageView1 setImage:[UIImage imageNamed:@"sc1.png"]];
+    [imageView2 setImage:[UIImage imageNamed:@"sc2.png"]];
+    [imageView3 setImage:[UIImage imageNamed:@"sc3.png"]];
+    [imageView4 setImage:[UIImage imageNamed:@"sc4.png"]];
+    [imageView5 setImage:[UIImage imageNamed:@"sc5.png"]];
+    [imageView6 setImage:[UIImage imageNamed:@"sc6.png"]];
+    [imageView7 setImage:[UIImage imageNamed:@"sc7.png"]];
+    [imageView8 setImage:[UIImage imageNamed:@"sc9.png"]];
+    [imageLabel1 setText:@"= 䅼"];
+    [imageLabel2 setText:@"= 因"];
+    [imageLabel3 setText:@"= 般"];
+    [imageLabel4 setText:@"= 奧"];
+    [imageLabel5 setText:@"= 道"];
+    [imageLabel6 setText:@"= 敖"];
+    [imageLabel7 setText:@"= 吐"];
+    [imageLabel8 setText:@"= 惦"];
+    
+    
+    [specialTableView addSubview:imageView1];
+    [specialTableView addSubview:imageView2];
+    [specialTableView addSubview:imageView3];
+    [specialTableView addSubview:imageView4];
+    [specialTableView addSubview:imageView5];
+    [specialTableView addSubview:imageView6];
+    [specialTableView addSubview:imageView7];
+    [specialTableView addSubview:imageView8];
+    
+    [specialTableView addSubview:imageLabel1];
+    [specialTableView addSubview:imageLabel2];
+    [specialTableView addSubview:imageLabel3];
+    [specialTableView addSubview:imageLabel4];
+    [specialTableView addSubview:imageLabel5];
+    [specialTableView addSubview:imageLabel6];
+    [specialTableView addSubview:imageLabel7];
+    [specialTableView addSubview:imageLabel8];
+}
+
+- (IBAction)showSpecialTable:(id)sender
+{
+    if (!isShowSpecialTable)
+    {
+        isShowSpecialTable = TRUE;
+        [self.view addSubview:specialTableView];
+    }
+    else
+    {
+        isShowSpecialTable = FALSE;
+    }
+    
+    NSLog(@"table bool = %d",isShowSpecialTable);
+}
 @end
