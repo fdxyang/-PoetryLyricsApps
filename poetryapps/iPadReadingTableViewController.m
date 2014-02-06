@@ -48,7 +48,11 @@
     
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
-
+    
+    // 2014.02.06 [CASPER] Implement about me
+    UIImageView             *_LogoImgForAboutMe;
+    UILabel                 *_EmailAddrForAboutMe;
+    // 2014.02.06 [CASPER] Implement about me ==
 }
 
 @end
@@ -788,6 +792,15 @@
         }
         
         
+    } else if (tableView.tag == TAG_SETTING_TABLE_VIEW) {
+        
+        if (indexPath.section == 3) {
+            
+            // Execute about me view
+            _CoverViewState = COVER_ABOUT_ME;
+            [self CoverViewStateMachine];
+            
+        }
     }
 }
 
@@ -965,6 +978,11 @@
             [self.view endEditing:YES];
             
         } else {
+            
+            if (_CoverViewState == COVER_ABOUT_ME) {
+                [_LogoImgForAboutMe removeFromSuperview];
+                [_EmailAddrForAboutMe removeFromSuperview];
+            }
             
             _CoverViewState = COVER_IDLE;
             [self CoverViewStateMachine];
@@ -1533,7 +1551,7 @@
         
         //_CoverView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
         _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.7 ];
+        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.9];
         //_CoverView.backgroundColor = [UIColor colorWithRed:(145/255.0f) green:(145/255.0f) blue:(145/255.0f) alpha:0.7 ];
         /*
         _CoverView.translucentAlpha = 0.9;
@@ -1740,6 +1758,81 @@
             [self ExecuteSettingTableViewAnnimation];
             
             break;
+            
+        case COVER_ABOUT_ME:
+        {
+            _isSettingTableOn = NO;
+            _isNavTableOn = NO;
+            _isSearching = NO;
+            _isSearchBarOn = NO;
+            
+            [UIView animateWithDuration:0.2
+                             animations:^{
+                                 
+                                 [_CategoryTableView setFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
+                                 [_SettingBtn setFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
+                                 [_SettingTableView setFrame:UI_IPAD_COVER_SETTING_TABLE_RECT_INIT];
+                                 [_SearchBar setFrame:UI_IPAD_COVER_SEARCH_BAR_RECT_INIT];
+                                 [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT];
+                                 [_NavigationHeader setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_HEADER];
+                                 //[_NaviBtn setFrame:UI_IPAD_NAVI_BTN_RECT_INIT];
+                                 
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                                 if (_LogoImgForAboutMe == nil) {
+                                     _LogoImgForAboutMe = [[UIImageView alloc] init];
+                                 }
+                                 
+                                 
+                                 if (_EmailAddrForAboutMe == nil) {
+                                     _EmailAddrForAboutMe = [[UILabel alloc] init];
+                                 }
+                                 
+                                 [_LogoImgForAboutMe setImage:[UIImage imageNamed:@"teamlogo.png"]];
+                                 _LogoImgForAboutMe.frame = CGRectMake(0, 0, 300, 300);
+                                 _LogoImgForAboutMe.center = CGPointMake(UI_IPAD_SCREEN_WIDTH/2, UI_IPAD_SCREEN_HEIGHT + _LogoImgForAboutMe.frame.size.height);
+                                 
+                                 _EmailAddrForAboutMe.frame = CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, 50);
+                                 
+                                 _EmailAddrForAboutMe.text = @"聯絡我們：hippocolors@gmail.com";
+                                 [_EmailAddrForAboutMe setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:40]];
+                                 [_EmailAddrForAboutMe setTextColor:[UIColor lightGrayColor]];
+                                 [_EmailAddrForAboutMe setTextAlignment:NSTextAlignmentCenter];
+                                 [_EmailAddrForAboutMe setBackgroundColor:[UIColor clearColor]];
+                                 
+                                 _EmailAddrForAboutMe.center = CGPointMake(UI_IPAD_SCREEN_WIDTH/2, UI_IPAD_SCREEN_HEIGHT + _EmailAddrForAboutMe.frame.size.height);
+                                 
+                                 [_CoverView addSubview:_LogoImgForAboutMe];
+                                 [_CoverView addSubview:_EmailAddrForAboutMe];
+                                 
+                                 NSLog(@"%@ - %@", _LogoImgForAboutMe, _EmailAddrForAboutMe);
+
+                                 [UIView animateWithDuration:0.2
+                                                  animations:^{
+                                                      
+                                                      _LogoImgForAboutMe.frame = CGRectMake(_LogoImgForAboutMe.frame.origin.x,
+                                                                                            80,
+                                                                                            _LogoImgForAboutMe.frame.size.width,
+                                                                                            _LogoImgForAboutMe.frame.size.height);
+                                                      
+                                                      
+                                                      _EmailAddrForAboutMe.frame = CGRectMake(_EmailAddrForAboutMe.frame.origin.x,
+                                                                                            500,
+                                                                                            _EmailAddrForAboutMe.frame.size.width,
+                                                                                            _EmailAddrForAboutMe.frame.size.height);
+
+
+                                                  } completion:^(BOOL finished) {
+                                                      NSLog(@"DONE %@ - %@", _LogoImgForAboutMe, _EmailAddrForAboutMe);
+                                                  }];
+                                 
+                            }];
+            
+            
+        }
+            break;
+            
         default:
             break;
     }

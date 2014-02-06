@@ -655,7 +655,9 @@
                     }
                     
                 } else if ([TempArray count] != 1) {
+                    
                     return NO;
+                    
                 }
 
                 
