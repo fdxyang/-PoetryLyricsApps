@@ -112,6 +112,7 @@ typedef enum {
     COVER_INIT,
     COVER_SEARCH,
     COVER_SETTING,
+    COVER_ABOUT_ME,
 } COVER_VIEW_STATE;
 
 
