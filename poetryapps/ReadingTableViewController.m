@@ -136,7 +136,7 @@
     _FontThemeColor = [[UIColor alloc] init];
     
     isShowSpecialTable = FALSE;
-    //[self createSpecialTableView];
+    [self createSpecialTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -1279,10 +1279,17 @@
         isShowSpecialTable = TRUE;
         
         [self.view addSubview:specialTableView];
+        [self.view bringSubviewToFront:specialTableView];
     }
     else
     {
         isShowSpecialTable = FALSE;
+
+        for (UIView *subview in [self.view subviews]) {
+            // Only remove the subviews with tag not equal to 1
+            if (subview.tag != 1)
+                [subview removeFromSuperview];
+        }
     }
     
     NSLog(@"table bool = %d",isShowSpecialTable);
