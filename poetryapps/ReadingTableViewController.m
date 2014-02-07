@@ -86,7 +86,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.screenName = @"READING VIEW";
     }
     return self;
 }

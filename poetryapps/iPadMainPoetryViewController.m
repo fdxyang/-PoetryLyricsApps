@@ -23,7 +23,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.screenName = @"IPAD MAIN POETRY VIEW";
     }
     return self;
 }

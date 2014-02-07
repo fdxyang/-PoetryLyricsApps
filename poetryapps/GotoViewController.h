@@ -12,8 +12,6 @@
 #import "Guidepicker.h"
 #import "Responsepicker.h"
 #import "GotoTableViewController.h"
-#import "GAITrackedViewController.h"
-#import "GAI.h"
 
 typedef enum {
     BASICGUIDE = 0,
@@ -21,7 +19,7 @@ typedef enum {
     GOTOPAGECOUNT
 }GotoPageAreaSection;
 
-@interface GotoViewController : GAITrackedViewController
+@interface GotoViewController : UIViewController
 {
     NSInteger gotoType;
     PoetryCoreData *PoetryDataBase;

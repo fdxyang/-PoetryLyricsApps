@@ -859,7 +859,6 @@
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
 		CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */; };
 		CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1818A4CDEB0003A478 /* libz.dylib */; };
-		CB942D2318A4CE1E0003A478 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1B18A4CE1E0003A478 /* libGoogleAnalyticsServices.a */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBFE962E18960C3A00385094 /* gotobtn1_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962B18960C3A00385094 /* gotobtn1_selected.png */; };
@@ -1761,13 +1760,6 @@
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
 		CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CB942D1818A4CDEB0003A478 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		CB942D1B18A4CE1E0003A478 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
-		CB942D1D18A4CE1E0003A478 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		CB942D1E18A4CE1E0003A478 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		CB942D1F18A4CE1E0003A478 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		CB942D2018A4CE1E0003A478 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		CB942D2118A4CE1E0003A478 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		CB942D2218A4CE1E0003A478 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
@@ -1785,7 +1777,6 @@
 				CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */,
 				CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */,
 				10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */,
-				CB942D2318A4CE1E0003A478 /* libGoogleAnalyticsServices.a in Frameworks */,
 				CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */,
 				CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */,
 				CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */,
@@ -1995,7 +1986,6 @@
 		CB25FD121843972D00F3D980 /* poetryapps */ = {
 			isa = PBXGroup;
 			children = (
-				CB942D1A18A4CE1E0003A478 /* googleAnalytics */,
 				1099C1BE18956A53004FD68C /* ThirdParty */,
 				109EF70E1863E8EA00A4B9E1 /* iPadView */,
 				CB86F0311862E0CC006F8500 /* Model */,
@@ -2875,28 +2865,6 @@
 				CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		CB942D1A18A4CE1E0003A478 /* googleAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				CB942D1B18A4CE1E0003A478 /* libGoogleAnalyticsServices.a */,
-				CB942D1C18A4CE1E0003A478 /* Library */,
-			);
-			path = googleAnalytics;
-			sourceTree = "<group>";
-		};
-		CB942D1C18A4CE1E0003A478 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				CB942D1D18A4CE1E0003A478 /* GAI.h */,
-				CB942D1E18A4CE1E0003A478 /* GAIDictionaryBuilder.h */,
-				CB942D1F18A4CE1E0003A478 /* GAIFields.h */,
-				CB942D2018A4CE1E0003A478 /* GAILogger.h */,
-				CB942D2118A4CE1E0003A478 /* GAITrackedViewController.h */,
-				CB942D2218A4CE1E0003A478 /* GAITracker.h */,
-			);
-			path = Library;
 			sourceTree = "<group>";
 		};
 		CBA286CD184DCF4A00010125 /* Resource */ = {

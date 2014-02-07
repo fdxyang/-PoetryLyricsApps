@@ -7,8 +7,7 @@
 //
 
 #import "GotoViewController.h"
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
+
 
 @interface GotoViewController ()
 {
@@ -27,7 +26,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.screenName = @"GOTO VIEW";
     }
     return self;
 }

@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GAITrackedViewController.h"
-#import "GAI.h"
-
-@interface AboutMeViewController : GAITrackedViewController
+@interface AboutMeViewController : UIViewController
 
 @property (nonatomic, strong) UIScrollView  *Scroller;
 @property (nonatomic, strong) UILabel       *TextLabel;

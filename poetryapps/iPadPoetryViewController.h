@@ -15,9 +15,6 @@
 #import "SettingViewController.h"
 #import "iPadNavTableHeader.h"
 
-#import "GAITrackedViewController.h"
-#import "GAI.h"
-
 #define UI_TABLE_WIDTH                  330
 #define UI_READING_VIEW_ORIGIN_X        0
 #define UI_IPAD_READINGVIEW_WIDTH       UI_IPAD_SCREEN_WIDTH
@@ -93,7 +90,7 @@
 
 
 
-@interface iPadPoetryViewController : GAITrackedViewController <UITableViewDelegate,
+@interface iPadPoetryViewController : UIViewController <UITableViewDelegate,
                                                                 UITableViewDataSource,
                                                                 UIGestureRecognizerDelegate,
                                                                 UISearchBarDelegate>
