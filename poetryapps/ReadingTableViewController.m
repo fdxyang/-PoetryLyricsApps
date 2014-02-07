@@ -1351,6 +1351,6 @@
         }
     }
     
-    NSLog(@"table bool = %d",isShowSpecialTable);
+    //NSLog(@"table bool = %d",isShowSpecialTable);
 }
 @end
