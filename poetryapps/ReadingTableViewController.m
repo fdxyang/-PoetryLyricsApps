@@ -136,7 +136,7 @@
     _FontThemeColor = [[UIColor alloc] init];
     
     isShowSpecialTable = FALSE;
-    //[self createSpecialTableView];
+    [self createSpecialTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -1233,6 +1233,7 @@
     [imageLabel7 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
     [imageLabel8 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
     
+    /*
     [imageView1 setImage:[UIImage imageNamed:@"sc1.png"]];
     [imageView2 setImage:[UIImage imageNamed:@"sc2.png"]];
     [imageView3 setImage:[UIImage imageNamed:@"sc3.png"]];
@@ -1249,7 +1250,7 @@
     [imageLabel6 setText:@" = 敖"];
     [imageLabel7 setText:@" = 吐"];
     [imageLabel8 setText:@" = 惦"];
-    
+    */
     
     [specialTableView addSubview:imageView1];
     [specialTableView addSubview:imageView2];
