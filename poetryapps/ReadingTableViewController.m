@@ -136,7 +136,7 @@
     _FontThemeColor = [[UIColor alloc] init];
     
     isShowSpecialTable = FALSE;
-    [self createSpecialTableView];
+    //[self createSpecialTableView];
 }
 
 - (void)didReceiveMemoryWarning
