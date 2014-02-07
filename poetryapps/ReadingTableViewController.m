@@ -69,9 +69,10 @@
 
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
+    
     BOOL                    isShowSpecialTable;
     specialWordTable        *specialTable;
-    UIView                  *specialTableView;
+    ILTranslucentView       *specialTableView;
     UIScrollView            *specialTableScrollView;
 }
 
@@ -856,11 +857,16 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if (isTutorialShowed) {
+        
         [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
         [_TutorialView removeFromSuperview];
         isTutorialShowed = NO;
         return NO;
+        
+    } else if (isShowSpecialTable) {
+        return NO;
     }
+    
     return YES;
 }
 
@@ -1172,7 +1178,57 @@
 
 - (void) createSpecialTableView
 {
-    //specialTableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320,700)];
+    
+    if (IS_IPHONE5) {
+        
+        specialTableView = [[ILTranslucentView alloc] initWithFrame:
+                            CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH,
+                                       UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)];
+        
+        //specialTableView.userInteractionEnabled = NO;
+        //specialTableView.exclusiveTouch = NO;
+        specialTableView.translucentAlpha = 0.9;
+        specialTableView.translucentStyle = UIBarStyleBlack;
+        specialTableView.translucentTintColor = [UIColor clearColor];
+        specialTableView.backgroundColor = [UIColor clearColor];
+        
+        
+        specialTableScrollView = [[UIScrollView alloc] initWithFrame:
+                                  CGRectMake(0, 20, UI_SCREEN_WIDTH,
+                                             UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
+
+    } else {
+        
+        specialTableView = [[ILTranslucentView alloc] initWithFrame:
+                            CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH,
+                                       UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)];
+        
+        //specialTableView.userInteractionEnabled = NO;
+        //specialTableView.exclusiveTouch = NO;
+        specialTableView.translucentAlpha = 0.9;
+        specialTableView.translucentStyle = UIBarStyleBlack;
+        specialTableView.translucentTintColor = [UIColor clearColor];
+        specialTableView.backgroundColor = [UIColor clearColor];
+        
+        
+        specialTableScrollView = [[UIScrollView alloc] initWithFrame:
+                                  CGRectMake(0, 20, UI_SCREEN_WIDTH,
+                                             UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
+    }
+    
+    [specialTableView addSubview:specialTableScrollView];
+    
+    // TODO: Modify image as Special Table Img
+    UIImageView *TestImg = [[UIImageView alloc] initWithFrame:CGRectMake(100, 400, 50, 50)];
+    [TestImg setImage:[UIImage imageNamed:@"sc1.png"]];
+    [specialTableScrollView addSubview:TestImg];
+    
+    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, 1000)]; // TODO: Modify "1000" as Image Height
+    [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
+    
+
+    /*
+    
     //specialTableScrollView.contentSize = CGSizeMake(320, 700);
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -1232,7 +1288,7 @@
     [imageLabel6 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
     [imageLabel7 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
     [imageLabel8 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    
+    */
     /*
     [imageView1 setImage:[UIImage imageNamed:@"sc1.png"]];
     [imageView2 setImage:[UIImage imageNamed:@"sc2.png"]];
@@ -1250,7 +1306,7 @@
     [imageLabel6 setText:@" = 敖"];
     [imageLabel7 setText:@" = 吐"];
     [imageLabel8 setText:@" = 惦"];
-    */
+    
     
     [specialTableView addSubview:imageView1];
     [specialTableView addSubview:imageView2];
@@ -1271,6 +1327,8 @@
     [specialTableView addSubview:imageLabel8];
     
     [specialTableView addSubview:title];
+     */
+    
 }
 
 - (IBAction)showSpecialTable:(id)sender
