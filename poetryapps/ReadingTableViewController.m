@@ -74,6 +74,7 @@
     specialWordTable        *specialTable;
     ILTranslucentView       *specialTableView;
     UIScrollView            *specialTableScrollView;
+    UIButton                *infoBtn;
 }
 
 @end
@@ -258,6 +259,15 @@
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
 
+    isShowSpecialTable = FALSE;
+    for (UIView *subview in [self.view subviews])
+    {
+        // Only remove the subviews with tag not equal to 1
+        if (subview.tag != 1)
+            [subview removeFromSuperview];
+    }
+    [infoBtn setTintColor:[UIColor whiteColor]];
+    
     
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
 
@@ -1333,6 +1343,7 @@
 
 - (IBAction)showSpecialTable:(id)sender
 {
+    infoBtn = sender;
     if (!isShowSpecialTable)
     {
         isShowSpecialTable = TRUE;
