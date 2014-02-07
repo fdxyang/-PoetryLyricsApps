@@ -1356,12 +1356,17 @@
     else
     {
         isShowSpecialTable = FALSE;
-
+        // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status
+        /*
         for (UIView *subview in [self.view subviews]) {
             // Only remove the subviews with tag not equal to 1
             if (subview.tag != 1)
                 [subview removeFromSuperview];
         }
+         */
+        // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status ==
+        
+        [specialTableView removeFromSuperview];
         [sender setTintColor:[UIColor whiteColor]];
     }
     
