@@ -1339,6 +1339,7 @@
         
         [self.view addSubview:specialTableView];
         [self.view bringSubviewToFront:specialTableView];
+        [sender setTintColor:[UIColor blueColor]];
     }
     else
     {
@@ -1349,6 +1350,7 @@
             if (subview.tag != 1)
                 [subview removeFromSuperview];
         }
+        [sender setTintColor:[UIColor whiteColor]];
     }
     
     //NSLog(@"table bool = %d",isShowSpecialTable);
