@@ -719,7 +719,7 @@
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
                     [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING];
-                    _NavigationHeader.TitleLab.text = @"導讀";
+                    _NavigationHeader.TitleLab.text = @"基督基石";
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
                     
