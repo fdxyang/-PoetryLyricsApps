@@ -42,7 +42,7 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
-        NSString *title, *filePath2,*content;
+        NSString *title,*titleB, *filePath2,*fileBPath,*content;
         NSString *fileContents;
         NSMutableString *poetryContent = [[NSMutableString alloc]init];
         int lineCount = 0;
@@ -54,12 +54,11 @@
             //NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
             title = [NSString stringWithFormat:@"/%d.txt",count+1];
             filePath2 = [FilePath stringByAppendingString:title];
+            titleB = [NSString stringWithFormat:@"/%dB.txt",count+1];
+            fileBPath = [FilePath stringByAppendingString:titleB];
             
-            if ([fileManager fileExistsAtPath:filePath2] == YES)
+            if ([fileManager fileExistsAtPath:filePath2] == YES || [fileManager fileExistsAtPath:fileBPath] == YES)
             {
-                // save core data
-                //NSLog(@"file exists - %@",filePath2);
-                
                 
                 content = [[NSString  alloc] initWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:nil];
                 
@@ -80,8 +79,6 @@
                 }
                 
                 //NSLog(@"poetry content = %@",poetryContent);
-                
-                
                 
                 NSDictionary *PoetryDic;
                 
