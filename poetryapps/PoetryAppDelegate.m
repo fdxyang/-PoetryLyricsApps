@@ -21,12 +21,25 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+/******* Set your tracking ID here *******/
+static NSString *const kTrackingId = @"UA-47866354-1";
+static NSString *const kAllowTracking = @"allowTracking";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    [GAI sharedInstance].optOut = ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+    
+    [GAI sharedInstance].dispatchInterval = 20;
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    _tracker = [[GAI sharedInstance] trackerWithName:@"poetryApps" trackingId:kTrackingId];
+    
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    NSLog(@"TEST in delegate");
+    //NSLog(@"TEST in delegate");
     PoetrySaveIntoCoreData *saveIntoCoreData = [[PoetrySaveIntoCoreData alloc]init];
     BOOL isSuccessful = [saveIntoCoreData isCoreDataSave];
     if(!isSuccessful)
@@ -55,7 +68,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [GAI sharedInstance].optOut = ![[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

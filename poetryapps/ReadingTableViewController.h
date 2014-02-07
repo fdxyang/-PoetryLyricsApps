@@ -13,6 +13,9 @@
 #import "Poetryparser.h"
 #import "specialWordTable.h"
 
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
 #   define READING_VIEW_LOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -24,10 +27,10 @@
 
 #define TAG_TUTORIAL_VIEW 1
 
-@interface ReadingTableViewController : UIViewController <UIGestureRecognizerDelegate,
-                                                            UITableViewDataSource,
-                                                            UITableViewDelegate,
-                                                            UIScrollViewDelegate>
+@interface ReadingTableViewController : GAITrackedViewController <UIGestureRecognizerDelegate,
+                                                                    UITableViewDataSource,
+                                                                    UITableViewDelegate,
+                                                                    UIScrollViewDelegate>
 
 @property (strong, nonatomic)   UITableView                 *TableView1;
 @property (strong, nonatomic)   UITableView                 *TableView2;

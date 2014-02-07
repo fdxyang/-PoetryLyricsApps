@@ -12,7 +12,10 @@
 #import "ThemeSetting.h"
 #import "PoetryCoreData.h"
 
-@interface SettingViewController : UITableViewController
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
+@interface SettingViewController : GAITrackedViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
 

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+// 2014.02.07 [Kevin] add google analytics
+#import "GAI.h"
+
 @interface PoetryAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -18,6 +22,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel            *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator    *persistentStoreCoordinator;
 
+// [Kevin] google analytics
+@property(nonatomic, strong) id<GAITracker> tracker;
 
 
 @end
