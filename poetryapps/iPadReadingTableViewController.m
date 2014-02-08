@@ -1166,9 +1166,11 @@
         return NO;
     }
     
+    
     if ((touch.view.tag == 1) || (touch.view.tag == 2)) {
         
         return YES;
+        
     } else if (touch.view.tag == TAG_NAVI_BTN) {
         
         return NO;
@@ -1183,7 +1185,10 @@
     if (_isNavTableOn) {
         return;
     }
-
+    
+    if (_CoverViewState == COVER_ABOUT_ME) {
+        return;
+    }
     
     if (_CurrentView == VIEW1) {
         //NSLog(@"Current = Table 1 / TheOther = Tabel 2");
