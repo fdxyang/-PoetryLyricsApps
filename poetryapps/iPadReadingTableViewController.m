@@ -1581,7 +1581,7 @@
     if (_CategoryTableView == nil) {
         _CategoryTableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
     }
-    _TableData = [NSMutableArray arrayWithObjects:@"導讀", @"聖詩", @"啟應文", @"閱讀歷史", nil];
+    _TableData = [NSMutableArray arrayWithObjects:@"基督基石", @"聖詩", @"啟應文", @"閱讀歷史", nil];
     _CategoryTableView.delegate = self;
     _CategoryTableView.dataSource = self;
     _CategoryTableView.scrollEnabled = NO;

@@ -218,7 +218,7 @@
     if (_TableView == nil) {
         _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
     }
-    _TableData = [NSMutableArray arrayWithObjects:@"導讀", @"聖詩", @"啟應文", @"閱讀歷史", nil];
+    _TableData = [NSMutableArray arrayWithObjects:@"基督基石", @"聖詩", @"啟應文", @"閱讀歷史", nil];
     _TableView.delegate = self;
     _TableView.dataSource = self;
     _TableView.scrollEnabled = NO;
@@ -901,7 +901,7 @@
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
                     [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING];
-                    _NavigationHeader.TitleLab.text = @"導讀";
+                    _NavigationHeader.TitleLab.text = @"基督基石";
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
                     
@@ -1064,7 +1064,7 @@
                     break;
                     
                 case 1:
-                    sectionStr = @"導讀";
+                    sectionStr = @"基督基石";
                     break;
                     
                 case 2:
