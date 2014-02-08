@@ -25,7 +25,6 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"did load");
     [super viewDidLoad];
     _Scroller = [[UIScrollView alloc] init];
     
@@ -54,22 +53,24 @@
     
     NSUInteger contactPos=0;
     CGRect Frame;
+    CGFloat scrollHeight = 0.0;
+    
     if (IS_IPHONE5) {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
         contactPos = 90;
+        scrollHeight = 300.0;
     } else {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
-        contactPos = 50;
+        contactPos = 10;
+        scrollHeight = 250.0;
     }
     [_Scroller setFrame:Frame];
     [self.view addSubview:_Scroller];
     
     
+    Size = CGSizeMake(UI_SCREEN_WIDTH, scrollHeight);
     
-    //CGSize Size = CGSizeMake(UI_SCREEN_WIDTH, 500.0f);
-    CGSize Size2 = CGSizeMake(UI_SCREEN_WIDTH, 300.0f);
-    
-    [_Scroller setContentSize:Size2];
+    [_Scroller setContentSize:Size];
     
     float teamlogo_x = 0.0;
     float teamlogo_y = 0.0;
@@ -92,25 +93,23 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
-    NSLog(@"did appear");
-    //self.navigationItem.title = @"關於我";
-    
     NSUInteger contactPos=0;
+    CGFloat scrollHeight = 0.0;
     
     CGRect Frame;
     if (IS_IPHONE5) {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
         contactPos = 90;
+        scrollHeight = 300.0;
     } else {
         Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
-        contactPos = 50;
+        contactPos = 10;
+        scrollHeight = 250.0;
     }
     [_Scroller setFrame:Frame];
     [self.view addSubview:_Scroller];
 
-    //CGSize Size = CGSizeMake(UI_SCREEN_WIDTH, 500.0f);
-    CGSize Size = CGSizeMake(UI_SCREEN_WIDTH, 300.0f);
+    CGSize Size = CGSizeMake(UI_SCREEN_WIDTH, scrollHeight);
     
     [_Scroller setContentSize:Size];
     
