@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad
 {
+    NSLog(@"did load");
     [super viewDidLoad];
     _Scroller = [[UIScrollView alloc] init];
     
@@ -51,10 +52,48 @@
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     //self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     
+    NSUInteger contactPos=0;
+    CGRect Frame;
+    if (IS_IPHONE5) {
+        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
+        contactPos = 90;
+    } else {
+        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
+        contactPos = 50;
+    }
+    [_Scroller setFrame:Frame];
+    [self.view addSubview:_Scroller];
+    
+    
+    
+    //CGSize Size = CGSizeMake(UI_SCREEN_WIDTH, 500.0f);
+    CGSize Size2 = CGSizeMake(UI_SCREEN_WIDTH, 300.0f);
+    
+    [_Scroller setContentSize:Size2];
+    
+    float teamlogo_x = 0.0;
+    float teamlogo_y = 0.0;
+    float teamlogo_width = 200.0;
+    float teamlogo_height = 200.0;
+    
+    //logo
+    UIImageView *teamLogo = [[UIImageView alloc] initWithFrame:CGRectMake(teamlogo_x+60, teamlogo_y, teamlogo_width, teamlogo_height)];
+    [teamLogo setImage:[UIImage imageNamed:@"teamlogo.png"]];
+    [_Scroller addSubview:teamLogo];
+    
+    UILabel *teamContact = [[UILabel alloc]initWithFrame:CGRectMake(0, teamlogo_y+teamlogo_height+contactPos, 320, 40)];
+    [teamContact setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18.0]];
+    teamContact.backgroundColor = [UIColor grayColor];
+    teamContact.textColor = [UIColor whiteColor];
+    teamContact.textAlignment = NSTextAlignmentCenter;
+    [teamContact setText:@"聯絡我們：hippocolors@gmail.com"];
+    [_Scroller addSubview:teamContact];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    NSLog(@"did appear");
     //self.navigationItem.title = @"關於我";
     
     NSUInteger contactPos=0;
