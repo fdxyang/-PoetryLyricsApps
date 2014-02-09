@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0A5D4EB5189F9C810024EAA5 /* teamlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D4EB4189F9C810024EAA5 /* teamlogo@2x.png */; };
+		0AA948FE18A7D4170008BAD0 /* specialtable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA948FC18A7D4170008BAD0 /* specialtable.png */; };
+		0AA948FF18A7D4170008BAD0 /* specialtable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA948FD18A7D4170008BAD0 /* specialtable@2x.png */; };
+		0AA9490218A7D6BA0008BAD0 /* specialtable_35inch.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9490018A7D6BA0008BAD0 /* specialtable_35inch.png */; };
+		0AA9490318A7D6BA0008BAD0 /* specialtable_35inch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9490118A7D6BA0008BAD0 /* specialtable_35inch@2x.png */; };
 		0ACC32B418A2F72900D245C0 /* specialWordTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACC32B318A2F72900D245C0 /* specialWordTable.m */; };
 		0ACC32C618A2F82800D245C0 /* sc1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32B618A2F82800D245C0 /* sc1.png */; };
 		0ACC32C718A2F82800D245C0 /* sc10.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32B718A2F82800D245C0 /* sc10.png */; };
@@ -878,6 +882,10 @@
 
 /* Begin PBXFileReference section */
 		0A5D4EB4189F9C810024EAA5 /* teamlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "teamlogo@2x.png"; path = "poetryapps/resource/image/teamlogo@2x.png"; sourceTree = SOURCE_ROOT; };
+		0AA948FC18A7D4170008BAD0 /* specialtable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = specialtable.png; path = poetryapps/resource/image/specialtable.png; sourceTree = SOURCE_ROOT; };
+		0AA948FD18A7D4170008BAD0 /* specialtable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "specialtable@2x.png"; path = "poetryapps/resource/image/specialtable@2x.png"; sourceTree = SOURCE_ROOT; };
+		0AA9490018A7D6BA0008BAD0 /* specialtable_35inch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = specialtable_35inch.png; path = poetryapps/resource/image/specialtable_35inch.png; sourceTree = SOURCE_ROOT; };
+		0AA9490118A7D6BA0008BAD0 /* specialtable_35inch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "specialtable_35inch@2x.png"; path = "poetryapps/resource/image/specialtable_35inch@2x.png"; sourceTree = SOURCE_ROOT; };
 		0ACC32B218A2F72900D245C0 /* specialWordTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specialWordTable.h; sourceTree = "<group>"; };
 		0ACC32B318A2F72900D245C0 /* specialWordTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = specialWordTable.m; sourceTree = "<group>"; };
 		0ACC32B618A2F82800D245C0 /* sc1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc1.png; sourceTree = "<group>"; };
@@ -2086,6 +2094,10 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				0AA9490018A7D6BA0008BAD0 /* specialtable_35inch.png */,
+				0AA9490118A7D6BA0008BAD0 /* specialtable_35inch@2x.png */,
+				0AA948FC18A7D4170008BAD0 /* specialtable.png */,
+				0AA948FD18A7D4170008BAD0 /* specialtable@2x.png */,
 				0ACC32B518A2F82800D245C0 /* sc */,
 				10B8AC3F1897AB8D005D6CC3 /* Welcome */,
 				10B8AC38189796D9005D6CC3 /* iPad */,
@@ -3148,6 +3160,7 @@
 				CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */,
 				CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */,
 				CB54FE6118695CCE00CED47E /* 355.txt in Resources */,
+				0AA948FE18A7D4170008BAD0 /* specialtable.png in Resources */,
 				CB54FE8E18695CCE00CED47E /* 396.txt in Resources */,
 				CB54FE3C18695CCE00CED47E /* 321.txt in Resources */,
 				10B8AC431897ABEF005D6CC3 /* WelcomePage_iPad@2x.png in Resources */,
@@ -3385,6 +3398,7 @@
 				CB54FEB018695CCE00CED47E /* 426.txt in Resources */,
 				CB54FDD918695CCE00CED47E /* 232.txt in Resources */,
 				CB54FFA418695CCE00CED47E /* 646.txt in Resources */,
+				0AA948FF18A7D4170008BAD0 /* specialtable@2x.png in Resources */,
 				CB54FF3A18695CCE00CED47E /* 550.txt in Resources */,
 				CB54FD8A18695CCE00CED47E /* 161.txt in Resources */,
 				CB54FF2218695CCE00CED47E /* 529.txt in Resources */,
@@ -3398,6 +3412,7 @@
 				CB54FFD818695CCE00CED47E /* 693.txt in Resources */,
 				CB54FF3E18695CCE00CED47E /* 554.txt in Resources */,
 				CB54FDCB18695CCE00CED47E /* 22.txt in Resources */,
+				0AA9490218A7D6BA0008BAD0 /* specialtable_35inch.png in Resources */,
 				CB54FFDD18695CCE00CED47E /* 698.txt in Resources */,
 				CB54FDF818695CCE00CED47E /* 260.txt in Resources */,
 				CB54FD9D18695CCE00CED47E /* 179.txt in Resources */,
@@ -3609,6 +3624,7 @@
 				CB54FD6D18695CCE00CED47E /* 135.txt in Resources */,
 				CB54FF2C18695CCE00CED47E /* 538.txt in Resources */,
 				CB54FDE118695CCE00CED47E /* 24.txt in Resources */,
+				0AA9490318A7D6BA0008BAD0 /* specialtable_35inch@2x.png in Resources */,
 				CB54FF7318695CCE00CED47E /* 601.txt in Resources */,
 				CB54FE5D18695CCE00CED47E /* 351.txt in Resources */,
 				CB54000518695CCE00CED47E /* 84.txt in Resources */,
