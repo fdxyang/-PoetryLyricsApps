@@ -5,15 +5,29 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Reading Table View Controller-->
+        <!--Reading Table View Controller - 聖詩內容-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
                 <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wwm-33-SDC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Jxr-Rw-cdd">
+                                <rect key="frame" x="149" y="273" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSpecialTable:" destination="edc-e0-G7q" eventType="touchUpInside" id="reT-sM-eO4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="聖詩內容" id="8pW-8M-Y1s"/>
                     <navigationItem key="navigationItem" id="bWY-Cq-QNw">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ujR-a1-VAX">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="m9c-L2-fG6">
@@ -32,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0Q-NQ-9tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="-34"/>
+            <point key="canvasLocation" x="673" y="-44"/>
         </scene>
         <!--Poetry Tab Bar Controller - GOTO-->
         <scene sceneID="EF1-TU-lpR">
@@ -45,15 +59,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="SFn-Ti-d2S" kind="relationship" relationship="viewControllers" id="0ii-14-Gyp"/>
                         <segue destination="v8i-aI-qlE" kind="relationship" relationship="viewControllers" id="Yut-uD-psM"/>
                         <segue destination="LUF-2Q-sMp" kind="relationship" relationship="viewControllers" id="6cn-cd-urz"/>
                         <segue destination="4Q7-nF-F61" kind="relationship" relationship="viewControllers" id="VX7-Za-29H"/>
+                        <segue destination="edc-e0-G7q" kind="relationship" relationship="viewControllers" id="Jg2-xU-za2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oml-Hy-kGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-129" y="257"/>
+            <point key="canvasLocation" x="-331" y="317"/>
         </scene>
         <!--Goto View Controller-->
         <scene sceneID="eRj-3C-vWg">
@@ -323,30 +337,10 @@
             </objects>
             <point key="canvasLocation" x="1424" y="2025"/>
         </scene>
-        <!--Navigation Controller - 聖詩內容-->
-        <scene sceneID="BAA-EL-heM">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SFn-Ti-d2S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="聖詩內容" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtE-LW-hAQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="edc-e0-G7q" kind="relationship" relationship="rootViewController" id="f2R-g1-ymx"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CNt-x1-dHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="693" y="-34"/>
-        </scene>
     </scenes>
     <resources>
         <image name="24_24buttondown.png" width="24" height="24"/>
         <image name="BarBtn_GOTO.png" width="30" height="30"/>
-        <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
         <image name="gotobtn1.png" width="93" height="30"/>
