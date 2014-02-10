@@ -45,6 +45,10 @@
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
 		1054B6F218A3295F0057C097 /* welcome_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1054B6F118A3295F0057C097 /* welcome_page@2x.png */; };
+		1055AF0E18A7C6A1004533CE /* info_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 1055AF0C18A7C6A1004533CE /* info_32.png */; };
+		1055AF0F18A7C6A1004533CE /* info_32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1055AF0D18A7C6A1004533CE /* info_32@2x.png */; };
+		1055AF1218A7C7FC004533CE /* Special_Characters-iPhone-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1055AF1018A7C7FC004533CE /* Special_Characters-iPhone-01.png */; };
+		1055AF1318A7C7FC004533CE /* Special_Characters-iPad-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1055AF1118A7C7FC004533CE /* Special_Characters-iPad-01.png */; };
 		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		105C43BC188E7421002BAF6B /* BG-GreyNote_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */; };
 		105C43C2188E7A00002BAF6B /* iPadReadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43C1188E7A00002BAF6B /* iPadReadingTableViewController.m */; };
@@ -91,6 +95,8 @@
 		10B8AC4B1897AC81005D6CC3 /* welcome_page_3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC4A1897AC81005D6CC3 /* welcome_page_3_5.png */; };
 		10BE81CD1886701A00E116F2 /* NaviBtnNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */; };
 		10BE81CE1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */; };
+		10C3921E18A6689900280D5E /* iPad-retina-light-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C3921C18A6689900280D5E /* iPad-retina-light-outlines-01.png */; };
+		10C3921F18A6689900280D5E /* iPad-retina-dark-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C3921D18A6689900280D5E /* iPad-retina-dark-outlines-01.png */; };
 		10DD73DA186C289E00047D12 /* iPadMainPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */; };
 		10E9F3AA1897501200220B47 /* NaviBtnNormal_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */; };
 		10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */; };
@@ -924,6 +930,10 @@
 		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
 		10455199187AAB1900DECB38 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		1054B6F118A3295F0057C097 /* welcome_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page@2x.png"; sourceTree = "<group>"; };
+		1055AF0C18A7C6A1004533CE /* info_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_32.png; sourceTree = "<group>"; };
+		1055AF0D18A7C6A1004533CE /* info_32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_32@2x.png"; sourceTree = "<group>"; };
+		1055AF1018A7C7FC004533CE /* Special_Characters-iPhone-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Special_Characters-iPhone-01.png"; sourceTree = "<group>"; };
+		1055AF1118A7C7FC004533CE /* Special_Characters-iPad-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Special_Characters-iPad-01.png"; sourceTree = "<group>"; };
 		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
 		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
 		105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BG-GreyNote_paper.png"; sourceTree = "<group>"; };
@@ -981,6 +991,8 @@
 		10B8AC4A1897AC81005D6CC3 /* welcome_page_3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page_3_5.png; sourceTree = "<group>"; };
 		10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_White_iPad.png; sourceTree = "<group>"; };
 		10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
+		10C3921C18A6689900280D5E /* iPad-retina-light-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-light-outlines-01.png"; sourceTree = "<group>"; };
+		10C3921D18A6689900280D5E /* iPad-retina-dark-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-dark-outlines-01.png"; sourceTree = "<group>"; };
 		10C4B2B7187506F30074B8E3 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
 		10DD73D8186C289E00047D12 /* iPadMainPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadMainPoetryViewController.h; sourceTree = "<group>"; };
 		10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadMainPoetryViewController.m; sourceTree = "<group>"; };
@@ -1816,6 +1828,8 @@
 		0ACC32B518A2F82800D245C0 /* sc */ = {
 			isa = PBXGroup;
 			children = (
+				1055AF1018A7C7FC004533CE /* Special_Characters-iPhone-01.png */,
+				1055AF1118A7C7FC004533CE /* Special_Characters-iPad-01.png */,
 				0ACC32B618A2F82800D245C0 /* sc1.png */,
 				0ACC32B718A2F82800D245C0 /* sc10.png */,
 				0ACC32B818A2F82800D245C0 /* sc11.png */,
@@ -1918,6 +1932,8 @@
 		10B8AC38189796D9005D6CC3 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				1055AF0C18A7C6A1004533CE /* info_32.png */,
+				1055AF0D18A7C6A1004533CE /* info_32@2x.png */,
 				10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */,
 				10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */,
 				10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */,
@@ -1931,6 +1947,8 @@
 				10B8AC391897978C005D6CC3 /* SettingNormal_White_iPad_Dark.png */,
 				10B8AC3A1897978C005D6CC3 /* SettingNormal_White_iPad.png */,
 				10B8AC3D189797B4005D6CC3 /* SettingNormal_White_iPad@2x.png */,
+				10C3921C18A6689900280D5E /* iPad-retina-light-outlines-01.png */,
+				10C3921D18A6689900280D5E /* iPad-retina-dark-outlines-01.png */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -2977,6 +2995,7 @@
 				CB54FF3F18695CCE00CED47E /* 555.txt in Resources */,
 				CB54FF2718695CCE00CED47E /* 533.txt in Resources */,
 				CB54FEBF18695CCE00CED47E /* 44.txt in Resources */,
+				1055AF1218A7C7FC004533CE /* Special_Characters-iPhone-01.png in Resources */,
 				CB54FF8A18695CCE00CED47E /* 622.txt in Resources */,
 				CB54FE4018695CCE00CED47E /* 325.txt in Resources */,
 				CB54FE3D18695CCE00CED47E /* 322.txt in Resources */,
@@ -2991,6 +3010,7 @@
 				CB54FF6718695CCE00CED47E /* 591.txt in Resources */,
 				CB54FE9618695CCE00CED47E /* 402.txt in Resources */,
 				CB54FDE718695CCE00CED47E /* 245.txt in Resources */,
+				10C3921F18A6689900280D5E /* iPad-retina-dark-outlines-01.png in Resources */,
 				CB54FFAA18695CCE00CED47E /* 651.txt in Resources */,
 				CB0AB8AC187E562200C60DFF /* 24_24buttonup.png in Resources */,
 				CB54FF6118695CCE00CED47E /* 586.txt in Resources */,
@@ -3277,6 +3297,7 @@
 				CB54FDE218695CCE00CED47E /* 240.txt in Resources */,
 				CB54000618695CCE00CED47E /* 85.txt in Resources */,
 				CB54FDD718695CCE00CED47E /* 230.txt in Resources */,
+				1055AF1318A7C7FC004533CE /* Special_Characters-iPad-01.png in Resources */,
 				CB54FE1418695CCE00CED47E /* 286.txt in Resources */,
 				CB54FEE718695CCE00CED47E /* 476.txt in Resources */,
 				CB54FE8B18695CCE00CED47E /* 393.txt in Resources */,
@@ -3448,6 +3469,7 @@
 				0ACC32D318A2F82800D245C0 /* sc7.png in Resources */,
 				CB54FF0218695CCE00CED47E /* 50.txt in Resources */,
 				CB54FD8E18695CCE00CED47E /* 165.txt in Resources */,
+				1055AF0F18A7C6A1004533CE /* info_32@2x.png in Resources */,
 				CB54FE4218695CCE00CED47E /* 327.txt in Resources */,
 				CB54FF6C18695CCE00CED47E /* 596.txt in Resources */,
 				CB54FEA818695CCE00CED47E /* 419.txt in Resources */,
@@ -3461,6 +3483,7 @@
 				CB54FFFD18695CCE00CED47E /* 77.txt in Resources */,
 				CB54FFC018695CCE00CED47E /* 671.txt in Resources */,
 				CB54FF4F18695CCE00CED47E /* 57.txt in Resources */,
+				1055AF0E18A7C6A1004533CE /* info_32.png in Resources */,
 				CB54FE8818695CCE00CED47E /* 390.txt in Resources */,
 				CB54FE6518695CCE00CED47E /* 359.txt in Resources */,
 				CB54FEE418695CCE00CED47E /* 473.txt in Resources */,
@@ -3644,6 +3667,7 @@
 				10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */,
 				CB54FF4318695CCE00CED47E /* 559.txt in Resources */,
 				1060F926187FFE1F004AE154 /* Icon-76@2x.png in Resources */,
+				10C3921E18A6689900280D5E /* iPad-retina-light-outlines-01.png in Resources */,
 				CB54FE3218695CCE00CED47E /* 312.txt in Resources */,
 				CB54FF4B18695CCE00CED47E /* 566.txt in Resources */,
 				CB54FF7018695CCE00CED47E /* 6.txt in Resources */,

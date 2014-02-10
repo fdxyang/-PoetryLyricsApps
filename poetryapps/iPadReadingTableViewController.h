@@ -60,6 +60,8 @@
 
 
 #define UI_IPAD_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_IPAD_SCREEN_HEIGHT * 0.66, UI_IPAD_SCREEN_HEIGHT * 0.66)
+#define UI_IPAD_READING_SPECIAL_CHAR_IMG_RECT                CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)
+
 
 #define TAG_COVER_VIEW                  3
 #define TAG_NAVI_BTN                    6
