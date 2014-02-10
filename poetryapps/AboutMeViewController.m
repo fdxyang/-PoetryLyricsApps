@@ -93,7 +93,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    /*
     NSUInteger contactPos=0;
     CGFloat scrollHeight = 0.0;
     
@@ -131,7 +130,6 @@
     teamContact.textAlignment = NSTextAlignmentCenter;
     [teamContact setText:@"聯絡我們：hippocolors@gmail.com"];
     [_Scroller addSubview:teamContact];
-     */
 }
 
 -(void)viewDidDisappear:(BOOL)animated

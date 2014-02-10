@@ -53,11 +53,6 @@
     UIImageView             *_LogoImgForAboutMe;
     UILabel                 *_EmailAddrForAboutMe;
     // 2014.02.06 [CASPER] Implement about me ==
-    
-    // 2014.02.09 [CASPER] Add Info Btn for Special Char
-    UIButton                *_SpecialCharBtn;
-    BOOL                    isSpecialCharShowed;
-    // 2014.02.09 [CASPER] Add Info Btn for Special Char ==
 }
 
 @end
@@ -108,10 +103,8 @@
                                                                 blue:(191/255.0f)
                                                                alpha:1]];
     
-    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"iPad-retina-light-outlines-01.png"]];
-    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"iPad-retina-dark-outlines-01.png"]];
-    //_LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-    //_DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     
     [self.view setBackgroundColor:_DarkBackgroundColor];
     
@@ -122,7 +115,6 @@
     _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
 
     _FontThemeColor = [[UIColor alloc] init];
-    _SpecialCharBtn = [[UIButton alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -188,18 +180,8 @@
         [self.view addSubview:_TutorialView];
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
-    
-    if (_SpecialCharBtn != nil) {
-        
-        [_SpecialCharBtn setFrame:CGRectMake(UI_IPAD_SCREEN_WIDTH - 80, UI_IPAD_SCREEN_HEIGHT - 80, 32, 32)];
-        [_SpecialCharBtn setImage:[UIImage imageNamed:@"info_32.png"] forState:UIControlStateNormal];
-        [_SpecialCharBtn addTarget:self action:@selector(SpecialCharBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        isSpecialCharShowed = NO;
-        [self.view addSubview:_SpecialCharBtn];
-    }
 
 }
-
 
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -1184,14 +1166,6 @@
         return NO;
     }
     
-    // 2014.02.09 [CASPER] Add Info Btn for Special Char
-    if (isSpecialCharShowed) {
-        [_TutorialView removeFromSuperview];
-        isSpecialCharShowed = NO;
-        return NO;
-    }
-    // 2014.02.09 [CASPER] Add Info Btn for Special Char ==
-    
     
     if ((touch.view.tag == 1) || (touch.view.tag == 2)) {
         
@@ -1748,11 +1722,6 @@
             //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
             [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
             [self RemoveCoverViewAnimation];
-            
-            // 2014.02.09 [CASPER] Add Info Btn for Special Char
-            [_SpecialCharBtn setHidden:NO];
-            // 2014.02.09 [CASPER] Add Info Btn for Special Char ==
-            
             break;
             
         case COVER_INIT:
@@ -1760,10 +1729,6 @@
             _isSearchBarOn = YES;
             _isSettingTableOn = NO;
             _isSearching = NO; //[CASPER] 2013.12.24
-            
-            // 2014.02.09 [CASPER] Add Info Btn for Special Char
-            [_SpecialCharBtn setHidden:YES];
-            // 2014.02.09 [CASPER] Add Info Btn for Special Char ==
             
             
             [self PlaceCoverView];
@@ -2225,26 +2190,4 @@
 }
 
 
--(void) SpecialCharBtnClicked
-{
-    
-    UIImageView   *TutorImg = [[UIImageView alloc] initWithFrame:UI_IPAD_READING_SPECIAL_CHAR_IMG_RECT];
-    _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_READING_TABLEVIEW_INIT_IPAD];
-    
-    [TutorImg setImage:[UIImage imageNamed:@"Special_Characters-iPad-01.png"]];
-    NSLog(@"%@", TutorImg);
-    [TutorImg setCenter:CGPointMake(UI_IPAD_SCREEN_WIDTH / 2, UI_IPAD_SCREEN_HEIGHT / 2 )];
-    [_TutorialView setTag:TAG_TUTORIAL_VIEW];
-    isSpecialCharShowed = YES;
-
-    _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
-    _TutorialView.exclusiveTouch = NO;
-    _TutorialView.translucentAlpha = 0.9;
-    _TutorialView.translucentStyle = UIBarStyleBlack;
-    _TutorialView.translucentTintColor = [UIColor clearColor];
-    _TutorialView.backgroundColor = [UIColor clearColor];
-    [_TutorialView addSubview:TutorImg];
-    [self.view addSubview:_TutorialView];
-
-}
 @end

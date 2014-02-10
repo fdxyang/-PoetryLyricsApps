@@ -1188,15 +1188,13 @@
 
 - (void) createSpecialTableView
 {
-    CGFloat height = 0.0;
-    NSString *imageName;
+    
     if (IS_IPHONE5) {
         
         specialTableView = [[ILTranslucentView alloc] initWithFrame:
                             CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH,
                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)];
         
-        height = UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT;
         //specialTableView.userInteractionEnabled = NO;
         //specialTableView.exclusiveTouch = NO;
         specialTableView.translucentAlpha = 0.9;
@@ -1208,8 +1206,6 @@
         specialTableScrollView = [[UIScrollView alloc] initWithFrame:
                                   CGRectMake(0, 20, UI_SCREEN_WIDTH,
                                              UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
-        
-        imageName = @"specialtable.png";
 
     } else {
         
@@ -1217,7 +1213,6 @@
                             CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH,
                                        UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)];
         
-        height = UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT;
         //specialTableView.userInteractionEnabled = NO;
         //specialTableView.exclusiveTouch = NO;
         specialTableView.translucentAlpha = 0.9;
@@ -1229,18 +1224,16 @@
         specialTableScrollView = [[UIScrollView alloc] initWithFrame:
                                   CGRectMake(0, 20, UI_SCREEN_WIDTH,
                                              UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
-        
-        imageName = @"specialtable_35inch.png";
     }
     
     [specialTableView addSubview:specialTableScrollView];
     
     // TODO: Modify image as Special Table Img
-    UIImageView *TestImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, height)];
-    [TestImg setImage:[UIImage imageNamed:imageName]];
+    UIImageView *TestImg = [[UIImageView alloc] initWithFrame:CGRectMake(100, 400, 50, 50)];
+    [TestImg setImage:[UIImage imageNamed:@"sc1.png"]];
     [specialTableScrollView addSubview:TestImg];
     
-    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, height)]; // TODO: Modify "1000" as Image Height
+    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, 1000)]; // TODO: Modify "1000" as Image Height
     [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
     
 
