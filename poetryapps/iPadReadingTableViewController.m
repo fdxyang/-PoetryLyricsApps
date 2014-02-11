@@ -194,7 +194,7 @@
     
     if (_SpecialCharBtn != nil) {
          
-     [_SpecialCharBtn setFrame:CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 140, 70, 70)];
+     [_SpecialCharBtn setFrame:CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 40, 50, 50)];
      [_SpecialCharBtn setImage:[UIImage imageNamed:@"iPad button-info-light-01.png"] forState:UIControlStateNormal];
      [_SpecialCharBtn addTarget:self action:@selector(SpecialCharBtnClicked) forControlEvents:UIControlEventTouchUpInside];
      isSpecialCharShowed = NO;
