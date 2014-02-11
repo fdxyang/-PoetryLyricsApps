@@ -54,6 +54,7 @@ typedef enum {
 -(NSDictionary *) Poetry_GetPreviousWithCurrentData : (NSDictionary *) NowReading;
 -(NSDictionary *) Poetry_GetNextWithCurrentData : (NSDictionary *) NowReading;
 -(POETRY_CATEGORY) Poetry_ExtractCategoryInPoetry : (NSDictionary*) Poetry;
+-(BOOL) Poetry_CoreDataUpdatePoetryInCoreData : (NSDictionary *) OldPoetry ByNewPoetry : (NSDictionary *) NewPoetry;
 
 
 // Poetry history Methods

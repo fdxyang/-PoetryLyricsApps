@@ -8,6 +8,7 @@
 
 #import "GotoViewController.h"
 
+
 @interface GotoViewController ()
 {
     UIColor *_BackgroundColor;
@@ -33,6 +34,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    uiOffset = 0.0;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    if(screenRect.size.height == 568)
+    {
+        //NSLog(@"this is 4 inch");
+        uiOffset = 21.0;
+        readingBtnOffset = 0;
+    }
+    else if(screenRect.size.height == 480)
+    {
+        //NSLog(@"this is 3.5 inch");
+        uiOffset = 108.0;
+        readingBtnOffset = 25;
+    }
 
     _poetryView = [[Poetrypicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
     _responseView = [[Responsepicker alloc] initWithFrame:CGRectMake(0,165,320,162) getbtn:gotoReading getState:FALSE];
@@ -49,37 +67,40 @@
     [self.view addSubview:_responseView];
     
     [self.view bringSubviewToFront:_guideView];
-    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
     [guideBtn setTitle:@"基督基石" forState:UIControlStateNormal];
     [poetryBtn setTitle:@"詩歌" forState:UIControlStateNormal];
     [responseBtn setTitle:@"啟應文" forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [poetryBtn setEnabled:YES];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [responseBtn setEnabled:YES];
     
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
-    self.navigationItem.title = @"快速查詢";
-    
-    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     [self.view setBackgroundColor:_BackgroundColor];
     
-    uiOffset = 0.0;
+    // Kevin 20140124 set title background color
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
     
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    //NSLog(@"height = %f",screenRect.size.height);
+    self.navigationItem.title = @"快速查詢";
     
-    if(screenRect.size.height == 568)
-    {
-        //NSLog(@"this is 4 inch");
-        uiOffset = 21.0;
-    }
-    else if(screenRect.size.height == 480)
-    {
-        //NSLog(@"this is 3.5 inch");
-        uiOffset = 108.0;
-    }
+    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
+    
+    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+    
+    [gotoReading setFrame:CGRectMake(20,378-readingBtnOffset,280, 50)];
+    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -88,6 +109,10 @@
 
     _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
     [_TableView reloadData];
+    
+    self.navigationItem.title = @"快速查詢";
+    
+    [gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,11 +136,12 @@
     [self.view bringSubviewToFront:_guideView];
     [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
     [guideBtn setEnabled:NO];
-    [poetryBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
 
@@ -132,11 +158,12 @@
     [self.view bringSubviewToFront:_poetryView];
     [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
-    [poetryBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [poetryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [poetryBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn2_selected.png"] forState:UIControlStateDisabled];
     [poetryBtn setEnabled:NO];
-    [responseBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
 }
 
@@ -153,11 +180,14 @@
     [self.view bringSubviewToFront:_responseView];
     [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
     
-    [guideBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [guideBtn setEnabled:YES];
-    [poetryBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [responseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    [responseBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn3_selected.png"] forState:UIControlStateDisabled];
     [responseBtn setEnabled:NO];
 }
 
@@ -173,11 +203,10 @@
             NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
             
             _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-            //NSLog(@"kk height = %f",_TableView.frame.size.height);
             _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
             _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
             _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GOTOBackground.png"]];
+            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
             [tempImageView setFrame:_TableView.frame];
             _TableView.backgroundView = tempImageView;
             [_TableView reloadData];
@@ -296,6 +325,37 @@
     return sectionStr;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    UIView *view;
+    
+    if (section == 1)
+    {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width,30)];
+        /* Create custom view to display section header... */
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, tableView.frame.size.width-10,30)];
+        [label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15]];
+        label.textAlignment = NSTextAlignmentLeft;
+        
+        NSString *string = @"歷史記錄";
+        
+        [label setText:string];
+        label.textColor = [UIColor whiteColor];
+        [view addSubview:label];
+        [view setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                        green:(159/255.0f)
+                                                         blue:(191/255.0f)
+                                                        alpha:1]];
+        [label setBackgroundColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                         green:(159/255.0f)
+                                                          blue:(191/255.0f)
+                                                         alpha:1]]; //your background color...
+    }
+    
+    return view;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -303,7 +363,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {

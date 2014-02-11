@@ -43,6 +43,8 @@
     UIImage                 *_NaviBtnImgWhitePressed;
     UIImage                 *_NaviBtnImgDarkNormal;
     UIImage                 *_NaviBtnImgDarkPressed;
+    UIImage                 *_SettingBtnImg;
+    UIImage                 *_SearchingBtnImg;
     
 }
 
@@ -100,20 +102,12 @@
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPad.png"]];
 
     _NaviBtnImgWhiteNormal = [UIImage imageNamed:@"NaviBtnNormal_White_iPad.png"];
-    _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
+    //_NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_White_iPad.png"];
     _NaviBtnImgDarkNormal = [UIImage imageNamed:@"NaviBtnNormal_iPad.png"];
-    _NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
-    
-    /*
-    _PrevTouchView = [[UIView alloc] initWithFrame:UI_IPAD_PREV_VIEW_RECT_INIT];
-    _NextTouchView = [[UIView alloc] initWithFrame:UI_IPAD_NEXT_VIEW_RECT_INIT];
-    [_PrevTouchView setBackgroundColor:[UIColor redColor]];
-    [_NextTouchView setBackgroundColor:[UIColor redColor]];
-    [_PrevTouchView setTag:TAG_PREV_TOUCH_VIEW];
-    [_NextTouchView setTag:TAG_NEXT_TOUCH_VIEW];
-    [self.view addSubview:_PrevTouchView];
-    [self.view addSubview:_NextTouchView];
-    */
+    //_NaviBtnImgDarkPressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
+
+    _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
+    _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,12 +164,12 @@
     if (_Setting.SettingTheme == THEME_LIGHT_DARK) {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgDarkNormal forState:UIControlStateNormal];
-        [_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgDarkPressed forState:UIControlStateHighlighted];
 
     } else {
         
         [_NaviBtn setBackgroundImage:_NaviBtnImgWhiteNormal forState:UIControlStateNormal];
-        [_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
+        //[_NaviBtn setBackgroundImage:_NaviBtnImgWhitePressed forState:UIControlStateHighlighted];
 
     }
 }
@@ -201,10 +195,10 @@
         _SettingBtn = [[UIButton alloc] initWithFrame:UI_IPAD_COVER_SETTING_BTN_RECT_INIT];
     }
     
-    [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+    //_SettingBtn.backgroundColor = [UIColor grayColor];
     
-    _SettingBtn.backgroundColor = [UIColor grayColor];
-    _SettingBtn.opaque = YES;
+    [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
     [_SettingBtn addTarget:self action:@selector(SettingBtnHandler) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -224,7 +218,7 @@
     if (_TableView == nil) {
         _TableView = [[UITableView alloc] initWithFrame:UI_IPAD_COVER_TABLEVIEW_RECT_INIT];
     }
-    _TableData = [NSMutableArray arrayWithObjects:@"導讀", @"聖詩", @"啟應文", @"閱讀歷史", nil];
+    _TableData = [NSMutableArray arrayWithObjects:@"基督基石", @"聖詩", @"啟應文", @"閱讀歷史", nil];
     _TableView.delegate = self;
     _TableView.dataSource = self;
     _TableView.scrollEnabled = NO;
@@ -638,8 +632,8 @@
             _isSettingTableOn = NO;
             _isSearching = NO;  //[CASPER] 2013.12.24
             _isTocTableOn = NO; //[CASPER] 2013.12.27
-            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
             [self RemoveCoverViewAnimation];
             break;
         
@@ -659,8 +653,9 @@
             _isSearchBarOn = YES;
             _isSettingTableOn = NO;
             //_SettingBtn.titleLabel.text = @"SETTING";
-            [_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
-
+            //[_SettingBtn setTitle:@"SETTING" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SettingBtnImg forState:UIControlStateNormal];
+            
             [self RemoveSettingTableViewAnnimation];
             [self ExecuteSearchBarAnnimation];
             break;
@@ -672,7 +667,8 @@
             _isSettingTableOn = YES;
             _isSearching = NO;
             //_SettingBtn.titleLabel.text = @"SEARCH";
-            [_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+            //[_SettingBtn setTitle:@"SEARCH" forState:UIControlStateNormal];
+            [_SettingBtn setImage:_SearchingBtnImg forState:UIControlStateNormal];
             
             [_SettingTableView reloadData];
             
@@ -905,7 +901,7 @@
                     _TocTableData = [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:GUARD_READING];
                     [_TocTableView reloadData];
                     [_TocTableView setFrame:UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT_GUARDREADING];
-                    _NavigationHeader.TitleLab.text = @"導讀";
+                    _NavigationHeader.TitleLab.text = @"基督基石";
                     _TocTableView.scrollEnabled = NO;
                     [self ExecuteTocTableViewAnimation];
                     
@@ -1068,7 +1064,7 @@
                     break;
                     
                 case 1:
-                    sectionStr = @"導讀";
+                    sectionStr = @"基督基石";
                     break;
                     
                 case 2:
@@ -1139,12 +1135,13 @@
             
             
         } else if (indexPath.section == 2) {
+            
             [self InitPreviewLab];
             [self Setting_InitThemeView];
             [cell addSubview:_ThemePreViewLab];
             
         } else if (indexPath.section == 3) {
-            cell.textLabel.text = @"Kevin / ioschswc@gmail.com";
+            cell.textLabel.text = @"關於我";
         }
         
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
@@ -2065,7 +2062,7 @@
         case THEME_LIGHT_DARK:
             IPAD_READING_VIEW_LOG(@"THEME_LIGHT_DARK");
             //THEME_LIGHT_DARK = 0x00,    // Font color = Black, Background = White
-            _ThemePreViewLab.backgroundColor = [UIColor whiteColor];
+            _ThemePreViewLab.backgroundColor = _LightBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor blackColor];
             _ThemePreViewLab.text = _NowReadingText;
             break;
@@ -2074,7 +2071,7 @@
             IPAD_READING_VIEW_LOG(@"THEME_DARK_LIGHT");
             
             //THEME_LIGHT_DARK = 0x01,    // Font color = White, Background = Black
-            _ThemePreViewLab.backgroundColor = [UIColor blackColor];
+            _ThemePreViewLab.backgroundColor = _DarkBackgroundColor;
             _ThemePreViewLab.textColor = [UIColor whiteColor];
             _ThemePreViewLab.text = _NowReadingText;
             

@@ -23,7 +23,8 @@
 
 #define UI_READING_VIEW_FRAME_RECT_INIT             CGRectMake(0, 0, UI_IPAD_READINGVIEW_WIDTH, 768)
 
-#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 50, 70, 70)
+//#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(30, 50, 70, 70)
+#define UI_IPAD_NAVI_BTN_RECT_INIT                  CGRectMake(40, 90, 70, 70)
 #define UI_IPAD_NAVI_BTN_RECT_HIDE                  CGRectMake(-10, 0, 0, 0)
 
 
@@ -50,8 +51,8 @@
 #define UI_IPAD_COVER_TABLEVIEW_RECT_INIT           CGRectMake(-320, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TABLEVIEW_RECT_ON_COVER       CGRectMake(0, 150, UI_IPAD_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
 #define UI_IPAD_COVER_TOC_TABLEVIEW_RECT_INIT       CGRectMake(-320, 100, UI_IPAD_TOC_TABLEVIEW_WIDTH, UI_IPAD_COVER_TABLEVIEW_HEIGHT)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(UI_IPAD_SCREEN_WIDTH - 200, -50, 100, 50)
-#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 200, 100, 100, 50)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_INIT         CGRectMake(UI_IPAD_SCREEN_WIDTH , 40, 0, 0)
+#define UI_IPAD_COVER_SETTING_BTN_RECT_ON_COVER     CGRectMake(UI_IPAD_SCREEN_WIDTH - 110, 90, 70, 70)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_INIT          CGRectMake(1024, 300, 350, 50)
 #define UI_IPAD_COVER_SEARCH_BAR_RECT_ON_COVER      CGRectMake(574, 300, 350, 50)
 #define UI_IPAD_COVER_SETTING_TABLE_RECT_INIT       CGRectMake(1024, 200, 320, 550)
@@ -90,9 +91,9 @@
 
 
 @interface iPadPoetryViewController : UIViewController <UITableViewDelegate,
-                                                        UITableViewDataSource,
-                                                        UIGestureRecognizerDelegate,
-                                                        UISearchBarDelegate>
+                                                                UITableViewDataSource,
+                                                                UIGestureRecognizerDelegate,
+                                                                UISearchBarDelegate>
 
 
 @property (nonatomic, strong) UIScrollView              *Scroller;
@@ -142,6 +143,13 @@
 @property (nonatomic, strong)   NSMutableArray          *TocTableData;
 @property (nonatomic, strong)   UITableView             *TocTableView;
 @property (nonatomic, strong)   iPadNavTableHeader      *NavigationHeader;
+
+// 2014.01.20 [CASPER] Change reading view to table view
+@property (strong, nonatomic)   UITableView                 *TableView1;
+@property (strong, nonatomic)   UITableView                 *TableView2;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray1;
+@property (strong, nonatomic)   NSMutableArray              *ReadingTableArray2;
+// 2014.01.20 [CASPER] Change reading view to table view == 
 
 typedef enum {
     VIEW1 = 0x00,

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OKE-jU-Z4D">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Poetry View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="PoetryViewController" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-524" y="257"/>
-        </scene>
-        <!--Reading View Controller-->
+        <!--Reading Table View Controller-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
-                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rwx-QZ-ePj"/>
-                        <viewControllerLayoutGuide type="bottom" id="Jyp-Z9-Xwd"/>
-                    </layoutGuides>
+                <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wwm-33-SDC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bWY-Cq-QNw"/>
+                    <navigationItem key="navigationItem" id="bWY-Cq-QNw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ujR-a1-VAX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="m9c-L2-fG6">
+                                <rect key="frame" x="282" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSpecialTable:" destination="edc-e0-G7q" eventType="touchUpInside" id="DBu-OV-v6C"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0Q-NQ-9tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1049" y="-34"/>
         </scene>
-        <!--Tab Bar Controller - GOTO-->
+        <!--Poetry Tab Bar Controller - GOTO-->
         <scene sceneID="EF1-TU-lpR">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabView" title="GOTO" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKE-jU-Z4D" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabView" title="GOTO" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKE-jU-Z4D" customClass="PoetryTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="EOk-b3-DBw">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -59,27 +59,22 @@
         <scene sceneID="eRj-3C-vWg">
             <objects>
                 <viewController storyboardIdentifier="GOTO_Picker_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KYQ-5T-R8S" customClass="GotoViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CPD-HU-xG1"/>
-                        <viewControllerLayoutGuide type="bottom" id="p9z-yv-mFH"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3nz-cD-u1i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbU-Kr-hYO">
-                                <rect key="frame" x="40" y="95" width="80" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="VbU-Kr-hYO">
+                                <rect key="frame" x="20" y="100" width="93" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn1.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="GOTOGuardBtnSelected.png"/>
                                 <connections>
                                     <action selector="guideBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="DfP-0k-Ljq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQ6-Iy-REN">
-                                <rect key="frame" x="120" y="95" width="80" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="LQ6-Iy-REN">
+                                <rect key="frame" x="113" y="100" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn2.png">
                                     <attributedString key="attributedTitle"/>
@@ -88,8 +83,8 @@
                                     <action selector="poetryBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="rtv-n1-pZN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Go-Hg-dcK">
-                                <rect key="frame" x="200" y="95" width="80" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="1Go-Hg-dcK">
+                                <rect key="frame" x="207" y="100" width="93" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="gotobtn3.png">
                                     <attributedString key="attributedTitle"/>
@@ -98,12 +93,12 @@
                                     <action selector="responseBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="iWI-9n-QoO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-NA-q83">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oKp-NA-q83">
                                 <rect key="frame" x="20" y="378" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Button" backgroundImage="gotobtnunselected.png">
-                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" backgroundImage="gotobtnselected.png"/>
@@ -317,10 +312,6 @@
         <scene sceneID="fQa-rM-TSx">
             <objects>
                 <viewController id="X09-Bl-QZh" customClass="AboutMeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5xs-Pn-ish"/>
-                        <viewControllerLayoutGuide type="bottom" id="9jp-cL-GJC"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DJ1-ug-P70">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -332,11 +323,11 @@
             </objects>
             <point key="canvasLocation" x="1424" y="2025"/>
         </scene>
-        <!--Navigation Controller - 導讀-->
+        <!--Navigation Controller - 聖詩內容-->
         <scene sceneID="BAA-EL-heM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SFn-Ti-d2S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="導讀" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
+                    <tabBarItem key="tabBarItem" title="聖詩內容" image="BarBtn_Reading.png" id="8O8-c5-S2D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtE-LW-hAQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -358,13 +349,13 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="GOTOGuardBtnSelected.png" width="850" height="225"/>
-        <image name="gotobtn1.png" width="80" height="35"/>
-        <image name="gotobtn2.png" width="80" height="35"/>
-        <image name="gotobtn3.png" width="80" height="35"/>
+        <image name="gotobtn1.png" width="93" height="30"/>
+        <image name="gotobtn2.png" width="94" height="30"/>
+        <image name="gotobtn3.png" width="93" height="30"/>
         <image name="gotobtnselected.png" width="280" height="50"/>
         <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

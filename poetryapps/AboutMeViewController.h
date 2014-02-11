@@ -10,4 +10,7 @@
 
 @interface AboutMeViewController : UIViewController
 
+@property (nonatomic, strong) UIScrollView  *Scroller;
+@property (nonatomic, strong) UILabel       *TextLabel;
+
 @end

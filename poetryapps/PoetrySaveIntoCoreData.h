@@ -15,4 +15,7 @@
 
 -(PoetrySaveIntoCoreData*) init;
 - (BOOL)isCoreDataSave;
+- (NSArray*) getPlistContent;
+- (BOOL)isCheckPlistFileExist;
+- (BOOL)isUpdatePlistFile;
 @end

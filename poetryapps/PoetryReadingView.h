@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PoetryReadingView : UIView
+@property (nonatomic, strong) UITableView *ReadingTableView;
 @property (nonatomic, strong) UIScrollView *Scroller;
 @property (nonatomic, strong) UILabel *ContentTextLabel;
 @property (nonatomic, strong) UILabel *TitleTextLabel; //Only for iPad

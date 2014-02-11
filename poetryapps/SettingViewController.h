@@ -12,7 +12,7 @@
 #import "ThemeSetting.h"
 #import "PoetryCoreData.h"
 
-@interface SettingViewController : UITableViewController
+@interface SettingViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
 

@@ -7,6 +7,13 @@
 //
 
 #import "PoetryAppDelegate.h"
+
+// 2014.01.28 [CASPER] remove welcome view and move the init process to app delegate
+#import "PoetryCoreData.h"
+#import "PoetrySettingCoreData.h"
+#import "PoetrySaveIntoCoreData.h"
+// 2014.01.28 [CASPER] remove welcome view and move the init process to app delegate ==
+
 @implementation PoetryAppDelegate
 
 // 2013.11.26 [CASPER] Core Data
@@ -17,6 +24,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //NSLog(@"TEST in delegate");
+    PoetrySaveIntoCoreData *saveIntoCoreData = [[PoetrySaveIntoCoreData alloc]init];
+    BOOL isSuccessful = [saveIntoCoreData isCoreDataSave];
+    if(!isSuccessful)
+        NSLog(@"Save into core data Error!!!!!!!!!!");
+    
+
     return YES;
 }
 							
@@ -39,7 +55,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -147,7 +162,9 @@
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    // 2014.01.31 [CASPER] Modify the directory to NSLibraryDirectory
+    //return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 

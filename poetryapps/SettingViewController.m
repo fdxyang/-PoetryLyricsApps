@@ -37,12 +37,33 @@
     _Setting = [[PoetrySettingCoreData alloc] init];
     _PoetryDatabase = [[PoetryCoreData alloc] init];
     self.navigationItem.title = @"設定";
-    
+   
+    // 20140126 Change preview label background
+    /*
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Light_bgiPhone.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Dark_bgiPhone.png"]];
-
+    */
     
-
+    _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+    _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
+    
+    UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+    _NavigationTitleLab.text = @"設定";
+    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
+    
+    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    self.navigationItem.titleView = _NavigationTitleLab;
+    CGSize Size = CGSizeMake(280, 200);
+    Size = [_NavigationTitleLab sizeThatFits:Size];
+    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
+                                                                                    green:(159/255.0f)
+                                                                                     blue:(191/255.0f)
+                                                                                    alpha:0.8]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,14 +81,15 @@
         
         // [CASPER] 2013.12.23 Set text in preview as poetry name
         _NowReadingText = [[_PoetryDatabase Poetry_CoreDataFetchDataInReading] valueForKey:POETRY_CORE_DATA_NAME_KEY];
-        // [CASPER] 2013.12.23 == 
+        // [CASPER] 2013.12.23 ==
+        
         if ([_NowReadingText length] == 0) {
             
-            _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+            _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY];
             
         }
     } else {
-        _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+        _NowReadingText = [(NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] firstObject] valueForKey:POETRY_CORE_DATA_NAME_KEY];
     }
     
     [_TableView reloadData];
@@ -113,7 +135,7 @@
         [cell addSubview:_ThemePreViewLab];
         
     } else if (indexPath.section ==3) {
-        cell.textLabel.text = @"Kevin / ioschswc@gmail.com";
+        cell.textLabel.text = @"關於我";
     }
    
     return cell;
