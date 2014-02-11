@@ -1368,7 +1368,7 @@
             if (subview.tag != 1)
                 [subview removeFromSuperview];
         }
-         */
+        */
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status ==
         
         [specialTableView removeFromSuperview];

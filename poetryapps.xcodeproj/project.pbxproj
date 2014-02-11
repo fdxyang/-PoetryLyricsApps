@@ -39,11 +39,19 @@
 		102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */; };
 		10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */; };
 		10398C4A186BCF3F00EF5E74 /* iPadNavTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */; };
+		1041A81018A9B7230067F27A /* Tutor_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 1041A80F18A9B7230067F27A /* Tutor_White.png */; };
 		10449954184D87B700C58526 /* FontSizeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449953184D87B700C58526 /* FontSizeSetting.xib */; };
 		10449957184D87E700C58526 /* FontSizeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 10449956184D87E700C58526 /* FontSizeSetting.m */; };
 		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
+		104CB79718A9BBBC002698B2 /* iPad-retina-light-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79518A9BBBC002698B2 /* iPad-retina-light-outlines-01.png */; };
+		104CB79818A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79618A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png */; };
+		104CB79D18A9BD59002698B2 /* iPad button-info-light-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */; };
+		104CB79E18A9BD59002698B2 /* iPad button-info-light-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79A18A9BD59002698B2 /* iPad button-info-light-01@2x.png */; };
+		104CB79F18A9BD59002698B2 /* iPad-button-info-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */; };
+		104CB7A018A9BD59002698B2 /* iPad-button-info-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */; };
+		104CB7A218A9BDE4002698B2 /* SpecialCharacter-ipad-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */; };
 		1054B6F218A3295F0057C097 /* welcome_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1054B6F118A3295F0057C097 /* welcome_page@2x.png */; };
 		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		105C43BC188E7421002BAF6B /* BG-GreyNote_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */; };
@@ -81,7 +89,6 @@
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
 		10AF12721862EC7F002F6DB9 /* Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AF12701862EC7F002F6DB9 /* Animations.m */; };
 		10B361961856BF9B00A632AD /* PoetryReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B361951856BF9B00A632AD /* PoetryReadingView.m */; };
-		10B8AC3718978C2F005D6CC3 /* Tutor_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC3618978C2F005D6CC3 /* Tutor_White.png */; };
 		10B8AC3B1897978C005D6CC3 /* SettingNormal_White_iPad_Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC391897978C005D6CC3 /* SettingNormal_White_iPad_Dark.png */; };
 		10B8AC3C1897978C005D6CC3 /* SettingNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC3A1897978C005D6CC3 /* SettingNormal_White_iPad.png */; };
 		10B8AC3E189797B4005D6CC3 /* SettingNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC3D189797B4005D6CC3 /* SettingNormal_White_iPad@2x.png */; };
@@ -916,6 +923,7 @@
 		10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadNavTableHeader.h; sourceTree = "<group>"; };
 		10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadNavTableHeader.m; sourceTree = "<group>"; };
 		10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = iPadNavTableHeader.xib; sourceTree = "<group>"; };
+		1041A80F18A9B7230067F27A /* Tutor_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_White.png; sourceTree = "<group>"; };
 		10449953184D87B700C58526 /* FontSizeSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontSizeSetting.xib; sourceTree = "<group>"; };
 		10449955184D87E700C58526 /* FontSizeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSizeSetting.h; sourceTree = "<group>"; };
 		10449956184D87E700C58526 /* FontSizeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSizeSetting.m; sourceTree = "<group>"; };
@@ -923,6 +931,13 @@
 		1044995A184DA5EF00C58526 /* ThemeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSetting.h; sourceTree = "<group>"; };
 		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
 		10455199187AAB1900DECB38 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		104CB79518A9BBBC002698B2 /* iPad-retina-light-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-light-outlines-01.png"; sourceTree = "<group>"; };
+		104CB79618A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-dark-outlines-01.png"; sourceTree = "<group>"; };
+		104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad button-info-light-01.png"; sourceTree = "<group>"; };
+		104CB79A18A9BD59002698B2 /* iPad button-info-light-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad button-info-light-01@2x.png"; sourceTree = "<group>"; };
+		104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01.png"; sourceTree = "<group>"; };
+		104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01@2x.png"; sourceTree = "<group>"; };
+		104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SpecialCharacter-ipad-01.png"; sourceTree = "<group>"; };
 		1054B6F118A3295F0057C097 /* welcome_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page@2x.png"; sourceTree = "<group>"; };
 		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
 		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
@@ -971,7 +986,6 @@
 		10AF12711862EC7F002F6DB9 /* Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
 		10B361941856BF9B00A632AD /* PoetryReadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryReadingView.h; sourceTree = "<group>"; };
 		10B361951856BF9B00A632AD /* PoetryReadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryReadingView.m; sourceTree = "<group>"; };
-		10B8AC3618978C2F005D6CC3 /* Tutor_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutor_White.png; sourceTree = "<group>"; };
 		10B8AC391897978C005D6CC3 /* SettingNormal_White_iPad_Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingNormal_White_iPad_Dark.png; sourceTree = "<group>"; };
 		10B8AC3A1897978C005D6CC3 /* SettingNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingNormal_White_iPad.png; sourceTree = "<group>"; };
 		10B8AC3D189797B4005D6CC3 /* SettingNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
@@ -1918,11 +1932,16 @@
 		10B8AC38189796D9005D6CC3 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */,
+				104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */,
+				104CB79A18A9BD59002698B2 /* iPad button-info-light-01@2x.png */,
+				104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */,
+				104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */,
+				1041A80F18A9B7230067F27A /* Tutor_White.png */,
 				10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */,
 				10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */,
 				10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */,
 				10E9F3AD1897506400220B47 /* NaviBtnPress_iPad@2x.png */,
-				10B8AC3618978C2F005D6CC3 /* Tutor_White.png */,
 				10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */,
 				10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */,
 				10F55C64187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png */,
@@ -1931,6 +1950,8 @@
 				10B8AC391897978C005D6CC3 /* SettingNormal_White_iPad_Dark.png */,
 				10B8AC3A1897978C005D6CC3 /* SettingNormal_White_iPad.png */,
 				10B8AC3D189797B4005D6CC3 /* SettingNormal_White_iPad@2x.png */,
+				104CB79518A9BBBC002698B2 /* iPad-retina-light-outlines-01.png */,
+				104CB79618A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -3101,6 +3122,7 @@
 				CB54FDB418695CCE00CED47E /* 2.txt in Resources */,
 				CB54FDCE18695CCE00CED47E /* 222.txt in Resources */,
 				CB54FD5518695CCE00CED47E /* 113.txt in Resources */,
+				104CB79818A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png in Resources */,
 				10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */,
 				CB54FFBC18695CCE00CED47E /* 668.txt in Resources */,
 				CB54FE6E18695CCE00CED47E /* 367.txt in Resources */,
@@ -3114,6 +3136,7 @@
 				10449959184DA42500C58526 /* ThemeSetting.xib in Resources */,
 				CB54FE7B18695CCE00CED47E /* 379.txt in Resources */,
 				CB54FE3B18695CCE00CED47E /* 320.txt in Resources */,
+				104CB79F18A9BD59002698B2 /* iPad-button-info-01.png in Resources */,
 				CB54FDDD18695CCE00CED47E /* 236.txt in Resources */,
 				CB54FEF318695CCE00CED47E /* 487.txt in Resources */,
 				CB54000D18695CCE00CED47E /* 91.txt in Resources */,
@@ -3139,6 +3162,7 @@
 				CB54FF1A18695CCE00CED47E /* 521.txt in Resources */,
 				CB54FF7718695CCE00CED47E /* 605.txt in Resources */,
 				CB54FE9318695CCE00CED47E /* 40.txt in Resources */,
+				104CB7A218A9BDE4002698B2 /* SpecialCharacter-ipad-01.png in Resources */,
 				CB54FFC918695CCE00CED47E /* 68.txt in Resources */,
 				CB54FED518695CCE00CED47E /* 46.txt in Resources */,
 				CB54FD7F18695CCE00CED47E /* 151.txt in Resources */,
@@ -3316,6 +3340,7 @@
 				CB54FD7A18695CCE00CED47E /* 147.txt in Resources */,
 				CB54FFC318695CCE00CED47E /* 674.txt in Resources */,
 				CB54FDFD18695CCE00CED47E /* 265.txt in Resources */,
+				104CB7A018A9BD59002698B2 /* iPad-button-info-01@2x.png in Resources */,
 				CB54FDEA18695CCE00CED47E /* 248.txt in Resources */,
 				CB54FF9618695CCE00CED47E /* 633.txt in Resources */,
 				CB54FFFA18695CCE00CED47E /* 74.txt in Resources */,
@@ -3367,6 +3392,7 @@
 				CB54FE6618695CCE00CED47E /* 36.txt in Resources */,
 				CB54FEB218695CCE00CED47E /* 428.txt in Resources */,
 				CB54FE5E18695CCE00CED47E /* 352.txt in Resources */,
+				1041A81018A9B7230067F27A /* Tutor_White.png in Resources */,
 				1060F92F187FFE1F004AE154 /* iTunesArtwork in Resources */,
 				CB54FE7F18695CCE00CED47E /* 382.txt in Resources */,
 				CB54FFD518695CCE00CED47E /* 690.txt in Resources */,
@@ -3401,6 +3427,7 @@
 				CB54FFA418695CCE00CED47E /* 646.txt in Resources */,
 				CB54FF3A18695CCE00CED47E /* 550.txt in Resources */,
 				CB54FD8A18695CCE00CED47E /* 161.txt in Resources */,
+				104CB79718A9BBBC002698B2 /* iPad-retina-light-outlines-01.png in Resources */,
 				CB54FF2218695CCE00CED47E /* 529.txt in Resources */,
 				CB54FD7418695CCE00CED47E /* 141.txt in Resources */,
 				CB54FDDE18695CCE00CED47E /* 237.txt in Resources */,
@@ -3414,6 +3441,7 @@
 				CB54FDCB18695CCE00CED47E /* 22.txt in Resources */,
 				CB54FFDD18695CCE00CED47E /* 698.txt in Resources */,
 				CB54FDF818695CCE00CED47E /* 260.txt in Resources */,
+				104CB79E18A9BD59002698B2 /* iPad button-info-light-01@2x.png in Resources */,
 				CB54FD9D18695CCE00CED47E /* 179.txt in Resources */,
 				CB54FF1718695CCE00CED47E /* 519.txt in Resources */,
 				CB54FD6818695CCE00CED47E /* 130.txt in Resources */,
@@ -3670,6 +3698,7 @@
 				CB54FD7C18695CCE00CED47E /* 149.txt in Resources */,
 				CB54FFC218695CCE00CED47E /* 673.txt in Resources */,
 				CB54FFF818695CCE00CED47E /* 721.txt in Resources */,
+				104CB79D18A9BD59002698B2 /* iPad button-info-light-01.png in Resources */,
 				CB54FE9018695CCE00CED47E /* 398.txt in Resources */,
 				CB54FDA918695CCE00CED47E /* 19.txt in Resources */,
 				CB54FE1718695CCE00CED47E /* 289.txt in Resources */,
@@ -3725,7 +3754,6 @@
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
 				10F55C66187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png in Resources */,
 				CB54FDDA18695CCE00CED47E /* 233.txt in Resources */,
-				10B8AC3718978C2F005D6CC3 /* Tutor_White.png in Resources */,
 				CB54FEAA18695CCE00CED47E /* 420.txt in Resources */,
 				CB54FF0C18695CCE00CED47E /* 509.txt in Resources */,
 				CB54FDEE18695CCE00CED47E /* 251.txt in Resources */,
