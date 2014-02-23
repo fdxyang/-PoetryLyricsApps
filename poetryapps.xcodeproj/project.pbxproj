@@ -45,6 +45,8 @@
 		10449959184DA42500C58526 /* ThemeSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10449958184DA42500C58526 /* ThemeSetting.xib */; };
 		1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1044995B184DA5EF00C58526 /* ThemeSetting.m */; };
 		1045519A187AAB1900DECB38 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10455199187AAB1900DECB38 /* Default-568h@2x.png */; };
+		10482F4B18AA743900E0BA20 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 10482F4918AA743900E0BA20 /* iTunesArtwork.png */; };
+		10482F4C18AA743900E0BA20 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10482F4A18AA743900E0BA20 /* iTunesArtwork@2x.png */; };
 		104CB79718A9BBBC002698B2 /* iPad-retina-light-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79518A9BBBC002698B2 /* iPad-retina-light-outlines-01.png */; };
 		104CB79818A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79618A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png */; };
 		104CB79D18A9BD59002698B2 /* iPad button-info-light-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */; };
@@ -70,8 +72,6 @@
 		1060F92C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */; };
 		1060F92D187FFE1F004AE154 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91D187FFE1F004AE154 /* Icon.png */; };
 		1060F92E187FFE1F004AE154 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91E187FFE1F004AE154 /* Icon@2x.png */; };
-		1060F92F187FFE1F004AE154 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91F187FFE1F004AE154 /* iTunesArtwork */; };
-		1060F930187FFE1F004AE154 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 1060F920187FFE1F004AE154 /* iTunesArtwork@2x */; };
 		107201771883DF0700EC638D /* ReadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 107201761883DF0700EC638D /* ReadingTableViewController.m */; };
 		10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10732AEF1880D32300304DA4 /* AboutMeViewController.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
@@ -931,6 +931,8 @@
 		1044995A184DA5EF00C58526 /* ThemeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSetting.h; sourceTree = "<group>"; };
 		1044995B184DA5EF00C58526 /* ThemeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSetting.m; sourceTree = "<group>"; };
 		10455199187AAB1900DECB38 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		10482F4918AA743900E0BA20 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		10482F4A18AA743900E0BA20 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		104CB79518A9BBBC002698B2 /* iPad-retina-light-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-light-outlines-01.png"; sourceTree = "<group>"; };
 		104CB79618A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-retina-dark-outlines-01.png"; sourceTree = "<group>"; };
 		104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad button-info-light-01.png"; sourceTree = "<group>"; };
@@ -958,8 +960,6 @@
 		1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@2x.png"; sourceTree = "<group>"; };
 		1060F91D187FFE1F004AE154 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1060F91E187FFE1F004AE154 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		1060F91F187FFE1F004AE154 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		1060F920187FFE1F004AE154 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		107201751883DF0700EC638D /* ReadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTableViewController.h; sourceTree = "<group>"; };
 		107201761883DF0700EC638D /* ReadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTableViewController.m; sourceTree = "<group>"; };
 		10732AEE1880D32300304DA4 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
@@ -1856,6 +1856,8 @@
 				1060F911187FFE1F004AE154 /* Icon-60.png */,
 				1060F912187FFE1F004AE154 /* Icon-60@2x.png */,
 				1060F913187FFE1F004AE154 /* Icon-72.png */,
+				10482F4918AA743900E0BA20 /* iTunesArtwork.png */,
+				10482F4A18AA743900E0BA20 /* iTunesArtwork@2x.png */,
 				1060F914187FFE1F004AE154 /* Icon-72@2x.png */,
 				1060F915187FFE1F004AE154 /* Icon-76.png */,
 				1060F916187FFE1F004AE154 /* Icon-76@2x.png */,
@@ -1867,8 +1869,6 @@
 				1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */,
 				1060F91D187FFE1F004AE154 /* Icon.png */,
 				1060F91E187FFE1F004AE154 /* Icon@2x.png */,
-				1060F91F187FFE1F004AE154 /* iTunesArtwork */,
-				1060F920187FFE1F004AE154 /* iTunesArtwork@2x */,
 			);
 			path = ICON;
 			sourceTree = "<group>";
@@ -3393,7 +3393,6 @@
 				CB54FEB218695CCE00CED47E /* 428.txt in Resources */,
 				CB54FE5E18695CCE00CED47E /* 352.txt in Resources */,
 				1041A81018A9B7230067F27A /* Tutor_White.png in Resources */,
-				1060F92F187FFE1F004AE154 /* iTunesArtwork in Resources */,
 				CB54FE7F18695CCE00CED47E /* 382.txt in Resources */,
 				CB54FFD518695CCE00CED47E /* 690.txt in Resources */,
 				CB54FEE118695CCE00CED47E /* 470.txt in Resources */,
@@ -3577,6 +3576,7 @@
 				CB54FDA418695CCE00CED47E /* 185.txt in Resources */,
 				CB54FF8918695CCE00CED47E /* 621.txt in Resources */,
 				1004E8CA187CFBF900718741 /* BarBtn_GOTO.png in Resources */,
+				10482F4B18AA743900E0BA20 /* iTunesArtwork.png in Resources */,
 				1060F925187FFE1F004AE154 /* Icon-76.png in Resources */,
 				CB54FF8F18695CCE00CED47E /* 627.txt in Resources */,
 				CB54FE7318695CCE00CED47E /* 371.txt in Resources */,
@@ -3740,6 +3740,7 @@
 				CB54FD9B18695CCE00CED47E /* 177.txt in Resources */,
 				CB54FDB518695CCE00CED47E /* 20.txt in Resources */,
 				CB381FB51849B056000ECB84 /* GotoTable.xib in Resources */,
+				10482F4C18AA743900E0BA20 /* iTunesArtwork@2x.png in Resources */,
 				CB54FD5718695CCE00CED47E /* 115.txt in Resources */,
 				CB54FE2018695CCE00CED47E /* 297.txt in Resources */,
 				CB54FF4518695CCE00CED47E /* 560.txt in Resources */,
@@ -3795,7 +3796,6 @@
 				CB54FF7818695CCE00CED47E /* 606.txt in Resources */,
 				CB54FFD418695CCE00CED47E /* 69.txt in Resources */,
 				CB54FED018695CCE00CED47E /* 455.txt in Resources */,
-				1060F930187FFE1F004AE154 /* iTunesArtwork@2x in Resources */,
 				CB54FDC018695CCE00CED47E /* 21.txt in Resources */,
 				CB54FECA18695CCE00CED47E /* 45.txt in Resources */,
 				CB54FE2618695CCE00CED47E /* 301.txt in Resources */,
@@ -4001,10 +4001,9 @@
 		CB25FD3F1843972D00F3D980 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4027,10 +4026,9 @@
 		CB25FD401843972D00F3D980 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
