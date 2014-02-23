@@ -577,13 +577,30 @@
                 {
                     //NSLog(@"%@",[line substringWithRange:NSMakeRange(i,1)]);
                     
-                    if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"："] ||
+                    
+                    if(([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"。"] ||
+                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"！"] ||
+                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"？"] ||
+                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"，"])&&
+                       ((i+1)<[line length]) &&
+                       [[line substringWithRange:NSMakeRange(i+1,1)] isEqualToString:@"」"])
+                    {
+                        [templine appendString:[line substringWithRange:NSMakeRange(i,1)]];
+                        if([templine length] == lineNum)
+                        {
+                            //NSLog(@"debug7");
+                            [templine appendString:@"\n"];
+                            //NSLog(@"TEMPLINE = %@",templine);
+                        }
+                    }
+                    else if([[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"："] ||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"。"] ||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"；"] ||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"，"] ||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"！"] ||
                        [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"、"] ||
-                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"？"])
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"？"] ||
+                       [[line substringWithRange:NSMakeRange(i,1)] isEqualToString:@"」"])
                     {
                         if(([outputArr length]+[templine length]) < lineNum)
                         {
