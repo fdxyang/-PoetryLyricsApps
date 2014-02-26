@@ -196,27 +196,57 @@
         
         [setting PoetrySetting_SetDataSaved:YES];
     }
+    else
+    {
+        //NSLog(@"check 2");
+        if([self isCheckPlistFileExist])
+        {
+            //NSLog(@"check 3");
+            if([self isUpdatePlistFile])
+            {
+                //NSLog(@"success!!");
+                /*
+                //check plist
+                NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
+                NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                
+                //判斷plist檔案存在時才刪除
+                if ([fileManager fileExistsAtPath: filePath]) {
+                    [fileManager removeItemAtPath:filePath error:NULL];
+                    
+                    [textView setText:@"資料清除成功！"];
+                }*/
+            }
+        }
+    }
     return TRUE;
 }
 
 - (NSArray*) getPlistContent
 {
+    //NSLog(@"check9");
     NSMutableArray *plistFileList = [[NSMutableArray alloc]init];
+    //NSLog(@"check91");
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
+    //NSLog(@"check92");
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    //NSLog(@"check93");
     
     NSString *str;
-    for(int i = 0 ;i < 1000 ; i++)
+    //NSLog(@"check94");
+    for(int i = 0 ;i < 721 ; i++)
     {
         str = [NSString stringWithFormat:@"file_%d",i];
-        
+        //NSLog(@"%d",i);
         if([plistData objectForKey:str])
         {
             NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
+            //NSLog(@"check 4");
             [plistFileList addObject:[plistData objectForKey:str]];
+            //NSLog(@"check 5");
+            //NSLog(@"plistFileList = %@",plistFileList);
         }
-        else
-            break;
     }
     
     return plistFileList;
@@ -252,12 +282,13 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
-    NSUInteger poetryIndex = 0,categoryIndex = 0;
+    NSInteger poetryIndex = 0,categoryIndex = 0;
     POETRY_CATEGORY category = GUARD_READING;
     NSString *file,*filename;
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     BOOL isUpdate = TRUE;
     
+    //NSLog(@"getlist count = %ld,getplist = %@",[getPlist count],[getPlist objectAtIndex:0]);
     for(int i=0;i<[getPlist count];i++)
     {
         poetryIndex = [[getPlist objectAtIndex:i] integerValue];
@@ -269,12 +300,12 @@
         }
         else if(poetryIndex >650 && poetryIndex <= 716)
         {
-            category = GUARD_READING;
+            category = RESPONSIVE_PRAYER;
             categoryIndex = poetryIndex - 651;
         }
         else if(poetryIndex > 716 && poetryIndex <= 721)
         {
-            category = RESPONSIVE_PRAYER;
+            category = GUARD_READING;
             categoryIndex = poetryIndex - 717;
         }
         else
@@ -301,6 +332,7 @@
             if (!isUpdate)
             {
                 NSLog(@"UPDATE ERROR!!");
+                return FALSE;
             }
             else
             {
@@ -313,7 +345,7 @@
         }
     }
     
-    return FALSE;
+    return TRUE;
 }
 
 /*
