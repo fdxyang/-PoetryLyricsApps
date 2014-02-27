@@ -626,9 +626,11 @@
 // 2014.01.25 [CASPER] Add update poetry API
 -(BOOL) Poetry_CoreDataUpdatePoetryInCoreData : (NSDictionary *) OldPoetry ByNewPoetry : (NSDictionary *) NewPoetry
 {
-    NSArray *TempArray;
-    POETRY_CATEGORY Category = [[OldPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+    //NSArray *TempArray;
+    NSString *PoetryCoreDataEntityName;
+    NSError *error = nil;
     
+    POETRY_CATEGORY Category = [[OldPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
     
     if (OldPoetry == nil) {
         return NO;
@@ -637,85 +639,21 @@
     switch (Category) {
             
         case GUARD_READING:
-            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:GUARD_READING];
             
-            if ([TempArray count] == 1) {
-                
-                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                
-                NSError *error = nil;
-                if (![_context save:&error]) {
-                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                    return NO;
-                }
-                
-            } else if ([TempArray count] != 1) {
-                
-                return NO;
-                
-            } else {
-                return NO;
-            }
-
+            PoetryCoreDataEntityName = POETRY_GUARD_CORE_DATA_ENTITY;
 
             break;
             
         case POETRYS:
-            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:POETRYS];
             
-            if ([TempArray count] == 1) {
-                
-                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                
-                NSError *error = nil;
-                if (![_context save:&error]) {
-                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                    return NO;
-                }
-                
-            } else if ([TempArray count] != 1) {
-                return NO;
-            } else {
-                return NO;
-            }
-
+            PoetryCoreDataEntityName = POETRY_CORE_DATA_ENTITY;
+        
             break;
             
         case RESPONSIVE_PRAYER:
-            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:RESPONSIVE_PRAYER];
             
-            if ([TempArray count] == 1) {
-                
-                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                
-                NSError *error = nil;
-                if (![_context save:&error]) {
-                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                    return NO;
-                }
-                
-            } else if ([TempArray count] != 1) {
-                return NO;
-            } else {
-                return NO;
-            }
-
-
+            PoetryCoreDataEntityName = POETRY_RES_CORE_DATA_ENTITY;
+            
             break;
             
         default:
@@ -726,6 +664,20 @@
             break;
     }
     
+    NSManagedObject *PoetryInCoreData = [[self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:Category] firstObject];
+    
+    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+    
+    NSLog(@"%@", [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+    
+    if (![_context save:&error]) {
+        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return NO;
+    }
+
     return YES;
 
 }

@@ -315,19 +315,25 @@
         
         //NSLog(@"index = %d,category = %d",categoryIndex,category);
         NSDictionary *originalPoetry = (NSDictionary*)[[PoetryDataBase Poetry_CoreDataFetchDataInCategory:category] objectAtIndex:categoryIndex];
+        NSDictionary *NewPoetry = originalPoetry; //[Casper] add
         
-        NSLog(@"poetry content = %@",[originalPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        //NSLog(@"poetry content = %@",[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]);
         filename = [NSString stringWithFormat:@"/%@.txt",[getPlist objectAtIndex:i]];
         file = [FilePath stringByAppendingString:filename];
         
         if ([fileManager fileExistsAtPath:file] == YES)
         {
-            NSDictionary *Dic;// = [poetryContent objectAtIndex:[[getPlist objectAtIndex:i] integerValue]];
+            //NSDictionary *Dic;// = [poetryContent objectAtIndex:[[getPlist objectAtIndex:i] integerValue]];
             NSString *content = [[NSString  alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
-            NSLog(@"content = %@",content);
-            [Dic setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
+            //NSLog(@"content = %@",content);
             
-            isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:Dic];
+            [NewPoetry setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
+            [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+            [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+            [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+            //NSLog(@"NewPoetry = %@", [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            
+            isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:NewPoetry];
             
             if (!isUpdate)
             {
