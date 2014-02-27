@@ -627,92 +627,91 @@
 -(BOOL) Poetry_CoreDataUpdatePoetryInCoreData : (NSDictionary *) OldPoetry ByNewPoetry : (NSDictionary *) NewPoetry
 {
     NSArray *TempArray;
+    POETRY_CATEGORY Category = [[OldPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+    
     
     if (OldPoetry == nil) {
         return NO;
     }
     
-    for (int i = 0; i < CATEGORY_MAX; i++) {
-        
-        switch (i) {
+    switch (Category) {
+            
+        case GUARD_READING:
+            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:GUARD_READING];
+            
+            if ([TempArray count] == 1) {
                 
-            case 0:
+                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
                 
-                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:GUARD_READING];
-                if ([TempArray count] == 1) {
-                    
-                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                    
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                    
-                    NSError *error = nil;
-                    if (![_context save:&error]) {
-                        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                        return NO;
-                    }
-                    
-                } else if ([TempArray count] != 1) {
-                    
-                    return NO;
-                    
-                }
-
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
                 
-                
-                break;
-                
-            case 1:
-                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:POETRYS];
-                if ([TempArray count] == 1) {
-                    
-                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                    
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                    
-                    NSError *error = nil;
-                    if (![_context save:&error]) {
-                        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                        return NO;
-                    }
-                    
-                } else if ([TempArray count] != 1) {
-                    return NO;
-                }
-                break;
-                
-            case 2:
-                TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:RESPONSIVE_PRAYER];
-                if ([TempArray count] == 1) {
-                    
-                    NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
-                    
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-                    [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
-                    
-                    NSError *error = nil;
-                    if (![_context save:&error]) {
-                        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
-                        return NO;
-                    }
-                    
-                } else if ([TempArray count] != 1) {
+                NSError *error = nil;
+                if (![_context save:&error]) {
+                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
                     return NO;
                 }
                 
-                break;
+            } else if ([TempArray count] != 1) {
                 
-            default:
                 return NO;
-                break;
-        }
+                
+            }
+
+            break;
+            
+        case POETRYS:
+            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:POETRYS];
+            
+            if ([TempArray count] == 1) {
+                
+                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
+                
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+                
+                NSError *error = nil;
+                if (![_context save:&error]) {
+                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
+                    return NO;
+                }
+                
+            } else if ([TempArray count] != 1) {
+                return NO;
+            }
+
+            break;
+            
+        case RESPONSIVE_PRAYER:
+            TempArray = [self Poetry_CoreDataSearchWithPoetryName:[OldPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] InCategory:RESPONSIVE_PRAYER];
+            
+            if ([TempArray count] == 1) {
+                
+                NSManagedObject *PoetryInCoreData = [TempArray objectAtIndex:0];
+                
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+                
+                NSError *error = nil;
+                if (![_context save:&error]) {
+                    CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
+                    return NO;
+                }
+                
+            } else if ([TempArray count] != 1) {
+                return NO;
+            }
+
+            break;
+        default:
+            CORE_DATA_ERROR_LOG(@"CANNOT FIND CATEGORY");
+            break;
     }
     
     return YES;
