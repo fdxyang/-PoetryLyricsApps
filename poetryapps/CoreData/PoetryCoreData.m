@@ -658,7 +658,10 @@
                 
                 return NO;
                 
+            } else {
+                return NO;
             }
+
 
             break;
             
@@ -681,6 +684,8 @@
                 }
                 
             } else if ([TempArray count] != 1) {
+                return NO;
+            } else {
                 return NO;
             }
 
@@ -706,11 +711,18 @@
                 
             } else if ([TempArray count] != 1) {
                 return NO;
+            } else {
+                return NO;
             }
 
+
             break;
+            
         default:
+            
             CORE_DATA_ERROR_LOG(@"CANNOT FIND CATEGORY");
+            return  NO;
+            
             break;
     }
     
