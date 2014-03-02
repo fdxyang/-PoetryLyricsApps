@@ -54,6 +54,7 @@
 		104CB79F18A9BD59002698B2 /* iPad-button-info-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */; };
 		104CB7A018A9BD59002698B2 /* iPad-button-info-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */; };
 		104CB7A218A9BDE4002698B2 /* SpecialCharacter-ipad-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */; };
+		1051B3DE18C2F74600B61543 /* NavigatorBarReading.m in Sources */ = {isa = PBXBuildFile; fileRef = 1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */; };
 		1054B6F218A3295F0057C097 /* welcome_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1054B6F118A3295F0057C097 /* welcome_page@2x.png */; };
 		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		105C43BC188E7421002BAF6B /* BG-GreyNote_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */; };
@@ -940,6 +941,8 @@
 		104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01.png"; sourceTree = "<group>"; };
 		104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01@2x.png"; sourceTree = "<group>"; };
 		104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SpecialCharacter-ipad-01.png"; sourceTree = "<group>"; };
+		1051B3DC18C2F74600B61543 /* NavigatorBarReading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigatorBarReading.h; sourceTree = "<group>"; };
+		1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigatorBarReading.m; sourceTree = "<group>"; };
 		1054B6F118A3295F0057C097 /* welcome_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page@2x.png"; sourceTree = "<group>"; };
 		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
 		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
@@ -2108,6 +2111,8 @@
 				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
 				107201751883DF0700EC638D /* ReadingTableViewController.h */,
 				107201761883DF0700EC638D /* ReadingTableViewController.m */,
+				1051B3DC18C2F74600B61543 /* NavigatorBarReading.h */,
+				1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -3856,6 +3861,7 @@
 				10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
+				1051B3DE18C2F74600B61543 /* NavigatorBarReading.m in Sources */,
 				1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */,
 				0ACC32B418A2F72900D245C0 /* specialWordTable.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
@@ -4002,8 +4008,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4027,8 +4033,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

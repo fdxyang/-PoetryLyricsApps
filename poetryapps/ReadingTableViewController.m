@@ -13,21 +13,22 @@
 #import "PoetrySettingCoreData.h"
 #import "ILTranslucentView.h"
 
-#define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-#define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+#define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
 //#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
+                                                                        0, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH        CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
+                                                                        0, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 // 2014.01.25 [CASPER] Add Turorial view
 #define UI_TUTORIAL_VIEW_RECT_4_INCH                    CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT)
@@ -65,7 +66,7 @@
     UIColor                 *_DarkBackgroundColor;
     UIColor                 *_FontThemeColor;
     
-    UILabel                 *_NavigationTitleLab;
+    //UILabel                 *_NavigationTitleLab;
 
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
@@ -93,6 +94,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     CGRect Frame;
     if (IS_IPHONE5) {
         Frame = UI_READING_TABLEVIEW_INIT_RECT_4_INCH;
@@ -100,6 +102,12 @@
         Frame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
     }
     
+    // 2014.03.02 [CASPER]
+    if (_NaviBarView == nil) _NaviBarView = [[NavigatorBarReading alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_IOS7_NAV_BAR_HEIGHT)];
+    
+    //[_NaviBarView setBackgroundColor:[UIColor colorWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:0.8]];
+    [_NaviBarView setBackgroundColor:UI_GLOBAL_COLOE_BLUE];
+
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handlePanFrom:)];
     
@@ -133,12 +141,17 @@
                                                                 blue:(191/255.0f)
                                                                alpha:1]];
     
+    
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     _FontThemeColor = [[UIColor alloc] init];
     
     isShowSpecialTable = FALSE;
     [self createSpecialTableView];
+    
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,7 +178,6 @@
     }
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
-    
 
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
@@ -211,19 +223,7 @@
         
         _TutorialView.tag = TAG_TUTORIAL_VIEW;
         
-        /*
-        OkayBtn.layer.cornerRadius = 5;
-        OkayBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        OkayBtn.layer.borderWidth = 1.0f;
-        [OkayBtn.titleLabel setFrame:CGRectMake(0, 0, OkayBtn.frame.size.width, OkayBtn.frame.size.height)];
-        [OkayBtn.titleLabel setText:@"我知道了"];
-        OkayBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [OkayBtn.titleLabel setTextColor:[UIColor whiteColor]];
-        [OkayBtn.titleLabel setHidden:NO];
-         
-        NSLog(@"%@", OkayBtn.titleLabel);
-         */
-        
+
         _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
         _TutorialView.exclusiveTouch = NO;
         _TutorialView.translucentAlpha = 0.9;
@@ -232,9 +232,6 @@
         _TutorialView.backgroundColor = [UIColor clearColor];
         NSLog(@"%d", _TutorialView.isExclusiveTouch);
 
-        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
-        
-        //[_TutorialView addSubview:OkayBtn];
         [_TutorialView addSubview:TutorImg];
         [self.navigationController.view addSubview:_TutorialView];
         //NSLog(@"%@", _TutorialView);
@@ -242,7 +239,8 @@
 
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
-    
+    // 2014.03.02 [CASPER]
+    [self.view addSubview:_NaviBarView];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -250,7 +248,7 @@
     [super viewDidDisappear:animated];
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
-    
+    [_NaviBarView removeFromSuperview];
     // 2014.01.25 [CASPER] Add Turorial view
     if (isTutorialShowed == YES) {
         isTutorialShowed = NO;
@@ -337,19 +335,20 @@
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [PoetryContentString componentsSeparatedByString:@"\n"]];
     
-    
+    _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    /*
     _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
     _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     _NavigationTitleLab.backgroundColor = [UIColor clearColor];
     _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
     _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
     _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
-
+*/
 //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
-    self.navigationItem.titleView = _NavigationTitleLab;
-    CGSize Size = CGSizeMake(280, 200);
-    Size = [_NavigationTitleLab sizeThatFits:Size];
-    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    //self.navigationItem.titleView = _NavigationTitleLab;
+    //CGSize Size = CGSizeMake(280, 200);
+    //Size = [_NavigationTitleLab sizeThatFits:Size];
+    //[_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
     
 }
 
@@ -1151,8 +1150,9 @@
                                  
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
-                                 self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                 _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 //self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 //_NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                  [self SwitchCurrentView];
                                  
                              }];
