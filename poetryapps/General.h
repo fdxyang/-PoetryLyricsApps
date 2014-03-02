@@ -24,4 +24,4 @@
 
 #define UI_IOS7_VERSION_FLOATING        7.0f
 
-#define UI_GLOBAL_COLOE_BLUE [UIColor colorWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:0.8]
+#define UI_GLOBAL_COLOR_BLUE [UIColor colorWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:0.8]

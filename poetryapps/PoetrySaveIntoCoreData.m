@@ -278,7 +278,7 @@
 - (BOOL)isUpdatePlistFile
 {
     NSArray *getPlist = [[NSArray alloc] initWithArray:[self getPlistContent]];
-    NSLog(@"PLIST = %@",getPlist);
+    //NSLog(@"PLIST = %@",getPlist);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];

@@ -46,6 +46,7 @@
 #define UI_BOLD_FONT_BIAS                    5
 #define SWITCH_VIEW_THRESHOLD                40
 
+
 @interface ReadingTableViewController () {
     
     UInt16                  _CurrentIndex;
@@ -106,8 +107,8 @@
     if (_NaviBarView == nil) _NaviBarView = [[NavigatorBarReading alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_IOS7_NAV_BAR_HEIGHT)];
     
     //[_NaviBarView setBackgroundColor:[UIColor colorWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:0.8]];
-    [_NaviBarView setBackgroundColor:UI_GLOBAL_COLOE_BLUE];
-
+    [_NaviBarView setBackgroundColor:UI_GLOBAL_COLOR_BLUE];
+    
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handlePanFrom:)];
     
@@ -149,7 +150,18 @@
     isShowSpecialTable = FALSE;
     [self createSpecialTableView];
     
+    infoBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 40, 30, 23, 23)];
+    /*
+    infoBtn.titleLabel.text = @"I";
+    [infoBtn.titleLabel setFrame:infoBtn.frame];
+    [infoBtn.titleLabel setFont:_Font];
+    [infoBtn.titleLabel setTextColor:[UIColor whiteColor]];
+    [infoBtn.titleLabel setHidden:NO];
+    [infoBtn setBackgroundColor:[UIColor redColor]];
+     */
     
+    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
+    [infoBtn addTarget:self action:@selector(showSpecialTable) forControlEvents:UIControlEventTouchUpInside];
 
     
 }
@@ -233,14 +245,22 @@
         NSLog(@"%d", _TutorialView.isExclusiveTouch);
 
         [_TutorialView addSubview:TutorImg];
-        [self.navigationController.view addSubview:_TutorialView];
+        [self.view addSubview:_TutorialView];
         //NSLog(@"%@", _TutorialView);
         //[self.navigationController presentModalViewController:TutorialView animated:YES];
 
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
+    
     // 2014.03.02 [CASPER]
+    if (14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue]) {
+        [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
+    } else {
+        [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
+    }
+    
     [self.view addSubview:_NaviBarView];
+    [_NaviBarView addSubview:infoBtn];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -264,6 +284,8 @@
         if (subview.tag != 1)
             [subview removeFromSuperview];
     }
+    
+    
     [infoBtn setTintColor:[UIColor whiteColor]];
     
     
@@ -275,8 +297,6 @@
 -(void) touchesBegan:(NSSet *)touches withEvents:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-
-    NSLog(@"touchesBegan");
 }
 
 
@@ -284,8 +304,6 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-
-    NSLog(@"TEST TOUCH");
 }
 
 
@@ -1152,7 +1170,15 @@
                                  _PoetryNowReading = _NewPoetryDic;
                                  //self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                  //_NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 
                                  _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 if (13 == _CurrentIndex) {
+                                             NSLog(@"test");
+                                     [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
+                                 } else {
+                                    [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
+                                 }
+                                 
                                  [self SwitchCurrentView];
                                  
                              }];
@@ -1347,20 +1373,23 @@
     
 }
 
-- (IBAction)showSpecialTable:(id)sender
+- (void)showSpecialTable
 {
-    infoBtn = sender;
+    //infoBtn = sender;
     if (!isShowSpecialTable)
     {
         isShowSpecialTable = TRUE;
-        
+        [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_after-01.png"] forState:UIControlStateNormal];
+
         [self.view addSubview:specialTableView];
         [self.view bringSubviewToFront:specialTableView];
-        [sender setTintColor:[UIColor blueColor]];
+        [infoBtn setTintColor:[UIColor blueColor]];
     }
     else
     {
         isShowSpecialTable = FALSE;
+        [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
+
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status
         /*
         for (UIView *subview in [self.view subviews]) {
@@ -1372,7 +1401,7 @@
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status ==
         
         [specialTableView removeFromSuperview];
-        [sender setTintColor:[UIColor whiteColor]];
+        [infoBtn setTintColor:[UIColor whiteColor]];
     }
     
     //NSLog(@"table bool = %d",isShowSpecialTable);

@@ -671,8 +671,6 @@
     [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
     [PoetryInCoreData setValue: [NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
     
-    NSLog(@"%@", [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
-    
     if (![_context save:&error]) {
         CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
         return NO;

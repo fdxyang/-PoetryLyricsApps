@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _TitleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, 320, 65)];
+        _TitleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, 290, 65)];
         _TitleLab.text = @"設定";
         _TitleLab.backgroundColor = [UIColor clearColor];
         _TitleLab.font = [UIFont boldSystemFontOfSize:16.0];

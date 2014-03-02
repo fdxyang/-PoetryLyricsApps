@@ -49,7 +49,7 @@
 
 @property (strong, nonatomic)   NavigatorBarReading         *NaviBarView;
 
-- (IBAction)showSpecialTable:(id)sender;
+//- (IBAction)showSpecialTable:(id)sender;
 - (void) createSpecialTableView;
 
 typedef enum {
