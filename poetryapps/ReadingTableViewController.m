@@ -253,7 +253,8 @@
     // 2014.01.25 [CASPER] Add Turorial view ==
     
     // 2014.03.02 [CASPER]
-    if (14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue]) {
+    if ((14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+        && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
         [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
     } else {
         [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
@@ -1168,16 +1169,17 @@
                                  
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
-                                 //self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                 //_NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
                                  
                                  _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                 if (13 == _CurrentIndex) {
-                                             NSLog(@"test");
+
+                                 // 2013.03.02 [CASPER]
+                                 if ((13 == _CurrentIndex)
+                                     && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
                                      [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
                                  } else {
                                     [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
                                  }
+                                 // 2013.03.02 [CASPER] ==
                                  
                                  [self SwitchCurrentView];
                                  
