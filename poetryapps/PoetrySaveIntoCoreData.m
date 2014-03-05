@@ -265,7 +265,7 @@
         
         if([plistData objectForKey:str])
         {
-            NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
+            //NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
             return TRUE;
         }
         else
@@ -287,6 +287,9 @@
     NSString *file,*filename;
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     BOOL isUpdate = TRUE;
+    
+    NSMutableString *poetryContent = [[NSMutableString alloc]init];
+    NSInteger lineCount = 0;
     
     //NSLog(@"getlist count = %ld,getplist = %@",[getPlist count],[getPlist objectAtIndex:0]);
     for(int i=0;i<[getPlist count];i++)
@@ -323,15 +326,28 @@
         
         if ([fileManager fileExistsAtPath:file] == YES)
         {
-            //NSDictionary *Dic;// = [poetryContent objectAtIndex:[[getPlist objectAtIndex:i] integerValue]];
+            lineCount = 0;
+            [poetryContent setString:@""];
+
             NSString *content = [[NSString  alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
             //NSLog(@"content = %@",content);
             
-            [NewPoetry setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
+            for (NSString *line in [content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]])
+            {
+                //NSLog(@"%ld:line = %@",lineCount,line);
+                if (lineCount != 0)
+                {
+                    [poetryContent appendString:@"\n"];
+                    [poetryContent appendString:line];
+                }
+                lineCount = lineCount+1;
+            }
+            
+            [NewPoetry setValue:poetryContent forKey:POETRY_CORE_DATA_CONTENT_KEY];
             [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
             [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
             [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
-            //NSLog(@"NewPoetry = %@", [NewPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+            //NSLog(@"NewPoetry = %@", [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
             
             isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:NewPoetry];
             
