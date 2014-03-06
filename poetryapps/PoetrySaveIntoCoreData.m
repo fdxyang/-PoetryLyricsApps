@@ -360,6 +360,16 @@
             {
                 NSLog(@"update ok");
             }
+            
+            
+            // [CASPER] check nowreading
+            NSDictionary *PoetryNowReading = [PoetryDataBase Poetry_CoreDataFetchDataInReading];
+            if ([[PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY] isEqualToString:[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]] ) {
+                // now reading is the same as the updated poetry
+                NSLog(@"Now reading poetry is updated");
+                [PoetryDataBase PoetryCoreDataSaveIntoNowReading:NewPoetry];
+            }
+
         }
         else //not exist file
         {
