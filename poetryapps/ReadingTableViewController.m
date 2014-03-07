@@ -253,7 +253,11 @@
     // 2014.01.25 [CASPER] Add Turorial view ==
     
     // 2014.03.02 [CASPER]
-    if ((14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+    if (((14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (320 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (321 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (496 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (405 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue]))
         && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
         [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
     } else {
@@ -1173,7 +1177,11 @@
                                  _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
 
                                  // 2013.03.02 [CASPER]
-                                 if ((13 == _CurrentIndex)
+                                 if (((13 == _CurrentIndex)
+                                      || (319 == _CurrentIndex)
+                                      || (320 == _CurrentIndex)
+                                      || (495 == _CurrentIndex)
+                                      || (404 == _CurrentIndex))
                                      && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
                                      [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
                                  } else {
