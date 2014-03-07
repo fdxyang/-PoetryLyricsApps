@@ -292,6 +292,7 @@
     
     
     [infoBtn setTintColor:[UIColor whiteColor]];
+    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
     
     
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
