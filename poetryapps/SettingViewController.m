@@ -135,7 +135,7 @@
         [cell addSubview:_ThemePreViewLab];
         
     } else if (indexPath.section ==3) {
-        cell.textLabel.text = @"關於我";
+        cell.textLabel.text = @"關於我們";
     }
    
     return cell;
@@ -178,7 +178,7 @@
             break;
             
         case 3:
-            sectionStr = @"關於我";
+            sectionStr = @"";
             break;
         default:
             break;

@@ -29,14 +29,6 @@
     
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     
-    //NSFileManager *fileManager2 = [NSFileManager defaultManager];
-    //NSString *FilePath2 = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
-    
-    //NSArray *directoryContent2 = NSSearchPathForDirectoriesInDomains (NSLibraryDirectory, NSUserDomainMask, YES);
-    //NSString *path = [[directoryContent2 objectAtIndex:0] stringByAppendingString:@"/Preferences/"];
-    
-    //NSLog(@"file manager = %@, filepath = %@,dic = %@,path = %@",fileManager2,FilePath2,[directoryContent2 objectAtIndex:0],path);
-    
     if(!setting.DataSaved)
     {
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -196,6 +188,16 @@
         
         [setting PoetrySetting_SetDataSaved:YES];
     }
+    else
+    {
+        if([self isCheckPlistFileExist])
+        {
+            if([self isUpdatePlistFile])
+            {
+                // update successful
+            }
+        }
+    }
     return TRUE;
 }
 
@@ -206,17 +208,14 @@
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     
     NSString *str;
-    for(int i = 0 ;i < 1000 ; i++)
+    for(int i = 0 ;i < 721 ; i++)
     {
         str = [NSString stringWithFormat:@"file_%d",i];
-        
         if([plistData objectForKey:str])
         {
-            NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
+            //NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
             [plistFileList addObject:[plistData objectForKey:str]];
         }
-        else
-            break;
     }
     
     return plistFileList;
@@ -235,7 +234,6 @@
         
         if([plistData objectForKey:str])
         {
-            NSLog(@"kk plist file = %@",[plistData objectForKey:str]);
             return TRUE;
         }
         else
@@ -248,15 +246,18 @@
 - (BOOL)isUpdatePlistFile
 {
     NSArray *getPlist = [[NSArray alloc] initWithArray:[self getPlistContent]];
-    NSLog(@"PLIST = %@",getPlist);
+    //NSLog(@"PLIST = %@",getPlist);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
-    NSUInteger poetryIndex = 0,categoryIndex = 0;
+    NSInteger poetryIndex = 0,categoryIndex = 0;
     POETRY_CATEGORY category = GUARD_READING;
     NSString *file,*filename;
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     BOOL isUpdate = TRUE;
+    
+    NSMutableString *poetryContent = [[NSMutableString alloc]init];
+    NSInteger lineCount = 0;
     
     for(int i=0;i<[getPlist count];i++)
     {
@@ -269,12 +270,12 @@
         }
         else if(poetryIndex >650 && poetryIndex <= 716)
         {
-            category = GUARD_READING;
+            category = RESPONSIVE_PRAYER;
             categoryIndex = poetryIndex - 651;
         }
         else if(poetryIndex > 716 && poetryIndex <= 721)
         {
-            category = RESPONSIVE_PRAYER;
+            category = GUARD_READING;
             categoryIndex = poetryIndex - 717;
         }
         else
@@ -284,27 +285,61 @@
         
         //NSLog(@"index = %d,category = %d",categoryIndex,category);
         NSDictionary *originalPoetry = (NSDictionary*)[[PoetryDataBase Poetry_CoreDataFetchDataInCategory:category] objectAtIndex:categoryIndex];
+        NSDictionary *NewPoetry = originalPoetry; //[Casper] add
         
-        NSLog(@"poetry content = %@",[originalPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+        NSString *originContent = [originalPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
+        
         filename = [NSString stringWithFormat:@"/%@.txt",[getPlist objectAtIndex:i]];
         file = [FilePath stringByAppendingString:filename];
         
         if ([fileManager fileExistsAtPath:file] == YES)
         {
-            NSDictionary *Dic;// = [poetryContent objectAtIndex:[[getPlist objectAtIndex:i] integerValue]];
+            lineCount = 0;
+            [poetryContent setString:@""];
+
             NSString *content = [[NSString  alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
-            NSLog(@"content = %@",content);
-            [Dic setValue:content forKey:POETRY_CORE_DATA_CONTENT_KEY];
+            //NSLog(@"content = %@",content);
             
-            isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:Dic];
-            
-            if (!isUpdate)
+            for (NSString *line in [content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]])
             {
-                NSLog(@"UPDATE ERROR!!");
+                //NSLog(@"%ld:line = %@",lineCount,line);
+                if (lineCount != 0)
+                {
+                    [poetryContent appendString:@"\n"];
+                    [poetryContent appendString:line];
+                }
+                lineCount = lineCount+1;
             }
-            else
+            
+            if(![poetryContent isEqualToString:originContent])
             {
-                NSLog(@"update ok");
+                NSLog(@"POETRY CONTENT is not the SAME");
+                [NewPoetry setValue:poetryContent forKey:POETRY_CORE_DATA_CONTENT_KEY];
+                [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+                [NewPoetry setValue:[originalPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+                //NSLog(@"NewPoetry = %@", [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY]);
+                
+                isUpdate = [PoetryDataBase Poetry_CoreDataUpdatePoetryInCoreData:originalPoetry ByNewPoetry:NewPoetry];
+                
+                if (!isUpdate)
+                {
+                    NSLog(@"UPDATE ERROR!!");
+                    return FALSE;
+                }
+                else
+                {
+                    NSLog(@"update ok");
+                }
+                
+                
+                // [CASPER] check nowreading
+                NSDictionary *PoetryNowReading = [PoetryDataBase Poetry_CoreDataFetchDataInReading];
+                if ([[PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY] isEqualToString:[originalPoetry valueForKey:POETRY_CORE_DATA_NAME_KEY]] ) {
+                    // now reading is the same as the updated poetry
+                    NSLog(@"Now reading poetry is updated");
+                    [PoetryDataBase PoetryCoreDataSaveIntoNowReading:NewPoetry];
+                }
             }
         }
         else //not exist file
@@ -313,7 +348,7 @@
         }
     }
     
-    return FALSE;
+    return TRUE;
 }
 
 /*

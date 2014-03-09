@@ -36,7 +36,6 @@
 		1004E8CB187CFBF900718741 /* BarBtn_GOTO@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */; };
 		1004E8CE187CFED000718741 /* BarBtn_Reading.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8CC187CFED000718741 /* BarBtn_Reading.png */; };
 		1004E8CF187CFED000718741 /* BarBtn_Reading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */; };
-		102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */; };
 		10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */; };
 		10398C4A186BCF3F00EF5E74 /* iPadNavTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */; };
 		1041A81018A9B7230067F27A /* Tutor_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 1041A80F18A9B7230067F27A /* Tutor_White.png */; };
@@ -54,6 +53,7 @@
 		104CB79F18A9BD59002698B2 /* iPad-button-info-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */; };
 		104CB7A018A9BD59002698B2 /* iPad-button-info-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */; };
 		104CB7A218A9BDE4002698B2 /* SpecialCharacter-ipad-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */; };
+		1051B3DE18C2F74600B61543 /* NavigatorBarReading.m in Sources */ = {isa = PBXBuildFile; fileRef = 1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */; };
 		1054B6F218A3295F0057C097 /* welcome_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1054B6F118A3295F0057C097 /* welcome_page@2x.png */; };
 		105C43B8188E23F2002BAF6B /* PoetryTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */; };
 		105C43BC188E7421002BAF6B /* BG-GreyNote_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */; };
@@ -72,6 +72,10 @@
 		1060F92C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */; };
 		1060F92D187FFE1F004AE154 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91D187FFE1F004AE154 /* Icon.png */; };
 		1060F92E187FFE1F004AE154 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1060F91E187FFE1F004AE154 /* Icon@2x.png */; };
+		1067B0A518C31BF800F0B7B1 /* iPhone_special icon_before-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1067B0A318C31BF800F0B7B1 /* iPhone_special icon_before-01.png */; };
+		1067B0AA18C31F6400F0B7B1 /* iPhone_special icon_after-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1067B0A718C31F6400F0B7B1 /* iPhone_special icon_after-01.png */; };
+		1067B0AB18C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1067B0A818C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png */; };
+		1067B0AC18C31F6400F0B7B1 /* iPhone_special icon_before-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1067B0A918C31F6400F0B7B1 /* iPhone_special icon_before-01@2x.png */; };
 		107201771883DF0700EC638D /* ReadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 107201761883DF0700EC638D /* ReadingTableViewController.m */; };
 		10732AF01880D32300304DA4 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10732AEF1880D32300304DA4 /* AboutMeViewController.m */; };
 		10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10771DC11849D0B600A3B342 /* SettingViewController.m */; };
@@ -80,10 +84,6 @@
 		1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1C018956A64004FD68C /* ILTranslucentView.m */; };
 		10A3067318960F4800BA3B9D /* ARROW_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067218960F4800BA3B9D /* ARROW_Right.png */; };
 		10A3067518960F4F00BA3B9D /* ARROW_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067418960F4F00BA3B9D /* ARROW_Left.png */; };
-		10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */; };
-		10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */; };
-		10AC47781876B9B500BADD8C /* Light_bgiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AC47761876B9B500BADD8C /* Light_bgiPhone.png */; };
-		10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
@@ -98,17 +98,12 @@
 		10B8AC4B1897AC81005D6CC3 /* welcome_page_3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8AC4A1897AC81005D6CC3 /* welcome_page_3_5.png */; };
 		10BE81CD1886701A00E116F2 /* NaviBtnNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */; };
 		10BE81CE1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */; };
-		10DD73DA186C289E00047D12 /* iPadMainPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */; };
 		10E9F3AA1897501200220B47 /* NaviBtnNormal_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */; };
 		10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */; };
 		10E9F3AE1897506400220B47 /* NaviBtnPress_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */; };
 		10E9F3AF1897506400220B47 /* NaviBtnPress_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AD1897506400220B47 /* NaviBtnPress_iPad@2x.png */; };
 		10E9F3B21897517D00220B47 /* SearchingNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3B01897517D00220B47 /* SearchingNormal_White_iPad.png */; };
 		10E9F3B31897517D00220B47 /* SearchingNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3B11897517D00220B47 /* SearchingNormal_White_iPad@2x.png */; };
-		10F55C50187EA9BF0003DBB2 /* Dark_bgiPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C4C187EA9BF0003DBB2 /* Dark_bgiPad.png */; };
-		10F55C51187EA9BF0003DBB2 /* Dark_bgiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C4D187EA9BF0003DBB2 /* Dark_bgiPad@2x.png */; };
-		10F55C52187EA9BF0003DBB2 /* Light_bgiPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C4E187EA9BF0003DBB2 /* Light_bgiPad.png */; };
-		10F55C53187EA9BF0003DBB2 /* Light_bgiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C4F187EA9BF0003DBB2 /* Light_bgiPad@2x.png */; };
 		10F55C62187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */; };
 		10F55C63187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */; };
 		10F55C66187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C64187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png */; };
@@ -862,9 +857,6 @@
 		CB54FFFF18695CCE00CED47E /* 79.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FD2D18695CCD00CED47E /* 79.txt */; };
 		CB5EFC71187FEA21004955F3 /* gotobtnselected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */; };
 		CB5EFC72187FEA21004955F3 /* gotobtnunselected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */; };
-		CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E6187FA52F00AF7A1C /* gotobtn1.png */; };
-		CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E7187FA52F00AF7A1C /* gotobtn2.png */; };
-		CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6126E8187FA52F00AF7A1C /* gotobtn3.png */; };
 		CB7AD56D189E442B0022649F /* teamlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB7AD56C189E442B0022649F /* teamlogo.png */; };
 		CB82809F1898F85500661A94 /* addNewFileList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB82809E1898F85500661A94 /* addNewFileList.plist */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
@@ -918,8 +910,6 @@
 		1004E8C9187CFBF900718741 /* BarBtn_GOTO@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_GOTO@2x.png"; sourceTree = "<group>"; };
 		1004E8CC187CFED000718741 /* BarBtn_Reading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Reading.png; sourceTree = "<group>"; };
 		1004E8CD187CFED000718741 /* BarBtn_Reading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Reading@2x.png"; sourceTree = "<group>"; };
-		102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadPoetryViewController.h; sourceTree = "<group>"; };
-		102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadPoetryViewController.m; sourceTree = "<group>"; };
 		10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadNavTableHeader.h; sourceTree = "<group>"; };
 		10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadNavTableHeader.m; sourceTree = "<group>"; };
 		10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = iPadNavTableHeader.xib; sourceTree = "<group>"; };
@@ -940,6 +930,8 @@
 		104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01.png"; sourceTree = "<group>"; };
 		104CB79C18A9BD59002698B2 /* iPad-button-info-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-button-info-01@2x.png"; sourceTree = "<group>"; };
 		104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SpecialCharacter-ipad-01.png"; sourceTree = "<group>"; };
+		1051B3DC18C2F74600B61543 /* NavigatorBarReading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigatorBarReading.h; sourceTree = "<group>"; };
+		1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigatorBarReading.m; sourceTree = "<group>"; };
 		1054B6F118A3295F0057C097 /* welcome_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_page@2x.png"; sourceTree = "<group>"; };
 		105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetryTabBarController.h; sourceTree = "<group>"; };
 		105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetryTabBarController.m; sourceTree = "<group>"; };
@@ -960,6 +952,10 @@
 		1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@2x.png"; sourceTree = "<group>"; };
 		1060F91D187FFE1F004AE154 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1060F91E187FFE1F004AE154 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		1067B0A318C31BF800F0B7B1 /* iPhone_special icon_before-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_before-01.png"; sourceTree = "<group>"; };
+		1067B0A718C31F6400F0B7B1 /* iPhone_special icon_after-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_after-01.png"; sourceTree = "<group>"; };
+		1067B0A818C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_after-01@2x.png"; sourceTree = "<group>"; };
+		1067B0A918C31F6400F0B7B1 /* iPhone_special icon_before-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_before-01@2x.png"; sourceTree = "<group>"; };
 		107201751883DF0700EC638D /* ReadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTableViewController.h; sourceTree = "<group>"; };
 		107201761883DF0700EC638D /* ReadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTableViewController.m; sourceTree = "<group>"; };
 		10732AEE1880D32300304DA4 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
@@ -974,10 +970,6 @@
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
 		10A3067218960F4800BA3B9D /* ARROW_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Right.png; sourceTree = "<group>"; };
 		10A3067418960F4F00BA3B9D /* ARROW_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Left.png; sourceTree = "<group>"; };
-		10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPhone@2x.png"; sourceTree = "<group>"; };
-		10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPhone.png; sourceTree = "<group>"; };
-		10AC47761876B9B500BADD8C /* Light_bgiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Light_bgiPhone.png; sourceTree = "<group>"; };
-		10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light_bgiPhone@2x.png"; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
@@ -996,18 +988,12 @@
 		10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_White_iPad.png; sourceTree = "<group>"; };
 		10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
 		10C4B2B7187506F30074B8E3 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
-		10DD73D8186C289E00047D12 /* iPadMainPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadMainPoetryViewController.h; sourceTree = "<group>"; };
-		10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadMainPoetryViewController.m; sourceTree = "<group>"; };
 		10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_iPad.png; sourceTree = "<group>"; };
 		10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_iPad@2x.png"; sourceTree = "<group>"; };
 		10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnPress_iPad.png; sourceTree = "<group>"; };
 		10E9F3AD1897506400220B47 /* NaviBtnPress_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnPress_iPad@2x.png"; sourceTree = "<group>"; };
 		10E9F3B01897517D00220B47 /* SearchingNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchingNormal_White_iPad.png; sourceTree = "<group>"; };
 		10E9F3B11897517D00220B47 /* SearchingNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchingNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
-		10F55C4C187EA9BF0003DBB2 /* Dark_bgiPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dark_bgiPad.png; sourceTree = "<group>"; };
-		10F55C4D187EA9BF0003DBB2 /* Dark_bgiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark_bgiPad@2x.png"; sourceTree = "<group>"; };
-		10F55C4E187EA9BF0003DBB2 /* Light_bgiPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Light_bgiPad.png; sourceTree = "<group>"; };
-		10F55C4F187EA9BF0003DBB2 /* Light_bgiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Light_bgiPad@2x.png"; sourceTree = "<group>"; };
 		10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WelcomePage_iPad_Portrait@2x.png"; sourceTree = "<group>"; };
 		10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WelcomePage_iPad_Portrait.png; sourceTree = "<group>"; };
 		10F55C64187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnPress_White_iPad.png; sourceTree = "<group>"; };
@@ -1773,9 +1759,6 @@
 		CB54FD4318695CCE00CED47E /* 99.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 99.txt; sourceTree = "<group>"; };
 		CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtnselected.png; path = poetryapps/resource/image/gotobtnselected.png; sourceTree = SOURCE_ROOT; };
 		CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtnunselected.png; path = poetryapps/resource/image/gotobtnunselected.png; sourceTree = SOURCE_ROOT; };
-		CB6126E6187FA52F00AF7A1C /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
-		CB6126E7187FA52F00AF7A1C /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
-		CB6126E8187FA52F00AF7A1C /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
 		CB7AD56C189E442B0022649F /* teamlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teamlogo.png; path = poetryapps/resource/image/teamlogo.png; sourceTree = SOURCE_ROOT; };
 		CB82809E1898F85500661A94 /* addNewFileList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = addNewFileList.plist; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
@@ -1904,10 +1887,6 @@
 		109EF70E1863E8EA00A4B9E1 /* iPadView */ = {
 			isa = PBXGroup;
 			children = (
-				10DD73D8186C289E00047D12 /* iPadMainPoetryViewController.h */,
-				10DD73D9186C289E00047D12 /* iPadMainPoetryViewController.m */,
-				102571B4185B5C4E008A06DC /* iPadPoetryViewController.h */,
-				102571B5185B5C4E008A06DC /* iPadPoetryViewController.m */,
 				10398C46186BCF1F00EF5E74 /* iPadNavTableHeader.h */,
 				10398C47186BCF1F00EF5E74 /* iPadNavTableHeader.m */,
 				10398C49186BCF3F00EF5E74 /* iPadNavTableHeader.xib */,
@@ -2108,6 +2087,8 @@
 				10B361951856BF9B00A632AD /* PoetryReadingView.m */,
 				107201751883DF0700EC638D /* ReadingTableViewController.h */,
 				107201761883DF0700EC638D /* ReadingTableViewController.m */,
+				1051B3DC18C2F74600B61543 /* NavigatorBarReading.h */,
+				1051B3DD18C2F74600B61543 /* NavigatorBarReading.m */,
 			);
 			name = ReadingView;
 			sourceTree = "<group>";
@@ -2127,13 +2108,6 @@
 				CBFE962D18960C3A00385094 /* gotobtn2_selected.png */,
 				CB5EFC6F187FEA21004955F3 /* gotobtnselected.png */,
 				CB5EFC70187FEA21004955F3 /* gotobtnunselected.png */,
-				CB6126E6187FA52F00AF7A1C /* gotobtn1.png */,
-				CB6126E7187FA52F00AF7A1C /* gotobtn2.png */,
-				CB6126E8187FA52F00AF7A1C /* gotobtn3.png */,
-				10F55C4C187EA9BF0003DBB2 /* Dark_bgiPad.png */,
-				10F55C4D187EA9BF0003DBB2 /* Dark_bgiPad@2x.png */,
-				10F55C4E187EA9BF0003DBB2 /* Light_bgiPad.png */,
-				10F55C4F187EA9BF0003DBB2 /* Light_bgiPad@2x.png */,
 				CB0AB8AD187E748300C60DFF /* 24_24buttondown@2x.png */,
 				CB0AB8AE187E748300C60DFF /* 24_24buttonup@2x.png */,
 				CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */,
@@ -2147,14 +2121,14 @@
 				1004E8C0187CFABF00718741 /* BarBtn_Setting.png */,
 				1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */,
 				10455199187AAB1900DECB38 /* Default-568h@2x.png */,
-				10A5EF9C187C3B0200ECAD99 /* Dark_bgiPhone.png */,
-				10A5EF9A187C3AE400ECAD99 /* Dark_bgiPhone@2x.png */,
-				10AC47761876B9B500BADD8C /* Light_bgiPhone.png */,
-				10AC47771876B9B500BADD8C /* Light_bgiPhone@2x.png */,
 				1099C1BC189541AA004FD68C /* BG-GreyNote_paper_Dark.png */,
 				105C43BB188E7421002BAF6B /* BG-GreyNote_paper.png */,
 				10A3067218960F4800BA3B9D /* ARROW_Right.png */,
 				10A3067418960F4F00BA3B9D /* ARROW_Left.png */,
+				1067B0A718C31F6400F0B7B1 /* iPhone_special icon_after-01.png */,
+				1067B0A818C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png */,
+				1067B0A918C31F6400F0B7B1 /* iPhone_special icon_before-01@2x.png */,
+				1067B0A318C31BF800F0B7B1 /* iPhone_special icon_before-01.png */,
 			);
 			name = image;
 			path = poetryapps/Resource/image;
@@ -2995,6 +2969,7 @@
 				CB54FFCC18695CCE00CED47E /* 682.txt in Resources */,
 				CB54FFC618695CCE00CED47E /* 677.txt in Resources */,
 				0ACC32C718A2F82800D245C0 /* sc10.png in Resources */,
+				1067B0AB18C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png in Resources */,
 				CB54FF3F18695CCE00CED47E /* 555.txt in Resources */,
 				CB54FF2718695CCE00CED47E /* 533.txt in Resources */,
 				CB54FEBF18695CCE00CED47E /* 44.txt in Resources */,
@@ -3123,11 +3098,9 @@
 				CB54FDCE18695CCE00CED47E /* 222.txt in Resources */,
 				CB54FD5518695CCE00CED47E /* 113.txt in Resources */,
 				104CB79818A9BBBC002698B2 /* iPad-retina-dark-outlines-01.png in Resources */,
-				10A5EF9D187C3B0200ECAD99 /* Dark_bgiPhone.png in Resources */,
 				CB54FFBC18695CCE00CED47E /* 668.txt in Resources */,
 				CB54FE6E18695CCE00CED47E /* 367.txt in Resources */,
 				10E9F3B31897517D00220B47 /* SearchingNormal_White_iPad@2x.png in Resources */,
-				10AC47781876B9B500BADD8C /* Light_bgiPhone.png in Resources */,
 				CB54FF1C18695CCE00CED47E /* 523.txt in Resources */,
 				CB54FF3018695CCE00CED47E /* 541.txt in Resources */,
 				CB54FE7118695CCE00CED47E /* 37.txt in Resources */,
@@ -3153,7 +3126,6 @@
 				CB54FF3118695CCE00CED47E /* 542.txt in Resources */,
 				CB54FFAB18695CCE00CED47E /* 652.txt in Resources */,
 				CB54FE8918695CCE00CED47E /* 391.txt in Resources */,
-				CB6126EB187FA52F00AF7A1C /* gotobtn2.png in Resources */,
 				1060F92B187FFE1F004AE154 /* Icon-Spotlight-40.png in Resources */,
 				CB54FF0D18695CCE00CED47E /* 51.txt in Resources */,
 				CB54FE5C18695CCE00CED47E /* 350.txt in Resources */,
@@ -3183,7 +3155,6 @@
 				CB54FD6F18695CCE00CED47E /* 137.txt in Resources */,
 				CB54001118695CCE00CED47E /* 95.txt in Resources */,
 				CB54FF7218695CCE00CED47E /* 600.txt in Resources */,
-				CB6126EA187FA52F00AF7A1C /* gotobtn1.png in Resources */,
 				CB0AB8B0187E748300C60DFF /* 24_24buttonup@2x.png in Resources */,
 				CB54FE6118695CCE00CED47E /* 355.txt in Resources */,
 				CB54FE8E18695CCE00CED47E /* 396.txt in Resources */,
@@ -3233,7 +3204,6 @@
 				CB54FDFC18695CCE00CED47E /* 264.txt in Resources */,
 				CB54FFAE18695CCE00CED47E /* 655.txt in Resources */,
 				CB54FEF518695CCE00CED47E /* 489.txt in Resources */,
-				10A5EF9B187C3AE400ECAD99 /* Dark_bgiPhone@2x.png in Resources */,
 				CB54FE6818695CCE00CED47E /* 361.txt in Resources */,
 				CB54FD9218695CCE00CED47E /* 169.txt in Resources */,
 				CB54FFE118695CCE00CED47E /* 700.txt in Resources */,
@@ -3263,6 +3233,7 @@
 				CB54FF7B18695CCE00CED47E /* 609.txt in Resources */,
 				CB54FE3018695CCE00CED47E /* 310.txt in Resources */,
 				CB54FE7518695CCE00CED47E /* 373.txt in Resources */,
+				1067B0AC18C31F6400F0B7B1 /* iPhone_special icon_before-01@2x.png in Resources */,
 				CB54001418695CCE00CED47E /* 98.txt in Resources */,
 				CB54FD6B18695CCE00CED47E /* 133.txt in Resources */,
 				CB54FF4718695CCE00CED47E /* 562.txt in Resources */,
@@ -3295,7 +3266,6 @@
 				CB54FFC718695CCE00CED47E /* 678.txt in Resources */,
 				CB54FF9A18695CCE00CED47E /* 637.txt in Resources */,
 				CB54FDEC18695CCE00CED47E /* 25.txt in Resources */,
-				10F55C52187EA9BF0003DBB2 /* Light_bgiPad.png in Resources */,
 				CB54FF0E18695CCE00CED47E /* 510.txt in Resources */,
 				CB54FEE618695CCE00CED47E /* 475.txt in Resources */,
 				CB54FD8818695CCE00CED47E /* 16.txt in Resources */,
@@ -3380,6 +3350,7 @@
 				CB54FFE718695CCE00CED47E /* 706.txt in Resources */,
 				CB54FF3718695CCE00CED47E /* 548.txt in Resources */,
 				CB54FE7818695CCE00CED47E /* 376.txt in Resources */,
+				1067B0A518C31BF800F0B7B1 /* iPhone_special icon_before-01.png in Resources */,
 				10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */,
 				0ACC32D518A2F82800D245C0 /* sc9.png in Resources */,
 				CB54FEC518695CCE00CED47E /* 445.txt in Resources */,
@@ -3412,6 +3383,7 @@
 				CB54FFEA18695CCE00CED47E /* 709.txt in Resources */,
 				CB54FF0418695CCE00CED47E /* 501.txt in Resources */,
 				CB54FE5018695CCE00CED47E /* 34.txt in Resources */,
+				1067B0AA18C31F6400F0B7B1 /* iPhone_special icon_after-01.png in Resources */,
 				CB54FFFE18695CCE00CED47E /* 78.txt in Resources */,
 				CB54FEEE18695CCE00CED47E /* 482.txt in Resources */,
 				CB54FFB118695CCE00CED47E /* 658.txt in Resources */,
@@ -3522,7 +3494,6 @@
 				CB54FD8418695CCE00CED47E /* 156.txt in Resources */,
 				CB54FD7718695CCE00CED47E /* 144.txt in Resources */,
 				CB54FE3318695CCE00CED47E /* 313.txt in Resources */,
-				10F55C53187EA9BF0003DBB2 /* Light_bgiPad@2x.png in Resources */,
 				CB54FEEB18695CCE00CED47E /* 48.txt in Resources */,
 				CB54FD5B18695CCE00CED47E /* 119.txt in Resources */,
 				CB54FEB618695CCE00CED47E /* 431.txt in Resources */,
@@ -3587,7 +3558,6 @@
 				CB54FE4518695CCE00CED47E /* 33.txt in Resources */,
 				CB54FE2E18695CCE00CED47E /* 309.txt in Resources */,
 				CB54000E18695CCE00CED47E /* 92.txt in Resources */,
-				10F55C50187EA9BF0003DBB2 /* Dark_bgiPad.png in Resources */,
 				CB54FFEE18695CCE00CED47E /* 712.txt in Resources */,
 				CB54FDC118695CCE00CED47E /* 210.txt in Resources */,
 				CB54FD5918695CCE00CED47E /* 117.txt in Resources */,
@@ -3631,9 +3601,7 @@
 				10E9F3AE1897506400220B47 /* NaviBtnPress_iPad.png in Resources */,
 				CB54FFAD18695CCE00CED47E /* 654.txt in Resources */,
 				CB54FF5718695CCE00CED47E /* 577.txt in Resources */,
-				CB6126EC187FA52F00AF7A1C /* gotobtn3.png in Resources */,
 				CB54FD8318695CCE00CED47E /* 155.txt in Resources */,
-				10F55C51187EA9BF0003DBB2 /* Dark_bgiPad@2x.png in Resources */,
 				CB54001018695CCE00CED47E /* 94.txt in Resources */,
 				CB54FE9B18695CCE00CED47E /* 407.txt in Resources */,
 				CB54FEBA18695CCE00CED47E /* 435.txt in Resources */,
@@ -3668,7 +3636,6 @@
 				CB54FFF218695CCE00CED47E /* 716.txt in Resources */,
 				CB54FE1D18695CCE00CED47E /* 294.txt in Resources */,
 				CB54000818695CCE00CED47E /* 87.txt in Resources */,
-				10AC47791876B9B500BADD8C /* Light_bgiPhone@2x.png in Resources */,
 				CB54FF4318695CCE00CED47E /* 559.txt in Resources */,
 				1060F926187FFE1F004AE154 /* Icon-76@2x.png in Resources */,
 				CB54FE3218695CCE00CED47E /* 312.txt in Resources */,
@@ -3850,12 +3817,11 @@
 				107201771883DF0700EC638D /* ReadingTableViewController.m in Sources */,
 				1044995C184DA5EF00C58526 /* ThemeSetting.m in Sources */,
 				CB4AC393188D07040067E94E /* Poetryparser.m in Sources */,
-				102571B6185B5C4E008A06DC /* iPadPoetryViewController.m in Sources */,
-				10DD73DA186C289E00047D12 /* iPadMainPoetryViewController.m in Sources */,
 				CB26ADF3184C2D3200091BF1 /* Guidepicker.m in Sources */,
 				10398C48186BCF1F00EF5E74 /* iPadNavTableHeader.m in Sources */,
 				CB381FBA1849BD5A000ECB84 /* ReadingViewController.m in Sources */,
 				10F88C1018488333009F045D /* SeachViewController.m in Sources */,
+				1051B3DE18C2F74600B61543 /* NavigatorBarReading.m in Sources */,
 				1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */,
 				0ACC32B418A2F72900D245C0 /* specialWordTable.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
@@ -4002,8 +3968,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4027,8 +3993,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHIN KANG CHANG (SBQ9QND52R)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

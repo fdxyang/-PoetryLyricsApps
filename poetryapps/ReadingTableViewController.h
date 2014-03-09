@@ -5,6 +5,8 @@
 //  Created by GIGIGUN on 2014/1/13.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
+//  2014.03.22 [CASPER] Add title view to fix view moving issue
+
 
 #import <UIKit/UIKit.h>
 #import "PoetryCoreData.h"
@@ -12,6 +14,9 @@
 #import "PoetryReadingView.h"
 #import "Poetryparser.h"
 #import "specialWordTable.h"
+
+//  2014.03.22 [CASPER]
+#import "NavigatorBarReading.h"
 
 //#define DEBUG_READINGVIEW
 #ifdef DEBUG_READINGVIEW
@@ -42,7 +47,9 @@
 
 @property (nonatomic, strong)   Poetryparser                *PoetryContentParser;
 
-- (IBAction)showSpecialTable:(id)sender;
+@property (strong, nonatomic)   NavigatorBarReading         *NaviBarView;
+
+//- (IBAction)showSpecialTable:(id)sender;
 - (void) createSpecialTableView;
 
 typedef enum {

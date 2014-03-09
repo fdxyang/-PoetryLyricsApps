@@ -13,21 +13,22 @@
 #import "PoetrySettingCoreData.h"
 #import "ILTranslucentView.h"
 
-#define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
-#define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, UI_IOS7_NAV_BAR_HEIGHT, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+
+#define UI_READING_TABLEVIEW_INIT_RECT_4_INCH       CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+#define UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH     CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_WIDTH)
 //#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
+                                                                        0, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH        CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        UI_IOS7_NAV_BAR_HEIGHT, \
+                                                                        0, \
                                                                         UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 // 2014.01.25 [CASPER] Add Turorial view
 #define UI_TUTORIAL_VIEW_RECT_4_INCH                    CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT)
@@ -44,6 +45,7 @@
 
 #define UI_BOLD_FONT_BIAS                    5
 #define SWITCH_VIEW_THRESHOLD                40
+
 
 @interface ReadingTableViewController () {
     
@@ -65,7 +67,7 @@
     UIColor                 *_DarkBackgroundColor;
     UIColor                 *_FontThemeColor;
     
-    UILabel                 *_NavigationTitleLab;
+    //UILabel                 *_NavigationTitleLab;
 
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
@@ -93,12 +95,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     CGRect Frame;
     if (IS_IPHONE5) {
         Frame = UI_READING_TABLEVIEW_INIT_RECT_4_INCH;
     } else {
         Frame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
     }
+    
+    // 2014.03.02 [CASPER]
+    if (_NaviBarView == nil) _NaviBarView = [[NavigatorBarReading alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_IOS7_NAV_BAR_HEIGHT)];
+    
+    //[_NaviBarView setBackgroundColor:[UIColor colorWithRed:(32/255.0f) green:(159/255.0f) blue:(191/255.0f) alpha:0.8]];
+    [_NaviBarView setBackgroundColor:UI_GLOBAL_COLOR_BLUE];
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handlePanFrom:)];
@@ -133,12 +142,28 @@
                                                                 blue:(191/255.0f)
                                                                alpha:1]];
     
+    
     _LightBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
     _DarkBackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper_Dark.png"]];
     _FontThemeColor = [[UIColor alloc] init];
     
     isShowSpecialTable = FALSE;
     [self createSpecialTableView];
+    
+    infoBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 40, 30, 23, 23)];
+    /*
+    infoBtn.titleLabel.text = @"I";
+    [infoBtn.titleLabel setFrame:infoBtn.frame];
+    [infoBtn.titleLabel setFont:_Font];
+    [infoBtn.titleLabel setTextColor:[UIColor whiteColor]];
+    [infoBtn.titleLabel setHidden:NO];
+    [infoBtn setBackgroundColor:[UIColor redColor]];
+     */
+    
+    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
+    [infoBtn addTarget:self action:@selector(showSpecialTable) forControlEvents:UIControlEventTouchUpInside];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,7 +190,6 @@
     }
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
-    
 
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
@@ -211,19 +235,7 @@
         
         _TutorialView.tag = TAG_TUTORIAL_VIEW;
         
-        /*
-        OkayBtn.layer.cornerRadius = 5;
-        OkayBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        OkayBtn.layer.borderWidth = 1.0f;
-        [OkayBtn.titleLabel setFrame:CGRectMake(0, 0, OkayBtn.frame.size.width, OkayBtn.frame.size.height)];
-        [OkayBtn.titleLabel setText:@"我知道了"];
-        OkayBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [OkayBtn.titleLabel setTextColor:[UIColor whiteColor]];
-        [OkayBtn.titleLabel setHidden:NO];
-         
-        NSLog(@"%@", OkayBtn.titleLabel);
-         */
-        
+
         _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
         _TutorialView.exclusiveTouch = NO;
         _TutorialView.translucentAlpha = 0.9;
@@ -232,17 +244,28 @@
         _TutorialView.backgroundColor = [UIColor clearColor];
         NSLog(@"%d", _TutorialView.isExclusiveTouch);
 
-        //[_TutorialView setBackgroundColor:[UIColor whiteColor]];
-        
-        //[_TutorialView addSubview:OkayBtn];
         [_TutorialView addSubview:TutorImg];
-        [self.navigationController.view addSubview:_TutorialView];
+        [self.view addSubview:_TutorialView];
         //NSLog(@"%@", _TutorialView);
         //[self.navigationController presentModalViewController:TutorialView animated:YES];
 
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
     
+    // 2014.03.02 [CASPER]
+    if (((14 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (320 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (321 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (496 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue])
+         || (405 == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue]))
+        && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
+        [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
+    } else {
+        [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
+    }
+    
+    [self.view addSubview:_NaviBarView];
+    [_NaviBarView addSubview:infoBtn];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -250,7 +273,7 @@
     [super viewDidDisappear:animated];
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
-    
+    [_NaviBarView removeFromSuperview];
     // 2014.01.25 [CASPER] Add Turorial view
     if (isTutorialShowed == YES) {
         isTutorialShowed = NO;
@@ -266,7 +289,10 @@
         if (subview.tag != 1)
             [subview removeFromSuperview];
     }
+    
+    
     [infoBtn setTintColor:[UIColor whiteColor]];
+    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
     
     
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
@@ -277,8 +303,6 @@
 -(void) touchesBegan:(NSSet *)touches withEvents:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-
-    NSLog(@"touchesBegan");
 }
 
 
@@ -286,8 +310,6 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-
-    NSLog(@"TEST TOUCH");
 }
 
 
@@ -337,19 +359,20 @@
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
                                 [PoetryContentString componentsSeparatedByString:@"\n"]];
     
-    
+    _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+    /*
     _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
     _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     _NavigationTitleLab.backgroundColor = [UIColor clearColor];
     _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
     _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
     _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
-
+*/
 //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
-    self.navigationItem.titleView = _NavigationTitleLab;
-    CGSize Size = CGSizeMake(280, 200);
-    Size = [_NavigationTitleLab sizeThatFits:Size];
-    [_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
+    //self.navigationItem.titleView = _NavigationTitleLab;
+    //CGSize Size = CGSizeMake(280, 200);
+    //Size = [_NavigationTitleLab sizeThatFits:Size];
+    //[_NavigationTitleLab setFrame:CGRectMake(0, 0, 280, Size.height)];
     
 }
 
@@ -1151,8 +1174,22 @@
                                  
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
-                                 self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-                                 _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+                                 
+                                 _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+
+                                 // 2013.03.02 [CASPER]
+                                 if (((13 == _CurrentIndex)
+                                      || (319 == _CurrentIndex)
+                                      || (320 == _CurrentIndex)
+                                      || (495 == _CurrentIndex)
+                                      || (404 == _CurrentIndex))
+                                     && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
+                                     [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
+                                 } else {
+                                    [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
+                                 }
+                                 // 2013.03.02 [CASPER] ==
+                                 
                                  [self SwitchCurrentView];
                                  
                              }];
@@ -1239,7 +1276,7 @@
     [TestImg setImage:[UIImage imageNamed:imageName]];
     [specialTableScrollView addSubview:TestImg];
     
-    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight)]; // TODO: Modify "1000" as Image Height
+    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight-150)]; // TODO: Modify "1000" as Image Height
     [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
     
 
@@ -1347,20 +1384,23 @@
     
 }
 
-- (IBAction)showSpecialTable:(id)sender
+- (void)showSpecialTable
 {
-    infoBtn = sender;
+    //infoBtn = sender;
     if (!isShowSpecialTable)
     {
         isShowSpecialTable = TRUE;
-        
+        [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_after-01.png"] forState:UIControlStateNormal];
+
         [self.view addSubview:specialTableView];
         [self.view bringSubviewToFront:specialTableView];
-        [sender setTintColor:[UIColor blueColor]];
+        [infoBtn setTintColor:[UIColor blueColor]];
     }
     else
     {
         isShowSpecialTable = FALSE;
+        [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
+
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status
         /*
         for (UIView *subview in [self.view subviews]) {
@@ -1372,7 +1412,7 @@
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status ==
         
         [specialTableView removeFromSuperview];
-        [sender setTintColor:[UIColor whiteColor]];
+        [infoBtn setTintColor:[UIColor whiteColor]];
     }
     
     //NSLog(@"table bool = %d",isShowSpecialTable);
