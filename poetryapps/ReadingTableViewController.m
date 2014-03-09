@@ -1276,7 +1276,7 @@
     [TestImg setImage:[UIImage imageNamed:imageName]];
     [specialTableScrollView addSubview:TestImg];
     
-    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight)]; // TODO: Modify "1000" as Image Height
+    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight-150)]; // TODO: Modify "1000" as Image Height
     [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
     
 
