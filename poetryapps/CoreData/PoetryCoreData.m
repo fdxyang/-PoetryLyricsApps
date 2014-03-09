@@ -630,7 +630,7 @@
     NSString *PoetryCoreDataEntityName;
     NSError *error = nil;
     
-    POETRY_CATEGORY Category = [[OldPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
+    POETRY_CATEGORY Category = (POETRY_CATEGORY)[[OldPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
     
     if (OldPoetry == nil) {
         return NO;
