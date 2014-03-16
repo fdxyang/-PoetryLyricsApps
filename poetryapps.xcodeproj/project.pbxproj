@@ -28,6 +28,7 @@
 		0ACC32D218A2F82800D245C0 /* sc6.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C218A2F82800D245C0 /* sc6.png */; };
 		0ACC32D318A2F82800D245C0 /* sc7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C318A2F82800D245C0 /* sc7.png */; };
 		0ACC32D518A2F82800D245C0 /* sc9.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C518A2F82800D245C0 /* sc9.png */; };
+		0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0ACDECC818D5FC85008B2F7B /* 653.txt */; };
 		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
 		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
 		1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C4187CFACD00718741 /* BarBtn_Search.png */; };
@@ -901,6 +902,7 @@
 		0ACC32C218A2F82800D245C0 /* sc6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc6.png; sourceTree = "<group>"; };
 		0ACC32C318A2F82800D245C0 /* sc7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc7.png; sourceTree = "<group>"; };
 		0ACC32C518A2F82800D245C0 /* sc9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc9.png; sourceTree = "<group>"; };
+		0ACDECC818D5FC85008B2F7B /* 653.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 653.txt; path = poetryapps/resource/poetry/653.txt; sourceTree = SOURCE_ROOT; };
 		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
 		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
 		1004E8C4187CFACD00718741 /* BarBtn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Search.png; sourceTree = "<group>"; };
@@ -2855,6 +2857,7 @@
 				CB54FD2318695CCD00CED47E /* 719.txt */,
 				CB54FD2518695CCD00CED47E /* 720.txt */,
 				CB54FD2618695CCD00CED47E /* 721.txt */,
+				0ACDECC818D5FC85008B2F7B /* 653.txt */,
 			);
 			name = poetry;
 			path = poetryapps/Resource/poetry;
@@ -3402,6 +3405,7 @@
 				CB54FF1618695CCE00CED47E /* 518.txt in Resources */,
 				CB54FF6A18695CCE00CED47E /* 594.txt in Resources */,
 				CB54FFD018695CCE00CED47E /* 686.txt in Resources */,
+				0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */,
 				CB54FE1F18695CCE00CED47E /* 296.txt in Resources */,
 				CB54FFD818695CCE00CED47E /* 693.txt in Resources */,
 				CB54FF3E18695CCE00CED47E /* 554.txt in Resources */,
