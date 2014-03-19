@@ -863,6 +863,9 @@
 		CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */; };
 		CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1818A4CDEB0003A478 /* libz.dylib */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
+		CBCB4F6E18D9305000D0A323 /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6B18D9305000D0A323 /* gotobtn1.png */; };
+		CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6C18D9305000D0A323 /* gotobtn3.png */; };
+		CBCB4F7018D9305000D0A323 /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6D18D9305000D0A323 /* gotobtn2.png */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBFE962E18960C3A00385094 /* gotobtn1_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962B18960C3A00385094 /* gotobtn1_selected.png */; };
 		CBFE962F18960C3A00385094 /* gotobtn3_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962C18960C3A00385094 /* gotobtn3_selected.png */; };
@@ -1767,6 +1770,9 @@
 		CB942D1818A4CDEB0003A478 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
+		CBCB4F6B18D9305000D0A323 /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
+		CBCB4F6C18D9305000D0A323 /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
+		CBCB4F6D18D9305000D0A323 /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBFE962B18960C3A00385094 /* gotobtn1_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1_selected.png; path = poetryapps/resource/image/gotobtn1_selected.png; sourceTree = SOURCE_ROOT; };
@@ -2096,6 +2102,9 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CBCB4F6B18D9305000D0A323 /* gotobtn1.png */,
+				CBCB4F6C18D9305000D0A323 /* gotobtn3.png */,
+				CBCB4F6D18D9305000D0A323 /* gotobtn2.png */,
 				0ACC32B518A2F82800D245C0 /* sc */,
 				10B8AC3F1897AB8D005D6CC3 /* Welcome */,
 				10B8AC38189796D9005D6CC3 /* iPad */,
@@ -3390,6 +3399,7 @@
 				CB54FDDB18695CCE00CED47E /* 234.txt in Resources */,
 				CB54FE3A18695CCE00CED47E /* 32.txt in Resources */,
 				CB54FFC118695CCE00CED47E /* 672.txt in Resources */,
+				CBCB4F6E18D9305000D0A323 /* gotobtn1.png in Resources */,
 				CB54FD9A18695CCE00CED47E /* 176.txt in Resources */,
 				CB54FDA218695CCE00CED47E /* 183.txt in Resources */,
 				CB54FEB018695CCE00CED47E /* 426.txt in Resources */,
@@ -3420,6 +3430,7 @@
 				CB54FFF618695CCE00CED47E /* 72.txt in Resources */,
 				CB54FE7A18695CCE00CED47E /* 378.txt in Resources */,
 				CB54FF3218695CCE00CED47E /* 543.txt in Resources */,
+				CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */,
 				CB54FF7A18695CCE00CED47E /* 608.txt in Resources */,
 				CB54FEFD18695CCE00CED47E /* 496.txt in Resources */,
 				CB54FEB518695CCE00CED47E /* 430.txt in Resources */,
@@ -3717,6 +3728,7 @@
 				CB54FF0718695CCE00CED47E /* 504.txt in Resources */,
 				CB54000118695CCE00CED47E /* 80.txt in Resources */,
 				CB54FE4D18695CCE00CED47E /* 337.txt in Resources */,
+				CBCB4F7018D9305000D0A323 /* gotobtn2.png in Resources */,
 				CB54000F18695CCE00CED47E /* 93.txt in Resources */,
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
