@@ -28,6 +28,7 @@
 		0ACC32D218A2F82800D245C0 /* sc6.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C218A2F82800D245C0 /* sc6.png */; };
 		0ACC32D318A2F82800D245C0 /* sc7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C318A2F82800D245C0 /* sc7.png */; };
 		0ACC32D518A2F82800D245C0 /* sc9.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C518A2F82800D245C0 /* sc9.png */; };
+		0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0ACDECC818D5FC85008B2F7B /* 653.txt */; };
 		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
 		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
 		1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C4187CFACD00718741 /* BarBtn_Search.png */; };
@@ -104,8 +105,6 @@
 		10E9F3AF1897506400220B47 /* NaviBtnPress_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AD1897506400220B47 /* NaviBtnPress_iPad@2x.png */; };
 		10E9F3B21897517D00220B47 /* SearchingNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3B01897517D00220B47 /* SearchingNormal_White_iPad.png */; };
 		10E9F3B31897517D00220B47 /* SearchingNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3B11897517D00220B47 /* SearchingNormal_White_iPad@2x.png */; };
-		10F55C62187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */; };
-		10F55C63187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */; };
 		10F55C66187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F55C64187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png */; };
 		10F88C1018488333009F045D /* SeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F88C0F18488333009F045D /* SeachViewController.m */; };
 		CB0AB8AB187E562200C60DFF /* 24_24buttondown.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0AB8A9187E562200C60DFF /* 24_24buttondown.png */; };
@@ -771,7 +770,6 @@
 		CB54FFA918695CCE00CED47E /* 650.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCD718695CCB00CED47E /* 650.txt */; };
 		CB54FFAA18695CCE00CED47E /* 651.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCD818695CCB00CED47E /* 651.txt */; };
 		CB54FFAB18695CCE00CED47E /* 652.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCD918695CCB00CED47E /* 652.txt */; };
-		CB54FFAC18695CCE00CED47E /* 653.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCDA18695CCB00CED47E /* 653.txt */; };
 		CB54FFAD18695CCE00CED47E /* 654.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCDB18695CCB00CED47E /* 654.txt */; };
 		CB54FFAE18695CCE00CED47E /* 655.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCDC18695CCB00CED47E /* 655.txt */; };
 		CB54FFAF18695CCE00CED47E /* 656.txt in Resources */ = {isa = PBXBuildFile; fileRef = CB54FCDD18695CCB00CED47E /* 656.txt */; };
@@ -863,6 +861,9 @@
 		CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */; };
 		CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1818A4CDEB0003A478 /* libz.dylib */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
+		CBCB4F6E18D9305000D0A323 /* gotobtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6B18D9305000D0A323 /* gotobtn1.png */; };
+		CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6C18D9305000D0A323 /* gotobtn3.png */; };
+		CBCB4F7018D9305000D0A323 /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6D18D9305000D0A323 /* gotobtn2.png */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
 		CBFE962E18960C3A00385094 /* gotobtn1_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962B18960C3A00385094 /* gotobtn1_selected.png */; };
 		CBFE962F18960C3A00385094 /* gotobtn3_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962C18960C3A00385094 /* gotobtn3_selected.png */; };
@@ -902,6 +903,7 @@
 		0ACC32C218A2F82800D245C0 /* sc6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc6.png; sourceTree = "<group>"; };
 		0ACC32C318A2F82800D245C0 /* sc7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc7.png; sourceTree = "<group>"; };
 		0ACC32C518A2F82800D245C0 /* sc9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc9.png; sourceTree = "<group>"; };
+		0ACDECC818D5FC85008B2F7B /* 653.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 653.txt; path = poetryapps/resource/poetry/653.txt; sourceTree = SOURCE_ROOT; };
 		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
 		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
 		1004E8C4187CFACD00718741 /* BarBtn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Search.png; sourceTree = "<group>"; };
@@ -994,8 +996,6 @@
 		10E9F3AD1897506400220B47 /* NaviBtnPress_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnPress_iPad@2x.png"; sourceTree = "<group>"; };
 		10E9F3B01897517D00220B47 /* SearchingNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchingNormal_White_iPad.png; sourceTree = "<group>"; };
 		10E9F3B11897517D00220B47 /* SearchingNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchingNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
-		10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WelcomePage_iPad_Portrait@2x.png"; sourceTree = "<group>"; };
-		10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WelcomePage_iPad_Portrait.png; sourceTree = "<group>"; };
 		10F55C64187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnPress_White_iPad.png; sourceTree = "<group>"; };
 		10F88C0E18488333009F045D /* SeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeachViewController.h; sourceTree = "<group>"; };
 		10F88C0F18488333009F045D /* SeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeachViewController.m; sourceTree = "<group>"; };
@@ -1651,7 +1651,6 @@
 		CB54FCD718695CCB00CED47E /* 650.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 650.txt; sourceTree = "<group>"; };
 		CB54FCD818695CCB00CED47E /* 651.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 651.txt; sourceTree = "<group>"; };
 		CB54FCD918695CCB00CED47E /* 652.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 652.txt; sourceTree = "<group>"; };
-		CB54FCDA18695CCB00CED47E /* 653.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 653.txt; sourceTree = "<group>"; };
 		CB54FCDB18695CCB00CED47E /* 654.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 654.txt; sourceTree = "<group>"; };
 		CB54FCDC18695CCB00CED47E /* 655.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 655.txt; sourceTree = "<group>"; };
 		CB54FCDD18695CCB00CED47E /* 656.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 656.txt; sourceTree = "<group>"; };
@@ -1767,6 +1766,9 @@
 		CB942D1818A4CDEB0003A478 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
 		CBA286CB184D753A00010125 /* GotoTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoTableCell.m; sourceTree = "<group>"; };
+		CBCB4F6B18D9305000D0A323 /* gotobtn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1.png; path = poetryapps/resource/image/gotobtn1.png; sourceTree = SOURCE_ROOT; };
+		CBCB4F6C18D9305000D0A323 /* gotobtn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3.png; path = poetryapps/resource/image/gotobtn3.png; sourceTree = SOURCE_ROOT; };
+		CBCB4F6D18D9305000D0A323 /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
 		CBFE962B18960C3A00385094 /* gotobtn1_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1_selected.png; path = poetryapps/resource/image/gotobtn1_selected.png; sourceTree = SOURCE_ROOT; };
@@ -1940,8 +1942,6 @@
 			children = (
 				10B8AC401897ABEF005D6CC3 /* WelcomePage_iPad.png */,
 				10B8AC411897ABEF005D6CC3 /* WelcomePage_iPad@2x.png */,
-				10F55C60187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png */,
-				10F55C61187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png */,
 				10B8AC4A1897AC81005D6CC3 /* welcome_page_3_5.png */,
 				10B8AC441897AC2F005D6CC3 /* welcome_page_3_5@2x.png */,
 				1054B6F118A3295F0057C097 /* welcome_page@2x.png */,
@@ -2096,6 +2096,9 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CBCB4F6B18D9305000D0A323 /* gotobtn1.png */,
+				CBCB4F6C18D9305000D0A323 /* gotobtn3.png */,
+				CBCB4F6D18D9305000D0A323 /* gotobtn2.png */,
 				0ACC32B518A2F82800D245C0 /* sc */,
 				10B8AC3F1897AB8D005D6CC3 /* Welcome */,
 				10B8AC38189796D9005D6CC3 /* iPad */,
@@ -2789,7 +2792,7 @@
 				CB54FCD718695CCB00CED47E /* 650.txt */,
 				CB54FCD818695CCB00CED47E /* 651.txt */,
 				CB54FCD918695CCB00CED47E /* 652.txt */,
-				CB54FCDA18695CCB00CED47E /* 653.txt */,
+				0ACDECC818D5FC85008B2F7B /* 653.txt */,
 				CB54FCDB18695CCB00CED47E /* 654.txt */,
 				CB54FCDC18695CCB00CED47E /* 655.txt */,
 				CB54FCDD18695CCB00CED47E /* 656.txt */,
@@ -3014,7 +3017,6 @@
 				CB54FF5118695CCE00CED47E /* 571.txt in Resources */,
 				CB54FE6918695CCE00CED47E /* 362.txt in Resources */,
 				1004E8CE187CFED000718741 /* BarBtn_Reading.png in Resources */,
-				CB54FFAC18695CCE00CED47E /* 653.txt in Resources */,
 				CB54FD9118695CCE00CED47E /* 168.txt in Resources */,
 				CB54FDF118695CCE00CED47E /* 254.txt in Resources */,
 				CB54FEDA18695CCE00CED47E /* 464.txt in Resources */,
@@ -3391,6 +3393,7 @@
 				CB54FDDB18695CCE00CED47E /* 234.txt in Resources */,
 				CB54FE3A18695CCE00CED47E /* 32.txt in Resources */,
 				CB54FFC118695CCE00CED47E /* 672.txt in Resources */,
+				CBCB4F6E18D9305000D0A323 /* gotobtn1.png in Resources */,
 				CB54FD9A18695CCE00CED47E /* 176.txt in Resources */,
 				CB54FDA218695CCE00CED47E /* 183.txt in Resources */,
 				CB54FEB018695CCE00CED47E /* 426.txt in Resources */,
@@ -3406,6 +3409,7 @@
 				CB54FF1618695CCE00CED47E /* 518.txt in Resources */,
 				CB54FF6A18695CCE00CED47E /* 594.txt in Resources */,
 				CB54FFD018695CCE00CED47E /* 686.txt in Resources */,
+				0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */,
 				CB54FE1F18695CCE00CED47E /* 296.txt in Resources */,
 				CB54FFD818695CCE00CED47E /* 693.txt in Resources */,
 				CB54FF3E18695CCE00CED47E /* 554.txt in Resources */,
@@ -3420,6 +3424,7 @@
 				CB54FFF618695CCE00CED47E /* 72.txt in Resources */,
 				CB54FE7A18695CCE00CED47E /* 378.txt in Resources */,
 				CB54FF3218695CCE00CED47E /* 543.txt in Resources */,
+				CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */,
 				CB54FF7A18695CCE00CED47E /* 608.txt in Resources */,
 				CB54FEFD18695CCE00CED47E /* 496.txt in Resources */,
 				CB54FEB518695CCE00CED47E /* 430.txt in Resources */,
@@ -3647,7 +3652,6 @@
 				CB54FFA818695CCE00CED47E /* 65.txt in Resources */,
 				CB54FECC18695CCE00CED47E /* 451.txt in Resources */,
 				CB54FE9918695CCE00CED47E /* 405.txt in Resources */,
-				10F55C62187F8E580003DBB2 /* WelcomePage_iPad_Portrait@2x.png in Resources */,
 				CB54FE0A18695CCE00CED47E /* 277.txt in Resources */,
 				CB54FD7318695CCE00CED47E /* 140.txt in Resources */,
 				CB54FDAD18695CCE00CED47E /* 193.txt in Resources */,
@@ -3717,6 +3721,7 @@
 				CB54FF0718695CCE00CED47E /* 504.txt in Resources */,
 				CB54000118695CCE00CED47E /* 80.txt in Resources */,
 				CB54FE4D18695CCE00CED47E /* 337.txt in Resources */,
+				CBCB4F7018D9305000D0A323 /* gotobtn2.png in Resources */,
 				CB54000F18695CCE00CED47E /* 93.txt in Resources */,
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
@@ -3771,7 +3776,6 @@
 				CB54FFB818695CCE00CED47E /* 664.txt in Resources */,
 				CB54FD6918695CCE00CED47E /* 131.txt in Resources */,
 				CB54FE4318695CCE00CED47E /* 328.txt in Resources */,
-				10F55C63187F8E580003DBB2 /* WelcomePage_iPad_Portrait.png in Resources */,
 				CB54FEA218695CCE00CED47E /* 413.txt in Resources */,
 				CB54FE9A18695CCE00CED47E /* 406.txt in Resources */,
 				CB54FE9D18695CCE00CED47E /* 409.txt in Resources */,
