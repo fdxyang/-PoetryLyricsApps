@@ -29,6 +29,7 @@
 		0ACC32D318A2F82800D245C0 /* sc7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C318A2F82800D245C0 /* sc7.png */; };
 		0ACC32D518A2F82800D245C0 /* sc9.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C518A2F82800D245C0 /* sc9.png */; };
 		0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0ACDECC818D5FC85008B2F7B /* 653.txt */; };
+		0ADDB30C199AD601000FAF09 /* FileListWithoutCoreData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB30B199AD601000FAF09 /* FileListWithoutCoreData.plist */; };
 		0AF09741199601AB0003C8AA /* 722.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0AF09740199601AB0003C8AA /* 722.txt */; };
 		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
 		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
@@ -905,6 +906,7 @@
 		0ACC32C318A2F82800D245C0 /* sc7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc7.png; sourceTree = "<group>"; };
 		0ACC32C518A2F82800D245C0 /* sc9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc9.png; sourceTree = "<group>"; };
 		0ACDECC818D5FC85008B2F7B /* 653.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 653.txt; path = poetryapps/resource/poetry/653.txt; sourceTree = SOURCE_ROOT; };
+		0ADDB30B199AD601000FAF09 /* FileListWithoutCoreData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FileListWithoutCoreData.plist; sourceTree = "<group>"; };
 		0AF09740199601AB0003C8AA /* 722.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 722.txt; path = poetryapps/resource/poetry/722.txt; sourceTree = SOURCE_ROOT; };
 		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
 		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
@@ -2017,6 +2019,7 @@
 				105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */,
 				105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */,
 				CB82809E1898F85500661A94 /* addNewFileList.plist */,
+				0ADDB30B199AD601000FAF09 /* FileListWithoutCoreData.plist */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -3122,6 +3125,7 @@
 				CB54FDA318695CCE00CED47E /* 184.txt in Resources */,
 				CB54FE0618695CCE00CED47E /* 273.txt in Resources */,
 				CB54FDE818695CCE00CED47E /* 246.txt in Resources */,
+				0ADDB30C199AD601000FAF09 /* FileListWithoutCoreData.plist in Resources */,
 				CB54FE0918695CCE00CED47E /* 276.txt in Resources */,
 				CB54FE5A18695CCE00CED47E /* 349.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,

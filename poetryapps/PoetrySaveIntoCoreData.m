@@ -190,6 +190,12 @@
     }
     else
     {
+        // check add file or not
+        if([self isAddNewFile])
+        {
+            NSLog(@"check ok!!");
+        }
+        
         if([self isCheckPlistFileExist])
         {
             if([self isUpdatePlistFile])
@@ -219,6 +225,44 @@
     }
     
     return plistFileList;
+}
+
+- (BOOL) isAddNewFile
+{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FileListWithoutCoreData" ofType:@"plist"];
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    
+    NSString *strItem,*strFlag;
+    for(int i=0;i< [plistData count];i++)
+    {
+        strItem = [NSString stringWithFormat:@"fileItem_%d",i];
+        if([plistData objectForKey:strItem])
+        {
+            NSLog(@"get the file");
+            
+            // save into core data
+            strFlag = [NSString stringWithFormat:@"fileFlag_%d",i];
+            
+            NSLog(@"flage = %@",[plistData objectForKey:strFlag]);
+            //if(![plistData objectForKey:strFlag])
+            {
+                NSLog(@"have to implement!!!");
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+                NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
+                NSString *title,*titleB, *filePath2,*fileBPath,*contentB;
+                NSString *fileContents;
+                NSMutableString *poetryContent = [[NSMutableString alloc]init];
+                int lineCount = 0;
+                int index = 0;
+            }
+            return TRUE;
+        }
+        else
+            break;
+    }
+    return FALSE;
 }
 
 - (BOOL)isCheckPlistFileExist

@@ -18,4 +18,5 @@
 - (NSArray*) getPlistContent;
 - (BOOL)isCheckPlistFileExist;
 - (BOOL)isUpdatePlistFile;
+- (BOOL) isAddNewFile;
 @end
