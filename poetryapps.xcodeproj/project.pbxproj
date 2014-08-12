@@ -29,6 +29,7 @@
 		0ACC32D318A2F82800D245C0 /* sc7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C318A2F82800D245C0 /* sc7.png */; };
 		0ACC32D518A2F82800D245C0 /* sc9.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACC32C518A2F82800D245C0 /* sc9.png */; };
 		0ACDECC918D5FC85008B2F7B /* 653.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0ACDECC818D5FC85008B2F7B /* 653.txt */; };
+		0AF09741199601AB0003C8AA /* 722.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0AF09740199601AB0003C8AA /* 722.txt */; };
 		1004E8C2187CFABF00718741 /* BarBtn_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C0187CFABF00718741 /* BarBtn_Setting.png */; };
 		1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */; };
 		1004E8C6187CFACD00718741 /* BarBtn_Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1004E8C4187CFACD00718741 /* BarBtn_Search.png */; };
@@ -904,6 +905,7 @@
 		0ACC32C318A2F82800D245C0 /* sc7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc7.png; sourceTree = "<group>"; };
 		0ACC32C518A2F82800D245C0 /* sc9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc9.png; sourceTree = "<group>"; };
 		0ACDECC818D5FC85008B2F7B /* 653.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 653.txt; path = poetryapps/resource/poetry/653.txt; sourceTree = SOURCE_ROOT; };
+		0AF09740199601AB0003C8AA /* 722.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 722.txt; path = poetryapps/resource/poetry/722.txt; sourceTree = SOURCE_ROOT; };
 		1004E8C0187CFABF00718741 /* BarBtn_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Setting.png; sourceTree = "<group>"; };
 		1004E8C1187CFABF00718741 /* BarBtn_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBtn_Setting@2x.png"; sourceTree = "<group>"; };
 		1004E8C4187CFACD00718741 /* BarBtn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBtn_Search.png; sourceTree = "<group>"; };
@@ -2861,6 +2863,7 @@
 				CB54FD2318695CCD00CED47E /* 719.txt */,
 				CB54FD2518695CCD00CED47E /* 720.txt */,
 				CB54FD2618695CCD00CED47E /* 721.txt */,
+				0AF09740199601AB0003C8AA /* 722.txt */,
 			);
 			name = poetry;
 			path = poetryapps/Resource/poetry;
@@ -3497,6 +3500,7 @@
 				CB54FEA618695CCE00CED47E /* 417.txt in Resources */,
 				CB54FE6C18695CCE00CED47E /* 365.txt in Resources */,
 				CB54FD8418695CCE00CED47E /* 156.txt in Resources */,
+				0AF09741199601AB0003C8AA /* 722.txt in Resources */,
 				CB54FD7718695CCE00CED47E /* 144.txt in Resources */,
 				CB54FE3318695CCE00CED47E /* 313.txt in Resources */,
 				CB54FEEB18695CCE00CED47E /* 48.txt in Resources */,
@@ -3972,8 +3976,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3997,8 +4001,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHIN KANG CHANG (MY3NCV255J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
