@@ -231,7 +231,7 @@
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FileListWithoutCoreData" ofType:@"plist"];
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    //PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     
     NSString *strItem,*strFlag;
     for(int i=0;i< [plistData count];i++)
@@ -245,9 +245,14 @@
             strFlag = [NSString stringWithFormat:@"fileFlag_%d",i];
             
             NSLog(@"flage = %@",[plistData objectForKey:strFlag]);
-            //if(![plistData objectForKey:strFlag])
+            NSLog(@"plist data = %@",plistData);
+            
+            NSMutableString *flag = [plistData objectForKey:strFlag];
+            NSLog(@"flag str = %@",flag);
+            //if([flag isEqualToString:@"0"])
             {
                 NSLog(@"have to implement!!!");
+                /*
                 NSFileManager *fileManager = [NSFileManager defaultManager];
                 NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
                 NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
@@ -256,6 +261,13 @@
                 NSMutableString *poetryContent = [[NSMutableString alloc]init];
                 int lineCount = 0;
                 int index = 0;
+                */
+                //[flag setString:@"1"];
+                //[flag setString:[NSString stringWithFormat:@"1"]];
+                //flag = @"1";
+                //[plistData setObject:@"1" forKey:strFlag];
+                //[plistData writeToFile:plistPath atomically:YES];
+                
             }
             return TRUE;
         }

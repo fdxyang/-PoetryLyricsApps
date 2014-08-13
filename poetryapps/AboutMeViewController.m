@@ -36,6 +36,9 @@
     _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
     
     //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+    
+    //[self.view setBackgroundColor:[UIColor colorWithRed:254.0/255.0 green:221.0/255.0 blue:120.0/255.0 alpha:1.0]];
+    //[self.view setBackgroundColor:[UIColor yellowColor]];
     self.navigationItem.titleView = _NavigationTitleLab;
     CGSize Size = CGSizeMake(180, 200);
     Size = [_NavigationTitleLab sizeThatFits:Size];
@@ -56,11 +59,11 @@
     CGFloat scrollHeight = 0.0;
     
     if (IS_IPHONE5) {
-        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-115);
+        Frame = CGRectMake(0, 60, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-75);
         contactPos = 90;
         scrollHeight = 300.0;
     } else {
-        Frame = CGRectMake(0, 100, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-115);
+        Frame = CGRectMake(0, 60, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-75);
         contactPos = 10;
         scrollHeight = 250.0;
     }
@@ -72,6 +75,13 @@
     
     [_Scroller setContentSize:Size];
     
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20,0,300,40)];
+    [title setText:@"Hippo Colors 色河馬"];
+    [title setFont:[UIFont systemFontOfSize:25]];
+    [title setTextColor:[UIColor colorWithRed:193.0/255.0 green:210.0/255.0 blue:240.0/255.0 alpha:1.0]];
+    [_Scroller addSubview:title];
+    
+    /*
     float teamlogo_x = 0.0;
     float teamlogo_y = 0.0;
     float teamlogo_width = 200.0;
@@ -89,6 +99,7 @@
     teamContact.textAlignment = NSTextAlignmentCenter;
     [teamContact setText:@"聯絡我們：hippocolors@gmail.com"];
     [_Scroller addSubview:teamContact];
+     */
 }
 
 -(void)viewDidAppear:(BOOL)animated
