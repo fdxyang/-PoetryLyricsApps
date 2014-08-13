@@ -57,15 +57,18 @@
     NSUInteger contactPos=0;
     CGRect Frame;
     CGFloat scrollHeight = 0.0;
+    CGFloat uiviewHeight = 0.0;
     
     if (IS_IPHONE5) {
-        Frame = CGRectMake(0, 60, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT-75);
+        Frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT);
         contactPos = 90;
         scrollHeight = 300.0;
+        uiviewHeight = UI_SCREEN_4_INCH_HEIGHT;
     } else {
-        Frame = CGRectMake(0, 60, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT-75);
+        Frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT);
         contactPos = 10;
         scrollHeight = 250.0;
+        uiviewHeight = UI_SCREEN_3_5_INCH_HEIGHT;
     }
     [_Scroller setFrame:Frame];
     [self.view addSubview:_Scroller];
@@ -75,11 +78,23 @@
     
     [_Scroller setContentSize:Size];
     
-    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20,0,300,40)];
+    UIView *aboutMeView = [[UIView alloc]initWithFrame:CGRectMake(0,0,320,uiviewHeight)];
+    [aboutMeView setBackgroundColor:[UIColor colorWithRed:254.0/255.0 green:221.0/255.0 blue:120.0/255.0 alpha:1.0]];
+    
+    
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20,10,300,30)];
     [title setText:@"Hippo Colors 色河馬"];
-    [title setFont:[UIFont systemFontOfSize:25]];
+    [title setFont:[UIFont systemFontOfSize:27]];
     [title setTextColor:[UIColor colorWithRed:193.0/255.0 green:210.0/255.0 blue:240.0/255.0 alpha:1.0]];
-    [_Scroller addSubview:title];
+    [aboutMeView addSubview:title];
+    
+    UILabel *introText = [[UILabel alloc]initWithFrame:CGRectMake(20,40,300,180)];
+    [introText setText:@"成立於2014年，\n一個年輕且熱血的團隊。\n\n隨著行動裝置普及，\n\n色河馬協助解決您的問題，\n把您的生活變簡單！\n"];
+    [introText setFont:[UIFont  fontWithName:@"TrebuchetMS" size:20]];
+    introText.numberOfLines = 0;
+    [aboutMeView addSubview:introText];
+    
+    [_Scroller addSubview:aboutMeView];
     
     /*
     float teamlogo_x = 0.0;
