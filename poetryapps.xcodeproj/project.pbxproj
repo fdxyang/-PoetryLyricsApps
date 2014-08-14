@@ -860,6 +860,13 @@
 		CB7AD56D189E442B0022649F /* teamlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB7AD56C189E442B0022649F /* teamlogo.png */; };
 		CB82809F1898F85500661A94 /* addNewFileList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB82809E1898F85500661A94 /* addNewFileList.plist */; };
 		CB86F0301862E092006F8500 /* PoetrySaveIntoCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */; };
+		CB8D97DF199C52070001269A /* blogicon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97DA199C52070001269A /* blogicon.png */; };
+		CB8D97E0199C52070001269A /* fbfans.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97DB199C52070001269A /* fbfans.png */; };
+		CB8D97E1199C52070001269A /* emailicon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97DC199C52070001269A /* emailicon.png */; };
+		CB8D97E2199C52070001269A /* aboutmebackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97DD199C52070001269A /* aboutmebackground.png */; };
+		CB8D97E6199C52CD0001269A /* Teamlogotm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97E4199C52CD0001269A /* Teamlogotm@2x.png */; };
+		CB8D97E7199C52CD0001269A /* Teamlogotm.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8D97E5199C52CD0001269A /* Teamlogotm.png */; };
+		CB8D97E9199C62520001269A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8D97E8199C62520001269A /* MessageUI.framework */; };
 		CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */; };
 		CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CB942D1818A4CDEB0003A478 /* libz.dylib */; };
 		CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA286CB184D753A00010125 /* GotoTableCell.m */; };
@@ -1766,6 +1773,13 @@
 		CB82809E1898F85500661A94 /* addNewFileList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = addNewFileList.plist; sourceTree = "<group>"; };
 		CB86F02E1862E092006F8500 /* PoetrySaveIntoCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoetrySaveIntoCoreData.h; sourceTree = "<group>"; };
 		CB86F02F1862E092006F8500 /* PoetrySaveIntoCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoetrySaveIntoCoreData.m; sourceTree = "<group>"; };
+		CB8D97DA199C52070001269A /* blogicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blogicon.png; sourceTree = "<group>"; };
+		CB8D97DB199C52070001269A /* fbfans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbfans.png; sourceTree = "<group>"; };
+		CB8D97DC199C52070001269A /* emailicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emailicon.png; sourceTree = "<group>"; };
+		CB8D97DD199C52070001269A /* aboutmebackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutmebackground.png; sourceTree = "<group>"; };
+		CB8D97E4199C52CD0001269A /* Teamlogotm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Teamlogotm@2x.png"; path = "poetryapps/resource/image/Teamlogotm@2x.png"; sourceTree = SOURCE_ROOT; };
+		CB8D97E5199C52CD0001269A /* Teamlogotm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Teamlogotm.png; path = poetryapps/resource/image/Teamlogotm.png; sourceTree = SOURCE_ROOT; };
+		CB8D97E8199C62520001269A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CB942D1818A4CDEB0003A478 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CBA286CA184D753A00010125 /* GotoTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoTableCell.h; sourceTree = "<group>"; };
@@ -1785,6 +1799,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB8D97E9199C62520001269A /* MessageUI.framework in Frameworks */,
 				CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */,
 				CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */,
 				10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */,
@@ -1984,6 +1999,7 @@
 		CB25FD0B1843972D00F3D980 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB8D97E8199C62520001269A /* MessageUI.framework */,
 				CB942D1818A4CDEB0003A478 /* libz.dylib */,
 				CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */,
 				10AE670E18449F8C00A683E7 /* CoreData.framework */,
@@ -2101,6 +2117,7 @@
 		CB54FA7018695CC200CED47E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CB8D97D7199C4CF50001269A /* AboutMe */,
 				CBCB4F6B18D9305000D0A323 /* gotobtn1.png */,
 				CBCB4F6C18D9305000D0A323 /* gotobtn3.png */,
 				CBCB4F6D18D9305000D0A323 /* gotobtn2.png */,
@@ -2883,6 +2900,19 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		CB8D97D7199C4CF50001269A /* AboutMe */ = {
+			isa = PBXGroup;
+			children = (
+				CB8D97E4199C52CD0001269A /* Teamlogotm@2x.png */,
+				CB8D97E5199C52CD0001269A /* Teamlogotm.png */,
+				CB8D97DA199C52070001269A /* blogicon.png */,
+				CB8D97DB199C52070001269A /* fbfans.png */,
+				CB8D97DC199C52070001269A /* emailicon.png */,
+				CB8D97DD199C52070001269A /* aboutmebackground.png */,
+			);
+			name = AboutMe;
+			sourceTree = "<group>";
+		};
 		CBA286CD184DCF4A00010125 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -2982,6 +3012,7 @@
 				CB54FF3F18695CCE00CED47E /* 555.txt in Resources */,
 				CB54FF2718695CCE00CED47E /* 533.txt in Resources */,
 				CB54FEBF18695CCE00CED47E /* 44.txt in Resources */,
+				CB8D97E1199C52070001269A /* emailicon.png in Resources */,
 				CB54FF8A18695CCE00CED47E /* 622.txt in Resources */,
 				CB54FE4018695CCE00CED47E /* 325.txt in Resources */,
 				CB54FE3D18695CCE00CED47E /* 322.txt in Resources */,
@@ -3146,6 +3177,7 @@
 				104CB7A218A9BDE4002698B2 /* SpecialCharacter-ipad-01.png in Resources */,
 				CB54FFC918695CCE00CED47E /* 68.txt in Resources */,
 				CB54FED518695CCE00CED47E /* 46.txt in Resources */,
+				CB8D97E2199C52070001269A /* aboutmebackground.png in Resources */,
 				CB54FD7F18695CCE00CED47E /* 151.txt in Resources */,
 				CB54FF5E18695CCE00CED47E /* 583.txt in Resources */,
 				CB54FE7D18695CCE00CED47E /* 380.txt in Resources */,
@@ -3203,6 +3235,7 @@
 				CB54FFB618695CCE00CED47E /* 662.txt in Resources */,
 				CB54FEFC18695CCE00CED47E /* 495.txt in Resources */,
 				CB54FD7D18695CCE00CED47E /* 15.txt in Resources */,
+				CB8D97DF199C52070001269A /* blogicon.png in Resources */,
 				CB54FED118695CCE00CED47E /* 456.txt in Resources */,
 				CB54FF7118695CCE00CED47E /* 60.txt in Resources */,
 				CB54FEBD18695CCE00CED47E /* 438.txt in Resources */,
@@ -3408,6 +3441,7 @@
 				CB54FFA418695CCE00CED47E /* 646.txt in Resources */,
 				CB54FF3A18695CCE00CED47E /* 550.txt in Resources */,
 				CB54FD8A18695CCE00CED47E /* 161.txt in Resources */,
+				CB8D97E7199C52CD0001269A /* Teamlogotm.png in Resources */,
 				104CB79718A9BBBC002698B2 /* iPad-retina-light-outlines-01.png in Resources */,
 				CB54FF2218695CCE00CED47E /* 529.txt in Resources */,
 				CB54FD7418695CCE00CED47E /* 141.txt in Resources */,
@@ -3626,6 +3660,7 @@
 				CB54FE5F18695CCE00CED47E /* 353.txt in Resources */,
 				CB54FD7518695CCE00CED47E /* 142.txt in Resources */,
 				CB54FEBB18695CCE00CED47E /* 436.txt in Resources */,
+				CB8D97E0199C52070001269A /* fbfans.png in Resources */,
 				CB54FF7E18695CCE00CED47E /* 611.txt in Resources */,
 				CB54FD7018695CCE00CED47E /* 138.txt in Resources */,
 				CB54FEAE18695CCE00CED47E /* 424.txt in Resources */,
@@ -3734,6 +3769,7 @@
 				CB54FEF418695CCE00CED47E /* 488.txt in Resources */,
 				CB54FDFE18695CCE00CED47E /* 266.txt in Resources */,
 				10F55C66187FC23E0003DBB2 /* NaviBtnPress_White_iPad.png in Resources */,
+				CB8D97E6199C52CD0001269A /* Teamlogotm@2x.png in Resources */,
 				CB54FDDA18695CCE00CED47E /* 233.txt in Resources */,
 				CB54FEAA18695CCE00CED47E /* 420.txt in Resources */,
 				CB54FF0C18695CCE00CED47E /* 509.txt in Resources */,
