@@ -229,7 +229,7 @@
 
 - (BOOL) isAddNewFile
 {
-    /*
+    
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FileListWithoutCoreData" ofType:@"plist"];
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
@@ -237,7 +237,8 @@
     NSString *strItem,*fileType;
     NSInteger index = 0,insertIndex=0,categoryType = 0;
     NSMutableString *poetryType;
-    BOOL isSave = FALSE;
+    NSArray *getPoetryContent;
+    BOOL isSave = FALSE,isFindContent = FALSE;
     
     for(int i=0;i< [plistData count];i++)
     {
@@ -247,9 +248,36 @@
         {
             NSLog(@"get the file");
             
+            poetryType = [plistData objectForKey:fileType];
+            
+            if([poetryType isEqual:@"GUARD_READING"])
+            {
+                insertIndex = index-721+5; // 721-717
+                categoryType = GUARD_READING;
+            }
+            else if([poetryType isEqual:@"POETRYS"])
+            {
+                insertIndex = index-721+649;
+                categoryType = POETRYS;
+            }
+            else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
+            {
+                insertIndex = index-721+65;//716-650
+                categoryType = RESPONSIVE_PRAYER;
+            }
+
+            
             // save into core data
             //if([flag isEqualToString:@"0"])
             //if(check core data exist or not) // no file in core data
+            getPoetryContent = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:[plistData objectForKey:strItem] InCategory:categoryType];
+            
+            for(int j=0;j<[getPoetryContent count];j++)
+            {
+                NSLog(@"content = %@",getPoetryContent[j]);
+            }
+            
+            if(isFindContent)
             {
                 //NSLog(@"have to implement!!!");
                 
@@ -284,23 +312,23 @@
                     }
                     NSDictionary *PoetryDic;
                     
-                    poetryType = [plistData objectForKey:fileType];
-                    
-                    if([poetryType isEqual:@"GUARD_READING"])
-                    {
-                        insertIndex = index-721+5; // 721-717
-                        categoryType = GUARD_READING;
-                    }
-                    else if([poetryType isEqual:@"POETRYS"])
-                    {
-                        insertIndex = index-721+649;
-                        categoryType = POETRYS;
-                    }
-                    else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
-                    {
-                        insertIndex = index-721+65;//716-650
-                        categoryType = RESPONSIVE_PRAYER;
-                    }
+//                    poetryType = [plistData objectForKey:fileType];
+//                    
+//                    if([poetryType isEqual:@"GUARD_READING"])
+//                    {
+//                        insertIndex = index-721+5; // 721-717
+//                        categoryType = GUARD_READING;
+//                    }
+//                    else if([poetryType isEqual:@"POETRYS"])
+//                    {
+//                        insertIndex = index-721+649;
+//                        categoryType = POETRYS;
+//                    }
+//                    else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
+//                    {
+//                        insertIndex = index-721+65;//716-650
+//                        categoryType = RESPONSIVE_PRAYER;
+//                    }
                     
                     PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                  title, POETRY_CORE_DATA_NAME_KEY,
@@ -328,7 +356,7 @@
         }
         else
             break;
-    }*/
+    }
     return FALSE;
 }
 
