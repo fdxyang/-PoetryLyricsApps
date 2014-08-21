@@ -230,7 +230,7 @@
 
 - (void) isAddNewFile
 {
- /*
+ 
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FileListWithoutCoreData" ofType:@"plist"];
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
@@ -341,7 +341,6 @@
             // do nothing
         }
     }
-  */
 }
 
 - (BOOL)isCheckPlistFileExist
