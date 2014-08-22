@@ -192,16 +192,17 @@
     {
         // check add file or not
         //if([self isAddNewFile])
-        {
+        //{
             [self isAddNewFile];
-            NSLog(@"check ok!!");
-        }
+            //NSLog(@"check ok!!");
+        //}
         
         if([self isCheckPlistFileExist])
         {
             if([self isUpdatePlistFile])
             {
                 // update successful
+                //NSLog(@"update successful!!");
             }
         }
     }
@@ -347,22 +348,27 @@
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSInteger plistCount = 0;
     
     
     NSString *str;
-    for(int i = 0 ;i < 721 ; i++)
+    for(int i = 0 ;i < [plistData count] ; i++)
     {
         str = [NSString stringWithFormat:@"file_%d",i+1];
         
         if([plistData objectForKey:str])
         {
-            return TRUE;
+            //return TRUE;
+            plistCount++;
         }
         else
             break;
     }
     
-    return FALSE;
+    if(plistCount == [plistData count])
+        return TRUE;
+    else
+        return FALSE;
 }
 
 - (BOOL)isUpdatePlistFile
@@ -405,7 +411,7 @@
             category = POETRYS;
         }
         
-        //NSLog(@"index = %d,category = %d",categoryIndex,category);
+        //NSLog(@"index = %ld,category = %d",(long)categoryIndex,category);
         NSDictionary *originalPoetry = (NSDictionary*)[[PoetryDataBase Poetry_CoreDataFetchDataInCategory:category] objectAtIndex:categoryIndex];
         NSDictionary *NewPoetry = originalPoetry; //[Casper] add
         
