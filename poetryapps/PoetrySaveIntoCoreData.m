@@ -257,7 +257,7 @@
         
         if([poetryType isEqual:@"GUARD_READING"])
         {
-            insertIndex = index-721+5; // 721-717
+            insertIndex = index-721+4; // 721-717
             categoryType = GUARD_READING;
         }
         else if([poetryType isEqual:@"POETRYS"])
@@ -287,7 +287,7 @@
         
         if(isFindContent)
         {
-            NSLog(@"have to implement!!!");
+            NSLog(@"isFindContent!!!");
             
             index = [[plistData objectForKey:strItem]integerValue];
             NSFileManager *fileManager = [NSFileManager defaultManager];
