@@ -191,12 +191,7 @@
     else
     {
         // check add file or not
-        //if([self isAddNewFile])
-        //{
-            [self isAddNewFile];
-            //NSLog(@"check ok!!");
-        //}
-        
+        [self isAddNewFile];
         if([self isCheckPlistFileExist])
         {
             if([self isUpdatePlistFile])
@@ -249,15 +244,15 @@
         strItem = [NSString stringWithFormat:@"fileItem_%d",i];
         fileTitle = [NSString stringWithFormat:@"fileTitle_%d",i];
         
-        NSLog(@"file name = %@",strItem);
-        NSLog(@"str = %@",[plistData objectForKey:strItem]);
+        //NSLog(@"file name = %@",strItem);
+        //NSLog(@"str = %@",[plistData objectForKey:strItem]);
         
         
         poetryType = [plistData objectForKey:fileType];
 
         NSArray *getPoetryContent = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:[plistData objectForKey:fileTitle] InCategory:categoryType];
         
-        NSLog(@"Array size = %d",[getPoetryContent count]);
+        //NSLog(@"Array size = %d",[getPoetryContent count]);
     
         if([getPoetryContent count])
         {
