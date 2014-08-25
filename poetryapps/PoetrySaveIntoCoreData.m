@@ -254,22 +254,6 @@
         
         
         poetryType = [plistData objectForKey:fileType];
-        
-        if([poetryType isEqual:@"GUARD_READING"])
-        {
-            insertIndex = index-721+4; // 721-717
-            categoryType = GUARD_READING;
-        }
-        else if([poetryType isEqual:@"POETRYS"])
-        {
-            insertIndex = index-721+649;
-            categoryType = POETRYS;
-        }
-        else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
-        {
-            insertIndex = index-721+65;//716-650
-            categoryType = RESPONSIVE_PRAYER;
-        }
 
         NSArray *getPoetryContent = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:[plistData objectForKey:fileTitle] InCategory:categoryType];
         
@@ -296,7 +280,22 @@
             NSString *fileContents;
             NSMutableString *poetryContent = [[NSMutableString alloc]init];
             int lineCount = 0;
-            //int index = 0;
+            
+            if([poetryType isEqual:@"GUARD_READING"])
+            {
+                insertIndex = index-721+5; // 721-717
+                categoryType = GUARD_READING;
+            }
+            else if([poetryType isEqual:@"POETRYS"])
+            {
+                insertIndex = index-721+649;
+                categoryType = POETRYS;
+            }
+            else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
+            {
+                insertIndex = index-721+65;//716-650
+                categoryType = RESPONSIVE_PRAYER;
+            }
             
             title = [NSString stringWithFormat:@"/%@.txt",[plistData objectForKey:strItem]];
             filePath2 = [FilePath stringByAppendingString:title];
