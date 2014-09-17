@@ -335,6 +335,10 @@
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = 0;
         
+        
+        // 20140917 [CASPER] Fix reading issue
+        [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
+        
     }
     
     self.navigationItem.title = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
