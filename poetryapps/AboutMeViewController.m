@@ -28,6 +28,8 @@
     [super viewDidLoad];
     _Scroller = [[UIScrollView alloc] init];
     
+    _buttonState = 0;
+    
     UILabel  *_NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
     _NavigationTitleLab.text = @"關於我";
     _NavigationTitleLab.backgroundColor = [UIColor clearColor];
@@ -62,12 +64,12 @@
     if (IS_IPHONE5) {
         Frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT);
         contactPos = 90;
-        scrollHeight = 300.0;
+        scrollHeight = 500.0;
         uiviewHeight = UI_SCREEN_4_INCH_HEIGHT;
     } else {
         Frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_3_5_INCH_HEIGHT);
         contactPos = 10;
-        scrollHeight = 420;
+        scrollHeight = 500;
         uiviewHeight = UI_SCREEN_3_5_INCH_HEIGHT;
     }
     
@@ -85,7 +87,35 @@
     //[aboutMeView setBackgroundColor:[UIColor colorWithRed:254.0/255.0 green:221.0/255.0 blue:120.0/255.0 alpha:1.0]];
     [aboutMeView addSubview:background];
     
+    UIImageView *introhippo = [[UIImageView alloc]initWithFrame:CGRectMake(35, 30, 250, 178)];
+    [introhippo setImage:[UIImage imageNamed:@"introhippo.png"]];
+    [aboutMeView addSubview:introhippo];
     
+    UIImageView *abouthippo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 230, 220, 231)];
+    [abouthippo setImage:[UIImage imageNamed:@"abouthippo.png"]];
+    [aboutMeView addSubview:abouthippo];
+    
+    _blogBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,220,60,60)];
+    [_blogBtn setImage:[UIImage imageNamed:@"blogicon.png"] forState:UIControlStateNormal];
+    [_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_blogBtn];
+    
+    _fbfansBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,285,60,60)];
+    [_fbfansBtn setImage:[UIImage imageNamed:@"fbfans.png"] forState:UIControlStateNormal];
+    [_fbfansBtn addTarget:self action:@selector(fbfansStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_fbfansBtn];
+    
+    _emailBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,350,60,60)];
+    [_emailBtn setImage:[UIImage imageNamed:@"emailicon.png"] forState:UIControlStateNormal];
+    [_emailBtn addTarget:self action:@selector(emailStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_emailBtn];
+    
+    _rateBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,415,60,60)];
+    [_rateBtn setImage:[UIImage imageNamed:@"rateicon.png"] forState:UIControlStateNormal];
+    [_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_rateBtn];
+    
+    /*
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20,10,300,30)];
     [title setText:@"Hippo Colors 色河馬"];
     [title setFont:[UIFont systemFontOfSize:27]];
@@ -116,7 +146,7 @@
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(100, 305, 120,120)];
     [logo setImage:[UIImage imageNamed:@"Teamlogotm.png"]];
     [aboutMeView addSubview:logo];
-    
+    */
     [_Scroller addSubview:aboutMeView];
     
     /*
@@ -196,12 +226,18 @@
 
 - (IBAction)blogStartBtn:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://hippocolors.blogspot.tw"]];
+     _buttonState = 1;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
 }
 
 - (IBAction)fbfansStartBtn:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://m.facebook.com/hippocolors"]];
+    _buttonState = 2;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
 }
 
 - (IBAction)emailStartBtn:(id)sender
@@ -216,7 +252,13 @@
         return;
     }
     else
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:hippocolors@gmail.com?subject=Hi,HippoColors"]];
+    {
+        _buttonState = 3;
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+        alertView.delegate = self;
+        [alertView show];
+    }
+    
     /*
     // 先檢查是否有信箱帳號
     if (![MFMailComposeViewController canSendMail]) {
@@ -260,6 +302,45 @@
     // 顯示電子郵件畫面
     [self presentViewController:_mailComposeViewController animated:YES completion:nil];
      */
+}
+
+- (IBAction)rateStartBtn:(id)sender
+{
+    _buttonState = 4;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"取消"])
+    {
+        NSLog(@"do nothing");
+    }
+    else if([title isEqualToString:@"確認"])
+    {
+        NSLog(@"do it");
+        
+        switch (_buttonState) {
+            case 1://blog
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://hippocolors.blogspot.tw"]];
+                break;
+            case 2: // fb
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://m.facebook.com/hippocolors"]];
+                break;
+            case 3: //email
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:hippocolors@gmail.com?subject=Hi,HippoColors"]];
+                break;
+            case 4: // rate
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=819339914&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8"]];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate Methods
