@@ -8,6 +8,8 @@
 
 #import "PoetrySaveIntoCoreData.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 @implementation PoetrySaveIntoCoreData
 
 -(PoetrySaveIntoCoreData*) init
@@ -32,7 +34,15 @@
     if(!setting.DataSaved)
     {
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+        NSString *FilePath;
+        
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            FilePath = [[NSBundle mainBundle] resourcePath];
+        }
+        else{
+            FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+        }
+        
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
         NSString *title,*titleB, *filePath2,*fileBPath,*contentB;
         NSString *fileContents;
