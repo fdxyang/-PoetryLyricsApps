@@ -8,8 +8,6 @@
 
 #import "PoetrySaveIntoCoreData.h"
 
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
 @implementation PoetrySaveIntoCoreData
 
 -(PoetrySaveIntoCoreData*) init
@@ -42,7 +40,7 @@
         else{
             FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
         }
-        
+
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
         NSString *title,*titleB, *filePath2,*fileBPath,*contentB;
         NSString *fileContents;
@@ -242,7 +240,8 @@
     PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
     
     NSString *strItem,*fileType,*fileTitle;
-    NSInteger index = 0,insertIndex=0,categoryType = 0,plistCount = [plistData count]/3;
+    NSInteger index = 0,insertIndex=0,plistCount = [plistData count]/3;
+    POETRY_CATEGORY categoryType = GUARD_READING;
     NSMutableString *poetryType;
     //NSMutableArray *getPoetryContent;
     BOOL isSave = FALSE,isFindContent = FALSE;
@@ -259,12 +258,19 @@
         
         
         poetryType = [plistData objectForKey:fileType];
+        
+        if([poetryType isEqualToString:@"GUARD_READING"])
+            categoryType = GUARD_READING;
+        else if([poetryType isEqualToString:@"POETRYS"])
+            categoryType = POETRYS;
+        else if([poetryType isEqualToString:@"RESPONSIVE_PRAYER"])
+            categoryType = RESPONSIVE_PRAYER;
 
         NSArray *getPoetryContent = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:[plistData objectForKey:fileTitle] InCategory:categoryType];
         
         //NSLog(@"Array size = %d",[getPoetryContent count]);
     
-        if([getPoetryContent count])
+        if([getPoetryContent count] > 0)
         {
             isFindContent = FALSE;
         }

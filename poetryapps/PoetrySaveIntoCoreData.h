@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
-//#import "PoetryAppDelegate.h"
+#import "General.h"
 
 @interface PoetrySaveIntoCoreData : NSObject
 
