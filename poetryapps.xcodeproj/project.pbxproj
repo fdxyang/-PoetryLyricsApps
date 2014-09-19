@@ -12,9 +12,6 @@
 		0A4D972E18A9936100E0CFF1 /* specialtable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4D972A18A9936100E0CFF1 /* specialtable.png */; };
 		0A4D972F18A9936100E0CFF1 /* specialtable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4D972B18A9936100E0CFF1 /* specialtable@2x.png */; };
 		0A4EB21719CA3D50003D9C83 /* abouthippo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21119CA3D50003D9C83 /* abouthippo.png */; };
-		0A4EB21819CA3D50003D9C83 /* blogicon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21219CA3D50003D9C83 /* blogicon2.png */; };
-		0A4EB21919CA3D50003D9C83 /* emailicon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21319CA3D50003D9C83 /* emailicon2.png */; };
-		0A4EB21A19CA3D50003D9C83 /* fbfans2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21419CA3D50003D9C83 /* fbfans2.png */; };
 		0A4EB21B19CA3D50003D9C83 /* introhippo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21519CA3D50003D9C83 /* introhippo.png */; };
 		0A4EB21C19CA3D50003D9C83 /* rateicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EB21619CA3D50003D9C83 /* rateicon.png */; };
 		0A5D4EB5189F9C810024EAA5 /* teamlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D4EB4189F9C810024EAA5 /* teamlogo@2x.png */; };
@@ -880,6 +877,18 @@
 		CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6C18D9305000D0A323 /* gotobtn3.png */; };
 		CBCB4F7018D9305000D0A323 /* gotobtn2.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB4F6D18D9305000D0A323 /* gotobtn2.png */; };
 		CBF19520184AF1190062FC00 /* Poetrypicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1951F184AF1190062FC00 /* Poetrypicker.m */; };
+		CBFC541F19CC338800E477B9 /* abouthippo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC541E19CC338800E477B9 /* abouthippo@2x.png */; };
+		CBFC542B19CC339700E477B9 /* abouthippo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542019CC339700E477B9 /* abouthippo@3x.png */; };
+		CBFC542C19CC339700E477B9 /* blogicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542119CC339700E477B9 /* blogicon@2x.png */; };
+		CBFC542D19CC339700E477B9 /* blogicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542219CC339700E477B9 /* blogicon@3x.png */; };
+		CBFC542E19CC339700E477B9 /* emailicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542319CC339700E477B9 /* emailicon@2x.png */; };
+		CBFC542F19CC339700E477B9 /* emailicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542419CC339700E477B9 /* emailicon@3x.png */; };
+		CBFC543019CC339700E477B9 /* fbfans@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542519CC339700E477B9 /* fbfans@2x.png */; };
+		CBFC543119CC339700E477B9 /* fbfans@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542619CC339700E477B9 /* fbfans@3x.png */; };
+		CBFC543219CC339700E477B9 /* introhippo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542719CC339700E477B9 /* introhippo@2x.png */; };
+		CBFC543319CC339700E477B9 /* introhippo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542819CC339700E477B9 /* introhippo@3x.png */; };
+		CBFC543419CC339700E477B9 /* rateicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542919CC339700E477B9 /* rateicon@2x.png */; };
+		CBFC543519CC339700E477B9 /* rateicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC542A19CC339700E477B9 /* rateicon@3x.png */; };
 		CBFE962E18960C3A00385094 /* gotobtn1_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962B18960C3A00385094 /* gotobtn1_selected.png */; };
 		CBFE962F18960C3A00385094 /* gotobtn3_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962C18960C3A00385094 /* gotobtn3_selected.png */; };
 		CBFE963018960C3A00385094 /* gotobtn2_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFE962D18960C3A00385094 /* gotobtn2_selected.png */; };
@@ -901,9 +910,6 @@
 		0A4D972A18A9936100E0CFF1 /* specialtable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = specialtable.png; path = poetryapps/resource/image/specialtable.png; sourceTree = SOURCE_ROOT; };
 		0A4D972B18A9936100E0CFF1 /* specialtable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "specialtable@2x.png"; path = "poetryapps/resource/image/specialtable@2x.png"; sourceTree = SOURCE_ROOT; };
 		0A4EB21119CA3D50003D9C83 /* abouthippo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abouthippo.png; path = poetryapps/resource/image/abouthippo.png; sourceTree = SOURCE_ROOT; };
-		0A4EB21219CA3D50003D9C83 /* blogicon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blogicon2.png; path = poetryapps/resource/image/blogicon2.png; sourceTree = SOURCE_ROOT; };
-		0A4EB21319CA3D50003D9C83 /* emailicon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emailicon2.png; path = poetryapps/resource/image/emailicon2.png; sourceTree = SOURCE_ROOT; };
-		0A4EB21419CA3D50003D9C83 /* fbfans2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fbfans2.png; path = poetryapps/resource/image/fbfans2.png; sourceTree = SOURCE_ROOT; };
 		0A4EB21519CA3D50003D9C83 /* introhippo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = introhippo.png; path = poetryapps/resource/image/introhippo.png; sourceTree = SOURCE_ROOT; };
 		0A4EB21619CA3D50003D9C83 /* rateicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rateicon.png; path = poetryapps/resource/image/rateicon.png; sourceTree = SOURCE_ROOT; };
 		0A5D4EB4189F9C810024EAA5 /* teamlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "teamlogo@2x.png"; path = "poetryapps/resource/image/teamlogo@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -1801,6 +1807,18 @@
 		CBCB4F6D18D9305000D0A323 /* gotobtn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2.png; path = poetryapps/resource/image/gotobtn2.png; sourceTree = SOURCE_ROOT; };
 		CBF1951E184AF1190062FC00 /* Poetrypicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poetrypicker.h; sourceTree = "<group>"; };
 		CBF1951F184AF1190062FC00 /* Poetrypicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poetrypicker.m; sourceTree = "<group>"; };
+		CBFC541E19CC338800E477B9 /* abouthippo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "abouthippo@2x.png"; path = "poetryapps/resource/image/abouthippo@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542019CC339700E477B9 /* abouthippo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "abouthippo@3x.png"; path = "poetryapps/resource/image/abouthippo@3x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542119CC339700E477B9 /* blogicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blogicon@2x.png"; path = "poetryapps/resource/image/blogicon@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542219CC339700E477B9 /* blogicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blogicon@3x.png"; path = "poetryapps/resource/image/blogicon@3x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542319CC339700E477B9 /* emailicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emailicon@2x.png"; path = "poetryapps/resource/image/emailicon@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542419CC339700E477B9 /* emailicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emailicon@3x.png"; path = "poetryapps/resource/image/emailicon@3x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542519CC339700E477B9 /* fbfans@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fbfans@2x.png"; path = "poetryapps/resource/image/fbfans@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542619CC339700E477B9 /* fbfans@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fbfans@3x.png"; path = "poetryapps/resource/image/fbfans@3x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542719CC339700E477B9 /* introhippo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introhippo@2x.png"; path = "poetryapps/resource/image/introhippo@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542819CC339700E477B9 /* introhippo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introhippo@3x.png"; path = "poetryapps/resource/image/introhippo@3x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542919CC339700E477B9 /* rateicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rateicon@2x.png"; path = "poetryapps/resource/image/rateicon@2x.png"; sourceTree = SOURCE_ROOT; };
+		CBFC542A19CC339700E477B9 /* rateicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rateicon@3x.png"; path = "poetryapps/resource/image/rateicon@3x.png"; sourceTree = SOURCE_ROOT; };
 		CBFE962B18960C3A00385094 /* gotobtn1_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn1_selected.png; path = poetryapps/resource/image/gotobtn1_selected.png; sourceTree = SOURCE_ROOT; };
 		CBFE962C18960C3A00385094 /* gotobtn3_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn3_selected.png; path = poetryapps/resource/image/gotobtn3_selected.png; sourceTree = SOURCE_ROOT; };
 		CBFE962D18960C3A00385094 /* gotobtn2_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gotobtn2_selected.png; path = poetryapps/resource/image/gotobtn2_selected.png; sourceTree = SOURCE_ROOT; };
@@ -2915,10 +2933,19 @@
 		CB8D97D7199C4CF50001269A /* AboutMe */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC542019CC339700E477B9 /* abouthippo@3x.png */,
+				CBFC542119CC339700E477B9 /* blogicon@2x.png */,
+				CBFC542219CC339700E477B9 /* blogicon@3x.png */,
+				CBFC542319CC339700E477B9 /* emailicon@2x.png */,
+				CBFC542419CC339700E477B9 /* emailicon@3x.png */,
+				CBFC542519CC339700E477B9 /* fbfans@2x.png */,
+				CBFC542619CC339700E477B9 /* fbfans@3x.png */,
+				CBFC542719CC339700E477B9 /* introhippo@2x.png */,
+				CBFC542819CC339700E477B9 /* introhippo@3x.png */,
+				CBFC542919CC339700E477B9 /* rateicon@2x.png */,
+				CBFC542A19CC339700E477B9 /* rateicon@3x.png */,
+				CBFC541E19CC338800E477B9 /* abouthippo@2x.png */,
 				0A4EB21119CA3D50003D9C83 /* abouthippo.png */,
-				0A4EB21219CA3D50003D9C83 /* blogicon2.png */,
-				0A4EB21319CA3D50003D9C83 /* emailicon2.png */,
-				0A4EB21419CA3D50003D9C83 /* fbfans2.png */,
 				0A4EB21519CA3D50003D9C83 /* introhippo.png */,
 				0A4EB21619CA3D50003D9C83 /* rateicon.png */,
 				CB8D97E4199C52CD0001269A /* Teamlogotm@2x.png */,
@@ -3038,7 +3065,6 @@
 				CB54FED818695CCE00CED47E /* 462.txt in Resources */,
 				CB54FE2518695CCE00CED47E /* 300.txt in Resources */,
 				CB54FE6318695CCE00CED47E /* 357.txt in Resources */,
-				0A4EB21A19CA3D50003D9C83 /* fbfans2.png in Resources */,
 				CB54FEC118695CCE00CED47E /* 441.txt in Resources */,
 				CB54FDF518695CCE00CED47E /* 258.txt in Resources */,
 				CB54FFF718695CCE00CED47E /* 720.txt in Resources */,
@@ -3178,6 +3204,7 @@
 				CB54FDE818695CCE00CED47E /* 246.txt in Resources */,
 				0ADDB30C199AD601000FAF09 /* FileListWithoutCoreData.plist in Resources */,
 				CB54FE0918695CCE00CED47E /* 276.txt in Resources */,
+				CBFC543419CC339700E477B9 /* rateicon@2x.png in Resources */,
 				CB54FE5A18695CCE00CED47E /* 349.txt in Resources */,
 				CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */,
 				CB54FF1E18695CCE00CED47E /* 525.txt in Resources */,
@@ -3371,6 +3398,7 @@
 				CB54FF9318695CCE00CED47E /* 630.txt in Resources */,
 				CB54FEB418695CCE00CED47E /* 43.txt in Resources */,
 				CB54FD7A18695CCE00CED47E /* 147.txt in Resources */,
+				CBFC543319CC339700E477B9 /* introhippo@3x.png in Resources */,
 				CB54FFC318695CCE00CED47E /* 674.txt in Resources */,
 				CB54FDFD18695CCE00CED47E /* 265.txt in Resources */,
 				104CB7A018A9BD59002698B2 /* iPad-button-info-01@2x.png in Resources */,
@@ -3407,6 +3435,7 @@
 				CB54FD6718695CCE00CED47E /* 13.txt in Resources */,
 				CB54FF9B18695CCE00CED47E /* 638.txt in Resources */,
 				CB54FF6018695CCE00CED47E /* 585.txt in Resources */,
+				CBFC542F19CC339700E477B9 /* emailicon@3x.png in Resources */,
 				CB54FDD318695CCE00CED47E /* 227.txt in Resources */,
 				CB54FE7E18695CCE00CED47E /* 381.txt in Resources */,
 				CB54FDD518695CCE00CED47E /* 229.txt in Resources */,
@@ -3417,6 +3446,7 @@
 				10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */,
 				0ACC32D518A2F82800D245C0 /* sc9.png in Resources */,
 				CB54FEC518695CCE00CED47E /* 445.txt in Resources */,
+				CBFC541F19CC338800E477B9 /* abouthippo@2x.png in Resources */,
 				CB54FE8118695CCE00CED47E /* 384.txt in Resources */,
 				CB54FF7618695CCE00CED47E /* 604.txt in Resources */,
 				CB54FEAD18695CCE00CED47E /* 423.txt in Resources */,
@@ -3444,8 +3474,6 @@
 				CB54FEF918695CCE00CED47E /* 492.txt in Resources */,
 				CB54FF5B18695CCE00CED47E /* 580.txt in Resources */,
 				CB54FFEA18695CCE00CED47E /* 709.txt in Resources */,
-				0A4EB21819CA3D50003D9C83 /* blogicon2.png in Resources */,
-				0A4EB21919CA3D50003D9C83 /* emailicon2.png in Resources */,
 				CB54FF0418695CCE00CED47E /* 501.txt in Resources */,
 				CB54FE5018695CCE00CED47E /* 34.txt in Resources */,
 				1067B0AA18C31F6400F0B7B1 /* iPhone_special icon_after-01.png in Resources */,
@@ -3491,6 +3519,7 @@
 				CBCB4F6F18D9305000D0A323 /* gotobtn3.png in Resources */,
 				CB54FF7A18695CCE00CED47E /* 608.txt in Resources */,
 				CB54FEFD18695CCE00CED47E /* 496.txt in Resources */,
+				CBFC543119CC339700E477B9 /* fbfans@3x.png in Resources */,
 				CB54FEB518695CCE00CED47E /* 430.txt in Resources */,
 				CB54FEFB18695CCE00CED47E /* 494.txt in Resources */,
 				CB54FF7918695CCE00CED47E /* 607.txt in Resources */,
@@ -3499,6 +3528,7 @@
 				CB54FFE518695CCE00CED47E /* 704.txt in Resources */,
 				CB54FE2918695CCE00CED47E /* 304.txt in Resources */,
 				CB54FE0B18695CCE00CED47E /* 278.txt in Resources */,
+				CBFC543519CC339700E477B9 /* rateicon@3x.png in Resources */,
 				0ACC32D018A2F82800D245C0 /* sc4.png in Resources */,
 				CB54FE2118695CCE00CED47E /* 298.txt in Resources */,
 				CB54FF8B18695CCE00CED47E /* 623.txt in Resources */,
@@ -3677,6 +3707,7 @@
 				CB54FEBA18695CCE00CED47E /* 435.txt in Resources */,
 				CB54FE8F18695CCE00CED47E /* 397.txt in Resources */,
 				CB54FD9E18695CCE00CED47E /* 18.txt in Resources */,
+				CBFC542B19CC339700E477B9 /* abouthippo@3x.png in Resources */,
 				CB54FFC418695CCE00CED47E /* 675.txt in Resources */,
 				CB54FE5418695CCE00CED47E /* 343.txt in Resources */,
 				CB54FE5318695CCE00CED47E /* 342.txt in Resources */,
@@ -3687,6 +3718,7 @@
 				CB54FF7E18695CCE00CED47E /* 611.txt in Resources */,
 				CB54FD7018695CCE00CED47E /* 138.txt in Resources */,
 				CB54FEAE18695CCE00CED47E /* 424.txt in Resources */,
+				CBFC543219CC339700E477B9 /* introhippo@2x.png in Resources */,
 				CB54FDC418695CCE00CED47E /* 213.txt in Resources */,
 				CB54FD6D18695CCE00CED47E /* 135.txt in Resources */,
 				CB54FF2C18695CCE00CED47E /* 538.txt in Resources */,
@@ -3702,6 +3734,7 @@
 				10B8AC451897AC2F005D6CC3 /* welcome_page_3_5@2x.png in Resources */,
 				1060F923187FFE1F004AE154 /* Icon-72.png in Resources */,
 				CB54FF1418695CCE00CED47E /* 516.txt in Resources */,
+				CBFC542D19CC339700E477B9 /* blogicon@3x.png in Resources */,
 				CB54FD8618695CCE00CED47E /* 158.txt in Resources */,
 				CB54FF3418695CCE00CED47E /* 545.txt in Resources */,
 				CB54FFF218695CCE00CED47E /* 716.txt in Resources */,
@@ -3746,6 +3779,7 @@
 				CB54FD8018695CCE00CED47E /* 152.txt in Resources */,
 				CB54FD7B18695CCE00CED47E /* 148.txt in Resources */,
 				CB54FE8418695CCE00CED47E /* 387.txt in Resources */,
+				CBFC542C19CC339700E477B9 /* blogicon@2x.png in Resources */,
 				CB54FE2818695CCE00CED47E /* 303.txt in Resources */,
 				CB54FD4618695CCE00CED47E /* 10.txt in Resources */,
 				CB54FF5D18695CCE00CED47E /* 582.txt in Resources */,
@@ -3780,6 +3814,7 @@
 				10482F4C18AA743900E0BA20 /* iTunesArtwork@2x.png in Resources */,
 				CB54FD5718695CCE00CED47E /* 115.txt in Resources */,
 				CB54FE2018695CCE00CED47E /* 297.txt in Resources */,
+				CBFC543019CC339700E477B9 /* fbfans@2x.png in Resources */,
 				CB54FF4518695CCE00CED47E /* 560.txt in Resources */,
 				CB54FF2B18695CCE00CED47E /* 537.txt in Resources */,
 				CB54FE4F18695CCE00CED47E /* 339.txt in Resources */,
@@ -3854,6 +3889,7 @@
 				CB54FD8B18695CCE00CED47E /* 162.txt in Resources */,
 				CB54FD4818695CCE00CED47E /* 101.txt in Resources */,
 				CB54FF1018695CCE00CED47E /* 512.txt in Resources */,
+				CBFC542E19CC339700E477B9 /* emailicon@2x.png in Resources */,
 				CB54FE2718695CCE00CED47E /* 302.txt in Resources */,
 				CB54FDBA18695CCE00CED47E /* 204.txt in Resources */,
 				0A4D972E18A9936100E0CFF1 /* specialtable.png in Resources */,
