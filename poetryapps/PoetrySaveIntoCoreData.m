@@ -286,7 +286,17 @@
             
             index = [[plistData objectForKey:strItem]integerValue];
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+            
+            NSString *FilePath;
+            
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+                FilePath = [[NSBundle mainBundle] resourcePath];
+            }
+            else{
+                FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+            }
+            //NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+            
             NSString *title,*filePath2;
             NSString *fileContents;
             NSMutableString *poetryContent = [[NSMutableString alloc]init];
@@ -387,7 +397,17 @@
     //NSLog(@"PLIST = %@",getPlist);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    
+    NSString *FilePath;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        FilePath = [[NSBundle mainBundle] resourcePath];
+    }
+    else{
+        FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    }
+    
+    //NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
     NSInteger poetryIndex = 0,categoryIndex = 0;
     POETRY_CATEGORY category = GUARD_READING;
     NSString *file,*filename;
