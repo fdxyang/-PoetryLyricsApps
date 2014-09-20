@@ -91,29 +91,31 @@
     [introhippo setImage:[UIImage imageNamed:@"introhippo.png"]];
     [aboutMeView addSubview:introhippo];
     
-    UIImageView *abouthippo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 230, 180, 189)];
+    UIImageView *abouthippo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 245, 180, 189)];
     [abouthippo setImage:[UIImage imageNamed:@"abouthippo.png"]];
     [aboutMeView addSubview:abouthippo];
     
-    _blogBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,220,40,40)];
-    [_blogBtn setImage:[UIImage imageNamed:@"blogicon.png"] forState:UIControlStateNormal];
-    [_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [aboutMeView addSubview:_blogBtn];
-    
-    _fbfansBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,270,40,40)];
+    _fbfansBtn = [[UIButton alloc]initWithFrame:CGRectMake(230,225,50,50)];
     [_fbfansBtn setImage:[UIImage imageNamed:@"fbfans.png"] forState:UIControlStateNormal];
     [_fbfansBtn addTarget:self action:@selector(fbfansStartBtn:) forControlEvents:UIControlEventTouchUpInside];
     [aboutMeView addSubview:_fbfansBtn];
     
-    _emailBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,320,40,40)];
+    _blogBtn = [[UIButton alloc]initWithFrame:CGRectMake(230,280,50,50)];
+    [_blogBtn setImage:[UIImage imageNamed:@"blogicon.png"] forState:UIControlStateNormal];
+    [_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_blogBtn];
+    
+    _rateBtn = [[UIButton alloc]initWithFrame:CGRectMake(230,335,50,50)];
+    [_rateBtn setImage:[UIImage imageNamed:@"rateicon.png"] forState:UIControlStateNormal];
+    [_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [aboutMeView addSubview:_rateBtn];
+    
+    _emailBtn = [[UIButton alloc]initWithFrame:CGRectMake(230,390,50,50)];
     [_emailBtn setImage:[UIImage imageNamed:@"emailicon.png"] forState:UIControlStateNormal];
     [_emailBtn addTarget:self action:@selector(emailStartBtn:) forControlEvents:UIControlEventTouchUpInside];
     [aboutMeView addSubview:_emailBtn];
     
-    _rateBtn = [[UIButton alloc]initWithFrame:CGRectMake(240,370,40,40)];
-    [_rateBtn setImage:[UIImage imageNamed:@"rateicon.png"] forState:UIControlStateNormal];
-    [_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [aboutMeView addSubview:_rateBtn];
+    
     
     /*
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20,10,300,30)];
