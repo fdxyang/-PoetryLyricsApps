@@ -102,7 +102,7 @@
                     if(index == 66)
                     index = 0;
                 }
-                else //717-721
+                else //717-722
                 {
                     index = index+1;
                     PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -111,7 +111,7 @@
                                  [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
                                  nil];
                     isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
-                    if(index == 5)
+                    if(index == 6)
                     index = 0;
                 }
                 
