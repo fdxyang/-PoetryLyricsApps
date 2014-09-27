@@ -256,7 +256,7 @@
     else
     {
         _buttonState = 3;
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Email?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
         alertView.delegate = self;
         [alertView show];
     }
