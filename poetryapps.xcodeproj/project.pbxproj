@@ -3019,7 +3019,7 @@
 				ORGANIZATIONNAME = cc;
 				TargetAttributes = {
 					CB25FD081843972D00F3D980 = {
-						DevelopmentTeam = MY3NCV255J;
+						DevelopmentTeam = 97365M2U5B;
 					};
 					CB25FD2C1843972D00F3D980 = {
 						TestTargetID = CB25FD081843972D00F3D980;
