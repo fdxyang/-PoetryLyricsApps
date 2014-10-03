@@ -309,7 +309,7 @@
 - (IBAction)rateStartBtn:(id)sender
 {
     _buttonState = 4;
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"訊息" message:@"給我們一點鼓勵吧！！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"訊息" message:@"來去評分，給我們一點鼓勵吧！！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
     alertView.delegate = self;
     [alertView show];
 }
