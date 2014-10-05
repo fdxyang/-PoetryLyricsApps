@@ -7,10 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface AboutMeViewController : UIViewController
+@interface AboutMeViewController : UIViewController<MFMailComposeViewControllerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIScrollView  *Scroller;
 @property (nonatomic, strong) UILabel       *TextLabel;
+@property (nonatomic, strong) UIButton      *blogBtn;
+@property (nonatomic, strong) UIButton      *fbfansBtn;
+@property (nonatomic, strong) UIButton      *emailBtn;
+@property (nonatomic, strong) UIButton      *rateBtn;
+@property (nonatomic) NSInteger     buttonState;
+//@property (nonatomic, strong) MFMailComposeViewController *mailComposeViewController;
+
+
+- (IBAction)blogStartBtn:(id)sender;
+- (IBAction)fbfansStartBtn:(id)sender;
+- (IBAction)emailStartBtn:(id)sender;
+- (IBAction)rateStartBtn:(id)sender;
 
 @end

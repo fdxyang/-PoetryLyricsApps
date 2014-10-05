@@ -32,7 +32,15 @@
     if(!setting.DataSaved)
     {
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+        NSString *FilePath;
+        
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            FilePath = [[NSBundle mainBundle] resourcePath];
+        }
+        else{
+            FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+        }
+
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FilePath error:NULL];
         NSString *title,*titleB, *filePath2,*fileBPath,*contentB;
         NSString *fileContents;
@@ -94,7 +102,7 @@
                     if(index == 66)
                     index = 0;
                 }
-                else //717-721
+                else //717-722
                 {
                     index = index+1;
                     PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -103,7 +111,7 @@
                                  [NSNumber numberWithInt:index],POETRY_CORE_DATA_INDEX_KEY,
                                  nil];
                     isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:GUARD_READING];
-                    if(index == 5)
+                    if(index == 6)
                     index = 0;
                 }
                 
@@ -190,11 +198,14 @@
     }
     else
     {
+        // check add file or not
+        [self isAddNewFile];
         if([self isCheckPlistFileExist])
         {
             if([self isUpdatePlistFile])
             {
                 // update successful
+                //NSLog(@"update successful!!");
             }
         }
     }
@@ -221,26 +232,163 @@
     return plistFileList;
 }
 
+- (void) isAddNewFile
+{
+ 
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FileListWithoutCoreData" ofType:@"plist"];
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    PoetryCoreData *PoetryDataBase = [[PoetryCoreData alloc] init];
+    
+    NSString *strItem,*fileType,*fileTitle;
+    NSInteger index = 0,insertIndex=0,plistCount = [plistData count]/3;
+    POETRY_CATEGORY categoryType = GUARD_READING;
+    NSMutableString *poetryType;
+    //NSMutableArray *getPoetryContent;
+    BOOL isSave = FALSE,isFindContent = FALSE;
+    
+    
+    for(int i=0;i<plistCount;i++)
+    {
+        fileType = [NSString stringWithFormat:@"fileType_%d",i];
+        strItem = [NSString stringWithFormat:@"fileItem_%d",i];
+        fileTitle = [NSString stringWithFormat:@"fileTitle_%d",i];
+        
+        //NSLog(@"file name = %@",strItem);
+        //NSLog(@"str = %@",[plistData objectForKey:strItem]);
+        
+        
+        poetryType = [plistData objectForKey:fileType];
+        
+        if([poetryType isEqualToString:@"GUARD_READING"])
+            categoryType = GUARD_READING;
+        else if([poetryType isEqualToString:@"POETRYS"])
+            categoryType = POETRYS;
+        else if([poetryType isEqualToString:@"RESPONSIVE_PRAYER"])
+            categoryType = RESPONSIVE_PRAYER;
+
+        NSArray *getPoetryContent = [PoetryDataBase Poetry_CoreDataSearchWithPoetryName:[plistData objectForKey:fileTitle] InCategory:categoryType];
+        
+        //NSLog(@"Array size = %d",[getPoetryContent count]);
+    
+        if([getPoetryContent count] > 0)
+        {
+            isFindContent = FALSE;
+        }
+        else
+        {
+            isFindContent = TRUE;
+        }
+        
+        
+        if(isFindContent)
+        {
+            NSLog(@"isFindContent!!!");
+            
+            index = [[plistData objectForKey:strItem]integerValue];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            NSString *FilePath;
+            
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+                FilePath = [[NSBundle mainBundle] resourcePath];
+            }
+            else{
+                FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+            }
+            //NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+            
+            NSString *title,*filePath2;
+            NSString *fileContents;
+            NSMutableString *poetryContent = [[NSMutableString alloc]init];
+            int lineCount = 0;
+            
+            if([poetryType isEqual:@"GUARD_READING"])
+            {
+                insertIndex = index-721+5; // 721-717
+                categoryType = GUARD_READING;
+            }
+            else if([poetryType isEqual:@"POETRYS"])
+            {
+                insertIndex = index-721+649;
+                categoryType = POETRYS;
+            }
+            else if([poetryType isEqual:@"RESPONSIVE_PRAYER"]) // 650-716
+            {
+                insertIndex = index-721+65;//716-650
+                categoryType = RESPONSIVE_PRAYER;
+            }
+            
+            title = [NSString stringWithFormat:@"/%@.txt",[plistData objectForKey:strItem]];
+            filePath2 = [FilePath stringByAppendingString:title];
+            if ([fileManager fileExistsAtPath:filePath2] == YES)
+            {
+                fileContents = [NSString stringWithContentsOfFile:filePath2 encoding:NSUTF8StringEncoding error:NULL];
+                
+                for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
+                    // Do something
+                    //NSLog(@"line = %@",line);
+                    if (lineCount == 0)
+                    {
+                        title = line;
+                    }
+                    else
+                    {
+                        [poetryContent appendString:@"\n"];
+                        [poetryContent appendString:line];
+                    }
+                    lineCount++;
+                }
+                NSDictionary *PoetryDic;
+                
+                PoetryDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                             title, POETRY_CORE_DATA_NAME_KEY,
+                             poetryContent, POETRY_CORE_DATA_CONTENT_KEY,
+                             [NSNumber numberWithInt:insertIndex],POETRY_CORE_DATA_INDEX_KEY,
+                             nil];
+                
+                isSave = [PoetryDataBase PoetryCoreDataSave:PoetryDic inCategory:categoryType];
+                if(!isSave)
+                {
+                    NSLog(@"Core data is Error!!!!!!!!!");
+                    return;// FALSE;
+                }
+                
+                [poetryContent setString:@""];
+                lineCount = 0;
+            }
+        }
+        else // exist in core data
+        {
+            // do nothing
+        }
+    }
+}
+
 - (BOOL)isCheckPlistFileExist
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"addNewFileList" ofType:@"plist"];
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSInteger plistCount = 0;
     
     
     NSString *str;
-    for(int i = 0 ;i < 721 ; i++)
+    for(int i = 0 ;i < [plistData count] ; i++)
     {
         str = [NSString stringWithFormat:@"file_%d",i+1];
         
         if([plistData objectForKey:str])
         {
-            return TRUE;
+            //return TRUE;
+            plistCount++;
         }
         else
             break;
     }
     
-    return FALSE;
+    if(plistCount == [plistData count])
+        return TRUE;
+    else
+        return FALSE;
 }
 
 - (BOOL)isUpdatePlistFile
@@ -249,7 +397,17 @@
     //NSLog(@"PLIST = %@",getPlist);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    
+    NSString *FilePath;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        FilePath = [[NSBundle mainBundle] resourcePath];
+    }
+    else{
+        FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
+    }
+    
+    //NSString *FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"poetryapps.app/"];
     NSInteger poetryIndex = 0,categoryIndex = 0;
     POETRY_CATEGORY category = GUARD_READING;
     NSString *file,*filename;
@@ -283,7 +441,7 @@
             category = POETRYS;
         }
         
-        //NSLog(@"index = %d,category = %d",categoryIndex,category);
+        //NSLog(@"index = %ld,category = %d",(long)categoryIndex,category);
         NSDictionary *originalPoetry = (NSDictionary*)[[PoetryDataBase Poetry_CoreDataFetchDataInCategory:category] objectAtIndex:categoryIndex];
         NSDictionary *NewPoetry = originalPoetry; //[Casper] add
         

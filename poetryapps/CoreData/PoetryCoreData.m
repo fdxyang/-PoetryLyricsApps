@@ -778,7 +778,14 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
     Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSDictionary *ReturnDic = (NSDictionary*)[Poetrys objectAtIndex:0];
+    
+    // [Casper] Fixed fetch now reading crashed issue
+    NSDictionary *ReturnDic;
+    if ([Poetrys count]!= 0) {
+        ReturnDic = (NSDictionary*)[Poetrys objectAtIndex:0];
+    }
+    // [Casper] Fixed fetch now reading crashed issue ==
+    //NSDictionary *ReturnDic = (NSDictionary*)[Poetrys objectAtIndex:0];
 
     return ReturnDic;
 }
