@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D1DF3E9D-760B-48B6-B4DD-7D0DD3F073CE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>poetryapps</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8BF910DE090F29C21EF398813BBDCA0EB314474A</key>
+		<string>https://github.com/fdxyang/-PoetryLyricsApps.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>poetryapps.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8BF910DE090F29C21EF398813BBDCA0EB314474A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/fdxyang/-PoetryLyricsApps.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8BF910DE090F29C21EF398813BBDCA0EB314474A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8BF910DE090F29C21EF398813BBDCA0EB314474A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>-PoetryLyricsApps</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -59,6 +59,9 @@
     UIButton                *_SpecialCharBtn;
     BOOL                    isSpecialCharShowed;
     // 2014.02.09 [CASPER] Add Info Btn for Special Char ==
+    
+    NSInteger               _buttonState;
+
 
 }
 
@@ -500,7 +503,7 @@
             [cell addSubview:_ThemePreViewLab];
             
         } else if (indexPath.section == 3) {
-            cell.textLabel.text = @"關於我";
+            cell.textLabel.text = @"關於我們"; // 20141026 [CASPER]
         }
         
     } else if (tableView.tag == TAG_TOC_TABLE_VIEW) {
@@ -570,7 +573,7 @@
 {
     
     ILTranslucentView *view;
-    // TODO: Blur effect
+
     if ((tableView.tag == 1) || (tableView.tag == 2)) {
         
         view = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 120)];
@@ -903,7 +906,6 @@
     if (_isTocTableOn) {    //[CASPER] 2013.12.27
         [self RemoveTocTableViewAnimation];
     }
-    // TODO: Setup Table frame
     if (_isSearching == NO) {
         _isSearching = YES;     //[CASPER] 2013.12.24
         
@@ -1587,14 +1589,8 @@
         
         //_CoverView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
         _CoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)];
-        _CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.9];
-        //_CoverView.backgroundColor = [UIColor colorWithRed:(145/255.0f) green:(145/255.0f) blue:(145/255.0f) alpha:0.7 ];
-        /*
-        _CoverView.translucentAlpha = 0.9;
-        _CoverView.translucentStyle = UIBarStyleBlack;
-        _CoverView.translucentTintColor = [UIColor clearColor];
-        _CoverView.backgroundColor = [UIColor clearColor];
-         */
+        //_CoverView.backgroundColor = [UIColor colorWithRed:(40/255.0f) green:(42/255.0f) blue:(54/255.0f) alpha:0.9];
+        _CoverView.backgroundColor = ABOUNT_BACKGROUND; // [Casper] 20141026 Modify the new about us
         
     }
     [_CoverView setTag:TAG_COVER_VIEW];
@@ -1819,7 +1815,12 @@
                                  
                              }
                              completion:^(BOOL finished) {
+                                 NSLog(@"Casper Test");
+                                 [self iPadInitAboutMeItems];
+                             }
+            /*{
                                  
+                                 // TODO: [Casper] 2014.10.26 Modify abount us items
                                  if (_LogoImgForAboutMe == nil) {
                                      _LogoImgForAboutMe = [[UIImageView alloc] init];
                                  }
@@ -1867,7 +1868,9 @@
                                                       NSLog(@"DONE %@ - %@", _LogoImgForAboutMe, _EmailAddrForAboutMe);
                                                   }];
                                  
-                            }];
+                            }
+             */
+             ];
             
             
         }
@@ -2245,6 +2248,201 @@
     [_TutorialView addSubview:TutorImg];
     [self.view addSubview:_TutorialView];
 
+}
+
+#pragma mark - About Me Items members
+
+-(void) iPadInitAboutMeItems
+{
+    _About_HippoImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_HIPPO_IMG_LOCA.x,
+                                                                        IPAD_ABOUT_HIPPO_IMG_LOCA.y,
+                                                                        IPAD_ABOUT_HIPPO_IMG_SIZE.width,
+                                                                        IPAD_ABOUT_HIPPO_IMG_SIZE.height)];
+    [_About_HippoImgView setImage:[UIImage imageNamed:IPAD_ABOUT_HIPPO_IMG_NAME]];
+    
+    _About_TitleImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_TITLE_IMG_LOCA.x,
+                                                                        IPAD_ABOUT_TITLE_IMG_LOCA.y,
+                                                                        IPAD_ABOUT_TITLE_IMG_SIZE.width,
+                                                                        IPAD_ABOUT_TITLE_IMG_SIZE.height)];
+    [_About_TitleImgView setImage:[UIImage imageNamed:IPAD_ABOUT_TITLE_IMG_NAME]];
+    
+    
+    _About_CopyRightImgView1 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_1_IMG_LOCA.x,
+                                                                             IPAD_ABOUT_CPR_1_IMG_LOCA.y,
+                                                                             IPAD_ABOUT_CPR_1_IMG_SIZE.width,
+                                                                             IPAD_ABOUT_CPR_1_IMG_SIZE.height)];
+    [_About_CopyRightImgView1 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_1_IMG_NAME]];
+    
+    _About_CopyRightImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_2_IMG_LOCA.x,
+                                                                             IPAD_ABOUT_CPR_2_IMG_LOCA.y,
+                                                                             IPAD_ABOUT_CPR_2_IMG_SIZE.width,
+                                                                             IPAD_ABOUT_CPR_2_IMG_SIZE.height)];
+    [_About_CopyRightImgView2 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_2_IMG_NAME]];
+    
+    _About_CopyRightImgView3 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_3_IMG_LOCA.x,
+                                                                             IPAD_ABOUT_CPR_3_IMG_LOCA.y,
+                                                                             IPAD_ABOUT_CPR_3_IMG_SIZE.width,
+                                                                             IPAD_ABOUT_CPR_3_IMG_SIZE.height)];
+    [_About_CopyRightImgView3 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_3_IMG_NAME]];
+
+    _About_fbfansBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    [_About_fbfansBtn setImage:[UIImage imageNamed:IPAD_ABOUT_FB_BTN_IMG_NAME] forState:UIControlStateNormal];
+    [_About_fbfansBtn addTarget:self action:@selector(fbfansStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    
+    _About_blogBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 120, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    [_About_blogBtn setImage:[UIImage imageNamed:IPAD_ABOUT_BG_BTN_IMG_NAME] forState:UIControlStateNormal];
+    [_About_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    
+    _About_emailBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 240, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    [_About_emailBtn setImage:[UIImage imageNamed:IPAD_ABOUT_EM_BTN_IMG_NAME] forState:UIControlStateNormal];
+    [_About_emailBtn addTarget:self action:@selector(emailStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    _About_rateBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 360, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    [_About_rateBtn setImage:[UIImage imageNamed:IPAD_ABOUT_RA_BTN_IMG_NAME] forState:UIControlStateNormal];
+    [_About_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_About_HippoImgView];
+    [self.view addSubview:_About_TitleImgView];
+    [self.view addSubview:_About_CopyRightImgView1];
+    [self.view addSubview:_About_CopyRightImgView2];
+    [self.view addSubview:_About_CopyRightImgView3];
+    [self.view addSubview:_About_fbfansBtn];
+    [self.view addSubview:_About_blogBtn];
+    [self.view addSubview:_About_emailBtn];
+    [self.view addSubview:_About_rateBtn];
+
+    
+}
+
+
+
+- (IBAction)blogStartBtn:(id)sender
+{
+    _buttonState = 1;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (IBAction)fbfansStartBtn:(id)sender
+{
+    _buttonState = 2;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Safari?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (IBAction)emailStartBtn:(id)sender
+{
+    if (![MFMailComposeViewController canSendMail]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未設定信箱"
+                                                        message:@"請確認信箱設定，或寄email至 hippocolors@gmail.com 謝謝！"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    else
+    {
+        _buttonState = 3;
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提醒" message:@"是否要開啟Email?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+        alertView.delegate = self;
+        [alertView show];
+    }
+    
+    /*
+     // 先檢查是否有信箱帳號
+     if (![MFMailComposeViewController canSendMail]) {
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No e-mail account"
+     message:@"Please set your e-mail account first."
+     delegate:self
+     cancelButtonTitle:@"OK"
+     otherButtonTitles: nil];
+     [alert show];
+     return;
+     }
+     // 建立物件並指定代理
+     _mailComposeViewController = [[MFMailComposeViewController alloc] init];
+     _mailComposeViewController.mailComposeDelegate = self;
+     
+     NSArray *toAddressList = @[@"hippocolors@gmail.com"];
+     //NSArray *ccAddressList = @[@"happyman.cg@gmail.com"];
+     //NSArray *bccAddressList = @[@"happyman.cg@gmail.com"];
+     
+     _mailComposeViewController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+     
+     // 設定收件人與主旨等資訊
+     [_mailComposeViewController setToRecipients:toAddressList];
+     //[_mailComposeViewController setCcRecipients:ccAddressList];
+     //[_mailComposeViewController setBccRecipients:bccAddressList];
+     [_mailComposeViewController setSubject:@"給Hippo Colors 色河馬"];
+     
+     // 設定內文並且使用HTML語法
+     //    NSString *siteLink = @"http://cg2010studio.wordpress.com/";
+     //    NSString *blogLink = @"http://cg2010studio.wordpress.com/";
+     //    NSString *emailBody =
+     //    [NSString stringWithFormat:@"%@\n%@\n", siteLink, blogLink];
+     
+     [_mailComposeViewController setMessageBody:@"" isHTML:NO];
+     
+     // 加入圖片
+     //    UIImage *theImage = [UIImage imageNamed:@"cat pic.jpg"];
+     //    NSData *imageData = UIImageJPEGRepresentation(theImage, 1.0);
+     //    [mailComposeViewController addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"image.jpg"];
+     
+     // 顯示電子郵件畫面
+     [self presentViewController:_mailComposeViewController animated:YES completion:nil];
+     */
+}
+
+- (IBAction)rateStartBtn:(id)sender
+{
+    _buttonState = 4;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"訊息" message:@"來去評分，給我們一點鼓勵吧！！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"確認", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"取消"])
+    {
+        NSLog(@"do nothing");
+    }
+    else if([title isEqualToString:@"確認"])
+    {
+        NSLog(@"do it");
+        
+        switch (_buttonState) {
+            case 1://blog
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://hippocolors.blogspot.tw"]];
+                break;
+            case 2: // fb
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://m.facebook.com/hippocolors"]];
+                break;
+            case 3: //email
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:hippocolors@gmail.com?subject=Hi,HippoColors"]];
+                break;
+            case 4: // rate
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=819339914&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8"]];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 
