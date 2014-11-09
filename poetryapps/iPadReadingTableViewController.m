@@ -5,6 +5,8 @@
 //  Created by GIGIGUN on 2014/1/21.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
+//  2014.11.09 [Casper] Replace searching btn img
+
 
 #import "iPadReadingTableViewController.h"
 
@@ -124,8 +126,8 @@
     _NaviBtnImgWhitePressed = [UIImage imageNamed:@"NaviBtnPress_iPad.png"];
     
     _SettingBtnImg = [UIImage imageNamed:@"SettingNormal_White_iPad.png"];
-    _SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
-
+    //_SearchingBtnImg = [UIImage imageNamed:@"SearchingNormal_White_iPad.png"];
+    _SearchingBtnImg = [UIImage imageNamed:IPAD_SEARCH_BTN_IMG_NAME]; // 2014.11.09 [Casper]
     _FontThemeColor = [[UIColor alloc] init];
     
     _SpecialCharBtn = [[UIButton alloc] init];
@@ -1004,8 +1006,11 @@
         } else {
             
             if (_CoverViewState == COVER_ABOUT_ME) {
+                [self iPadAboutMeAnimation_BackToInit]; //2014.11.09 [Casper]
+                /*
                 [_LogoImgForAboutMe removeFromSuperview];
                 [_EmailAddrForAboutMe removeFromSuperview];
+                 */
             }
             
             _CoverViewState = COVER_IDLE;
@@ -1817,6 +1822,12 @@
                              completion:^(BOOL finished) {
                                  NSLog(@"Casper Test");
                                  [self iPadInitAboutMeItems];
+                                 [UIView animateWithDuration:0.2
+                                                  animations:^{
+                                                      [self iPadAboutMeAnimation];
+                                                  } completion:^(BOOL finished) {
+
+                                                  }];
                              }
             /*{
                                  
@@ -2251,76 +2262,201 @@
 }
 
 #pragma mark - About Me Items members
-
+// 2014.11.09 [Casper]
 -(void) iPadInitAboutMeItems
 {
-    _About_HippoImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_HIPPO_IMG_LOCA.x,
-                                                                        IPAD_ABOUT_HIPPO_IMG_LOCA.y,
-                                                                        IPAD_ABOUT_HIPPO_IMG_SIZE.width,
-                                                                        IPAD_ABOUT_HIPPO_IMG_SIZE.height)];
-    [_About_HippoImgView setImage:[UIImage imageNamed:IPAD_ABOUT_HIPPO_IMG_NAME]];
-    
-    _About_TitleImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_TITLE_IMG_LOCA.x,
-                                                                        IPAD_ABOUT_TITLE_IMG_LOCA.y,
-                                                                        IPAD_ABOUT_TITLE_IMG_SIZE.width,
-                                                                        IPAD_ABOUT_TITLE_IMG_SIZE.height)];
-    [_About_TitleImgView setImage:[UIImage imageNamed:IPAD_ABOUT_TITLE_IMG_NAME]];
+    if (_About_HippoImgView == nil) {
+        _About_HippoImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_HIPPO_IMG_LOCA_INIT.x,
+                                                                            IPAD_ABOUT_HIPPO_IMG_LOCA_INIT.y,
+                                                                            IPAD_ABOUT_HIPPO_IMG_SIZE.width,
+                                                                            IPAD_ABOUT_HIPPO_IMG_SIZE.height)];
+        [_About_HippoImgView setImage:[UIImage imageNamed:IPAD_ABOUT_HIPPO_IMG_NAME]];
+        [self.view addSubview:_About_HippoImgView];
+    }
     
     
-    _About_CopyRightImgView1 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_1_IMG_LOCA.x,
-                                                                             IPAD_ABOUT_CPR_1_IMG_LOCA.y,
-                                                                             IPAD_ABOUT_CPR_1_IMG_SIZE.width,
-                                                                             IPAD_ABOUT_CPR_1_IMG_SIZE.height)];
-    [_About_CopyRightImgView1 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_1_IMG_NAME]];
+    if (_About_TitleImgView == nil) {
+        _About_TitleImgView = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_TITLE_IMG_LOCA_INIT.x,
+                                                                            IPAD_ABOUT_TITLE_IMG_LOCA_INIT.y,
+                                                                            IPAD_ABOUT_TITLE_IMG_SIZE.width,
+                                                                            IPAD_ABOUT_TITLE_IMG_SIZE.height)];
+        [_About_TitleImgView setImage:[UIImage imageNamed:IPAD_ABOUT_TITLE_IMG_NAME]];
+        [self.view addSubview:_About_TitleImgView];
+    }
     
-    _About_CopyRightImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_2_IMG_LOCA.x,
-                                                                             IPAD_ABOUT_CPR_2_IMG_LOCA.y,
-                                                                             IPAD_ABOUT_CPR_2_IMG_SIZE.width,
-                                                                             IPAD_ABOUT_CPR_2_IMG_SIZE.height)];
-    [_About_CopyRightImgView2 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_2_IMG_NAME]];
+    if (_About_CopyRightImgView1 == nil) {
+        _About_CopyRightImgView1 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_1_IMG_LOCA_INIT.x,
+                                                                                 IPAD_ABOUT_CPR_1_IMG_LOCA_INIT.y,
+                                                                                 IPAD_ABOUT_CPR_1_IMG_SIZE.width,
+                                                                                 IPAD_ABOUT_CPR_1_IMG_SIZE.height)];
+        [_About_CopyRightImgView1 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_1_IMG_NAME]];
+        [self.view addSubview:_About_CopyRightImgView1];
+    }
     
-    _About_CopyRightImgView3 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_3_IMG_LOCA.x,
-                                                                             IPAD_ABOUT_CPR_3_IMG_LOCA.y,
-                                                                             IPAD_ABOUT_CPR_3_IMG_SIZE.width,
-                                                                             IPAD_ABOUT_CPR_3_IMG_SIZE.height)];
-    [_About_CopyRightImgView3 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_3_IMG_NAME]];
+    if (_About_CopyRightImgView2 == nil) {
+        _About_CopyRightImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_2_IMG_LOCA_INIT.x,
+                                                                                 IPAD_ABOUT_CPR_2_IMG_LOCA_INIT.y,
+                                                                                 IPAD_ABOUT_CPR_2_IMG_SIZE.width,
+                                                                                 IPAD_ABOUT_CPR_2_IMG_SIZE.height)];
+        [_About_CopyRightImgView2 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_2_IMG_NAME]];
+        [self.view addSubview:_About_CopyRightImgView2];
 
-    _About_fbfansBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
-                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
-    [_About_fbfansBtn setImage:[UIImage imageNamed:IPAD_ABOUT_FB_BTN_IMG_NAME] forState:UIControlStateNormal];
-    [_About_fbfansBtn addTarget:self action:@selector(fbfansStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (_About_CopyRightImgView3 == nil) {
+        _About_CopyRightImgView3 = [[UIImageView alloc] initWithFrame:CGRectMake(IPAD_ABOUT_CPR_3_IMG_LOCA_INIT.x,
+                                                                                 IPAD_ABOUT_CPR_3_IMG_LOCA_INIT.y,
+                                                                                 IPAD_ABOUT_CPR_3_IMG_SIZE.width,
+                                                                                 IPAD_ABOUT_CPR_3_IMG_SIZE.height)];
+        [_About_CopyRightImgView3 setImage:[UIImage imageNamed:IPAD_ABOUT_CPR_3_IMG_NAME]];
+        [self.view addSubview:_About_CopyRightImgView3];
+    }
+    
+    if (_About_fbfansBtn == nil) {
+        _About_fbfansBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                                                      IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+        [_About_fbfansBtn setImage:[UIImage imageNamed:IPAD_ABOUT_FB_BTN_IMG_NAME] forState:UIControlStateNormal];
+        [_About_fbfansBtn addTarget:self action:@selector(fbfansStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_About_fbfansBtn];
 
+    }
     
-    
-    _About_blogBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
-                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 120, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
-    [_About_blogBtn setImage:[UIImage imageNamed:IPAD_ABOUT_BG_BTN_IMG_NAME] forState:UIControlStateNormal];
-    [_About_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+    if (_About_blogBtn == nil) {
+        
+        _About_blogBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                                                    IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+        [_About_blogBtn setImage:[UIImage imageNamed:IPAD_ABOUT_BG_BTN_IMG_NAME] forState:UIControlStateNormal];
+        [_About_blogBtn addTarget:self action:@selector(blogStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_About_blogBtn];
 
+    }
     
-    
-    _About_emailBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
-                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 240, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
-    [_About_emailBtn setImage:[UIImage imageNamed:IPAD_ABOUT_EM_BTN_IMG_NAME] forState:UIControlStateNormal];
-    [_About_emailBtn addTarget:self action:@selector(emailStartBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    _About_rateBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
-                                                                  IPAD_ABOUT_BTN_1_IMG_LOCA.y + 360, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
-    [_About_rateBtn setImage:[UIImage imageNamed:IPAD_ABOUT_RA_BTN_IMG_NAME] forState:UIControlStateNormal];
-    [_About_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:_About_HippoImgView];
-    [self.view addSubview:_About_TitleImgView];
-    [self.view addSubview:_About_CopyRightImgView1];
-    [self.view addSubview:_About_CopyRightImgView2];
-    [self.view addSubview:_About_CopyRightImgView3];
-    [self.view addSubview:_About_fbfansBtn];
-    [self.view addSubview:_About_blogBtn];
-    [self.view addSubview:_About_emailBtn];
-    [self.view addSubview:_About_rateBtn];
+    if (_About_emailBtn == nil) {
+        
+        _About_emailBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                                                     IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+        [_About_emailBtn setImage:[UIImage imageNamed:IPAD_ABOUT_EM_BTN_IMG_NAME] forState:UIControlStateNormal];
+        [_About_emailBtn addTarget:self action:@selector(emailStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_About_emailBtn];
 
+    }
+    
+    if (_About_rateBtn == nil) {
+        
+        _About_rateBtn = [[UIButton alloc] initWithFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                                                    IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y, IPAD_ABOUT_BTNS_IMG_SIZE.width, IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+        [_About_rateBtn setImage:[UIImage imageNamed:IPAD_ABOUT_RA_BTN_IMG_NAME] forState:UIControlStateNormal];
+        [_About_rateBtn addTarget:self action:@selector(rateStartBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_About_rateBtn];
+
+    }
+    
+    
+}
+
+
+-(void) iPadAboutMeAnimation
+{
+    [_About_HippoImgView setFrame:CGRectMake(IPAD_ABOUT_HIPPO_IMG_LOCA.x,
+                                             IPAD_ABOUT_HIPPO_IMG_LOCA.y,
+                                             IPAD_ABOUT_HIPPO_IMG_SIZE.width,
+                                             IPAD_ABOUT_HIPPO_IMG_SIZE.height)];
+    
+    [_About_TitleImgView setFrame:CGRectMake(IPAD_ABOUT_TITLE_IMG_LOCA.x,
+                                             IPAD_ABOUT_TITLE_IMG_LOCA.y,
+                                             IPAD_ABOUT_TITLE_IMG_SIZE.width,
+                                             IPAD_ABOUT_TITLE_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView1 setFrame:CGRectMake(IPAD_ABOUT_CPR_1_IMG_LOCA.x,
+                                                  IPAD_ABOUT_CPR_1_IMG_LOCA.y,
+                                                  IPAD_ABOUT_CPR_1_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_1_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView2 setFrame:CGRectMake(IPAD_ABOUT_CPR_2_IMG_LOCA.x,
+                                                  IPAD_ABOUT_CPR_2_IMG_LOCA.y,
+                                                  IPAD_ABOUT_CPR_2_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_2_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView3 setFrame:CGRectMake(IPAD_ABOUT_CPR_3_IMG_LOCA.x,
+                                                  IPAD_ABOUT_CPR_3_IMG_LOCA.y,
+                                                  IPAD_ABOUT_CPR_3_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_3_IMG_SIZE.height)];
+    
+    
+    [_About_fbfansBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                          IPAD_ABOUT_BTN_1_IMG_LOCA.y,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    
+    [_About_blogBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                          IPAD_ABOUT_BTN_1_IMG_LOCA.y + 120,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    [_About_emailBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                          IPAD_ABOUT_BTN_1_IMG_LOCA.y + 240,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    [_About_rateBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA.x,
+                                          IPAD_ABOUT_BTN_1_IMG_LOCA.y + 360,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    
+}
+
+
+-(void) iPadAboutMeAnimation_BackToInit
+{
+    [_About_HippoImgView setFrame:CGRectMake(IPAD_ABOUT_HIPPO_IMG_LOCA_INIT.x,
+                                             IPAD_ABOUT_HIPPO_IMG_LOCA_INIT.y,
+                                             IPAD_ABOUT_HIPPO_IMG_SIZE.width,
+                                             IPAD_ABOUT_HIPPO_IMG_SIZE.height)];
+    
+    [_About_TitleImgView setFrame:CGRectMake(IPAD_ABOUT_TITLE_IMG_LOCA_INIT.x,
+                                             IPAD_ABOUT_TITLE_IMG_LOCA_INIT.y,
+                                             IPAD_ABOUT_TITLE_IMG_SIZE.width,
+                                             IPAD_ABOUT_TITLE_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView1 setFrame:CGRectMake(IPAD_ABOUT_CPR_1_IMG_LOCA_INIT.x,
+                                                  IPAD_ABOUT_CPR_1_IMG_LOCA_INIT.y,
+                                                  IPAD_ABOUT_CPR_1_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_1_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView2 setFrame:CGRectMake(IPAD_ABOUT_CPR_2_IMG_LOCA_INIT.x,
+                                                  IPAD_ABOUT_CPR_2_IMG_LOCA_INIT.y,
+                                                  IPAD_ABOUT_CPR_2_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_2_IMG_SIZE.height)];
+    
+    [_About_CopyRightImgView3 setFrame:CGRectMake(IPAD_ABOUT_CPR_3_IMG_LOCA_INIT.x,
+                                                  IPAD_ABOUT_CPR_3_IMG_LOCA_INIT.y,
+                                                  IPAD_ABOUT_CPR_3_IMG_SIZE.width,
+                                                  IPAD_ABOUT_CPR_3_IMG_SIZE.height)];
+    
+    
+    [_About_fbfansBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                          IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                          IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    
+    [_About_blogBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                        IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y,
+                                        IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                        IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    [_About_emailBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                         IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y,
+                                         IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                         IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
+    [_About_rateBtn setFrame:CGRectMake(IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.x,
+                                        IPAD_ABOUT_BTN_1_IMG_LOCA_INIT.y,
+                                        IPAD_ABOUT_BTNS_IMG_SIZE.width,
+                                        IPAD_ABOUT_BTNS_IMG_SIZE.height)];
+    
     
 }
 
@@ -2361,49 +2497,6 @@
         [alertView show];
     }
     
-    /*
-     // 先檢查是否有信箱帳號
-     if (![MFMailComposeViewController canSendMail]) {
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No e-mail account"
-     message:@"Please set your e-mail account first."
-     delegate:self
-     cancelButtonTitle:@"OK"
-     otherButtonTitles: nil];
-     [alert show];
-     return;
-     }
-     // 建立物件並指定代理
-     _mailComposeViewController = [[MFMailComposeViewController alloc] init];
-     _mailComposeViewController.mailComposeDelegate = self;
-     
-     NSArray *toAddressList = @[@"hippocolors@gmail.com"];
-     //NSArray *ccAddressList = @[@"happyman.cg@gmail.com"];
-     //NSArray *bccAddressList = @[@"happyman.cg@gmail.com"];
-     
-     _mailComposeViewController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-     
-     // 設定收件人與主旨等資訊
-     [_mailComposeViewController setToRecipients:toAddressList];
-     //[_mailComposeViewController setCcRecipients:ccAddressList];
-     //[_mailComposeViewController setBccRecipients:bccAddressList];
-     [_mailComposeViewController setSubject:@"給Hippo Colors 色河馬"];
-     
-     // 設定內文並且使用HTML語法
-     //    NSString *siteLink = @"http://cg2010studio.wordpress.com/";
-     //    NSString *blogLink = @"http://cg2010studio.wordpress.com/";
-     //    NSString *emailBody =
-     //    [NSString stringWithFormat:@"%@\n%@\n", siteLink, blogLink];
-     
-     [_mailComposeViewController setMessageBody:@"" isHTML:NO];
-     
-     // 加入圖片
-     //    UIImage *theImage = [UIImage imageNamed:@"cat pic.jpg"];
-     //    NSData *imageData = UIImageJPEGRepresentation(theImage, 1.0);
-     //    [mailComposeViewController addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"image.jpg"];
-     
-     // 顯示電子郵件畫面
-     [self presentViewController:_mailComposeViewController animated:YES completion:nil];
-     */
 }
 
 - (IBAction)rateStartBtn:(id)sender

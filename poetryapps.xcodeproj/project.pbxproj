@@ -113,6 +113,7 @@
 		10B8FCC11A07327E00B123BF /* iPadAboutMe_CopyRight3.png in Resources */ = {isa = PBXBuildFile; fileRef = 10B8FCBF1A07327E00B123BF /* iPadAboutMe_CopyRight3.png */; };
 		10BE81CD1886701A00E116F2 /* NaviBtnNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */; };
 		10BE81CE1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */; };
+		10E192EB1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */; };
 		10E9F3AA1897501200220B47 /* NaviBtnNormal_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */; };
 		10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */; };
 		10E9F3AE1897506400220B47 /* NaviBtnPress_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */; };
@@ -1037,6 +1038,7 @@
 		10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_White_iPad.png; sourceTree = "<group>"; };
 		10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
 		10C4B2B7187506F30074B8E3 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
+		10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad_button_search_200_200-01.png"; sourceTree = "<group>"; };
 		10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_iPad.png; sourceTree = "<group>"; };
 		10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_iPad@2x.png"; sourceTree = "<group>"; };
 		10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnPress_iPad.png; sourceTree = "<group>"; };
@@ -1981,6 +1983,7 @@
 			isa = PBXGroup;
 			children = (
 				104CB7A118A9BDE4002698B2 /* SpecialCharacter-ipad-01.png */,
+				10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */,
 				104CB79918A9BD59002698B2 /* iPad button-info-light-01.png */,
 				104CB79A18A9BD59002698B2 /* iPad button-info-light-01@2x.png */,
 				104CB79B18A9BD59002698B2 /* iPad-button-info-01.png */,
@@ -3407,6 +3410,7 @@
 				CB54FEB818695CCE00CED47E /* 433.txt in Resources */,
 				CB54FF1F18695CCE00CED47E /* 526.txt in Resources */,
 				CB54FDBB18695CCE00CED47E /* 205.txt in Resources */,
+				10E192EB1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png in Resources */,
 				CB54FFA218695CCE00CED47E /* 644.txt in Resources */,
 				CB54FFCD18695CCE00CED47E /* 683.txt in Resources */,
 				CB54FE1A18695CCE00CED47E /* 291.txt in Resources */,

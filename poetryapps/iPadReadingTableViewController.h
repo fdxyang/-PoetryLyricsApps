@@ -5,6 +5,8 @@
 //  Created by GIGIGUN on 2014/1/21.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
+//  2014.11.09 [Casper] Replace searching btn img
+
 
 #import <UIKit/UIKit.h>
 #import "PoetryReadingView.h"
@@ -63,6 +65,9 @@
 
 #define UI_IPAD_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_IPAD_SCREEN_HEIGHT * 0.66, UI_IPAD_SCREEN_HEIGHT * 0.66)
 
+
+#define IPAD_SEARCH_BTN_IMG_NAME    @"ipad_button_search_200_200-01.png" //  2014.11.09 [Casper]
+
 #pragma mark - About Me Items
 #define ABOUNT_BACKGROUND  [UIColor colorWithRed:(242.0f/255) green:(242.0f/255) blue:(242.0f/255) alpha:0.95]
 #define IPAD_ABOUT_HIPPO_IMG_NAME   @"iPadAboutMe_Hippo.png"
@@ -82,12 +87,20 @@
 #define IPAD_ABOUT_CPR_3_IMG_SIZE  CGSizeMake(500, 105)
 #define IPAD_ABOUT_BTNS_IMG_SIZE   CGSizeMake(100, 100)
 
+#define IPAD_ABOUT_HIPPO_IMG_LOCA_INIT  CGPointMake(0, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_TITLE_IMG_LOCA_INIT  CGPointMake(90, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_1_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_2_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_3_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_BTN_1_IMG_LOCA_INIT  CGPointMake(880, UI_IPAD_SCREEN_WIDTH)
+
+
+
 #define IPAD_ABOUT_HIPPO_IMG_LOCA  CGPointMake(0, 270)
 #define IPAD_ABOUT_TITLE_IMG_LOCA  CGPointMake(90, 80)
 #define IPAD_ABOUT_CPR_1_IMG_LOCA  CGPointMake(350, 110)
 #define IPAD_ABOUT_CPR_2_IMG_LOCA  CGPointMake(350, 110 + IPAD_ABOUT_CPR_1_IMG_SIZE.height)
 #define IPAD_ABOUT_CPR_3_IMG_LOCA  CGPointMake(350, 110 + IPAD_ABOUT_CPR_1_IMG_SIZE.height + IPAD_ABOUT_CPR_2_IMG_SIZE.height)
-
 #define IPAD_ABOUT_BTN_1_IMG_LOCA  CGPointMake(880, 110)
 
 
