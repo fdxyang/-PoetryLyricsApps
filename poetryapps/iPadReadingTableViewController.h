@@ -5,6 +5,8 @@
 //  Created by GIGIGUN on 2014/1/21.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
+//  2014.11.09 [Casper] Replace searching btn img
+
 
 #import <UIKit/UIKit.h>
 #import "PoetryReadingView.h"
@@ -14,6 +16,8 @@
 #import "iPadNavTableHeader.h"
 #import "SettingViewController.h"
 #import "ILTranslucentView.h"
+#import <MessageUI/MessageUI.h>
+
 
 
 #define UI_READING_TABLEVIEW_INIT_IPAD       CGRectMake(0, 0, UI_IPAD_SCREEN_WIDTH, UI_IPAD_SCREEN_HEIGHT)
@@ -61,6 +65,46 @@
 
 #define UI_IPAD_READING_TUTORIAL_IMG_RECT                CGRectMake(0, 0, UI_IPAD_SCREEN_HEIGHT * 0.66, UI_IPAD_SCREEN_HEIGHT * 0.66)
 
+
+#define IPAD_SEARCH_BTN_IMG_NAME    @"ipad_button_search_200_200-01.png" //  2014.11.09 [Casper]
+
+#pragma mark - About Me Items
+#define ABOUNT_BACKGROUND  [UIColor colorWithRed:(242.0f/255) green:(242.0f/255) blue:(242.0f/255) alpha:0.95]
+#define IPAD_ABOUT_HIPPO_IMG_NAME   @"iPadAboutMe_Hippo.png"
+#define IPAD_ABOUT_CPR_1_IMG_NAME   @"iPadAboutMe_CopyRight1.png"
+#define IPAD_ABOUT_CPR_2_IMG_NAME   @"iPadAboutMe_CopyRight2.png"
+#define IPAD_ABOUT_CPR_3_IMG_NAME   @"iPadAboutMe_CopyRight3.png"
+#define IPAD_ABOUT_TITLE_IMG_NAME   @"iPadAboutMe_AboutTitle.png"
+#define IPAD_ABOUT_FB_BTN_IMG_NAME  @"iPad_fbfans.png"
+#define IPAD_ABOUT_BG_BTN_IMG_NAME  @"iPad_blogicon.png"
+#define IPAD_ABOUT_RA_BTN_IMG_NAME  @"iPad_rateicon.png"
+#define IPAD_ABOUT_EM_BTN_IMG_NAME  @"iPad_emailicon.png"
+
+#define IPAD_ABOUT_HIPPO_IMG_SIZE  CGSizeMake(166.25 * 1.8, 175 * 1.8)
+#define IPAD_ABOUT_TITLE_IMG_SIZE  CGSizeMake(230, 129.5)
+#define IPAD_ABOUT_CPR_1_IMG_SIZE  CGSizeMake(500, 143.75)
+#define IPAD_ABOUT_CPR_2_IMG_SIZE  CGSizeMake(500, 110)
+#define IPAD_ABOUT_CPR_3_IMG_SIZE  CGSizeMake(500, 105)
+#define IPAD_ABOUT_BTNS_IMG_SIZE   CGSizeMake(100, 100)
+
+#define IPAD_ABOUT_HIPPO_IMG_LOCA_INIT  CGPointMake(0, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_TITLE_IMG_LOCA_INIT  CGPointMake(90, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_1_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_2_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_CPR_3_IMG_LOCA_INIT  CGPointMake(350, UI_IPAD_SCREEN_WIDTH)
+#define IPAD_ABOUT_BTN_1_IMG_LOCA_INIT  CGPointMake(880, UI_IPAD_SCREEN_WIDTH)
+
+
+
+#define IPAD_ABOUT_HIPPO_IMG_LOCA  CGPointMake(0, 270)
+#define IPAD_ABOUT_TITLE_IMG_LOCA  CGPointMake(90, 80)
+#define IPAD_ABOUT_CPR_1_IMG_LOCA  CGPointMake(350, 110)
+#define IPAD_ABOUT_CPR_2_IMG_LOCA  CGPointMake(350, 110 + IPAD_ABOUT_CPR_1_IMG_SIZE.height)
+#define IPAD_ABOUT_CPR_3_IMG_LOCA  CGPointMake(350, 110 + IPAD_ABOUT_CPR_1_IMG_SIZE.height + IPAD_ABOUT_CPR_2_IMG_SIZE.height)
+#define IPAD_ABOUT_BTN_1_IMG_LOCA  CGPointMake(880, 110)
+
+
+
 #define TAG_COVER_VIEW                  3
 #define TAG_NAVI_BTN                    6
 #define TAG_CATEGORY_TABLE_VIEW         4
@@ -72,7 +116,8 @@
 @interface iPadReadingTableViewController : UIViewController <  UIGestureRecognizerDelegate,
                                                                 UITableViewDataSource,
                                                                 UITableViewDelegate,
-                                                                UISearchBarDelegate>
+                                                                UISearchBarDelegate,
+                                                                MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic)   UITableView                 *TableView1;
 @property (strong, nonatomic)   UITableView                 *TableView2;
@@ -146,4 +191,14 @@ typedef enum {
 @property (nonatomic, strong)   NSString                *NowReadingText;
 
 
+#pragma mark - About Me Items members
+@property (retain)   UIImageView             *About_HippoImgView;
+@property (retain)   UIImageView             *About_CopyRightImgView1;
+@property (retain)   UIImageView             *About_CopyRightImgView2;
+@property (retain)   UIImageView             *About_CopyRightImgView3;
+@property (retain)   UIImageView             *About_TitleImgView;
+@property (retain)   UIButton                *About_fbfansBtn;
+@property (retain)   UIButton                *About_blogBtn;
+@property (retain)   UIButton                *About_emailBtn;
+@property (retain)   UIButton                *About_rateBtn;
 @end
