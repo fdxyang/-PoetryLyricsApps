@@ -5,14 +5,14 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "welcome_page_3_5@2x.png",
+      "filename" : "960*640-Welcome page-01.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "welcome_page@2x.png",
+      "filename" : "1136*640 welcome page-01.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -30,7 +30,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "WelcomePage_iPad.png",
+      "filename" : "1024*768_Welcome page_v1-01.png",
       "scale" : "1x"
     },
     {
@@ -46,7 +46,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "WelcomePage_iPad@2x.png",
+      "filename" : "2048*1536_Welcome page_v1-01.png",
       "scale" : "2x"
     }
   ],

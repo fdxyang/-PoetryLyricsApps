@@ -854,7 +854,7 @@
                 break;
                 
             case 3:
-                sectionStr = @"關於我";
+                sectionStr = @"";
                 break;
             default:
                 break;
