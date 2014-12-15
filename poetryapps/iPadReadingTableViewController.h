@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
 //  2014.11.09 [Casper] Replace searching btn img
+//  2014.12.10 [Casper] Fixed the new poetry in iPad makes the toc table display error
+
 
 
 #import <UIKit/UIKit.h>
@@ -36,7 +38,13 @@
 #define UI_IPAD_COVER_TABLE_CELL_HEADER_HEIGHT      30
 
 #define UI_IPAD_COVER_TABLEVIEW_HEIGHT              UI_IPAD_COVER_TABLE_CELL_HEIGHT * 4
-#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    UI_IPAD_COVER_TABLE_CELL_HEIGHT * 5
+// 2014.12.10 [Casper]
+// Since the guard reading increased to 6
+
+//#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    UI_IPAD_COVER_TABLE_CELL_HEIGHT * 5
+#define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_GUARD    UI_IPAD_COVER_TABLE_CELL_HEIGHT * 6
+// 2014.12.10 [Casper] ==
+
 
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_POETRY   UI_IPAD_SCREEN_HEIGHT - 160
 #define UI_IPAD_COVER_TOC_TABLEVIEW_HEIGHT_RESPON   UI_IPAD_SCREEN_HEIGHT - 160
