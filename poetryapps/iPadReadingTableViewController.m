@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
 //  2014.11.09 [Casper] Replace searching btn img
+//  2015.01.05 [Kevin]  Search keyword without restrictions for iPad
 
 
 #import "iPadReadingTableViewController.h"
@@ -942,14 +943,14 @@
     _SearchRespose = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryName:searchText InCategory:RESPONSIVE_PRAYER]];
     
     
-    
-    if ([searchText length] > 3 ) {
+    // Close by Kevin 20150105
+    //if ([searchText length] > 3 ) {
         
         [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
         [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
         [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
         
-    }
+    //}
     
     
     _SearchResultDisplayArray = [NSArray arrayWithObjects:
