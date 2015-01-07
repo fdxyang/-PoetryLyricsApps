@@ -7,6 +7,7 @@
 //
 //  2014.11.09 [Casper] Replace searching btn img
 //  2015.01.05 [Kevin]  Search keyword without restrictions for iPad
+//  2015.01.07 [Kevin] Fix search result bug
 
 
 #import "iPadReadingTableViewController.h"
@@ -948,8 +949,8 @@
         
         [_SearchGuidedReading addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:GUARD_READING]];
         [_SearchPoetryData addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
-        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:POETRYS]];
-        
+        [_SearchRespose addObjectsFromArray:[_PoetryDatabase Poetry_CoreDataSearchWithPoetryContent:searchText InCategory:RESPONSIVE_PRAYER]]; // 2015.01.16 [Casper]
+    
     //}
     
     
