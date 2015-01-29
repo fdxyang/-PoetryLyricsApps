@@ -7,7 +7,6 @@
 //
 //  2014.03.22 [CASPER] Add title view to fix view moving issue
 
-
 #import <UIKit/UIKit.h>
 #import "PoetryCoreData.h"
 #import "PoetrySettingCoreData.h"
@@ -27,7 +26,9 @@
 
 #define READING_VIEW_ERROR_LOG(fmt, ...) NSLog((@"ERROR !! %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define TAG_TUTORIAL_VIEW 1
+#define TAG_TUTORIAL_VIEW       1
+
+
 
 @interface ReadingTableViewController : UIViewController <UIGestureRecognizerDelegate,
                                                                     UITableViewDataSource,

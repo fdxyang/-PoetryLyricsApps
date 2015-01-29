@@ -5,7 +5,8 @@
 //  Created by GIGIGUN on 2014/1/13.
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
-// 20140123 [CASPER] Add poetry parser
+//  20140123 [CASPER] Add poetry parser
+//  2015.01.29 [CASPER] Add function that touch special char view to close
 
 
 #import "ReadingTableViewController.h"
@@ -310,6 +311,11 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
+    //  2015.01.29 [CASPER]
+    if (isShowSpecialTable) {
+        [self showSpecialTable];
+    }
 }
 
 
@@ -1282,7 +1288,9 @@
     [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight-150)]; // TODO: Modify "1000" as Image Height
     [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
     
-
+    specialTableScrollView.userInteractionEnabled = NO; // To pass touch event to the lower level
+    specialTableScrollView.exclusiveTouch = NO;
+    
     /*
     
     //specialTableScrollView.contentSize = CGSizeMake(320, 700);
@@ -1403,7 +1411,7 @@
     {
         isShowSpecialTable = FALSE;
         [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
-
+        
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status
         /*
         for (UIView *subview in [self.view subviews]) {
