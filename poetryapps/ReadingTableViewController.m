@@ -6,7 +6,8 @@
 //  Copyright (c) 2014年 cc. All rights reserved.
 //
 // 20140123 [CASPER] Add poetry parser
-
+//  20140123 [CASPER] Add poetry parser
+//  2015.01.29 [CASPER] Add function that touch special char view to close
 
 #import "ReadingTableViewController.h"
 #import "PoetryCoreData.h"
@@ -310,6 +311,11 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
+    //  2015.01.29 [CASPER]
+    if (isShowSpecialTable) {
+        [self showSpecialTable];
+    }
 }
 
 
@@ -1273,6 +1279,9 @@
     }
     
     [specialTableView addSubview:specialTableScrollView];
+    
+    specialTableScrollView.userInteractionEnabled = NO; // To pass touch event to the lower level
+    specialTableScrollView.exclusiveTouch = NO;
     
     // TODO: Modify image as Special Table Img
     UIImageView *TestImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, imageHeight)];
