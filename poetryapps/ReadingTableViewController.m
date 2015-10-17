@@ -48,6 +48,9 @@
 #define SWITCH_VIEW_THRESHOLD                40
 
 
+#define BOOKMARKED_IMAGE [UIImage imageNamed:@"Bookmarked"]
+#define NOT_BOOKMARKED_IMAGE [UIImage imageNamed:@"NotBookmarked"]
+
 @interface ReadingTableViewController () {
     
     UInt16                  _CurrentIndex;
@@ -79,7 +82,8 @@
     UIScrollView            *specialTableScrollView;
     UIButton                *infoBtn;
 }
-
+// 20151017 [Casper] Add bookmark function
+@property (strong, nonatomic) UIButton *AddToBookmarkBtn;
 @end
 
 @implementation ReadingTableViewController
@@ -163,9 +167,41 @@
     
     [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
     [infoBtn addTarget:self action:@selector(showSpecialTable) forControlEvents:UIControlEventTouchUpInside];
-
+    
+    [self init_AddToBookmarkBtn];
+    NSLog(@"init_AddToBookmarkBtn %@", _AddToBookmarkBtn);
     
 }
+
+
+-(void) init_AddToBookmarkBtn
+{
+    CGRect Frame = self.view.frame;
+    
+    _AddToBookmarkBtn = [[UIButton alloc] initWithFrame:CGRectMake(Frame.size.width - 60.0f,
+                                                                   Frame.size.height - 50.0f - 60.0f,
+                                                                   50.0f,
+                                                                50.0f)];
+
+
+    _AddToBookmarkBtn.layer.masksToBounds = NO;
+//    _AddToBookmarkBtn.layer.cornerRadius = 22.5f;
+//    _AddToBookmarkBtn.layer.shadowColor = [[UIColor alloc] initWithRed:(83/255.0f)
+//                                                                 green:(83/255.0f)
+//                                                                  blue:(83/255.0f)
+//                                                                 alpha:1].CGColor;
+    _AddToBookmarkBtn.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
+    _AddToBookmarkBtn.layer.shadowOpacity = 0.8;
+    _AddToBookmarkBtn.layer.shadowRadius = 2;
+//    [_AddToBookmarkBtn setBackgroundColor:[[UIColor alloc] initWithRed:(240/255.0f)
+//                                                               green:(85/255.0f)
+//                                                                blue:(37/255.0f)
+//                                                               alpha:1]];
+    [_AddToBookmarkBtn addTarget:self action:@selector(BookmarkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_AddToBookmarkBtn];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -204,7 +240,8 @@
         [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH];
     }
     [_TableView1 reloadData];
-    [self.view addSubview:_TableView1];
+    //[self.view addSubview:_TableView1];
+    [self.view insertSubview:_TableView1 belowSubview:_AddToBookmarkBtn];
 
     // 2014.01.21 [CASPER] color setting
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
@@ -267,6 +304,7 @@
     
     [self.view addSubview:_NaviBarView];
     [_NaviBarView addSubview:infoBtn];
+    [self getBookmarkStatusWithNowReading];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -1183,7 +1221,8 @@
                                  
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
-                                 
+                                 [self getBookmarkStatusWithNowReading];
+
                                  _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
 
                                  // 2013.03.02 [CASPER]
@@ -1429,4 +1468,38 @@
     
     //NSLog(@"table bool = %d",isShowSpecialTable);
 }
+
+
+-(IBAction)BookmarkBtnClicked:(id)sender
+{
+    
+    [self setBookmarkWithNowReading];
+}
+
+
+-(void) setBookmarkWithNowReading
+{
+    NSDictionary *ReturnDic = [_PoetryDatabase PoetryCoreDataSaveIntoBookmark:_PoetryNowReading];
+    NSLog(@"BookmarkBtnClicked returnDic = %@", ReturnDic);
+    if (ReturnDic != nil) {
+        [self setBookmarkWithBookmarkStatus:[[ReturnDic valueForKey:BOOKMARK_STATUS_KEY] boolValue]];
+    }
+}
+
+-(void) getBookmarkStatusWithNowReading
+{
+    [self setBookmarkWithBookmarkStatus : [_PoetryDatabase PoetryCoreDataGetBookmarkStatus:_PoetryNowReading]];
+}
+
+-(void) setBookmarkWithBookmarkStatus : (BOOL) BookmarkStatus
+{
+    if (BookmarkStatus) {
+        [_AddToBookmarkBtn setImage:BOOKMARKED_IMAGE forState:UIControlStateNormal];
+    } else {
+        [_AddToBookmarkBtn setImage:NOT_BOOKMARKED_IMAGE forState:UIControlStateNormal];
+    }
+    
+}
+
+
 @end

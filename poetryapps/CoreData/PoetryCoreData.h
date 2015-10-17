@@ -13,6 +13,7 @@
 #define POETRY_CORE_DATA_ENTITY                 @"Poetrys"
 #define POETRY_RES_CORE_DATA_ENTITY             @"ResponsivePrayer"
 #define POETRY_HISTORY_CORE_DATA_ENTITY         @"PoetrysHistory"
+#define POETRY_BOOKMARK_CORE_DATA_ENTITY        @"PoetryBookmark"
 #define POETRY_NOW_READING_CORE_DATA_ENTITY     @"NowReading" //[CASPER] Add for reading view
 
 #define POETRY_CORE_DATA_NAME_KEY               @"name"
@@ -21,6 +22,7 @@
 #define POETRY_CORE_DATA_INDEX_KEY              @"index"        // [CASPER] Add index
 #define POETRY_CORE_DATA_CATERORY_KEY           @"category"     // [CASPER] Add category
 
+#define BOOKMARK_STATUS_KEY                     @"BookmarkStatus"
 
 #define POETRY_MAX_NUMBER_IN_HISTORY            10              // [CASPER] History only save 10 object
 
@@ -72,5 +74,9 @@ typedef enum {
 -(BOOL) PoetryCoreDataSaveIntoNowReading : (NSDictionary *) PoetryDic;
 -(NSDictionary*) Poetry_CoreDataFetchDataInReading;
 
+
+// Bookmark methods
+-(BOOL) PoetryCoreDataGetBookmarkStatus : (NSDictionary *) PoetryDic;
+-(NSDictionary*) PoetryCoreDataSaveIntoBookmark : (NSDictionary *) PoetryDic;
 
 @end

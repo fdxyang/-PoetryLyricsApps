@@ -16,6 +16,9 @@
 
 #define UI_HEAD_TAIL_LAB_RECT_4_INCH     CGRectMake(10, UI_IPHONE_SCREEN_HEIGHT_4_INCH/2, UI_IPHONE_SCREEN_WIDTH, 50)
 
+// 20151017 [Casper] Add bookmark function
+//#define READING_BOOKMARK_FRAME CGRectMake(UI_SCREEN_WIDTH - 40.0f - 10.0f, 0, 40.0f, 40.0f)
+
 
 @interface ReadingViewController (){
     
@@ -41,6 +44,8 @@
 
 
 }
+
+
 
 @end
 

@@ -1000,6 +1000,7 @@
 		1060F91C187FFE1F004AE154 /* Icon-Spotlight-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@2x.png"; sourceTree = "<group>"; };
 		1060F91D187FFE1F004AE154 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1060F91E187FFE1F004AE154 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		1061E2E21BD2533A0079F725 /* Poetry 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 3.xcdatamodel"; sourceTree = "<group>"; };
 		1067B0A318C31BF800F0B7B1 /* iPhone_special icon_before-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_before-01.png"; sourceTree = "<group>"; };
 		1067B0A718C31F6400F0B7B1 /* iPhone_special icon_after-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_after-01.png"; sourceTree = "<group>"; };
 		1067B0A818C31F6400F0B7B1 /* iPhone_special icon_after-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_special icon_after-01@2x.png"; sourceTree = "<group>"; };
@@ -4240,10 +4241,11 @@
 		10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1061E2E21BD2533A0079F725 /* Poetry 3.xcdatamodel */,
 				109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */,
 				10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */,
 			);
-			currentVersion = 109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */;
+			currentVersion = 1061E2E21BD2533A0079F725 /* Poetry 3.xcdatamodel */;
 			name = Poetry.xcdatamodeld;
 			path = CoreData/Poetry.xcdatamodeld;
 			sourceTree = "<group>";

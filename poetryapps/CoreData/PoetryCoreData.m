@@ -792,4 +792,98 @@
 
 
 
+#pragma mark - History Core Data Methods
+
+// set bookMark
+-(NSDictionary*) PoetryCoreDataSaveIntoBookmark : (NSDictionary *) PoetryDic
+{
+    
+    //TODO: Find the input in history
+    
+    NSArray *SearchNameArray = [self Poetry_CoreDataSearchWithPoetryNameInBookmark: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+    if ([SearchNameArray count] > 0) {
+        
+        // This Poetry is already in the database, delete all the data in history database
+        for (int index = 0; index < [SearchNameArray count]; index++) {
+            
+            CORE_DATA_LOG("duplicate data in bookMark, delete %d", index);
+            NSManagedObject *TempPoetry = [SearchNameArray objectAtIndex:index];
+            [self Poetry_CoreDataDelete:TempPoetry];
+            
+        }
+        return  @{BOOKMARK_STATUS_KEY : [NSNumber numberWithBool:NO]};
+    }
+    
+    
+    CORE_DATA_LOG("Save %@ poetry in history", [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]);
+    
+    NSString *PoetryCoreDataEntityName = POETRY_BOOKMARK_CORE_DATA_ENTITY;
+    NSManagedObject *NewPoetry = [NSEntityDescription insertNewObjectForEntityForName:PoetryCoreDataEntityName inManagedObjectContext:_context];
+    
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY] forKey:POETRY_CORE_DATA_NAME_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CONTENT_KEY] forKey:POETRY_CORE_DATA_CONTENT_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_INDEX_KEY] forKey:POETRY_CORE_DATA_INDEX_KEY];
+    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CATERORY_KEY] forKey:POETRY_CORE_DATA_CATERORY_KEY];
+//    [NewPoetry setValue:[PoetryDic valueForKey:POETRY_CORE_DATA_CREATION_TIME_KEY] forKey:POETRY_CORE_DATA_CREATION_TIME_KEY];
+    
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        CORE_DATA_ERROR_LOG(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        return nil;
+    }
+    
+    return  @{BOOKMARK_STATUS_KEY : [NSNumber numberWithBool:YES]};
+    
+}
+
+-(BOOL) PoetryCoreDataGetBookmarkStatus : (NSDictionary *) PoetryDic
+{
+    
+    //TODO: Find the input in history
+    
+    NSArray *SearchNameArray = [self Poetry_CoreDataSearchWithPoetryNameInBookmark: [PoetryDic valueForKey:POETRY_CORE_DATA_NAME_KEY]];
+    if ([SearchNameArray count] > 0) {
+        
+        return YES;
+    }
+    return NO;
+}
+
+-(NSArray*) Poetry_CoreDataSearchWithPoetryNameInBookmark : (NSString *) SearcgName
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSString *BookCoreDataEntityName = POETRY_BOOKMARK_CORE_DATA_ENTITY;
+    
+    
+    // NSSortDescriptor tells defines how to sort the fetched results
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_NAME_KEY ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // fetchRequest needs to know what entity to fetch
+    NSEntityDescription *entity = [NSEntityDescription entityForName:BookCoreDataEntityName inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    
+    NSFetchedResultsController  *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_context sectionNameKeyPath:nil cacheName:@"Root"];
+    
+    
+    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", SearcgName];
+    
+    [fetchedResultsController.fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error])
+    {
+        // Handle error
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+    
+    return fetchedResultsController.fetchedObjects;
+    
+}
+
+
+
 @end
