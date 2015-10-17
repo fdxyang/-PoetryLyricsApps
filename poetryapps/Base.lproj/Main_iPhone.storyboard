@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OKE-jU-Z4D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OKE-jU-Z4D">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Reading Table View Controller - 聖詩內容-->
+        <!--聖詩內容-->
         <scene sceneID="lB9-yr-xo3">
             <objects>
                 <viewController storyboardIdentifier="Reading_View" id="edc-e0-G7q" customClass="ReadingTableViewController" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
             </objects>
             <point key="canvasLocation" x="1049" y="-34"/>
         </scene>
-        <!--Poetry Tab Bar Controller - GOTO-->
+        <!--GOTO-->
         <scene sceneID="EF1-TU-lpR">
             <objects>
                 <tabBarController storyboardIdentifier="MainTabView" title="GOTO" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKE-jU-Z4D" customClass="PoetryTabBarController" sceneMemberID="viewController">
@@ -59,6 +59,7 @@
         <!--Goto View Controller-->
         <scene sceneID="eRj-3C-vWg">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IWl-Kn-nps" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="GOTO_Picker_View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KYQ-5T-R8S" customClass="GotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nz-cD-u1i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -110,18 +111,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2yN-GT-lod">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="4tL-Jm-ZpJ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="DDD-yE-SoI">
-                                <rect key="frame" x="280" y="10" width="24" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="24_24buttondown.png"/>
-                                <connections>
-                                    <action selector="changeModeBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="3Wo-YO-IgN"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="2yN-GT-lod"/>
                     <connections>
                         <outlet property="gotoReading" destination="oKp-NA-q83" id="rO9-2Y-641"/>
                         <outlet property="guideBtn" destination="VbU-Kr-hYO" id="UmN-VO-iYn"/>
@@ -130,9 +120,8 @@
                         <segue destination="U98-hz-mbe" kind="push" identifier="detailTableView" id="x6q-bi-pgJ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IWl-Kn-nps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1043" y="637"/>
+            <point key="canvasLocation" x="1095" y="637"/>
         </scene>
         <!--Goto Table View Controller-->
         <scene sceneID="VnN-Hd-qsC">
@@ -166,7 +155,7 @@
             </objects>
             <point key="canvasLocation" x="1481" y="631"/>
         </scene>
-        <!--Navigation Controller - 快速查詢-->
+        <!--快速查詢-->
         <scene sceneID="D5D-oZ-tzg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v8i-aI-qlE" sceneMemberID="viewController">
@@ -185,7 +174,7 @@
             </objects>
             <point key="canvasLocation" x="693" y="637"/>
         </scene>
-        <!--Navigation Controller - 搜尋-->
+        <!--搜尋-->
         <scene sceneID="gYN-51-DAU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LUF-2Q-sMp" sceneMemberID="viewController">
@@ -255,7 +244,7 @@
             </objects>
             <point key="canvasLocation" x="1043" y="1325"/>
         </scene>
-        <!--Navigation Controller - 設定-->
+        <!--設定-->
         <scene sceneID="cRp-lL-z3g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Q7-nF-F61" sceneMemberID="viewController">
@@ -284,14 +273,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MfN-4U-RuQ">
-                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="114" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MfN-4U-RuQ" id="tWH-ZP-HQe">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="X09-Bl-QZh" kind="push" identifier="AboutMe" id="cTN-1O-PYc"/>
+                                    <segue destination="dQ9-1a-1RB" kind="push" identifier="AboutMeViewController" id="5fX-YB-ovx"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -310,23 +299,80 @@
             <point key="canvasLocation" x="1049" y="2025"/>
         </scene>
         <!--About Me View Controller-->
-        <scene sceneID="fQa-rM-TSx">
+        <scene sceneID="cwr-aN-Wef">
             <objects>
-                <viewController id="X09-Bl-QZh" customClass="AboutMeViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DJ1-ug-P70">
+                <viewController storyboardIdentifier="AboutMeViewController" id="dQ9-1a-1RB" customClass="AboutMeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FZR-ho-VdO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="eIG-rv-bbn">
+                                <rect key="frame" x="16" y="88" width="288" height="414"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AboutView_HippoTitle" id="pnD-Hf-lA8">
+                                        <rect key="frame" x="0.0" y="24" width="288" height="169"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="onD-VU-pWU">
+                                        <rect key="frame" x="196" y="336" width="66" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="About_HippoBtnEmail">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="emailStartBtn:" destination="dQ9-1a-1RB" eventType="touchUpInside" id="RT4-yK-r5L"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1hF-6m-RKB">
+                                        <rect key="frame" x="195" y="261" width="67" height="67"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="About_HippoBtnBlog">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="blogStartBtn:" destination="dQ9-1a-1RB" eventType="touchUpInside" id="W1q-0U-sgb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="w8H-UG-udH">
+                                        <rect key="frame" x="196" y="187" width="66" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="About_HippoBtnFB">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fbfansStartBtn:" destination="dQ9-1a-1RB" eventType="touchUpInside" id="JRV-LL-RtP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AboutView_HippoLogo" id="nm6-fk-wDQ">
+                                <rect key="frame" x="0.0" y="300" width="176" height="184"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iXV-mG-ms5"/>
+                    <navigationItem key="navigationItem" id="5ZI-nx-0vf"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Wd-T2-X6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R7v-ze-1zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1424" y="2025"/>
+            <point key="canvasLocation" x="1772" y="2025"/>
         </scene>
     </scenes>
     <resources>
-        <image name="24_24buttondown.png" width="24" height="24"/>
+        <image name="AboutView_HippoLogo" width="200" height="210"/>
+        <image name="AboutView_HippoTitle" width="282" height="165"/>
+        <image name="About_HippoBtnBlog" width="60" height="60"/>
+        <image name="About_HippoBtnEmail" width="60" height="59"/>
+        <image name="About_HippoBtnFB" width="60" height="58"/>
         <image name="BarBtn_GOTO.png" width="30" height="30"/>
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
@@ -337,10 +383,10 @@
         <image name="gotobtnselected.png" width="280" height="50"/>
         <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>
-    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

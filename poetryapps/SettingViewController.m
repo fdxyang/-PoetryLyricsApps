@@ -193,8 +193,7 @@
     NSLog(@"Seleted");
     if (indexPath.section == 3) {
         
-        [self performSegueWithIdentifier:@"AboutMe" sender:nil];
-        
+        [self performSegueWithIdentifier:@"AboutMeViewController" sender:nil];   
     }
 }
 

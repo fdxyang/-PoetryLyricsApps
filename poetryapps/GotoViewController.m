@@ -35,7 +35,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    uiOffset = 0.0;
+    uiOffset = 20.0;
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
+    
+    _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
+    _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
+    _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
+    _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+    [tempImageView setFrame:_TableView.frame];
+    _TableView.backgroundView = tempImageView;
+    [_TableView reloadData];
+    [self.view addSubview:_TableView];
+    /*
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     
@@ -79,7 +91,7 @@
     [poetryBtn setEnabled:YES];
     [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [responseBtn setEnabled:YES];
-    
+    */
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
     _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
