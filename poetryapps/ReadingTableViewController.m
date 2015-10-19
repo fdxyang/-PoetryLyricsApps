@@ -51,6 +51,8 @@
 #define BOOKMARKED_IMAGE [UIImage imageNamed:@"Bookmarked"]
 #define NOT_BOOKMARKED_IMAGE [UIImage imageNamed:@"NotBookmarked"]
 
+#define BOOKMARK_BTN_TAG 10
+
 @interface ReadingTableViewController () {
     
     UInt16                  _CurrentIndex;
@@ -239,10 +241,11 @@
     } else {
         [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH];
     }
-    [_TableView1 reloadData];
+
     //[self.view addSubview:_TableView1];
     [self.view insertSubview:_TableView1 belowSubview:_AddToBookmarkBtn];
-
+    [_TableView1 reloadData];
+    
     // 2014.01.21 [CASPER] color setting
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
                                                                                     green:(159/255.0f)
@@ -310,6 +313,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    NSLog(@"ViewDidDisappear");
     [_TableView1 removeFromSuperview];
     [_TableView2 removeFromSuperview];
     [_NaviBarView removeFromSuperview];
@@ -325,8 +329,12 @@
     for (UIView *subview in [self.view subviews])
     {
         // Only remove the subviews with tag not equal to 1
-        if (subview.tag != 1)
-            [subview removeFromSuperview];
+        if ((subview.tag != 1)) {
+            if ((subview.tag != BOOKMARK_BTN_TAG)) {
+                [subview removeFromSuperview];
+            }
+        }
+        
     }
     
     
