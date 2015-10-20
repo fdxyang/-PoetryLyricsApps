@@ -22,14 +22,14 @@
 //#define UI_READING_TUORIAL_OK_BTN_RECT              CGRectMake(0, 0, 120, 30)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_4_INCH          CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        0, \
-                                                                        UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+0, \
+UI_SCREEN_WIDTH, \
+UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 #define UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH        CGRectMake( UI_SCREEN_WIDTH, \
-                                                                        0, \
-                                                                        UI_SCREEN_WIDTH, \
-                                                                        UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
+0, \
+UI_SCREEN_WIDTH, \
+UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT)
 
 // 2014.01.25 [CASPER] Add Turorial view
 #define UI_TUTORIAL_VIEW_RECT_4_INCH                    CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_4_INCH_HEIGHT)
@@ -68,13 +68,13 @@
     CGPoint                 _TouchInit;
     BOOL                    _CrossCategoryFlag;
     BOOL                    _HeadAndTailFlag;
-
+    
     UIColor                 *_LightBackgroundColor;
     UIColor                 *_DarkBackgroundColor;
     UIColor                 *_FontThemeColor;
     
     //UILabel                 *_NavigationTitleLab;
-
+    
     ILTranslucentView       *_TutorialView;
     BOOL                    isTutorialShowed;
     
@@ -159,19 +159,20 @@
     
     infoBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH - 40, 30, 23, 23)];
     /*
-    infoBtn.titleLabel.text = @"I";
-    [infoBtn.titleLabel setFrame:infoBtn.frame];
-    [infoBtn.titleLabel setFont:_Font];
-    [infoBtn.titleLabel setTextColor:[UIColor whiteColor]];
-    [infoBtn.titleLabel setHidden:NO];
-    [infoBtn setBackgroundColor:[UIColor redColor]];
+     infoBtn.titleLabel.text = @"I";
+     [infoBtn.titleLabel setFrame:infoBtn.frame];
+     [infoBtn.titleLabel setFont:_Font];
+     [infoBtn.titleLabel setTextColor:[UIColor whiteColor]];
+     [infoBtn.titleLabel setHidden:NO];
+     [infoBtn setBackgroundColor:[UIColor redColor]];
      */
     
-    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
-    [infoBtn addTarget:self action:@selector(showSpecialTable) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self init_AddToBookmarkBtn];
-    NSLog(@"init_AddToBookmarkBtn %@", _AddToBookmarkBtn);
+//    [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
+//    [infoBtn addTarget:self action:@selector(showSpecialTable) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self init_AddToBookmarkBtn];
+//    NSLog(@"init_AddToBookmarkBtn %@", _AddToBookmarkBtn);
+    [infoBtn addTarget:self action:@selector(BookmarkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -183,22 +184,22 @@
     _AddToBookmarkBtn = [[UIButton alloc] initWithFrame:CGRectMake(Frame.size.width - 40.0f,
                                                                    Frame.size.height - 50.0f - 40.0f,
                                                                    30.0f,
-                                                                30.0f)];
-
-
+                                                                   30.0f)];
+    
+    
     _AddToBookmarkBtn.layer.masksToBounds = NO;
-//    _AddToBookmarkBtn.layer.cornerRadius = 22.5f;
-//    _AddToBookmarkBtn.layer.shadowColor = [[UIColor alloc] initWithRed:(83/255.0f)
-//                                                                 green:(83/255.0f)
-//                                                                  blue:(83/255.0f)
-//                                                                 alpha:1].CGColor;
+    //    _AddToBookmarkBtn.layer.cornerRadius = 22.5f;
+    //    _AddToBookmarkBtn.layer.shadowColor = [[UIColor alloc] initWithRed:(83/255.0f)
+    //                                                                 green:(83/255.0f)
+    //                                                                  blue:(83/255.0f)
+    //                                                                 alpha:1].CGColor;
     _AddToBookmarkBtn.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
     _AddToBookmarkBtn.layer.shadowOpacity = 0.8;
     _AddToBookmarkBtn.layer.shadowRadius = 2;
-//    [_AddToBookmarkBtn setBackgroundColor:[[UIColor alloc] initWithRed:(240/255.0f)
-//                                                               green:(85/255.0f)
-//                                                                blue:(37/255.0f)
-//                                                               alpha:1]];
+    //    [_AddToBookmarkBtn setBackgroundColor:[[UIColor alloc] initWithRed:(240/255.0f)
+    //                                                               green:(85/255.0f)
+    //                                                                blue:(37/255.0f)
+    //                                                               alpha:1]];
     [_AddToBookmarkBtn addTarget:self action:@selector(BookmarkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _AddToBookmarkBtn.tag = BOOKMARK_BTN_TAG;
     [self.view addSubview:_AddToBookmarkBtn];
@@ -225,11 +226,11 @@
         [_TableView1 setBackgroundColor:_DarkBackgroundColor];
         [_TableView2 setBackgroundColor:_DarkBackgroundColor];
         _FontThemeColor = [UIColor whiteColor];
-
+        
     }
     _Font = [UIFont fontWithName:@"HelveticaNeue-Light" size:_PoetrySetting.SettingFontSize];
     _BoldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:_PoetrySetting.SettingFontSize + UI_BOLD_FONT_BIAS];
-
+    
     _HeadAndTailFlag = NO;
     _CurrentView = VIEW1;
     [_CellHeightArray removeAllObjects];
@@ -241,9 +242,9 @@
     } else {
         [_TableView1 setFrame:UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH];
     }
-
-    //[self.view addSubview:_TableView1];
-    [self.view insertSubview:_TableView1 belowSubview:_AddToBookmarkBtn];
+    
+    [self.view addSubview:_TableView1];
+//    [self.view insertSubview:_TableView1 belowSubview:_AddToBookmarkBtn];
     [_TableView1 reloadData];
     
     // 2014.01.21 [CASPER] color setting
@@ -255,16 +256,16 @@
     isTutorialShowed = NO;
     if (_PoetrySetting.TutorialShowed == NO) {
         isTutorialShowed = YES;
-
+        
         //UIButton    *OkayBtn = [[UIButton alloc] initWithFrame:UI_READING_TUORIAL_OK_BTN_RECT];
         UIImageView *TutorImg = [[UIImageView alloc] initWithFrame:UI_READING_TUTORIAL_IMG_RECT];
         
         [TutorImg setImage:[UIImage imageNamed:@"Tutor_White.png"]];
-
+        
         if (IS_IPHONE5) {
             //_TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
             _TutorialView = [[ILTranslucentView alloc] initWithFrame:UI_TUTORIAL_VIEW_RECT_4_INCH];
-
+            
             [TutorImg setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, UI_SCREEN_4_INCH_HEIGHT / 2 )];
             //[OkayBtn setCenter:CGPointMake(UI_SCREEN_WIDTH / 2, TutorImg.frame.origin.y - 35)];
         } else {
@@ -276,7 +277,7 @@
         
         _TutorialView.tag = TAG_TUTORIAL_VIEW;
         
-
+        
         _TutorialView.userInteractionEnabled = NO; // To pass touch event to the lower level
         _TutorialView.exclusiveTouch = NO;
         _TutorialView.translucentAlpha = 0.9;
@@ -284,12 +285,12 @@
         _TutorialView.translucentTintColor = [UIColor clearColor];
         _TutorialView.backgroundColor = [UIColor clearColor];
         NSLog(@"%d", _TutorialView.isExclusiveTouch);
-
+        
         [_TutorialView addSubview:TutorImg];
         [self.view addSubview:_TutorialView];
         //NSLog(@"%@", _TutorialView);
         //[self.navigationController presentModalViewController:TutorialView animated:YES];
-
+        
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
     
@@ -324,7 +325,7 @@
         [_PoetrySetting PoetrySetting_SetTutorialViewShowed:YES];
     }
     // 2014.01.25 [CASPER] Add Turorial view ==
-
+    
     isShowSpecialTable = FALSE;
     for (UIView *subview in [self.view subviews])
     {
@@ -343,7 +344,7 @@
     
     
     [_PoetryDatabase PoetryCoreDataSaveIntoNowReading:_PoetryNowReading];
-
+    
 }
 
 
@@ -374,14 +375,15 @@
     if (_PoetryDatabase.isReadingExist) {
         
         _PoetryNowReading = [_PoetryDatabase Poetry_CoreDataFetchDataInReading];
+        
         Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
         _CurrentIndex = [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_INDEX_KEY] integerValue] - 1; //Since the index in core data starts at 1
         
     } else {
         
-        NSLog(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING");
         _PoetryNowReading = (NSDictionary*)[[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS] objectAtIndex:0];
+        NSLog(@"NO READING POETRY, GET THE 1st POETRY in GUARD READING %@", [_PoetryDatabase Poetry_CoreDataFetchDataInCategory:POETRYS]);
         
         Category = (POETRY_CATEGORY)[[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
         _NowReadingCategoryArray = [NSMutableArray arrayWithArray:[_PoetryDatabase Poetry_CoreDataFetchDataInCategory:Category]];
@@ -397,33 +399,33 @@
     // 20140123 [CASPER] Add poetry parser
     
     if (Category == POETRYS) {
-
+        
         PoetryContentString = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY] Fontsize:_PoetrySetting.SettingFontSize];
-
-
+        
+        
         //NSLog(@"%@", PoetryContentString);
     } else {
         
         PoetryContentString = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
         
     }
-     
-
+    
+    
     // 20140123 [CASPER] Add poetry parser ==
-
+    
     _ReadingTableArray1 = [NSMutableArray arrayWithArray:
-                                [PoetryContentString componentsSeparatedByString:@"\n"]];
+                           [PoetryContentString componentsSeparatedByString:@"\n"]];
     
     _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
     /*
-    _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
-    _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-    _NavigationTitleLab.backgroundColor = [UIColor clearColor];
-    _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
-    _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
-    _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
-*/
-//    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
+     _NavigationTitleLab = [[UILabel alloc] initWithFrame:CGRectZero];
+     _NavigationTitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
+     _NavigationTitleLab.backgroundColor = [UIColor clearColor];
+     _NavigationTitleLab.font = [UIFont boldSystemFontOfSize:16.0];
+     _NavigationTitleLab.textAlignment = NSTextAlignmentCenter;
+     _NavigationTitleLab.textColor = [UIColor whiteColor]; // change this color
+     */
+    //    _NavigationTitleLab.textColor = [[UIColor alloc] initWithRed:(247/255.0f) green:(243/255.0f) blue:(205/255.0f) alpha:1]; // change this color
     //self.navigationItem.titleView = _NavigationTitleLab;
     //CGSize Size = CGSizeMake(280, 200);
     //Size = [_NavigationTitleLab sizeThatFits:Size];
@@ -433,192 +435,192 @@
 
 #pragma mark - Table view data source
 /*
--(NSString*) JudgeTheFinalMarkShouldBeRemoved : (NSString*) ContentStrInCell
-{
-    NSString *ContentStr;
-    NSUInteger Threshold = 0;
-    
-    UInt16      TextLength;
-    BOOL        isAttrCell = NO;
-    
-    TextLength = [ContentStr length];
-    
-    if ([ContentStr hasPrefix:@"@@"]) {
-        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
-        TextLength = TextLength - [@"@@" length];
-        isAttrCell = YES;
-    }
-    
-    if (isAttrCell) {
-        
-        switch (_PoetrySetting.SettingFontSize) {
-            case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                }
-                break;
-                
-            default:
-                break;
-        }
-        
-    } else {
-        
-        switch (_PoetrySetting.SettingFontSize) {
-            case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                }
-                break;
-                
-            default:
-                break;
-        }
-        
-    }
-    
-    
-    return ContentStr;
-}
-*/
+ -(NSString*) JudgeTheFinalMarkShouldBeRemoved : (NSString*) ContentStrInCell
+ {
+ NSString *ContentStr;
+ NSUInteger Threshold = 0;
+ 
+ UInt16      TextLength;
+ BOOL        isAttrCell = NO;
+ 
+ TextLength = [ContentStr length];
+ 
+ if ([ContentStr hasPrefix:@"@@"]) {
+ ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+ TextLength = TextLength - [@"@@" length];
+ isAttrCell = YES;
+ }
+ 
+ if (isAttrCell) {
+ 
+ switch (_PoetrySetting.SettingFontSize) {
+ case POETRY_SETIING_FONT_SIZE_SMALL:
+ if (( TextLength >= UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_MEDIUM:
+ if (( TextLength >= UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_LARGE:
+ if (( TextLength >= UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ 
+ } else {
+ 
+ switch (_PoetrySetting.SettingFontSize) {
+ case POETRY_SETIING_FONT_SIZE_SMALL:
+ if (( TextLength >= UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_MEDIUM:
+ if (( TextLength >= UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_LARGE:
+ if (( TextLength >= UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ 
+ }
+ 
+ 
+ return ContentStr;
+ }
+ */
 //
 // Calculating line number for each cell in table view
 // accroding to the threshold for every kind of font size
 //
 /*
-- (NSInteger) CalculateLineNumberWithContentString : (NSString *) ContentStr
-{
-    NSInteger   LineNumber = 1;
-    NSString    *Keyword = @"@@";
-    UInt16      TextLength;
-    BOOL        isAttrCell = NO;
-    
-    TextLength = [ContentStr length];
-    
-    if ([ContentStr hasPrefix:Keyword]) {
-        ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
-        TextLength = TextLength - [Keyword length];
-        isAttrCell = YES;
-    }
-    
-    if (isAttrCell) {
-        
-        switch (_PoetrySetting.SettingFontSize) {
-            case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength > UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength > UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                    
-
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength > UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                }
-                break;
-                
-            default:
-                break;
-        }
-
-    } else {
-        
-        switch (_PoetrySetting.SettingFontSize) {
-            case POETRY_SETIING_FONT_SIZE_SMALL:
-                if (( TextLength > UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_SMALL_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_SMALL_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_MEDIUM:
-                if (( TextLength > UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                }
-                break;
-                
-            case POETRY_SETIING_FONT_SIZE_LARGE:
-                if (( TextLength > UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
-                    
-                    if ((TextLength % UI_LARGE_FONT_SIZE_THRESHOLD) == 0) {
-                        LineNumber = (TextLength / UI_LARGE_FONT_SIZE_THRESHOLD);
-                    } else {
-                        LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
-                    }
-                    
-                    
-                }
-                break;
-                
-            default:
-                break;
-        }
-
-    }
-    return LineNumber;
-}
-*/
+ - (NSInteger) CalculateLineNumberWithContentString : (NSString *) ContentStr
+ {
+ NSInteger   LineNumber = 1;
+ NSString    *Keyword = @"@@";
+ UInt16      TextLength;
+ BOOL        isAttrCell = NO;
+ 
+ TextLength = [ContentStr length];
+ 
+ if ([ContentStr hasPrefix:Keyword]) {
+ ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
+ TextLength = TextLength - [Keyword length];
+ isAttrCell = YES;
+ }
+ 
+ if (isAttrCell) {
+ 
+ switch (_PoetrySetting.SettingFontSize) {
+ case POETRY_SETIING_FONT_SIZE_SMALL:
+ if (( TextLength > UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_BOLD_SMALL_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_MEDIUM:
+ if (( TextLength > UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_BOLD_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ 
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_LARGE:
+ if (( TextLength > UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_BOLD_LARGE_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ 
+ } else {
+ 
+ switch (_PoetrySetting.SettingFontSize) {
+ case POETRY_SETIING_FONT_SIZE_SMALL:
+ if (( TextLength > UI_SMALL_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_SMALL_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_SMALL_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_SMALL_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_MEDIUM:
+ if (( TextLength > UI_MEDIUM_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_MEDIUM_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_MEDIUM_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ }
+ break;
+ 
+ case POETRY_SETIING_FONT_SIZE_LARGE:
+ if (( TextLength > UI_LARGE_FONT_SIZE_THRESHOLD) && TextLength != 0) {
+ 
+ if ((TextLength % UI_LARGE_FONT_SIZE_THRESHOLD) == 0) {
+ LineNumber = (TextLength / UI_LARGE_FONT_SIZE_THRESHOLD);
+ } else {
+ LineNumber = ((TextLength / UI_LARGE_FONT_SIZE_THRESHOLD) + 1);
+ }
+ 
+ 
+ }
+ break;
+ 
+ default:
+ break;
+ }
+ 
+ }
+ return LineNumber;
+ }
+ */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -648,16 +650,16 @@
     
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     if (tableView.tag == 1) {
         
         ContentStr = [_ReadingTableArray1 objectAtIndex:indexPath.row];
-
+        
         if ([ContentStr hasPrefix:@"@@"]) {
-
+            
             ContentStr = [ContentStr stringByReplacingOccurrencesOfString:@"@@" withString:@""];
             cell.textLabel.font = _BoldFont;
-
+            
         } else {
             
             cell.textLabel.font = _Font;
@@ -674,7 +676,7 @@
         
     } else {
         
-       ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
+        ContentStr = [_ReadingTableArray2 objectAtIndex:indexPath.row];
         
         if ([ContentStr hasPrefix:@"@@"]) {
             
@@ -705,8 +707,8 @@
     CGFloat     Height = 0;
     NSString    *ContentStr;
     NSString    *Keyword = @"@@";
-//    UInt16      LineNumber;
-
+    //    UInt16      LineNumber;
+    
     
     
     UILabel *TempLabel = [[UILabel alloc] init];
@@ -735,7 +737,7 @@
         } else {
             Height = Size.height + 10;
         }
-
+        
     } else {
         
         
@@ -751,26 +753,26 @@
         } else {
             Height = Size.height + 10;
         }
-
-    }
-        /*
-    LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
-    
-    if ([ContentStr hasPrefix:Keyword]) {
-
-        Height = (_PoetrySetting.SettingFontSize + 20) * LineNumber;
-        if (LineNumber > 1) {
-            Height = Height - 10;
-        }
-        
-    } else {
-        
-        Height = (_PoetrySetting.SettingFontSize + 10) * LineNumber;
-        if (LineNumber > 1) {
-            Height = Height - 5;
-        }
         
     }
+    /*
+     LineNumber = [self CalculateLineNumberWithContentString:ContentStr];
+     
+     if ([ContentStr hasPrefix:Keyword]) {
+     
+     Height = (_PoetrySetting.SettingFontSize + 20) * LineNumber;
+     if (LineNumber > 1) {
+     Height = Height - 10;
+     }
+     
+     } else {
+     
+     Height = (_PoetrySetting.SettingFontSize + 10) * LineNumber;
+     if (LineNumber > 1) {
+     Height = Height - 5;
+     }
+     
+     }
      */
     // NSLog(@"Height = %f", Height);
     return Height;
@@ -791,7 +793,7 @@
 {
     NSString *ContentStr;
     POETRY_CATEGORY Category;
-
+    
     
     if (NewPoetry != nil) {
         ContentStr = [NewPoetry valueForKey:POETRY_CORE_DATA_CONTENT_KEY];
@@ -800,14 +802,14 @@
     // 20140123 [CASPER] Add poetry parser
     
     Category = (POETRY_CATEGORY)[[NewPoetry valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue];
-
+    
     if (Category == POETRYS) {
         ContentStr = [_PoetryContentParser parseContentBySymbolAndAdjustFontSize:ContentStr Fontsize:_PoetrySetting.SettingFontSize];
-
+        
     }
     
     // 20140123 [CASPER] Add poetry parser ==
-
+    
     
     if (_CurrentView == VIEW1) {
         
@@ -815,7 +817,7 @@
         _ReadingTableArray2 = [NSMutableArray arrayWithArray:
                                [ContentStr componentsSeparatedByString:@"\n"]];
         [_TableView2 reloadData];
-
+        
     } else {
         
         [_ReadingTableArray1 removeAllObjects];
@@ -823,7 +825,7 @@
                                [ContentStr componentsSeparatedByString:@"\n"]];
         [_TableView1 reloadData];
     }
-   
+    
 }
 
 -(void) GetNewPoetryByGestureDirection
@@ -832,7 +834,7 @@
     if (_SlideDirection == SlideLabelLeftToRigth) {
         // PREV
         NSLog(@"GetNewPoetryByGestureDirection - PREV");
-
+        
         if (_CurrentIndex == 0) {
             
             // This is the first poetry in this category
@@ -887,11 +889,11 @@
         
         // NEXT
         NSLog(@"GetNewPoetryByGestureDirection - NEXT");
-
+        
         if (_CurrentIndex == ([_NowReadingCategoryArray count] - 1)) {
             
             [_TempPoetryList removeAllObjects];
-
+            
             // Check the Category
             NSNumber *CategoryNum = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY];
             if (RESPONSIVE_PRAYER != (POETRY_CATEGORY)[CategoryNum integerValue]) {
@@ -934,7 +936,7 @@
             _NewPoetryDic = [_NowReadingCategoryArray objectAtIndex:(_CurrentIndex + 1)];
             NSLog(@"_NewDataDic index = %d", _CurrentIndex + 1);
         }
-
+        
     }
     
     if (!_HeadAndTailFlag) {
@@ -997,7 +999,7 @@
         default:
             break;
     }
-
+    
 }
 
 -(void) HandleGestureChangeStateWith : (CGPoint) location
@@ -1019,7 +1021,7 @@
     switch (_ViewMovementState) {
             
         case DirectionJudgement:
-
+            
             if ((location.x - _TouchInit.x) > 0) {
                 
                 // PREV
@@ -1027,7 +1029,7 @@
                 //[TheOtherView setScrollsToTop:YES];
                 TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
                 _SlideDirection = SlideLabelLeftToRigth;
-
+                
                 [self GetNewPoetryByGestureDirection];
                 
                 if (_HeadAndTailFlag) {
@@ -1051,7 +1053,7 @@
                 // NEXT
                 [CurrentView setFrame:DefaultFrame];
                 _SlideDirection = SlideLabelRightToLegt;
-
+                
                 [self GetNewPoetryByGestureDirection];
                 
                 if (_HeadAndTailFlag) {
@@ -1069,17 +1071,17 @@
                     [TheOtherView setFrame:NextPoetryFrame];
                     //[TheOtherView setScrollsToTop:YES];
                     TheOtherView.contentOffset = CGPointMake(0, 0 - TheOtherView.contentInset.top);
-
+                    
                     [self.view insertSubview:TheOtherView aboveSubview:CurrentView];
                     
                 }
                 
             }
-
+            
             _ViewMovementState = ViewMoving;
             
             break;
-        
+            
         case ViewMoving:
             
             if ((location.x - _TouchInit.x) > 0) {
@@ -1096,7 +1098,7 @@
                                                  DefaultFrame.origin.y,
                                                  CGRectGetWidth(DefaultFrame),
                                                  CGRectGetHeight(DefaultFrame))];
-
+                
             } else {
                 
                 // NEXT
@@ -1120,7 +1122,7 @@
                                                       NextPoetryFrame.origin.y,
                                                       CGRectGetWidth(NextPoetryFrame),
                                                       CGRectGetHeight(NextPoetryFrame))];
-
+                    
                 }
                 
             }
@@ -1129,13 +1131,13 @@
         default:
             break;
     }
-
+    
 }
 
 
 -(void) HandleGestureEndStateWith : (CGPoint) location
-                       OnCurrentView : (UITableView*) CurrentView
-                     andTheOtherView : (UITableView*) TheOtherView
+                    OnCurrentView : (UITableView*) CurrentView
+                  andTheOtherView : (UITableView*) TheOtherView
 {
     CGRect DefaultFrame;
     CGRect NextPoetryFrame;
@@ -1147,7 +1149,7 @@
         DefaultFrame = UI_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
         NextPoetryFrame = UI_NEXT_READING_TABLEVIEW_INIT_RECT_3_5_INCH;
     }
-
+    
     if (_HeadAndTailFlag) {
         
         [UIView animateWithDuration:0.2
@@ -1166,7 +1168,7 @@
                              
                          }
                          completion:^(BOOL finished) {
-                           
+                             
                              _HeadAndTailFlag = NO;
                              [_HeadAndTailLab setHidden:YES];
                              
@@ -1230,9 +1232,9 @@
                                  NSLog(@"_CurrentIndex = %d", _CurrentIndex);
                                  _PoetryNowReading = _NewPoetryDic;
                                  [self getBookmarkStatusWithNowReading];
-
+                                 
                                  _NaviBarView.TitleLab.text = [_PoetryNowReading valueForKey:POETRY_CORE_DATA_NAME_KEY];
-
+                                 
                                  // 2013.03.02 [CASPER]
                                  if (((13 == _CurrentIndex)
                                       || (319 == _CurrentIndex)
@@ -1242,7 +1244,7 @@
                                      && (POETRYS == [[_PoetryNowReading valueForKey:POETRY_CORE_DATA_CATERORY_KEY] integerValue])) {
                                      [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentLeft];
                                  } else {
-                                    [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
+                                     [_NaviBarView.TitleLab setTextAlignment:NSTextAlignmentCenter];
                                  }
                                  // 2013.03.02 [CASPER] ==
                                  
@@ -1276,7 +1278,7 @@
     
     
     _ViewMovementState = None;
-
+    
 }
 
 - (void) createSpecialTableView
@@ -1303,7 +1305,7 @@
                                              UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
         imageHeight = 568;
         imageName = @"specialtable.png";
-
+        
     } else {
         
         specialTableView = [[ILTranslucentView alloc] initWithFrame:
@@ -1338,107 +1340,107 @@
     [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight-150)]; // TODO: Modify "1000" as Image Height
     [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
     
-
+    
     /*
-    
-    //specialTableScrollView.contentSize = CGSizeMake(320, 700);
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    specialTableView = [[UIView alloc] initWithFrame:CGRectMake(0,65,screenWidth,screenHeight-65-45)];
-    [specialTableView setBackgroundColor:[UIColor grayColor]];
-    //[specialTableScrollView addSubview:specialTableView];
-    
-    CGFloat start_x = 70;
-    //CGFloat start_y = 65;
-    CGFloat offset = 5;
-    NSUInteger index = 0;
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, index*50, 320,50)];
-    [title setText:@"特殊字對照表"];
-    title.textAlignment = UIBaselineAdjustmentAlignCenters;
-    [title setFont:[UIFont fontWithName:@"HelveticaNeue" size:28]];
-    
-    index = index+1;
-    UIImageView * imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView3 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView4 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView5 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel5 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView6 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel6 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView7 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel7 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    UIImageView * imageView8 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
-    UILabel     * imageLabel8 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
-    index = index+1;
-    
-    [imageLabel1 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel2 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel3 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel4 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel5 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel6 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel7 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    [imageLabel8 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
-    */
+     
+     //specialTableScrollView.contentSize = CGSizeMake(320, 700);
+     CGRect screenRect = [[UIScreen mainScreen] bounds];
+     CGFloat screenWidth = screenRect.size.width;
+     CGFloat screenHeight = screenRect.size.height;
+     specialTableView = [[UIView alloc] initWithFrame:CGRectMake(0,65,screenWidth,screenHeight-65-45)];
+     [specialTableView setBackgroundColor:[UIColor grayColor]];
+     //[specialTableScrollView addSubview:specialTableView];
+     
+     CGFloat start_x = 70;
+     //CGFloat start_y = 65;
+     CGFloat offset = 5;
+     NSUInteger index = 0;
+     
+     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, index*50, 320,50)];
+     [title setText:@"特殊字對照表"];
+     title.textAlignment = UIBaselineAdjustmentAlignCenters;
+     [title setFont:[UIFont fontWithName:@"HelveticaNeue" size:28]];
+     
+     index = index+1;
+     UIImageView * imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView3 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView4 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView5 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel5 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView6 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel6 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView7 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel7 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     UIImageView * imageView8 = [[UIImageView alloc]initWithFrame:CGRectMake(start_x+offset*2,offset+50*index,50,50)];
+     UILabel     * imageLabel8 = [[UILabel alloc]initWithFrame:CGRectMake(start_x+offset*2+50,offset+50*index,150,50)];
+     index = index+1;
+     
+     [imageLabel1 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel2 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel3 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel4 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel5 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel6 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel7 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     [imageLabel8 setFont:[UIFont fontWithName:@"HelveticaNeue" size:44]];
+     */
     /*
-    [imageView1 setImage:[UIImage imageNamed:@"sc1.png"]];
-    [imageView2 setImage:[UIImage imageNamed:@"sc2.png"]];
-    [imageView3 setImage:[UIImage imageNamed:@"sc3.png"]];
-    [imageView4 setImage:[UIImage imageNamed:@"sc4.png"]];
-    [imageView5 setImage:[UIImage imageNamed:@"sc5.png"]];
-    [imageView6 setImage:[UIImage imageNamed:@"sc6.png"]];
-    [imageView7 setImage:[UIImage imageNamed:@"sc7.png"]];
-    [imageView8 setImage:[UIImage imageNamed:@"sc9.png"]];
-    [imageLabel1 setText:@" = 䅼"];
-    [imageLabel2 setText:@" = 因"];
-    [imageLabel3 setText:@" = 般"];
-    [imageLabel4 setText:@" = 奧"];
-    [imageLabel5 setText:@" = 道"];
-    [imageLabel6 setText:@" = 敖"];
-    [imageLabel7 setText:@" = 吐"];
-    [imageLabel8 setText:@" = 惦"];
-    
-    
-    [specialTableView addSubview:imageView1];
-    [specialTableView addSubview:imageView2];
-    [specialTableView addSubview:imageView3];
-    [specialTableView addSubview:imageView4];
-    [specialTableView addSubview:imageView5];
-    [specialTableView addSubview:imageView6];
-    [specialTableView addSubview:imageView7];
-    [specialTableView addSubview:imageView8];
-    
-    [specialTableView addSubview:imageLabel1];
-    [specialTableView addSubview:imageLabel2];
-    [specialTableView addSubview:imageLabel3];
-    [specialTableView addSubview:imageLabel4];
-    [specialTableView addSubview:imageLabel5];
-    [specialTableView addSubview:imageLabel6];
-    [specialTableView addSubview:imageLabel7];
-    [specialTableView addSubview:imageLabel8];
-    
-    [specialTableView addSubview:title];
+     [imageView1 setImage:[UIImage imageNamed:@"sc1.png"]];
+     [imageView2 setImage:[UIImage imageNamed:@"sc2.png"]];
+     [imageView3 setImage:[UIImage imageNamed:@"sc3.png"]];
+     [imageView4 setImage:[UIImage imageNamed:@"sc4.png"]];
+     [imageView5 setImage:[UIImage imageNamed:@"sc5.png"]];
+     [imageView6 setImage:[UIImage imageNamed:@"sc6.png"]];
+     [imageView7 setImage:[UIImage imageNamed:@"sc7.png"]];
+     [imageView8 setImage:[UIImage imageNamed:@"sc9.png"]];
+     [imageLabel1 setText:@" = 䅼"];
+     [imageLabel2 setText:@" = 因"];
+     [imageLabel3 setText:@" = 般"];
+     [imageLabel4 setText:@" = 奧"];
+     [imageLabel5 setText:@" = 道"];
+     [imageLabel6 setText:@" = 敖"];
+     [imageLabel7 setText:@" = 吐"];
+     [imageLabel8 setText:@" = 惦"];
+     
+     
+     [specialTableView addSubview:imageView1];
+     [specialTableView addSubview:imageView2];
+     [specialTableView addSubview:imageView3];
+     [specialTableView addSubview:imageView4];
+     [specialTableView addSubview:imageView5];
+     [specialTableView addSubview:imageView6];
+     [specialTableView addSubview:imageView7];
+     [specialTableView addSubview:imageView8];
+     
+     [specialTableView addSubview:imageLabel1];
+     [specialTableView addSubview:imageLabel2];
+     [specialTableView addSubview:imageLabel3];
+     [specialTableView addSubview:imageLabel4];
+     [specialTableView addSubview:imageLabel5];
+     [specialTableView addSubview:imageLabel6];
+     [specialTableView addSubview:imageLabel7];
+     [specialTableView addSubview:imageLabel8];
+     
+     [specialTableView addSubview:title];
      */
     
 }
@@ -1450,7 +1452,7 @@
     {
         isShowSpecialTable = TRUE;
         [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_after-01.png"] forState:UIControlStateNormal];
-
+        
         [self.view addSubview:specialTableView];
         [self.view bringSubviewToFront:specialTableView];
         [infoBtn setTintColor:[UIColor blueColor]];
@@ -1459,15 +1461,15 @@
     {
         isShowSpecialTable = FALSE;
         [infoBtn setImage:[UIImage imageNamed:@"iPhone_special icon_before-01.png"] forState:UIControlStateNormal];
-
+        
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status
         /*
-        for (UIView *subview in [self.view subviews]) {
-            // Only remove the subviews with tag not equal to 1
-            if (subview.tag != 1)
-                [subview removeFromSuperview];
-        }
-        */
+         for (UIView *subview in [self.view subviews]) {
+         // Only remove the subviews with tag not equal to 1
+         if (subview.tag != 1)
+         [subview removeFromSuperview];
+         }
+         */
         // 2014.02.07 [CASPER] fix remove reading view while press info at show special table status ==
         
         [specialTableView removeFromSuperview];
@@ -1502,9 +1504,9 @@
 -(void) setBookmarkWithBookmarkStatus : (BOOL) BookmarkStatus
 {
     if (BookmarkStatus) {
-        [_AddToBookmarkBtn setImage:BOOKMARKED_IMAGE forState:UIControlStateNormal];
+        [infoBtn setImage:BOOKMARKED_IMAGE forState:UIControlStateNormal];
     } else {
-        [_AddToBookmarkBtn setImage:NOT_BOOKMARKED_IMAGE forState:UIControlStateNormal];
+        [infoBtn setImage:NOT_BOOKMARKED_IMAGE forState:UIControlStateNormal];
     }
     
 }

@@ -114,6 +114,7 @@
 		10BE81CD1886701A00E116F2 /* NaviBtnNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */; };
 		10BE81CE1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */; };
 		10E192EB1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */; };
+		10E5BDAF1BD676FA00A19E75 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E5BDAE1BD676FA00A19E75 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		10E9F3AA1897501200220B47 /* NaviBtnNormal_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */; };
 		10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */; };
 		10E9F3AE1897506400220B47 /* NaviBtnPress_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */; };
@@ -134,7 +135,6 @@
 		CB25FD1D1843972D00F3D980 /* PoetryAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB25FD1C1843972D00F3D980 /* PoetryAppDelegate.m */; };
 		CB25FD201843972D00F3D980 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD1E1843972D00F3D980 /* Main_iPhone.storyboard */; };
 		CB25FD231843972D00F3D980 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD211843972D00F3D980 /* Main_iPad.storyboard */; };
-		CB25FD281843972D00F3D980 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB25FD271843972D00F3D980 /* Images.xcassets */; };
 		CB25FD2F1843972D00F3D980 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD2E1843972D00F3D980 /* XCTest.framework */; };
 		CB25FD301843972D00F3D980 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD0C1843972D00F3D980 /* Foundation.framework */; };
 		CB25FD311843972D00F3D980 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB25FD101843972D00F3D980 /* UIKit.framework */; };
@@ -1040,6 +1040,7 @@
 		10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_White_iPad@2x.png"; sourceTree = "<group>"; };
 		10C4B2B7187506F30074B8E3 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
 		10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad_button_search_200_200-01.png"; sourceTree = "<group>"; };
+		10E5BDAE1BD676FA00A19E75 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnNormal_iPad.png; sourceTree = "<group>"; };
 		10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaviBtnNormal_iPad@2x.png"; sourceTree = "<group>"; };
 		10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBtnPress_iPad.png; sourceTree = "<group>"; };
@@ -1065,7 +1066,6 @@
 		CB25FD1C1843972D00F3D980 /* PoetryAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoetryAppDelegate.m; sourceTree = "<group>"; };
 		CB25FD1F1843972D00F3D980 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		CB25FD221843972D00F3D980 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		CB25FD271843972D00F3D980 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CB25FD2D1843972D00F3D980 /* poetryappsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = poetryappsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB25FD2E1843972D00F3D980 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CB25FD361843972D00F3D980 /* poetryappsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "poetryappsTests-Info.plist"; sourceTree = "<group>"; };
@@ -2082,12 +2082,12 @@
 				CB25FD1E1843972D00F3D980 /* Main_iPhone.storyboard */,
 				CB25FD211843972D00F3D980 /* Main_iPad.storyboard */,
 				10C4B2B7187506F30074B8E3 /* General.h */,
-				CB25FD271843972D00F3D980 /* Images.xcassets */,
 				CB25FD131843972D00F3D980 /* Supporting Files */,
 				105C43B6188E23F2002BAF6B /* PoetryTabBarController.h */,
 				105C43B7188E23F2002BAF6B /* PoetryTabBarController.m */,
 				CB82809E1898F85500661A94 /* addNewFileList.plist */,
 				0ADDB30B199AD601000FAF09 /* FileListWithoutCoreData.plist */,
+				10E5BDAE1BD676FA00A19E75 /* Images.xcassets */,
 			);
 			path = poetryapps;
 			sourceTree = "<group>";
@@ -3146,6 +3146,7 @@
 				CB54FD6618695CCE00CED47E /* 129.txt in Resources */,
 				CB54FE2318695CCE00CED47E /* 3.txt in Resources */,
 				1004E8C3187CFABF00718741 /* BarBtn_Setting@2x.png in Resources */,
+				10E5BDAF1BD676FA00A19E75 /* Images.xcassets in Resources */,
 				CB54FE9C18695CCE00CED47E /* 408.txt in Resources */,
 				1060F927187FFE1F004AE154 /* Icon-Small-50.png in Resources */,
 				CB54FF8018695CCE00CED47E /* 613.txt in Resources */,
@@ -3264,7 +3265,6 @@
 				CB54FE3618695CCE00CED47E /* 316.txt in Resources */,
 				CB54FDF418695CCE00CED47E /* 257.txt in Resources */,
 				CB54FE1218695CCE00CED47E /* 284.txt in Resources */,
-				CB25FD281843972D00F3D980 /* Images.xcassets in Resources */,
 				CB54FEC718695CCE00CED47E /* 447.txt in Resources */,
 				CB54FDB618695CCE00CED47E /* 200.txt in Resources */,
 				CB54FF5318695CCE00CED47E /* 573.txt in Resources */,
