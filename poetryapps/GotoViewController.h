@@ -19,33 +19,35 @@ typedef enum {
     GOTOPAGECOUNT
 }GotoPageAreaSection;
 
-@interface GotoViewController : UIViewController
+@interface GotoViewController : UIViewController <UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSInteger gotoType;
     PoetryCoreData *PoetryDataBase;
     float uiOffset;
-    float readingBtnOffset;
+    NSArray *list;
+    //float readingBtnOffset;
 }
 
 @property (nonatomic,strong) NSMutableArray *historyArr;
 @property (nonatomic,strong) NSMutableArray *guideArray;
-@property (nonatomic) BOOL isTreeMode;
-@property (nonatomic, strong) GotoTable *TableView;
-@property (strong, nonatomic) IBOutlet UIButton *guideBtn;
-@property (strong, nonatomic) IBOutlet UIButton *poetryBtn;
-@property (strong, nonatomic) IBOutlet UIButton *responseBtn;
-@property (strong, nonatomic) IBOutlet UIButton *gotoReading;
+@property (nonatomic) UITableView *TableView;
+//@property (nonatomic) BOOL isTreeMode;
+//@property (nonatomic, strong) GotoTable *TableView;
+//@property (strong, nonatomic) IBOutlet UIButton *guideBtn;
+//@property (strong, nonatomic) IBOutlet UIButton *poetryBtn;
+//@property (strong, nonatomic) IBOutlet UIButton *responseBtn;
+//@property (strong, nonatomic) IBOutlet UIButton *gotoReading;
 
-@property (strong,nonatomic) Guidepicker *guideView;
-@property (strong,nonatomic) Poetrypicker *poetryView;
-@property (strong,nonatomic) Responsepicker *responseView;
+//@property (strong,nonatomic) Guidepicker *guideView;
+//@property (strong,nonatomic) Poetrypicker *poetryView;
+//@property (strong,nonatomic) Responsepicker *responseView;
 
 @property (strong,nonatomic) GotoTableViewController *detailTableView;
 
-- (IBAction)guideBtnClicked:(id)sender;
-- (IBAction)poetryBtnClicked:(id)sender;
-- (IBAction)responseBtnClicked:(id)sender;
-- (IBAction)changeModeBtnClicked:(id)sender;
-- (IBAction)changeReadingModeClicked:(id)sender;
+//- (IBAction)guideBtnClicked:(id)sender;
+//- (IBAction)poetryBtnClicked:(id)sender;
+//- (IBAction)responseBtnClicked:(id)sender;
+//- (IBAction)changeModeBtnClicked:(id)sender;
+//- (IBAction)changeReadingModeClicked:(id)sender;
 
 @end

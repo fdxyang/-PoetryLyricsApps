@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OKE-jU-Z4D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OKE-jU-Z4D">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -66,64 +66,11 @@
                     <view key="view" contentMode="scaleToFill" id="3nz-cD-u1i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="VbU-Kr-hYO">
-                                <rect key="frame" x="20" y="100" width="93" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <state key="normal" backgroundImage="gotobtn1.png">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
-                                <connections>
-                                    <action selector="guideBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="DfP-0k-Ljq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="LQ6-Iy-REN">
-                                <rect key="frame" x="113" y="100" width="94" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <state key="normal" backgroundImage="gotobtn2.png">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
-                                <connections>
-                                    <action selector="poetryBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="rtv-n1-pZN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="1Go-Hg-dcK">
-                                <rect key="frame" x="207" y="100" width="93" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <state key="normal" backgroundImage="gotobtn3.png">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
-                                <connections>
-                                    <action selector="responseBtnClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="iWI-9n-QoO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oKp-NA-q83">
-                                <rect key="frame" x="20" y="378" width="280" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button" backgroundImage="gotobtnunselected.png">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" backgroundImage="gotobtnselected.png"/>
-                                <connections>
-                                    <action selector="changeReadingModeClicked:" destination="KYQ-5T-R8S" eventType="touchUpInside" id="OLO-Qm-NOf"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2yN-GT-lod"/>
                     <connections>
-                        <outlet property="gotoReading" destination="oKp-NA-q83" id="rO9-2Y-641"/>
-                        <outlet property="guideBtn" destination="VbU-Kr-hYO" id="UmN-VO-iYn"/>
-                        <outlet property="poetryBtn" destination="LQ6-Iy-REN" id="Tbt-eu-4fX"/>
-                        <outlet property="responseBtn" destination="1Go-Hg-dcK" id="P0G-so-wBt"/>
                         <segue destination="U98-hz-mbe" kind="push" identifier="detailTableView" id="x6q-bi-pgJ"/>
                     </connections>
                 </viewController>
@@ -405,11 +352,6 @@
         <image name="BarBtn_Reading.png" width="30" height="30"/>
         <image name="BarBtn_Search.png" width="30" height="30"/>
         <image name="BarBtn_Setting.png" width="30" height="30"/>
-        <image name="gotobtn1.png" width="93" height="30"/>
-        <image name="gotobtn2.png" width="94" height="30"/>
-        <image name="gotobtn3.png" width="93" height="30"/>
-        <image name="gotobtnselected.png" width="280" height="50"/>
-        <image name="gotobtnunselected.png" width="280" height="50"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

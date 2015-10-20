@@ -13,13 +13,17 @@
 {
     UIColor *_BackgroundColor;
 }
+
+@property (nonatomic) UISearchBar *searchBar;
+
 @end
 
+
 @implementation GotoViewController
-@synthesize guideBtn;
-@synthesize poetryBtn;
-@synthesize responseBtn;
-@synthesize gotoReading;
+//@synthesize guideBtn;
+//@synthesize poetryBtn;
+//@synthesize responseBtn;
+//@synthesize gotoReading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,16 +39,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    uiOffset = 20.0;
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
+    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,64,self.view.frame.size.width,50)];
+    _searchBar.delegate = self;
+    [self.view addSubview:_searchBar];
     
-    _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-    _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
-    _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
+    //uiOffset = 120.0;
+    //NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
+    
+    _TableView = [[UITableView alloc]initWithFrame:CGRectMake(0,_searchBar.frame.origin.y+_searchBar.frame.size.height, self.view.frame.size.width,self.view.frame.size.height-_searchBar.frame.origin.y-_searchBar.frame.size.height)];//(GotoTable *)[subviewArray objectAtIndex:0];
+    //_TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
+    //_TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
+    list = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
+    
+    
+    _TableView.dataSource = self;
+    _TableView.delegate = self;
     _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-    [tempImageView setFrame:_TableView.frame];
-    _TableView.backgroundView = tempImageView;
+//    UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+//    [tempImageView setFrame:_TableView.frame];
+//    _TableView.backgroundView = tempImageView;
     [_TableView reloadData];
     [self.view addSubview:_TableView];
     /*
@@ -94,8 +107,8 @@
     */
     PoetryDataBase = [[PoetryCoreData alloc] init];
     
-    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-    [self.view setBackgroundColor:_BackgroundColor];
+//    _BackgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+//    [self.view setBackgroundColor:_BackgroundColor];
     
     // Kevin 20140124 set title background color
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:(32/255.0f)
@@ -111,8 +124,8 @@
     
     self.navigationController.navigationBar.titleTextAttributes = textAttributes;
     
-    [gotoReading setFrame:CGRectMake(20,378-readingBtnOffset,280, 50)];
-    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
+//    [gotoReading setFrame:CGRectMake(20,378-readingBtnOffset,280, 50)];
+//    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -124,7 +137,7 @@
     
     self.navigationItem.title = @"快速查詢";
     
-    [gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
+//    [gotoReading setFrame:CGRectMake(20, 378-readingBtnOffset, 280, 50)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,153 +147,153 @@
 }
 
 
-- (IBAction)guideBtnClicked:(id)sender
-{
-    gotoType = 0; //guide type
-    
-    [_guideView setFlag:TRUE];
-    [_poetryView setFlag:FALSE];
-    [_responseView setFlag:FALSE];
-    
-    _poetryView.hidden = YES;
-    _responseView.hidden=YES;
-    _guideView.hidden = NO;
-    [self.view bringSubviewToFront:_guideView];
-    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
-    
-    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
-    [guideBtn setEnabled:NO];
-    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [responseBtn setEnabled:YES];
-}
-
-- (IBAction)poetryBtnClicked:(id)sender
-{
-    gotoType = 1; // poetry type
-    
-    [_guideView setFlag:FALSE];
-    [_poetryView setFlag:TRUE];
-    [_responseView setFlag:FALSE];
-    _responseView.hidden=YES;
-    _guideView.hidden = YES;
-    _poetryView.hidden = NO;
-    [self.view bringSubviewToFront:_poetryView];
-    [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
-    
-    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [guideBtn setEnabled:YES];
-    [poetryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    [poetryBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn2_selected.png"] forState:UIControlStateDisabled];
-    [poetryBtn setEnabled:NO];
-    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [responseBtn setEnabled:YES];
-}
-
-- (IBAction)responseBtnClicked:(id)sender
-{
-    gotoType = 2; // response type
-    
-    [_guideView setFlag:FALSE];
-    [_poetryView setFlag:FALSE];
-    [_responseView setFlag:TRUE];
-    _guideView.hidden = YES;
-    _poetryView.hidden = YES;
-    _responseView.hidden=NO;
-    [self.view bringSubviewToFront:_responseView];
-    [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
-    
-    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [guideBtn setEnabled:YES];
-    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [poetryBtn setEnabled:YES];
-    [responseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-    [responseBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn3_selected.png"] forState:UIControlStateDisabled];
-    [responseBtn setEnabled:NO];
-}
-
-- (IBAction)changeModeBtnClicked:(id)sender
-{
-    UIButton *modeBtn = (UIButton*)sender;
-    NSString *imageName;
-    CATransition *animation = [CATransition animation];
-    if (!_isTreeMode) // tree mode
-    {
-        if(!_TableView)
-        {
-            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
-            
-            _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
-            _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
-            _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
-            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
-            [tempImageView setFrame:_TableView.frame];
-            _TableView.backgroundView = tempImageView;
-            [_TableView reloadData];
-            [self.view addSubview:_TableView];
-        }
-        else
-        {
-            [self.view addSubview:_TableView];
-            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
-            [_TableView reloadData];
-        }
-    
-        imageName = @"24_24buttonup.png";
-        
-        // set up an animation for the transition between the views
-        [animation setDuration:0.5];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionFromBottom];
-    
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    
-        [[self.view layer] addAnimation:animation forKey:@"GotoTable"];
-        _isTreeMode = TRUE;
-    }
-    else // picker mode
-    {
-        [_TableView removeFromSuperview];
-        
-        [animation setDuration:0.5];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionFromTop];
-        
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        [[self.view layer] addAnimation:animation forKey:@"GotoTable"];
-        _isTreeMode = FALSE;
-        imageName = @"24_24buttondown.png";
-    }
-    
-    [modeBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-}
-
-- (IBAction)changeReadingModeClicked:(id)sender
-{
-    if(gotoType == 0) // guide
-    {
-        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_guideView getGuideContent]];
-        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_guideView getGuideContent]];
-    }
-    else if(gotoType == 1) // poetry
-    {
-        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_poetryView getPoetryContent]];
-        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_poetryView getPoetryContent]];
-    }
-    else if(gotoType == 2) // response
-    {
-        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_responseView getResponseContent]];
-        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_responseView getResponseContent]];
-    }
-    
-    [self.tabBarController setSelectedIndex:0];
-}
+//- (IBAction)guideBtnClicked:(id)sender
+//{
+//    gotoType = 0; //guide type
+//    
+//    [_guideView setFlag:TRUE];
+//    [_poetryView setFlag:FALSE];
+//    [_responseView setFlag:FALSE];
+//    
+//    _poetryView.hidden = YES;
+//    _responseView.hidden=YES;
+//    _guideView.hidden = NO;
+//    [self.view bringSubviewToFront:_guideView];
+//    [gotoReading setTitle:[_guideView getPickerContent] forState:UIControlStateNormal];
+//    
+//    [guideBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//    [guideBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn1_selected.png"] forState:UIControlStateDisabled];
+//    [guideBtn setEnabled:NO];
+//    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [poetryBtn setEnabled:YES];
+//    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [responseBtn setEnabled:YES];
+//}
+//
+//- (IBAction)poetryBtnClicked:(id)sender
+//{
+//    gotoType = 1; // poetry type
+//    
+//    [_guideView setFlag:FALSE];
+//    [_poetryView setFlag:TRUE];
+//    [_responseView setFlag:FALSE];
+//    _responseView.hidden=YES;
+//    _guideView.hidden = YES;
+//    _poetryView.hidden = NO;
+//    [self.view bringSubviewToFront:_poetryView];
+//    [gotoReading setTitle:[_poetryView getPickerContent] forState:UIControlStateNormal];
+//    
+//    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [guideBtn setEnabled:YES];
+//    [poetryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//    [poetryBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn2_selected.png"] forState:UIControlStateDisabled];
+//    [poetryBtn setEnabled:NO];
+//    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [responseBtn setEnabled:YES];
+//}
+//
+//- (IBAction)responseBtnClicked:(id)sender
+//{
+//    gotoType = 2; // response type
+//    
+//    [_guideView setFlag:FALSE];
+//    [_poetryView setFlag:FALSE];
+//    [_responseView setFlag:TRUE];
+//    _guideView.hidden = YES;
+//    _poetryView.hidden = YES;
+//    _responseView.hidden=NO;
+//    [self.view bringSubviewToFront:_responseView];
+//    [gotoReading setTitle:[_responseView getPickerContent] forState:UIControlStateNormal];
+//    
+//    //[guideBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+//    [guideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [guideBtn setEnabled:YES];
+//    //[poetryBtn setTitleColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1] forState:UIControlStateNormal];
+//    [poetryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [poetryBtn setEnabled:YES];
+//    [responseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//    [responseBtn setBackgroundImage:[UIImage imageNamed:@"gotobtn3_selected.png"] forState:UIControlStateDisabled];
+//    [responseBtn setEnabled:NO];
+//}
+//
+//- (IBAction)changeModeBtnClicked:(id)sender
+//{
+//    UIButton *modeBtn = (UIButton*)sender;
+//    NSString *imageName;
+//    CATransition *animation = [CATransition animation];
+//    if (!_isTreeMode) // tree mode
+//    {
+//        if(!_TableView)
+//        {
+//            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"GotoTable" owner:self options:nil];
+//            
+//            _TableView = (GotoTable *)[subviewArray objectAtIndex:0];
+//            _TableView.frame = CGRectMake(0, 64, _TableView.frame.size.width, _TableView.frame.size.height-uiOffset);
+//            _TableView.TableData = [[NSArray alloc] initWithObjects:@"基督基石", @"詩歌", @"啟應文", nil];
+//            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+//            UIImageView *tempImageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BG-GreyNote_paper.png"]];
+//            [tempImageView setFrame:_TableView.frame];
+//            _TableView.backgroundView = tempImageView;
+//            [_TableView reloadData];
+//            [self.view addSubview:_TableView];
+//        }
+//        else
+//        {
+//            [self.view addSubview:_TableView];
+//            _historyArr = [PoetryDataBase Poetry_CoreDataFetchDataInHistory];
+//            [_TableView reloadData];
+//        }
+//    
+//        imageName = @"24_24buttonup.png";
+//        
+//        // set up an animation for the transition between the views
+//        [animation setDuration:0.5];
+//        [animation setType:kCATransitionPush];
+//        [animation setSubtype:kCATransitionFromBottom];
+//    
+//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    
+//        [[self.view layer] addAnimation:animation forKey:@"GotoTable"];
+//        _isTreeMode = TRUE;
+//    }
+//    else // picker mode
+//    {
+//        [_TableView removeFromSuperview];
+//        
+//        [animation setDuration:0.5];
+//        [animation setType:kCATransitionPush];
+//        [animation setSubtype:kCATransitionFromTop];
+//        
+//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//        
+//        [[self.view layer] addAnimation:animation forKey:@"GotoTable"];
+//        _isTreeMode = FALSE;
+//        imageName = @"24_24buttondown.png";
+//    }
+//    
+//    [modeBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+//}
+//
+//- (IBAction)changeReadingModeClicked:(id)sender
+//{
+//    if(gotoType == 0) // guide
+//    {
+//        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_guideView getGuideContent]];
+//        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_guideView getGuideContent]];
+//    }
+//    else if(gotoType == 1) // poetry
+//    {
+//        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_poetryView getPoetryContent]];
+//        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_poetryView getPoetryContent]];
+//    }
+//    else if(gotoType == 2) // response
+//    {
+//        [PoetryDataBase PoetryCoreDataSaveIntoNowReading:[_responseView getResponseContent]];
+//        [PoetryDataBase PoetryCoreDataSaveIntoHistory:[_responseView getResponseContent]];
+//    }
+//    
+//    [self.tabBarController setSelectedIndex:0];
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -375,7 +388,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d%d",indexPath.row,indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",(long)indexPath.row,(long)indexPath.section];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -385,7 +398,7 @@
     cell.backgroundColor = [UIColor clearColor];
     if(indexPath.section == BASICGUIDE)
     {
-        cell.textLabel.text = [_TableView.TableData objectAtIndex:indexPath.row];
+        cell.textLabel.text = [list objectAtIndex:indexPath.row];//[_TableView.TableData objectAtIndex:indexPath.row];
     }
     else
     {
@@ -468,6 +481,12 @@
         
         [_detailTableView setTableViewType:gotoType];
     }
+}
+
+#pragma kevin search bar delegate
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+    return NO;
 }
 
 @end
