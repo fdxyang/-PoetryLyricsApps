@@ -180,10 +180,10 @@
 {
     CGRect Frame = self.view.frame;
     
-    _AddToBookmarkBtn = [[UIButton alloc] initWithFrame:CGRectMake(Frame.size.width - 60.0f,
-                                                                   Frame.size.height - 50.0f - 60.0f,
-                                                                   50.0f,
-                                                                50.0f)];
+    _AddToBookmarkBtn = [[UIButton alloc] initWithFrame:CGRectMake(Frame.size.width - 40.0f,
+                                                                   Frame.size.height - 50.0f - 40.0f,
+                                                                   30.0f,
+                                                                30.0f)];
 
 
     _AddToBookmarkBtn.layer.masksToBounds = NO;
