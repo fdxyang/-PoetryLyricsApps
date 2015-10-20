@@ -200,7 +200,7 @@
 //                                                                blue:(37/255.0f)
 //                                                               alpha:1]];
     [_AddToBookmarkBtn addTarget:self action:@selector(BookmarkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
+    _AddToBookmarkBtn.tag = BOOKMARK_BTN_TAG;
     [self.view addSubview:_AddToBookmarkBtn];
 }
 
