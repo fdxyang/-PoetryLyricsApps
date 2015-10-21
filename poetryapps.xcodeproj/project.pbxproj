@@ -98,6 +98,9 @@
 		1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1C018956A64004FD68C /* ILTranslucentView.m */; };
 		10A3067318960F4800BA3B9D /* ARROW_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067218960F4800BA3B9D /* ARROW_Right.png */; };
 		10A3067518960F4F00BA3B9D /* ARROW_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067418960F4F00BA3B9D /* ARROW_Left.png */; };
+		10A30A541BD7D6C9003C3FAD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A521BD7D6C9003C3FAD /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		10A30A551BD7D6C9003C3FAD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A531BD7D6C9003C3FAD /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		10A30A581BD7D6DA003C3FAD /* FacebookLoginTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A30A571BD7D6DA003C3FAD /* FacebookLoginTestViewController.m */; settings = {ASSET_TAGS = (); }; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
@@ -1019,6 +1022,10 @@
 		109F69BD18557DEA00F32337 /* Poetry 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Poetry 2.xcdatamodel"; sourceTree = "<group>"; };
 		10A3067218960F4800BA3B9D /* ARROW_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Right.png; sourceTree = "<group>"; };
 		10A3067418960F4F00BA3B9D /* ARROW_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARROW_Left.png; sourceTree = "<group>"; };
+		10A30A521BD7D6C9003C3FAD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		10A30A531BD7D6C9003C3FAD /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		10A30A561BD7D6DA003C3FAD /* FacebookLoginTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookLoginTestViewController.h; sourceTree = "<group>"; };
+		10A30A571BD7D6DA003C3FAD /* FacebookLoginTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLoginTestViewController.m; sourceTree = "<group>"; };
 		10AE670918449E8E00A683E7 /* Poetry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetry.xcdatamodel; sourceTree = "<group>"; };
 		10AE670B18449EA700A683E7 /* PoetryCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PoetryCoreData.h; path = CoreData/PoetryCoreData.h; sourceTree = "<group>"; };
 		10AE670C18449EA700A683E7 /* PoetryCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoetryCoreData.m; path = CoreData/PoetryCoreData.m; sourceTree = "<group>"; };
@@ -1849,9 +1856,11 @@
 			files = (
 				CB8D97E9199C62520001269A /* MessageUI.framework in Frameworks */,
 				CB942D1918A4CDEB0003A478 /* libz.dylib in Frameworks */,
+				10A30A551BD7D6C9003C3FAD /* FBSDKLoginKit.framework in Frameworks */,
 				CB942D1718A4CDDB0003A478 /* SystemConfiguration.framework in Frameworks */,
 				10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */,
 				CB25FD0F1843972D00F3D980 /* CoreGraphics.framework in Frameworks */,
+				10A30A541BD7D6C9003C3FAD /* FBSDKCoreKit.framework in Frameworks */,
 				CB25FD111843972D00F3D980 /* UIKit.framework in Frameworks */,
 				CB25FD0D1843972D00F3D980 /* Foundation.framework in Frameworks */,
 			);
@@ -1947,6 +1956,8 @@
 				1044995B184DA5EF00C58526 /* ThemeSetting.m */,
 				10732AEE1880D32300304DA4 /* AboutMeViewController.h */,
 				10732AEF1880D32300304DA4 /* AboutMeViewController.m */,
+				10A30A561BD7D6DA003C3FAD /* FacebookLoginTestViewController.h */,
+				10A30A571BD7D6DA003C3FAD /* FacebookLoginTestViewController.m */,
 			);
 			name = SettingView;
 			sourceTree = "<group>";
@@ -1972,6 +1983,15 @@
 				105C43C1188E7A00002BAF6B /* iPadReadingTableViewController.m */,
 			);
 			name = iPadView;
+			sourceTree = "<group>";
+		};
+		10A30A511BD7D6BD003C3FAD /* FacebookSDK */ = {
+			isa = PBXGroup;
+			children = (
+				10A30A521BD7D6C9003C3FAD /* FBSDKCoreKit.framework */,
+				10A30A531BD7D6C9003C3FAD /* FBSDKLoginKit.framework */,
+			);
+			name = FacebookSDK;
 			sourceTree = "<group>";
 		};
 		10AE671018449F9900A683E7 /* CoreData */ = {
@@ -2057,6 +2077,7 @@
 		CB25FD0B1843972D00F3D980 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10A30A511BD7D6BD003C3FAD /* FacebookSDK */,
 				CB8D97E8199C62520001269A /* MessageUI.framework */,
 				CB942D1818A4CDEB0003A478 /* libz.dylib */,
 				CB942D1618A4CDDB0003A478 /* SystemConfiguration.framework */,
@@ -3974,6 +3995,7 @@
 				1051B3DE18C2F74600B61543 /* NavigatorBarReading.m in Sources */,
 				1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */,
 				0ACC32B418A2F72900D245C0 /* specialWordTable.m in Sources */,
+				10A30A581BD7D6DA003C3FAD /* FacebookLoginTestViewController.m in Sources */,
 				10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */,
 				CBA286CC184D753A00010125 /* GotoTableCell.m in Sources */,
 				10AF12721862EC7F002F6DB9 /* Animations.m in Sources */,
@@ -4121,6 +4143,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4146,6 +4172,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "poetryapps/poetryapps-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

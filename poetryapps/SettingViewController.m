@@ -10,6 +10,8 @@
 #import "PoetryCoreData.h"
 #import "ILTranslucentView.h"
 
+#define TEST_FACEBOOK_LOGIN
+
 @interface SettingViewController () {
     
     UIColor                 *_LightBackgroundColor;
@@ -112,7 +114,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
+#ifdef TEST_FACEBOOK_LOGIN
+    // test cell
+    return 6;
+#else
     return 5;
+#endif
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -152,6 +161,11 @@
     else if (indexPath.section == 4) {
         cell.textLabel.text = @"特殊字清單";
     }
+#ifdef TEST_FACEBOOK_LOGIN
+    else if (indexPath.section == 5) {
+        cell.textLabel.text = @"Facebook Login Test";
+    }
+#endif
    
     return cell;
 }
@@ -214,6 +228,12 @@
         //[specialTableView setHidden:NO];
         [self showSpecialTable];
     }
+    
+#ifdef TEST_FACEBOOK_LOGIN
+    else if (indexPath.section ==5) {
+        [self performSegueWithIdentifier:@"FacebookLoginTestViewController" sender:nil];
+    }
+#endif
 }
 
 #pragma kevin show special table

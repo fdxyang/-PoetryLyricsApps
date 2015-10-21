@@ -14,6 +14,9 @@
 #import "PoetrySaveIntoCoreData.h"
 // 2014.01.28 [CASPER] remove welcome view and move the init process to app delegate ==
 
+// 2015.19,21 [CASPER] Integrade Facebook SDK
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 @implementation PoetryAppDelegate
 
 // 2013.11.26 [CASPER] Core Data
@@ -32,10 +35,12 @@
     if(!isSuccessful)
         NSLog(@"Save into core data Error!!!!!!!!!!");
     
-
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -44,7 +49,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -55,11 +60,22 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 

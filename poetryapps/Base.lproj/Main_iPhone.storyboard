@@ -89,7 +89,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MMK-mI-6ql">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMK-mI-6ql" id="ebG-zQ-9vR">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -292,6 +292,7 @@
                     <navigationItem key="navigationItem" id="fzI-7r-beZ"/>
                     <connections>
                         <outlet property="TableView" destination="0Vd-82-Sb5" id="qyK-9F-OX0"/>
+                        <segue destination="3sf-uz-fK4" kind="push" identifier="FacebookLoginTestViewController" id="7hs-72-ltT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTl-iL-h7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -372,6 +373,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7v-ze-1zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1772" y="2025"/>
+        </scene>
+        <!--Facebook Login Test View Controller-->
+        <scene sceneID="fgw-04-hAa">
+            <objects>
+                <viewController storyboardIdentifier="FacebookLoginTestViewController" id="3sf-uz-fK4" customClass="FacebookLoginTestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D4B-0x-1Cl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1K2-lm-m59"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mTL-Lm-570" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1772" y="2670"/>
         </scene>
     </scenes>
     <resources>
