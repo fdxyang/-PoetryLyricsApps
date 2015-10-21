@@ -25,6 +25,7 @@ typedef enum {
     PoetryCoreData *PoetryDataBase;
     float uiOffset;
     NSArray *list;
+    UITapGestureRecognizer *tapGestureRecognizer;
     //float readingBtnOffset;
 }
 
