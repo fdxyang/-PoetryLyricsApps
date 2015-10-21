@@ -849,6 +849,18 @@
     return NO;
 }
 
+-(NSMutableArray*) Poetry_CoreDataFetchDataInBookmark
+{
+    NSMutableArray *Poetrys = [[NSMutableArray alloc] init];
+    
+    NSString *PoetryCoreDataEntityName = POETRY_BOOKMARK_CORE_DATA_ENTITY;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
+    Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    return Poetrys;
+}
+
 -(NSArray*) Poetry_CoreDataSearchWithPoetryNameInBookmark : (NSString *) SearcgName
 {
     

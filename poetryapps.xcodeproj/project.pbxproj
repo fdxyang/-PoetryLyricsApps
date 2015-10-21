@@ -46,6 +46,7 @@
 		10157B3B1A088E3D0098D5B2 /* iPad_emailicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B371A088E3D0098D5B2 /* iPad_emailicon.png */; };
 		10157B3C1A088E3D0098D5B2 /* iPad_fbfans.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B381A088E3D0098D5B2 /* iPad_fbfans.png */; };
 		10157B3D1A088E3D0098D5B2 /* iPad_rateicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B391A088E3D0098D5B2 /* iPad_rateicon.png */; };
+		101F33CF1BD7165800D0CFA4 /* BookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 101F33CE1BD7165800D0CFA4 /* BookmarkTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		102469471A0473E4001DC9AD /* iPadAboutMe_CopyRight1.png in Resources */ = {isa = PBXBuildFile; fileRef = 102469461A0473E4001DC9AD /* iPadAboutMe_CopyRight1.png */; };
 		10377A531A0E68ED00FBFA76 /* iPadAboutMe_Hippo.png in Resources */ = {isa = PBXBuildFile; fileRef = 10377A521A0E68ED00FBFA76 /* iPadAboutMe_Hippo.png */; };
 		10377A551A0E6A0200FBFA76 /* iPadAboutMe_AboutTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 10377A541A0E6A0200FBFA76 /* iPadAboutMe_AboutTitle.png */; };
@@ -955,6 +956,8 @@
 		10157B371A088E3D0098D5B2 /* iPad_emailicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPad_emailicon.png; sourceTree = "<group>"; };
 		10157B381A088E3D0098D5B2 /* iPad_fbfans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPad_fbfans.png; sourceTree = "<group>"; };
 		10157B391A088E3D0098D5B2 /* iPad_rateicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPad_rateicon.png; sourceTree = "<group>"; };
+		101F33CD1BD7165800D0CFA4 /* BookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkTableViewController.h; sourceTree = "<group>"; };
+		101F33CE1BD7165800D0CFA4 /* BookmarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkTableViewController.m; sourceTree = "<group>"; };
 		102469461A0473E4001DC9AD /* iPadAboutMe_CopyRight1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadAboutMe_CopyRight1.png; sourceTree = "<group>"; };
 		10377A521A0E68ED00FBFA76 /* iPadAboutMe_Hippo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadAboutMe_Hippo.png; sourceTree = "<group>"; };
 		10377A541A0E6A0200FBFA76 /* iPadAboutMe_AboutTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadAboutMe_AboutTitle.png; sourceTree = "<group>"; };
@@ -1905,6 +1908,15 @@
 			path = poetryapps/resource/image/sc;
 			sourceTree = SOURCE_ROOT;
 		};
+		101F33CC1BD715FF00D0CFA4 /* BookmarkView */ = {
+			isa = PBXGroup;
+			children = (
+				101F33CD1BD7165800D0CFA4 /* BookmarkTableViewController.h */,
+				101F33CE1BD7165800D0CFA4 /* BookmarkTableViewController.m */,
+			);
+			name = BookmarkView;
+			sourceTree = "<group>";
+		};
 		1060F910187FFE1F004AE154 /* ICON */ = {
 			isa = PBXGroup;
 			children = (
@@ -2077,6 +2089,7 @@
 				10AE671018449F9900A683E7 /* CoreData */,
 				0ACC32B218A2F72900D245C0 /* specialWordTable.h */,
 				0ACC32B318A2F72900D245C0 /* specialWordTable.m */,
+				101F33CC1BD715FF00D0CFA4 /* BookmarkView */,
 				CB25FD1B1843972D00F3D980 /* PoetryAppDelegate.h */,
 				CB25FD1C1843972D00F3D980 /* PoetryAppDelegate.m */,
 				CB25FD1E1843972D00F3D980 /* Main_iPhone.storyboard */,
@@ -3980,6 +3993,7 @@
 				108D2278184987ED005E6893 /* PoetrySettingCoreData.m in Sources */,
 				CB381FB41849B056000ECB84 /* GotoTable.m in Sources */,
 				CB381FB61849B056000ECB84 /* GotoViewController.m in Sources */,
+				101F33CF1BD7165800D0CFA4 /* BookmarkTableViewController.m in Sources */,
 				10449957184D87E700C58526 /* FontSizeSetting.m in Sources */,
 				10771DC21849D0B600A3B342 /* SettingViewController.m in Sources */,
 			);

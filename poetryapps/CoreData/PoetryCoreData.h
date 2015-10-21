@@ -78,5 +78,6 @@ typedef enum {
 // Bookmark methods
 -(BOOL) PoetryCoreDataGetBookmarkStatus : (NSDictionary *) PoetryDic;
 -(NSDictionary*) PoetryCoreDataSaveIntoBookmark : (NSDictionary *) PoetryDic;
+-(NSMutableArray*) Poetry_CoreDataFetchDataInBookmark;
 
 @end
