@@ -74,7 +74,6 @@
     tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showSpecialTable)];
     [tapGestureRecognizer setNumberOfTouchesRequired:1];
     [tapGestureRecognizer setNumberOfTapsRequired:1];
-    
     isShowSpecialTable = FALSE;
     [self createSpecialTableView];
 }
@@ -225,6 +224,8 @@
         isShowSpecialTable = TRUE;
         [self.view addSubview:specialTableView];
         [self.view bringSubviewToFront:specialTableView];
+        //[_TableView setContentOffset:CGPointZero animated:YES];
+        [_TableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }
     else
     {
@@ -241,7 +242,7 @@
     
     specialTableView = [[ILTranslucentView alloc] initWithFrame:
                         CGRectMake(0, 0, self.view.frame.size.width,
-                                   self.view.frame.size.height)];
+                                   self.view.frame.size.height+50)];
     
     
     specialTableView.translucentAlpha = 0.9;
@@ -250,12 +251,18 @@
     specialTableView.backgroundColor = [UIColor clearColor];
     
     
-    specialTableScrollView = [[UIScrollView alloc] initWithFrame:
-                              CGRectMake(0, 20, UI_SCREEN_WIDTH,
-                                         UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
-    
     imageHeight = self.view.frame.size.height;
-    imageName = @"specialtable.png";
+    
+    if (self.view.frame.size.height < 568) {
+        imageName = @"specialtable_35inch.png";
+    }
+    else{
+        imageName = @"specialtable.png";
+    }
+    
+    specialTableScrollView = [[UIScrollView alloc] initWithFrame:
+                              CGRectMake(0, 20, self.view.frame.size.width,
+                                         self.view.frame.size.height)];
     
     [specialTableView addSubview:specialTableScrollView];
     
