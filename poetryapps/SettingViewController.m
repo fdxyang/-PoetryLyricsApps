@@ -8,15 +8,19 @@
 
 #import "SettingViewController.h"
 #import "PoetryCoreData.h"
+#import "ILTranslucentView.h"
 
 @interface SettingViewController () {
     
     UIColor                 *_LightBackgroundColor;
     UIColor                 *_DarkBackgroundColor;
-    
-
+    BOOL                    isShowSpecialTable;
+    ILTranslucentView            *specialTableView;
+    UIScrollView             *specialTableScrollView;
+    UITapGestureRecognizer *tapGestureRecognizer;
 }
 
+@property (nonatomic) UIView *specialView;
 @end
 
 @implementation SettingViewController
@@ -64,6 +68,15 @@
                                                                                     green:(159/255.0f)
                                                                                      blue:(191/255.0f)
                                                                                     alpha:0.8]];
+    
+    _specialView = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height)];
+    
+    tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showSpecialTable)];
+    [tapGestureRecognizer setNumberOfTouchesRequired:1];
+    [tapGestureRecognizer setNumberOfTapsRequired:1];
+    
+    isShowSpecialTable = FALSE;
+    [self createSpecialTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,7 +113,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -136,6 +149,9 @@
         
     } else if (indexPath.section ==3) {
         cell.textLabel.text = @"關於我們";
+    }
+    else if (indexPath.section == 4) {
+        cell.textLabel.text = @"特殊字清單";
     }
    
     return cell;
@@ -195,6 +211,66 @@
         
         [self performSegueWithIdentifier:@"AboutMeViewController" sender:nil];   
     }
+    else if(indexPath.section == 4){
+        //[specialTableView setHidden:NO];
+        [self showSpecialTable];
+    }
+}
+
+#pragma kevin show special table
+- (void)showSpecialTable
+{
+    if (!isShowSpecialTable)
+    {
+        isShowSpecialTable = TRUE;
+        [self.view addSubview:specialTableView];
+        [self.view bringSubviewToFront:specialTableView];
+    }
+    else
+    {
+        isShowSpecialTable = FALSE;
+        [specialTableView removeFromSuperview];
+    }
+}
+
+- (void) createSpecialTableView
+{
+    CGFloat imageHeight = 0.0;
+    NSString *imageName;
+    
+    
+    specialTableView = [[ILTranslucentView alloc] initWithFrame:
+                        CGRectMake(0, 0, self.view.frame.size.width,
+                                   self.view.frame.size.height)];
+    
+    
+    specialTableView.translucentAlpha = 0.9;
+    specialTableView.translucentStyle = UIBarStyleBlack;
+    specialTableView.translucentTintColor = [UIColor clearColor];
+    specialTableView.backgroundColor = [UIColor clearColor];
+    
+    
+    specialTableScrollView = [[UIScrollView alloc] initWithFrame:
+                              CGRectMake(0, 20, UI_SCREEN_WIDTH,
+                                         UI_SCREEN_4_INCH_HEIGHT - UI_IOS7_NAV_BAR_HEIGHT - UI_IOS7_TAB_BAR_HEIGHT - 20)];
+    
+    imageHeight = self.view.frame.size.height;
+    imageName = @"specialtable.png";
+    
+    [specialTableView addSubview:specialTableScrollView];
+    
+    specialTableScrollView.userInteractionEnabled = NO; // To pass touch event to the lower level
+    specialTableScrollView.exclusiveTouch = NO;
+    
+    // TODO: Modify image as Special Table Img
+    UIImageView *TestImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, imageHeight)];
+    [TestImg setImage:[UIImage imageNamed:imageName]];
+    [specialTableScrollView addSubview:TestImg];
+    
+    [specialTableScrollView setContentSize:CGSizeMake(UI_SCREEN_WIDTH, imageHeight-150)]; // TODO: Modify "1000" as Image Height
+    [specialTableScrollView setBackgroundColor:[UIColor clearColor]];
+    
+    [specialTableView addGestureRecognizer:tapGestureRecognizer];
 }
 
 #pragma mark - Font Setting

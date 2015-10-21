@@ -12,7 +12,7 @@
 #import "ThemeSetting.h"
 #import "PoetryCoreData.h"
 
-@interface SettingViewController : UIViewController
+@interface SettingViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
 
