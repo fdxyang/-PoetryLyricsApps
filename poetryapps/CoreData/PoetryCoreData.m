@@ -855,7 +855,13 @@
     
     NSString *PoetryCoreDataEntityName = POETRY_BOOKMARK_CORE_DATA_ENTITY;
     
+    // NSSortDescriptor tells defines how to sort the fetched results
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:POETRY_CORE_DATA_CATERORY_KEY ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:PoetryCoreDataEntityName];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+
     Poetrys = [[_context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     return Poetrys;

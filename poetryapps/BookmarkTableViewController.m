@@ -53,6 +53,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    _BookmarkArray = [_CoreData Poetry_CoreDataFetchDataInBookmark];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
