@@ -24,7 +24,14 @@
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
     loginButton.readPermissions =
-    @[@"public_profile", @"email", @"user_friends"];
+    @[@"public_profile",
+      @"email",
+      @"user_friends" ,
+      @"user_birthday",
+      @"user_religion_politics"
+      ];
+    
+    loginButton.publishPermissions = @[@"publish_pages"];
     // Do any additional setup after loading the view.
 }
 

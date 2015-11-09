@@ -46,7 +46,7 @@
 		10157B3B1A088E3D0098D5B2 /* iPad_emailicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B371A088E3D0098D5B2 /* iPad_emailicon.png */; };
 		10157B3C1A088E3D0098D5B2 /* iPad_fbfans.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B381A088E3D0098D5B2 /* iPad_fbfans.png */; };
 		10157B3D1A088E3D0098D5B2 /* iPad_rateicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10157B391A088E3D0098D5B2 /* iPad_rateicon.png */; };
-		101F33CF1BD7165800D0CFA4 /* BookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 101F33CE1BD7165800D0CFA4 /* BookmarkTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		101F33CF1BD7165800D0CFA4 /* BookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 101F33CE1BD7165800D0CFA4 /* BookmarkTableViewController.m */; };
 		102469471A0473E4001DC9AD /* iPadAboutMe_CopyRight1.png in Resources */ = {isa = PBXBuildFile; fileRef = 102469461A0473E4001DC9AD /* iPadAboutMe_CopyRight1.png */; };
 		10377A531A0E68ED00FBFA76 /* iPadAboutMe_Hippo.png in Resources */ = {isa = PBXBuildFile; fileRef = 10377A521A0E68ED00FBFA76 /* iPadAboutMe_Hippo.png */; };
 		10377A551A0E6A0200FBFA76 /* iPadAboutMe_AboutTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 10377A541A0E6A0200FBFA76 /* iPadAboutMe_AboutTitle.png */; };
@@ -98,9 +98,9 @@
 		1099C1C118956A64004FD68C /* ILTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1099C1C018956A64004FD68C /* ILTranslucentView.m */; };
 		10A3067318960F4800BA3B9D /* ARROW_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067218960F4800BA3B9D /* ARROW_Right.png */; };
 		10A3067518960F4F00BA3B9D /* ARROW_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A3067418960F4F00BA3B9D /* ARROW_Left.png */; };
-		10A30A541BD7D6C9003C3FAD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A521BD7D6C9003C3FAD /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		10A30A551BD7D6C9003C3FAD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A531BD7D6C9003C3FAD /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		10A30A581BD7D6DA003C3FAD /* FacebookLoginTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A30A571BD7D6DA003C3FAD /* FacebookLoginTestViewController.m */; settings = {ASSET_TAGS = (); }; };
+		10A30A541BD7D6C9003C3FAD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A521BD7D6C9003C3FAD /* FBSDKCoreKit.framework */; };
+		10A30A551BD7D6C9003C3FAD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A30A531BD7D6C9003C3FAD /* FBSDKLoginKit.framework */; };
+		10A30A581BD7D6DA003C3FAD /* FacebookLoginTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A30A571BD7D6DA003C3FAD /* FacebookLoginTestViewController.m */; };
 		10AE670A18449E8E00A683E7 /* Poetry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670818449E8E00A683E7 /* Poetry.xcdatamodeld */; };
 		10AE670D18449EA700A683E7 /* PoetryCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AE670C18449EA700A683E7 /* PoetryCoreData.m */; };
 		10AE670F18449F8C00A683E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE670E18449F8C00A683E7 /* CoreData.framework */; };
@@ -118,7 +118,7 @@
 		10BE81CD1886701A00E116F2 /* NaviBtnNormal_White_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CB1886701A00E116F2 /* NaviBtnNormal_White_iPad.png */; };
 		10BE81CE1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BE81CC1886701A00E116F2 /* NaviBtnNormal_White_iPad@2x.png */; };
 		10E192EB1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E192EA1A0FB6CC007874B8 /* ipad_button_search_200_200-01.png */; };
-		10E5BDAF1BD676FA00A19E75 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E5BDAE1BD676FA00A19E75 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		10E5BDAF1BD676FA00A19E75 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E5BDAE1BD676FA00A19E75 /* Images.xcassets */; };
 		10E9F3AA1897501200220B47 /* NaviBtnNormal_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A81897501200220B47 /* NaviBtnNormal_iPad.png */; };
 		10E9F3AB1897501200220B47 /* NaviBtnNormal_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3A91897501200220B47 /* NaviBtnNormal_iPad@2x.png */; };
 		10E9F3AE1897506400220B47 /* NaviBtnPress_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 10E9F3AC1897506400220B47 /* NaviBtnPress_iPad.png */; };
